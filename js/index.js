@@ -23,7 +23,8 @@ var app = {
     initialize: function() {
         this.manejadores();
 		
-		
+		DataManager.getProductsFromServer(function(r){
+		console.log(r);});
 
 		
 		

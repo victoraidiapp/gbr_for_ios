@@ -41,6 +41,7 @@
         <script type="text/javascript" src="chui/chui-3.5.4.min.js"></script>
         <script type="text/javascript" src="js/lang.js"></script>
         <script type="text/javascript" src="js/loadingdialog.js"></script>
+        <script type="text/javascript" src="js/localfilemanager.js"></script>
         <script type="text/javascript" src="js/datamanager.js"></script>
         <script type="text/javascript" src="js/mapmanager.js"></script>        
         
@@ -54,6 +55,14 @@
         <!--Aqui va el contenido HTML siguiendo la doc chocolatechip ui-->
         
         <script type="text/javascript">
+		document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	
+	console.log("El dispositivo ya está listo");
+    console.log(cordova.file);
+	app.initialize();
+}
+
 		var $lang;
     	$(function() {
 			
@@ -68,8 +77,8 @@
          		selected : 1
       		};
       		$.UITabbar(opts);
-						
-			app.initialize();
+			//console.log(cordova.file);			
+			
         	      	
     	});  	   		
   		</script>

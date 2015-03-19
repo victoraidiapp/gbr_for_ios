@@ -15,9 +15,10 @@ values[token]=null;
 		$.ajax({
 			type:"POST",
 			url:"http://datic.es/gahibre/webservice/servicio.php",
-			dataType:"json",
+			dataType:"text",
 			data:values,
 			success:function(r){
+				//console.log("El resultado obtenido es "+r);
 			callBack(r)	
 			}
 		})

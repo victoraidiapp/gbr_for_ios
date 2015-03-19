@@ -16,6 +16,14 @@ var LocalFileManager={
 				console.log("He creado el archivo");
 			})
 		})
+		
+		//Creamos la carpeta de imagenes de productos
+		
+		
+		LocalFileManager.createDirectory(dirEntry,"src");
+		LocalFileManager.createDirectory(dirEntry.getDirectory("/src"),"img_prod");
+		LocalFileManager.createDirectory(dirEntry.getDirectory("/src"),"img_main");
+		
 	});
 		
 	},
@@ -41,18 +49,14 @@ console.log("Ya he escrito el archivo");
 	console.log("Ha ocurrido un error al crear el writer");	
 	});	
 	},
-	readCatalogue:function(){
+	readCatalogue:function(callback){
 		console.log("Iniciamos la lectura");
 		LocalFileManager.catalogueFile.file(function(file) {
        var reader = new FileReader();
 		console.log("Hemos creado el FileReader");
        reader.onloadend = function(e) {
-		   console.log("Termino la lectura");
-         console.log("El contenido es "+reader.result);
-		 var obj = jQuery.parseJSON( reader.result );
-		 for(x in obj){
-			console.log("El valorde "+x+" es "+obj[x]); 
-		 }
+		   callback(reader.result);
+		   
 		 
        };
 	reader.onerror=function(){
@@ -63,5 +67,30 @@ console.log("Ya he escrito el archivo");
 	console.log("Ha ocurrido un error al obtener el file");	
 	});
   
-	}
+	},
+	getLocalFile:function(file,success,error){
+		LocalFileManager.docDirectory.getFile(file,{create:false},success,error)
+	},
+	downloadFile:function(remote,local){
+		DataManager.getRemoteBlob(remote,function(blob){
+			LocalFileManager.docDirectory.getFile(local,{create:true},function(fEntry){
+				fEntry.createWriter(function(fWriter){
+					fWriter.write(blob);
+				},function(err){
+					//Error al crear el file writer	
+				})
+				
+			},function(err){
+				
+			})
+		})
+	},
+	createDirectory:function(rootDirEntry, name) {
+  // Throw out './' or '/' and move on to prevent something like '/foo/.//bar'.
+  
+  rootDirEntry.getDirectory(name, {create: true}, function(dirEntry) {
+    console.log("Creado el directorio "+name);
+  }, errorHandler);
+}
+
 };

@@ -25,49 +25,25 @@ var app = {
 		console.log(cordova.file);
 		LocalFileManager.init();
 		DataManager.getProductsFromServer(function(r){
-			//console.log("Del servidor obtenemos "+r);
+			console.log("Del servidor obtenemos "+r);
 			
 			LocalFileManager.writeToCatalogue(r);
-			LocalFileManager.readCatalogue();
-		//console.log(r);
-		/*var docDir=window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dirEntry){
-			console.log("Tengo un directorio");
-			dirEntry.getFile('database.txt',{create: true, exclusive: true}, function(fileEntry) {
-console.log("El archivo se ha creado");
-fileEntry.createWriter(function(fileWriter) {
-
-      fileWriter.onwriteend = function(e) {
-        console.log('Write completed.');
-      };
-
-      fileWriter.onerror = function(e) {
-        console.log('Write failed: ' + e.toString());
-      };
-
-      // Create a new Blob and write it to log.txt.
-      var blob = new Blob(r, {type: 'text/plain'});
-
-      fileWriter.write(blob);
-
-    }, errorHandler);
-
-  }, function(err){
-	console.log("El archivo NO se ha creado");  
-  });
-		},function(err){
-			console.log("No puedo acceder al directorio");
-		});
+			//LocalFileManager.readCatalogue();
+			
+			//Vamos a descargarnos las imágenes de los productos
+			
+			var jresponse=jQuery.parseJSON(r);
+			
+			for(p in jresponse.producto){
+				console.log("La fotoGrande es "+jresponse.producto[p].fotoGrande);
+				LocalFileManager.getLocalFile("/src/img_prod/"+jresponse.producto[p].fotoGrande,function(fEntry){
+					
+				},function(err){
+					//Como el archivo no existe en local hay que descargarlo
+					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,"/src/img_prod/"+jresponse.producto[p].fotoGrande)
+				})
+			}
 		
-		cordova.file.documentsDirectory.getFile('database.txt', {create: true, exclusive: true}, function(fileEntry) {
-console.log("El archivo se ha creado");
-    // fileEntry.isFile === true
-    // fileEntry.name == 'log.txt'
-    // fileEntry.fullPath == '/log.txt'
-
-  }, function(err){
-	console.log("El archivo NO se ha creado");  
-  });
-		*/
 		});
 
 		

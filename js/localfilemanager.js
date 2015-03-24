@@ -73,15 +73,22 @@ console.log("Ya he escrito el archivo");
 	},
 	downloadFile:function(remote,local){
 		DataManager.getRemoteBlob(remote,function(blob){
+			console.log("Ya hemos descargado el blob de "+remote);
 			LocalFileManager.docDirectory.getFile(local,{create:true},function(fEntry){
+				console.log("Queremos escribir en "+local)
 				fEntry.createWriter(function(fWriter){
 					fWriter.write(blob);
+					console.log("Hemos escrito en local en "+local);
 				},function(err){
 					//Error al crear el file writer	
+					console.log("Error al crear el writer "+local);
 				})
 				
 			},function(err){
-				
+				console.log("Error al crear el fEntry de "+local);
+				for(var x in err){
+				console.log(x+" es "+err[x]);	
+				}
 			})
 		})
 	},

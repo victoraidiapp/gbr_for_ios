@@ -25,17 +25,20 @@ values[token]=null;
 			}
 		})
 	},
-	getBikeLanes:function(callBack){
-		$.ajax({
-    type: "GET",
-    url: "assets/BikeLanesZones.xml",
-    dataType: "xml",
-    success: function(xml){
-		callBack($(xml));
-		
-	}
-  });
-		
+	getRemoteBlob:function(remote,callback){
+		var xhr = new XMLHttpRequest();
+xhr.open('GET', remote, true);
+xhr.responseType = 'blob';
+
+xhr.onload = function(e) {
+  if (this.status == 200) {
+    // Note: .response instead of .responseText
+    var blob = new Blob([this.response], {type: 'image/png'});
+    callback(blob);
+  }
+};
+
+xhr.send();
 		
 	},
 	updateProducts:function(){

@@ -35,12 +35,12 @@ var app = {
 			var jresponse=jQuery.parseJSON(r);
 			
 			for(p in jresponse.producto){
-				console.log("La fotoGrande es "+jresponse.producto[p].fotoGrande);
-				LocalFileManager.getLocalFile("/src/img_prod/"+jresponse.producto[p].fotoGrande,function(fEntry){
+				console.log("La foto grande es "+jresponse.producto[p].fotoGrande);
+				LocalFileManager.getLocalFile("src/img_prod/"+jresponse.producto[p].fotoGrande,function(fEntry){
 					
 				},function(err){
 					//Como el archivo no existe en local hay que descargarlo
-					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,"/src/img_prod/"+jresponse.producto[p].fotoGrande)
+					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,jresponse.producto[p].fotoGrande)
 				})
 			}
 		

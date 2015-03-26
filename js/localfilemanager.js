@@ -7,22 +7,35 @@ var LocalFileManager={
 	//Inicializamos el sistema
 	window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dirEntry){
 		LocalFileManager.docDirectory=dirEntry;
+		console.log("El directorio raiz es "+dirEntry.fullPath);
 		dirEntry.getFile('catalogue.txt', {}, function(fileEntry) {
 			LocalFileManager.catalogueFile=fileEntry;
-			console.log("He asignado el arcihvo que ya existía");
-		},function(err){
-			dirEntry.getFile('catalogue.txt',{create: true, exclusive: true}, function(fileEntry) {
-				LocalFileManager.catalogueFile=fileEntry;
-				console.log("He creado el archivo");
-			})
-		})
+			console.log("He asignado el arcihvo que ya existía "+fileEntry.fullPath );
+				},function(err){
+					dirEntry.getFile('catalogue.txt',{create: true, exclusive: true}, function(fileEntry) {
+						LocalFileManager.catalogueFile=fileEntry;
+						console.log("He creado el archivo");
+					})
+			
+			
+			
+				})
 		
 		//Creamos la carpeta de imagenes de productos
-		
-		
-		LocalFileManager.createDirectory(dirEntry,"src");
-		LocalFileManager.createDirectory(dirEntry.getDirectory("/src"),"img_prod");
-		LocalFileManager.createDirectory(dirEntry.getDirectory("/src"),"img_main");
+		/*dirEntry.getDirectory("src",{create: true}, function(dirEntry) {
+			console.log("He creado correctamente el directorio "+dirEntry.fullPath);
+			
+		},function(err){
+			console.log("He tenido algunos problemas al crear el directorio "+err.code)
+		})*/
+		console.log("Vamos a crear los directorios en "+LocalFileManager.docDirectory.name);
+		/*LocalFileManager.createDirectory(LocalFileManager.docDirectory,"src");
+		LocalFileManager.createDirectory(LocalFileManager.docDirectory.getDirectory("src"),"img_prod");
+		LocalFileManager.createDirectory(LocalFileManager.docDirectory.getDirectory("src"),"img_main");*/
+		var path1='src/img_prod';
+		LocalFileManager.createDirs(LocalFileManager.docDirectory,path1.split('/'));
+		var path2='src/img_main';
+		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
 		
 	});
 		
@@ -94,10 +107,28 @@ console.log("Ya he escrito el archivo");
 	},
 	createDirectory:function(rootDirEntry, name) {
   // Throw out './' or '/' and move on to prevent something like '/foo/.//bar'.
-  
+  console.log("Creamos el directorio "+name);
+  console.log(" en el directorio "+rootDirEntry.fullPath)
   rootDirEntry.getDirectory(name, {create: true}, function(dirEntry) {
-    console.log("Creado el directorio "+name);
-  }, errorHandler);
+    console.log("Creado el directorio "+dirEntry.fullPath);
+  }, function(err){
+	console.log("Fallo al crear el directorio "+err.code);  
+  });
+},createDirs:function(rootDirEntry, folders) {
+  // Throw out './' or '/' and move on to prevent something like '/foo/.//bar'.
+  
+  if (folders[0] == '.' || folders[0] == '') {
+    folders = folders.slice(1);
+  }
+  rootDirEntry.getDirectory(folders[0], {create: true}, function(dirEntry) {
+    // Recursively add the new subfolder (if we still have another to create).
+	console.log("Creando "+folders[1]+" en "+folders[0])
+    if (folders.length) {
+      LocalFileManager.createDirs(dirEntry, folders.slice(1));
+    }
+  }, function(err){
+	console.log("Error al crear dir "+err.code);  
+  });
 }
 
 };

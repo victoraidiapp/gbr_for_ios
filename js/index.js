@@ -37,10 +37,13 @@ var app = {
 			for(p in jresponse.producto){
 				console.log("La foto grande es "+jresponse.producto[p].fotoGrande);
 				LocalFileManager.getLocalFile("src/img_prod/"+jresponse.producto[p].fotoGrande,function(fEntry){
-					
+					console.log("Hemos encontrado la imagen en "+fEntry.fullPath);
+				jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				},function(err){
 					//Como el archivo no existe en local hay que descargarlo
-					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,jresponse.producto[p].fotoGrande)
+					console.log("No hemos podido encontrar el archivo "+err.code);
+					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,"src/img_prod/"+jresponse.producto[p].fotoGrande)
+					//jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				})
 			}
 		

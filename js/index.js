@@ -22,7 +22,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.manejadores();
-		console.log(cordova.file);
+		//console.log(cordova.file);
 		LocalFileManager.init();
 		DataManager.getProductsFromServer(function(r){
 			console.log("Del servidor obtenemos "+r);
@@ -37,11 +37,13 @@ var app = {
 			for(p in jresponse.producto){
 				console.log("La foto grande es "+jresponse.producto[p].fotoGrande);
 				LocalFileManager.getLocalFile("src/img_prod/"+jresponse.producto[p].fotoGrande,function(fEntry){
-					console.log("Hemos encontrado la imagen en "+fEntry.fullPath);
-				jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
+					//console.log("Hemos encontrado la imagen en "+fEntry.toNativeURL());
+				jQuery("#img_prods").append('<img src="'+fEntry.toNativeURL()+'" width=50 />');	
+				//jQuery("#img_prods").append('<img src="Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
+				//jQuery("#img_prods").append('<img src="../Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				},function(err){
 					//Como el archivo no existe en local hay que descargarlo
-					console.log("No hemos podido encontrar el archivo "+err.code);
+					//console.log("No hemos podido encontrar el archivo "+err.code);
 					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,"src/img_prod/"+jresponse.producto[p].fotoGrande)
 					//jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				})

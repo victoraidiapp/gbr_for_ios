@@ -32,11 +32,21 @@ var LocalFileManager={
 		/*LocalFileManager.createDirectory(LocalFileManager.docDirectory,"src");
 		LocalFileManager.createDirectory(LocalFileManager.docDirectory.getDirectory("src"),"img_prod");
 		LocalFileManager.createDirectory(LocalFileManager.docDirectory.getDirectory("src"),"img_main");*/
+		LocalFileManager.docDirectory.getDirectory('src/img_prod',{},function(){
+			console.log("El direcotio ya existe");
+		},function(err){
+			console.log("El dir no existe");
 		var path1='src/img_prod';
 		LocalFileManager.createDirs(LocalFileManager.docDirectory,path1.split('/'));
-		var path2='src/img_main';
-		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
+		});
 		
+		LocalFileManager.docDirectory.getDirectory('src/img_main',{},function(){
+			console.log("El direcotio main ya existe");
+		},function(err){
+		var path2='src/img_main';
+		console.log("El directorio no exite, lo vamos a crear");
+		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
+		})
 	});
 		
 	},
@@ -87,21 +97,19 @@ console.log("Ya he escrito el archivo");
 	downloadFile:function(remote,local){
 		DataManager.getRemoteBlob(remote,function(blob){
 			console.log("Ya hemos descargado el blob de "+remote);
-			LocalFileManager.docDirectory.getFile(local,{create:true},function(fEntry){
-				console.log("Queremos escribir en "+local)
+			LocalFileManager.docDirectory.getFile(local,{create:true,exclusive:true},function(fEntry){
+				console.log("Queremos escribir en "+fEntry.toNativeURL())
 				fEntry.createWriter(function(fWriter){
 					fWriter.write(blob);
-					console.log("Hemos escrito en local en "+local);
+					console.log("Hemos escrito en local en "+fEntry.toNativeURL());
 				},function(err){
 					//Error al crear el file writer	
 					console.log("Error al crear el writer "+local);
 				})
 				
 			},function(err){
-				console.log("Error al crear el fEntry de "+local);
-				for(var x in err){
-				console.log(x+" es "+err[x]);	
-				}
+				console.log("Error al crear el fEntry de "+local+", "+err.code);
+				
 			})
 		})
 	},

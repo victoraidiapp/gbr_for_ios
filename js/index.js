@@ -33,21 +33,17 @@ var app = {
 			//Vamos a descargarnos las imágenes de los productos
 			
 			var jresponse=jQuery.parseJSON(r);
-			
+			var arrProds=new Array();
 			for(p in jresponse.producto){
-				console.log("La foto grande es "+jresponse.producto[p].fotoGrande);
-				LocalFileManager.getLocalFile("src/img_prod/"+jresponse.producto[p].fotoGrande,function(fEntry){
-					//console.log("Hemos encontrado la imagen en "+fEntry.toNativeURL());
-				jQuery("#img_prods").append('<img src="'+fEntry.toNativeURL()+'" width=50 />');	
-				//jQuery("#img_prods").append('<img src="Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
-				//jQuery("#img_prods").append('<img src="../Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
-				},function(err){
-					//Como el archivo no existe en local hay que descargarlo
-					//console.log("No hemos podido encontrar el archivo "+err.code);
-					LocalFileManager.downloadFile(DataManager.SERVER.products+jresponse.producto[p].fotoGrande,"src/img_prod/"+jresponse.producto[p].fotoGrande)
-					//jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
-				})
+				arrProds.push(jresponse.producto[p].fotoGrande);
+				
 			}
+			
+			DataManager.updateProducts(arrProds);
+			
+				
+				
+			
 		
 		});
 

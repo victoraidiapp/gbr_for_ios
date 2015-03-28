@@ -94,23 +94,18 @@ console.log("Ya he escrito el archivo");
 	getLocalFile:function(file,success,error){
 		LocalFileManager.docDirectory.getFile(file,{create:false},success,error)
 	},
-	downloadFile:function(remote,local){
+	downloadFile:function(remote,local,success,errorf){
 		DataManager.getRemoteBlob(remote,function(blob){
 			console.log("Ya hemos descargado el blob de "+remote);
 			LocalFileManager.docDirectory.getFile(local,{create:true,exclusive:true},function(fEntry){
-				console.log("Queremos escribir en "+fEntry.toNativeURL())
+				console.log("Queremos escribir en "+fEntry.toURL())
 				fEntry.createWriter(function(fWriter){
 					fWriter.write(blob);
-					console.log("Hemos escrito en local en "+fEntry.toNativeURL());
-				},function(err){
-					//Error al crear el file writer	
-					console.log("Error al crear el writer "+local);
-				})
+					console.log("Hemos escrito en local en "+fEntry.toURL());
+					success();
+				},errorf)
 				
-			},function(err){
-				console.log("Error al crear el fEntry de "+local+", "+err.code);
-				
-			})
+			},errorf)
 		})
 	},
 	createDirectory:function(rootDirEntry, name) {

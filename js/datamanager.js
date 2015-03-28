@@ -41,8 +41,32 @@ xhr.onload = function(e) {
 xhr.send();
 		
 	},
-	updateProducts:function(){
-		
+	updateProducts:function(arrProds){
+		if(arrProds.length==0) return;
+		console.log("Intentamos descargar la imagen "+arrProds[0]);
+		LocalFileManager.getLocalFile("src/img_prod/"+arrProds[0],function(fEntry){
+					//console.log("Hemos encontrado la imagen en "+fEntry.toNativeURL());
+					//console.log("La imagen existe en "+arrProds[0].toNativeURL());
+				jQuery("#img_prods").append('<img src="'+fEntry.toURL()+'" width=50 />');
+				arrProds.shift();
+				DataManager.updateProducts(arrProds);	
+				//jQuery("#img_prods").append('<img src="Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
+				//jQuery("#img_prods").append('<img src="../Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
+				},function(err){
+					//Como el archivo no existe en local hay que descargarlo
+					//console.log("No hemos podido encontrar el archivo "+err.code);
+					LocalFileManager.downloadFile(DataManager.SERVER.products+arrProds[0],"src/img_prod/"+arrProds[0],function(){
+						console.log("Hemos descargado el archivo "+arrProds[0]);
+						
+						arrProds.shift();
+				DataManager.updateProducts(arrProds);
+					},function(err){
+						console.log("Hemos encontrado el error "+err+" aldescargar el archivo "+arrProds[0]);
+						arrProds.shift();
+				DataManager.updateProducts(arrProds);
+					})
+					//jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
+				})
 	}
 	
 };

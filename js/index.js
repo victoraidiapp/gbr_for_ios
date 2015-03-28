@@ -22,31 +22,10 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.manejadores();
+		LoadingDialog.init();
 		//console.log(cordova.file);
 		LocalFileManager.init();
-		DataManager.getProductsFromServer(function(r){
-			console.log("Del servidor obtenemos "+r);
-			
-			LocalFileManager.writeToCatalogue(r);
-			//LocalFileManager.readCatalogue();
-			
-			//Vamos a descargarnos las imágenes de los productos
-			
-			var jresponse=jQuery.parseJSON(r);
-			var arrProds=new Array();
-			for(p in jresponse.producto){
-				arrProds.push(jresponse.producto[p].fotoGrande);
-				
-			}
-			
-			DataManager.updateProducts(arrProds);
-			
-				
-				
-			
-		
-		});
-
+		DataManager.init();
 		
 		
     },

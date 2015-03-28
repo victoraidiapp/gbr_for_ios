@@ -95,6 +95,7 @@ console.log("Ya he escrito el archivo");
 		LocalFileManager.docDirectory.getFile(file,{create:false},success,error)
 	},
 	downloadFile:function(remote,local,success,errorf){
+		
 		DataManager.getRemoteBlob(remote,function(blob){
 			console.log("Ya hemos descargado el blob de "+remote);
 			LocalFileManager.docDirectory.getFile(local,{create:true,exclusive:true},function(fEntry){
@@ -106,7 +107,7 @@ console.log("Ya he escrito el archivo");
 				},errorf)
 				
 			},errorf)
-		})
+		},errorf)
 	},
 	createDirectory:function(rootDirEntry, name) {
   // Throw out './' or '/' and move on to prevent something like '/foo/.//bar'.

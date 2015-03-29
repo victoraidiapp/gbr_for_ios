@@ -2,6 +2,7 @@
 var LocalFileManager={
 	docDirectory:null,
 	catalogueFile:null,
+	docsPath:null,
 	
 	init:function(){
 	//Inicializamos el sistema
@@ -20,7 +21,7 @@ var LocalFileManager={
 			
 			
 				})
-		
+		LocalFileManager.docsPath=dirEntry.toURL();
 		//Creamos la carpeta de imagenes de productos
 		/*dirEntry.getDirectory("src",{create: true}, function(dirEntry) {
 			console.log("He creado correctamente el directorio "+dirEntry.fullPath);

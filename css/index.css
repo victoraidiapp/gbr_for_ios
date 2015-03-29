@@ -139,14 +139,13 @@ background-color:#fcfcf8;
 }
 
 article .loading{
-	background-color: #38a0f9;
+	background-color: #666;
 	background-image: url(../img/ajax-loader.gif);
 	background-repeat:no-repeat;
-	
 	width:95%;
 	margin-left:auto;
 	margin-right:auto;
-	height:20px;
+	min-height:20px;
 	padding-top:80px;
 	background-position: center center;
 	border-radius:10px;
@@ -160,10 +159,10 @@ article .loading{
 	margin-bottom:30px;
 	opacity:0.0;
 	position:absolute;
-top:10px;
-left:0px;
-z-index:35000;	
--webkit-transition:opacity 1s;
+	top:10px;
+	left:0px;
+	z-index:35000;
+	-webkit-transition:opacity 1s;
 }
 
 article.current .loading.visible{

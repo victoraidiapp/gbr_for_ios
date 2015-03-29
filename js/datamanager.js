@@ -1,6 +1,7 @@
 // JavaScript Document
 var DataManager={
-	SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/'}
+	SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/'},
+	catalogueJSON:null
 	,
 	init:function(){
 		
@@ -14,19 +15,22 @@ var DataManager={
 			
 			//Vamos a descargarnos las imágenes de los productos
 			
-			var jresponse=jQuery.parseJSON(r);
+			DataManager.catalogueJSON=jQuery.parseJSON(r);
 			var arrProds=new Array();
-			for(p in jresponse.producto){
-				arrProds.push(jresponse.producto[p].fotoGrande);
+			for(p in DataManager.catalogueJSON.producto){
+				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
+				arrProds.push(DataManager.catalogueJSON.producto[p].fotoGrande);
 			}
 			
 			DataManager.updateProducts(arrProds,function(onProgress){
 				console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
-					
+					DataManager.initCatalogue();
 					LoadingDialog.hide(300);
 				return;
 				}
+				
+		
 				LoadingDialog.show('<strong>Actualizando base de datos</strong><p>Descargando imágenes de producto</br>Quedan '+onProgress.left);
 			});
 			
@@ -36,6 +40,15 @@ var DataManager={
 		
 		});
 
+	
+		
+	},
+	initCatalogue:function(){
+		for(p in DataManager.catalogueJSON.producto){
+				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
+				jQuery("#productos ul.list").append('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');
+			}
 		
 	},
 	getProductsFromServer:function(callBack){
@@ -94,7 +107,7 @@ xhr.send();
 		LocalFileManager.getLocalFile("src/img_prod/"+arrProds[0],function(fEntry){
 					//console.log("Hemos encontrado la imagen en "+fEntry.toNativeURL());
 					//console.log("La imagen existe en "+arrProds[0].toNativeURL());
-				jQuery("#img_prods").append('<img src="'+fEntry.toURL()+'" width=50 />');
+				
 				arrProds.shift();
 				DataManager.updateProducts(arrProds,onProgCallback);	
 				//jQuery("#img_prods").append('<img src="Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	

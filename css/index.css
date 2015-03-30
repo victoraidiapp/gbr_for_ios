@@ -69,13 +69,13 @@ body {
     }
 }
 
-h1 {
-    font-size:24px;
+nav h1 {
+    
     font-weight:normal;
-    margin:0px;
     overflow:visible;
     padding:0px;
     text-align:center;
+	color:#FFF;
 }
 
 .event {
@@ -112,4 +112,60 @@ h1 {
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+
+.tabbar > .button > .icon{
+display:none;	
+}
+
+body.hasTabBar nav {
+background-color: #043680;
+
+}
+
+.tabbar > .button{
+	background-color: #043680;
+	color:#FFF;
+	border-right-width: 1px;
+	
+	border-right-style: solid;
+	
+	border-right-color: #fcfcf8;
+	
+}
+.tabbar >.button.selected{
+background-color:#fcfcf8;	
+}
+
+article .loading{
+	background-color: #666;
+	background-image: url(../img/ajax-loader.gif);
+	background-repeat:no-repeat;
+	width:95%;
+	margin-left:auto;
+	margin-right:auto;
+	min-height:20px;
+	padding-top:80px;
+	background-position: center center;
+	border-radius:10px;
+	margin-top:30px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFF;
+	text-align: center;
+	width:94%;
+	margin-left:3%;
+	margin-bottom:30px;
+	opacity:0.0;
+	position:absolute;
+	top:10px;
+	left:0px;
+	z-index:35000;
+	-webkit-transition:opacity 1s;
+}
+
+article.current .loading.visible{
+	opacity:0.7;
+
 }

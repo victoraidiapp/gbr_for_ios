@@ -25,21 +25,23 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <title>SalOnBike</title>
+        <title>Gahibre</title>
         
         <!-- Hojas de estilo -->
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
         <link rel="stylesheet" type="text/css" href="chui/chui-ios-3.5.4.css" />
-        <link rel="stylesheet" href="css/salonbike.css">
-        <script type="text/javascript"
-      	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBChbZRBqtlb9wg5sbJSOE0amo6dAL503I&sensor=true">
-    	</script>
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
         <!-- javascript funciones personalizadas -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/util.js"></script>   
+        <script type="text/javascript" src="js/jquery.sha256.js"></script>   
+        <script type="text/javascript" src="js/date-functions.js"></script>  
+        <script type="text/javascript" src="js/util.js"></script>  
+        
         <script type="text/javascript" src="chui/chui-3.5.4.min.js"></script>
         <script type="text/javascript" src="js/lang.js"></script>
         <script type="text/javascript" src="js/loadingdialog.js"></script>
+        <script type="text/javascript" src="js/localfilemanager.js"></script>
         <script type="text/javascript" src="js/datamanager.js"></script>
         <script type="text/javascript" src="js/mapmanager.js"></script>        
         
@@ -53,6 +55,14 @@
         <!--Aqui va el contenido HTML siguiendo la doc chocolatechip ui-->
         
         <script type="text/javascript">
+		document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	
+	console.log("El dispositivo ya está listo");
+    console.log(cordova.file);
+	app.initialize();
+}
+
 		var $lang;
     	$(function() {
 			
@@ -60,31 +70,45 @@
 		$lang=$lang.substr(0,2);
 			
       		var opts = {
-         		tabs : 5,
+         		tabs : 4,
          		imagePath : "icons/",
-         		icons : ["estacion", "ruta", "carril", "rutabici", "listado"],
-         		labels : [Lang[$lang]["Estaciones"], Lang[$lang]["Más cercana"], Lang[$lang]["Carril bici"], Lang[$lang]["Más cercano"], Lang[$lang]["listaZonas"]],
-         		//selected : 2
+         		icons : ["estacion", "ruta", "carril", "rutabici"],
+         		labels : ["Gahibre","Productos","Pedidos", "Outlet"],
+         		selected : 1
       		};
       		$.UITabbar(opts);
-						
-			app.initialize();
-        	console.log('Se inició el mapa?');        	
+			//console.log(cordova.file);			
+			
+        	      	
     	});  	   		
   		</script>
-  <nav class="current"></nav>
-  	<article id="mapa" class="current navigable">
+  <nav class="current"><h1>Gahibre</h1></nav>
+  	<article id="home" class="current navigable">
     	<section>
         
-        	<div class="role-content" id="gmapa"></div>
+        	<div class="role-content" id="img_prods"></div>
         </section>
     </article>
-    <nav class="next zonas"><h1>CARRILES BICI</h1></nav>
-  	<article id="listaZonas" class="next navigable">
+    <nav class="next zonas"><h1>Productos</h1></nav>
+  	<article id="productos" class="next navigable">
+    <section>
+        	<div class="role-content"><ul class="list"></ul></div>
+        </section>
+        </article>
+     
+     <nav class="next zonas"><h1>Pedidos</h1></nav>
+  	<article id="pedidos" class="next navigable">
     <section>
         	<div class="role-content"></div>
         </section>
         </article>
         
+    <nav class="next zonas"><h1>Outlet</h1></nav>
+  	<article id="outlet" class="next navigable">
+    <section>
+        	<div class="role-content"></div>
+        </section>
+        </article>    
+           
     </body>
 </html>

@@ -11,7 +11,7 @@ manejadores:function(){
 },
 show:function(texto){
 	console.log(";ostramos el dialogo");
-	$('article.current .loading').text(texto).addClass('visible');;
+	$('article.current .loading').html(texto).addClass('visible');;
 	$('article.current .loading').nextAll().addClass('whenloading');
 },
 hide:function(t){

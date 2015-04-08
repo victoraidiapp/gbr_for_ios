@@ -1,6 +1,9 @@
 // JavaScript Document
 var DataManager={
-	SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/'},
+	SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/',
+	categorias:'http://datic.es/gahibre/img/bbdd/categorias/',
+	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
+	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
 	catalogueJSON:null
 	,
 	init:function(){
@@ -19,10 +22,21 @@ var DataManager={
 			var arrProds=new Array();
 			for(p in DataManager.catalogueJSON.producto){
 				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
-				arrProds.push(DataManager.catalogueJSON.producto[p].fotoGrande);
+				arrProds.push(DataManager.SERVER.products+DataManager.catalogueJSON.producto[p].fotoGrande);
 			}
 			
-			DataManager.updateProducts(arrProds,function(onProgress){
+			//Vamos a descargar las imagenes de las categorias
+			for(p in DataManager.catalogueJSON.categoria){
+				console.log("Imagen de categoria:"+DataManager.catalogueJSON.producto[p].fotoGrande)
+				arrProds.push(DataManager.SERVER.categorias+DataManager.catalogueJSON.categoria[p].categoria);
+			}
+			
+			//Incluimos tambien las imágenes de los logotipos
+			for(p in DataManager.catalogueJSON.logotipo){
+				arrProds.push(DataManager.SERVER.logotipos+DataManager.catalogueJSON.logotipo[p].logotipo);
+			}
+			
+			DataManager.updateImages(arrProds,function(onProgress){
 				console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
 					DataManager.initCatalogue();
@@ -60,8 +74,10 @@ var yyyy = today.getFullYear();
 console.log(today.dateFormat('Ymd')+'SecretoPublicoGahibre2014');
 console.log(jQuery.sha256(today.dateFormat('Ymd')+'SecretoPublicoGahibre2014'));
 var token=jQuery.sha256(today.dateFormat('Ymd')+'SecretoPublicoGahibre2014');
+console.log("El token es "+token);
+
 var values = { };
-values[token]=null;
+values['token']=token;
 
 		$.ajax({
 			type:"POST",
@@ -69,7 +85,7 @@ values[token]=null;
 			dataType:"text",
 			data:values,
 			success:function(r){
-				//console.log("El resultado obtenido es "+r);
+				console.log("El resultado obtenido es "+r);
 			callBack(r)	
 			}
 		})
@@ -90,7 +106,7 @@ xhr.onerror=errorCallback;
 xhr.send();
 		
 	},
-	updateProducts:function(arrProds,onProgCallback){
+	updateImages:function(arrProds,onProgCallback){
 		console.log("Quedan "+arrProds.length);
 		if(arrProds.length==0){
 			
@@ -103,40 +119,42 @@ xhr.send();
 		onProgCallback(onProgData);	
 			 return;
 		}
+		pathParts=arrProds[0].split("/");
+		
 		console.log("Intentamos descargar la imagen "+arrProds[0]);
-		LocalFileManager.getLocalFile("src/img_prod/"+arrProds[0],function(fEntry){
-					//console.log("Hemos encontrado la imagen en "+fEntry.toNativeURL());
-					//console.log("La imagen existe en "+arrProds[0].toNativeURL());
+		LocalFileManager.getLocalFile("src/img_prod/"+pathParts[pathParts.length-1],function(fEntry){
+					console.log("Hemos encontrado la imagen en "+fEntry.toURL());
+					
 				
 				arrProds.shift();
-				DataManager.updateProducts(arrProds,onProgCallback);	
+				DataManager.updateImages(arrProds,onProgCallback);	
 				//jQuery("#img_prods").append('<img src="Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				//jQuery("#img_prods").append('<img src="../Documents/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				},function(err){
 					//Como el archivo no existe en local hay que descargarlo
-					//console.log("No hemos podido encontrar el archivo "+err.code);
-					if(arrProds[0] === undefined || arrProds[0] == null || arrProds[0].length <= 3) {
+					console.log("No hemos podido encontrar el archivo en local "+arrProds[0]);
+					if(pathParts[pathParts.length-1] === undefined || pathParts[pathParts.length-1] == null || pathParts[pathParts.length-1].length <= 3) {
 			
 							
 							
 						arrProds.shift();
-				DataManager.updateProducts(arrProds,onProgCallback);
+				DataManager.updateImages(arrProds,onProgCallback);
 							return;	
 					}
 		
-					LocalFileManager.downloadFile(DataManager.SERVER.products+arrProds[0],"src/img_prod/"+arrProds[0],function(){
-						//console.log("Hemos descargado el archivo "+arrProds[0]);
+					LocalFileManager.downloadFile(arrProds[0],"src/img_prod/"+pathParts[pathParts.length-1],function(){
+						console.log("Hemos descargado el archivo "+pathParts[pathParts.length-1]);
 						var onProgData={
 						finished:false,
 						left:arrProds.length	
 						}
 						onProgCallback(onProgData);
 						arrProds.shift();
-				DataManager.updateProducts(arrProds,onProgCallback);
+				DataManager.updateImages(arrProds,onProgCallback);
 					},function(err){
 						console.log("Hemos encontrado el error "+err+" aldescargar el archivo "+arrProds[0]);
 						arrProds.shift();
-				DataManager.updateProducts(arrProds,onProgCallback);
+				DataManager.updateImages(arrProds,onProgCallback);
 					})
 					//jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				})

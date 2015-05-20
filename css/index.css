@@ -169,7 +169,11 @@ article.current .loading.visible{
 	opacity:0.7;
 
 }
-
+.center-vertical {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 /*BOTONES*/
 .product-search input{
 margin-top:1%;	
@@ -180,7 +184,6 @@ display:block;
 margin-left:auto;
 margin-right:auto;
 width:46%;
-margin-top:35%;
 padding:2%;
 }
 

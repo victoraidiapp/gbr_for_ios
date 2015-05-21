@@ -43,7 +43,7 @@
         <script type="text/javascript" src="js/loadingdialog.js"></script>
         <script type="text/javascript" src="js/localfilemanager.js"></script>
         <script type="text/javascript" src="js/datamanager.js"></script>
-        <script type="text/javascript" src="js/mapmanager.js"></script>        
+        <!--<script type="text/javascript" src="js/mapmanager.js"></script>  -->      
         
     </head>
     <body>
@@ -78,7 +78,8 @@ function onDeviceReady() {
       		};
       		$.UITabbar(opts);
 			//console.log(cordova.file);			
-			
+			$.UIPaging();
+			app.manejadores();
         	      	
     	});  	   		
   		</script>
@@ -90,15 +91,27 @@ function onDeviceReady() {
         </section>
     </article>
     <nav class="next zonas"><h1>Productos</h1></nav>
-  	<article id="productos" class="next navigable">
-    <section>
-        	<div class="role-content"><ul class="list"></ul></div>
+  	<article id="productos" class="next navigable paging">
+    <section class="current">
+    <div class="center-vertical product-search">
+    <input type="text" placeholder="Modelo" />
+    <input type="button" class="gahibre-button" value="CÁTÁLOGO" id="searchByCatalogo"/>
+    <input type="button" class="gahibre-button" value="FAMILIA" id="showFamilia"/>
+    </div>
+        
         </section>
+        
+      <section id="product-cat" class="next">
+      <div class="role-content"><ul class="list"><li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg" height="25"/><span class="tit_modelo">E520</span></aside></div></li>
+      <li class="comp"><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg" height="25"/></aside><div><h2>E550</h2></div></li></ul>	</div>
+      </section>
+
+    
         </article>
      
      <nav class="next zonas"><h1>Pedidos</h1></nav>
   	<article id="pedidos" class="next navigable">
-    <section>
+    <section >
         	<div class="role-content"></div>
         </section>
         </article>

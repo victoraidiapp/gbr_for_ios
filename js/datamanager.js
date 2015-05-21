@@ -59,11 +59,13 @@ var DataManager={
 	},
 	initCatalogue:function(){
 		for(p in DataManager.catalogueJSON.producto){
-				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
-				jQuery("#productos ul.list").append('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');
+				//console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
+				/*console.log('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');*/
+				jQuery("#product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="25"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].modelo+'</h2></div></li>');
 			}
-		
+		console.log("El contenido del listado de productos es "+jQuery("#product-cat ul.list").html());
 	},
 	getProductsFromServer:function(callBack){
 		var today = new Date();

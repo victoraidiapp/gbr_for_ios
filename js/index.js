@@ -41,14 +41,9 @@ var app = {
 			window.open($(this).attr('href'), "_system");
 	return false;
 		} )
-		console.log("CArgamos los manejadores");
 		
-	$(document).on("tap singletap click","#searchByCatalogo",function(e){
-		console.log("Queremos cargar la sección de catalogo");
-		$("#productos section.current").addClass("next").removeClass("current");
-		$("#product-cat").addClass("current").removeClass("next");
 		
-	})
+	
 	
 		
 		

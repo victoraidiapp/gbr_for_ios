@@ -47,6 +47,12 @@ var app = {
 		$("#productos section.current").addClass("next").removeClass("current");
 		$("#product-cat").addClass("current").removeClass("next");
 		
+		
+		$("#product-cat").on("tap singletap click","li",function(e){
+			console.log("Queremos acceder al producto "+$(this).index());
+			$("#productos section.current").addClass("next").removeClass("current");
+		$("#product-carrousel").addClass("current").removeClass("next");
+		})
 	
 	})
 	

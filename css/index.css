@@ -210,6 +210,14 @@ vertical-align:middle;
 #product-cat .list > li.nav::after{
 top:30px;	
 }
-
+.back-button{
+	  background-image: url(../img/iconos/back_57.png);
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  background-size: 100%;
+  display: none;
+  
+}
 /*PRODUCT VIEWER*/
 

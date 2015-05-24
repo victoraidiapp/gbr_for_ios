@@ -43,7 +43,8 @@
         <script type="text/javascript" src="js/loadingdialog.js"></script>
         <script type="text/javascript" src="js/localfilemanager.js"></script>
         <script type="text/javascript" src="js/datamanager.js"></script>
-        <!--<script type="text/javascript" src="js/mapmanager.js"></script>  -->      
+        <!--<script type="text/javascript" src="js/local-test.js"></script>
+        <script type="text/javascript" src="js/mapmanager.js"></script>  -->      
         
     </head>
     <body>
@@ -79,6 +80,8 @@ function onDeviceReady() {
       		$.UITabbar(opts);
 			//console.log(cordova.file);			
 			$.UIPaging();
+			
+			//localTest();
 			app.manejadores();
         	      	
     	});  	   		
@@ -109,7 +112,8 @@ function onDeviceReady() {
       </section>
 
 		<section id="product-carrousel" class="next">
-        	<div class="role-content">
+        <div id="product-viewer" style="width:100%;height:100%"></div>
+        	<!--<div class="role-content">
             <div class="product-item">
             <h2>Modelo E520</h2>
             <div class="center"><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/></div>
@@ -123,7 +127,7 @@ function onDeviceReady() {
             <h3 class="inline">P.V.P: </h3><span class="value">9</span>
             </div>
             
-            </div>
+            </div>-->
         </section>
     
         </article>

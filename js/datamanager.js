@@ -4,6 +4,7 @@ var DataManager={
 	categorias:'http://datic.es/gahibre/img/bbdd/categorias/',
 	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
 	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
+	productCarrousel:new Array(),
 	catalogueJSON:null
 	,
 	init:function(){
@@ -23,6 +24,7 @@ var DataManager={
 			for(p in DataManager.catalogueJSON.producto){
 				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
 				arrProds.push(DataManager.SERVER.products+DataManager.catalogueJSON.producto[p].fotoGrande);
+				
 			}
 			
 			//Vamos a descargar las imagenes de las categorias
@@ -35,6 +37,8 @@ var DataManager={
 			for(p in DataManager.catalogueJSON.logotipo){
 				arrProds.push(DataManager.SERVER.logotipos+DataManager.catalogueJSON.logotipo[p].logotipo);
 			}
+			
+			//Cargamos los productos en el carrousel
 			
 			DataManager.updateImages(arrProds,function(onProgress){
 				console.log("quedan "+onProgress.left);
@@ -64,8 +68,24 @@ var DataManager={
 				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');*/
 				jQuery("#product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="25"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].modelo+'</h2></div></li>');
+				
+				DataManager.productCarrousel.push(
+            '<h2>Modelo '+DataManager.catalogueJSON.producto[p].modelo+'</h2>'+
+            '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].fotoGrande+'"/></div>'+
+            '<div class="center"><span class="material">'+DataManager.gamaName(DataManager.catalogueJSON.producto[p].idGama)+'</span></div>'+
+            '<h3>DESCRIPCIÓN</h3>'+
+            '<p>'+DataManager.catalogueJSON.producto[p].descripcion+'</p>'+
+            '<h3>USO</h3>'+
+            '<p>'+DataManager.catalogueJSON.producto[p].uso+'</p>'+
+            '<h3 class="inline">TALLA: </h3><span class="value">9</span>'+
+            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">120 pares</span>'+
+            '<h3 class="inline">P.V.P: </h3><span class="value">9</span>');
 			}
-		console.log("El contenido del listado de productos es "+jQuery("#product-cat ul.list").html());
+			
+		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: false });
+		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
+		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
 	},
 	getProductsFromServer:function(callBack){
 		var today = new Date();
@@ -160,6 +180,13 @@ xhr.send();
 					})
 					//jQuery("#img_prods").append('<img src="/src/img_prod/'+jresponse.producto[p].fotoGrande+'" width=50 />');	
 				})
+	},
+	gamaName:function(idGama){
+		for(g in DataManager.catalogueJSON.gama){
+			if(DataManager.catalogueJSON.gama[g].idGama==idGama){
+			return DataManager.catalogueJSON.gama[g].gama;	
+			}
+		}
 	}
 	
 };

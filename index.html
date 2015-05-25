@@ -39,12 +39,13 @@
         <script type="text/javascript" src="js/util.js"></script>  
         
         <script type="text/javascript" src="chui/chui-3.5.4.min.js"></script>
+        <!--<script type="text/javascript" src="chui/chui-3.8.7.js"></script>-->
         <script type="text/javascript" src="js/lang.js"></script>
         <script type="text/javascript" src="js/loadingdialog.js"></script>
         <script type="text/javascript" src="js/localfilemanager.js"></script>
         <script type="text/javascript" src="js/datamanager.js"></script>
-        <!--<script type="text/javascript" src="js/local-test.js"></script>
-        <script type="text/javascript" src="js/mapmanager.js"></script>  -->      
+        <script type="text/javascript" src="js/local-test.js"></script>
+        <!--<script type="text/javascript" src="js/mapmanager.js"></script>  -->      
         
     </head>
     <body>
@@ -79,10 +80,11 @@ function onDeviceReady() {
       		};
       		$.UITabbar(opts);
 			//console.log(cordova.file);			
+			//localTest();
 			$.UIPaging();
 			
-			//localTest();
-			app.manejadores();
+			
+			//app.manejadores();
         	      	
     	});  	   		
   		</script>
@@ -94,26 +96,30 @@ function onDeviceReady() {
         </section>
     </article>
     <nav class="next productos"><h1>Productos</h1><span class="back-button"></span></nav>
-  	<article id="productos" class="next navigable paging">
+  	<article id="productos" class="next paging navigable">
     <section id="product-init" class="current">
+    
     <div class="center-vertical product-search">
-    <input type="text" placeholder="Modelo" />
+    <form id="form-search">
+    <input id="search-model" type="search" placeholder="Modelo" />
+    </form>
     <input type="button" class="gahibre-button" value="CÁTÁLOGO" id="searchByCatalogo"/>
     <input type="button" class="gahibre-button" value="FAMILIA" id="showFamilia"/>
     </div>
         
         </section>
         
-      <section id="product-cat" class="next">
-      <div class="role-content"><ul class="list"><li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E520</span></aside></div></li>
-      <li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E525</span></aside></div></li>
+     <section id="product-cat" class="next">
+      <div class="role-content"><ul class="list"><!--<li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E520</span></aside></div></li>
+      <li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E525</span></aside></div></li>-->
       
       </ul>	</div>
       </section>
-
-		<section id="product-carrousel" class="next">
-        <div id="product-viewer" style="width:100%;height:100%"></div>
-        	<!--<div class="role-content">
+ 
+		<section id="product-carrousel" class="next navigable">
+        <div id="product-viewer" style="width:100%;height:600px"></div>
+        <!--
+        	<div class="role-content">
             <div class="product-item">
             <h2>Modelo E520</h2>
             <div class="center"><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/></div>
@@ -127,15 +133,15 @@ function onDeviceReady() {
             <h3 class="inline">P.V.P: </h3><span class="value">9</span>
             </div>
             
-            </div>-->
-        </section>
+            </div>
+      -->  </section>
     
         </article>
      
      <nav class="next zonas"><h1>Pedidos</h1></nav>
   	<article id="pedidos" class="next navigable">
     <section >
-        	<div class="role-content"></div>
+        	<div id="product-viewer2" style="width:100%;height:600px"></div>
         </section>
         </article>
         

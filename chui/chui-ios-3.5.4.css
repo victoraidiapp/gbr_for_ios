@@ -105,7 +105,7 @@ small,
    =========================== */
 article {
   position: absolute;
-  top: 45px;
+  top: 60px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -186,12 +186,12 @@ article > section,
 .slide-out > section {
   padding-top: 20px;
   padding-bottom: 100px;
-  -webkit-box-flex: 1;
+  /*-webkit-box-flex: 1;
   -webkit-flex: 1;
   flex: 1;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0;*/
   width: 100%;
   min-height: 100% !important;
 }
@@ -352,29 +352,32 @@ html[dir=rtl] .toolbar > .button.align-flush {
   overflow: hidden;
 }
 nav {
-  height: 45px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  align-items: flex-start;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  -webkit-transition: all 0.15s ease-out;
-  transition: all 0.15s ease-out;
-  padding: 0 15px;
-  vertical-align: middle;
+	height: 60px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: start;
+	-webkit-align-items: flex-start;
+	align-items: flex-start;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	-webkit-transition: all 0.15s ease-out;
+	transition: all 0.15s ease-out;
+	vertical-align: middle;
+	padding-top: 15;
+	padding-right: 15px;
+	padding-bottom: 0;
+	padding-left: 15px;
 }
 nav > h1 {
   text-align: center;
@@ -384,7 +387,7 @@ nav > h1 {
   flex: 1 !important;
   font: normal 12pt/14pt HelveticaNeue, Sans-serif;
   position: absolute;
-  top: 0;
+  top: 15px;
   left: 100px;
   right: 100px;
   z-index: -1;
@@ -1224,7 +1227,7 @@ body.splitlayout > nav h1 {
   text-align: center;
 }
 body.splitlayout > article.master {
-  top: 45px;
+  top: 60px;
   left: 0;
   bottom: 0;
   right: 320px;
@@ -1234,7 +1237,7 @@ body.splitlayout > article.master {
   border-right: solid 1px #c8c8c7 !important;
 }
 body.splitlayout > article.detail {
-  top: 45px;
+  top: 60px;
   left: 320px !important;
   bottom: 0;
   left: 0;
@@ -2183,7 +2186,7 @@ body.hasTabBar article {
 body.hasTabBar .previous:not(.navigable),
 body.hasTabBar .next:not(.navigable) {
   display: none;
-  -webkiit-transform: none;
+  -webkit-transform: none;
 }
 .tabbar {
   display: -webkit-box;

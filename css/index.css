@@ -174,7 +174,7 @@ article.current .loading.visible{
 .product-search input{
 margin-top:1%;	
 }
-.product-search input[type="text"]{
+.product-search input[type="search"]{
 font-size:150%;
 display:block;
 margin-left:auto;

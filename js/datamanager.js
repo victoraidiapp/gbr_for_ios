@@ -5,6 +5,7 @@ var DataManager={
 	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
 	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
 	productCarrousel:new Array(),
+	carouselObject:null,
 	catalogueJSON:null
 	,
 	init:function(){
@@ -83,9 +84,11 @@ var DataManager={
             '<h3 class="inline">P.V.P: </h3><span class="value">9</span>');
 			}
 			
-		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: false });
+		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
-		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
+		DataManager.carouselObject=$('#product-viewer').data('carousel');
+		 console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
+		 $('#product-carrousel').removeClass('navigable');
 	},
 	getProductsFromServer:function(callBack){
 		var today = new Date();
@@ -187,6 +190,18 @@ xhr.send();
 			return DataManager.catalogueJSON.gama[g].gama;	
 			}
 		}
+	},
+	searchModel:function(model){
+		var i=0;
+		for(g in DataManager.catalogueJSON.producto){
+			
+			if(DataManager.catalogueJSON.producto[g].modelo==model){
+			return i;	
+			}
+			i++;
+		}
+		
+		return null;
 	}
 	
 };

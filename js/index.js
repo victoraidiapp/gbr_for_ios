@@ -36,29 +36,48 @@ var app = {
     manejadores: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
 		
-		$(document).on("tap singletap click","a.external",function(e){
+		$(document).on("tap","a.external",function(e){
 			e.preventDefault();
 			window.open($(this).attr('href'), "_system");
 	return false;
 		} )
 		
-		$(document).on("tap singletap click","#searchByCatalogo",function(e){
+		$(document).on("tap","#searchByCatalogo",function(e){
 			e.preventDefault();
 		console.log("Queremos cargar la sección de catalogo");
 		app.navProducts("product-cat",true);
 		return false;
 		})
 		
-		$("#product-cat").on("tap singletap click","li",function(e){
+		$("#product-cat").on("tap","li",function(e){
 			e.preventDefault();
 			app.navProducts("product-carrousel",true);
+			//DataManager.carouselObject.goToPanel($(this).index()-1);
+			DataManager.carouselObject.goToPanel($(this).index());
 		return false;
 	
 	})
 	
-	
+	$(document).on("search","#search-model",function(e){
+		e.preventDefault();
+		console.log("Quieres buscar");
+		var sr=DataManager.searchModel($(this).val());
+		if(sr!=null){
+			app.navProducts("product-carrousel",true);
+			DataManager.carouselObject.goToPanel(sr);
+			$(this).blur();
+		}else{
+		console.log("No lo encuentro");	
+		};
+		return true;
+	})
+	$(document).on("searh submit","#form-search",function(e){
+		e.preventDefault();
+		console.log("Quieres buscar desde el form");
+	})
 	//Back button Productos
 	$("nav.productos").on("tap",".back-button",function(e){
+		e.preventDefault();
 		if($("#product-cat").hasClass("current")){
 			app.navProducts("product-init",false);
 			return false;

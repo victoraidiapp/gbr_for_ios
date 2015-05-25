@@ -42,9 +42,35 @@ var app = {
 	return false;
 		} )
 		
+		$(document).on("tap singletap click","#searchByCatalogo",function(e){
+			e.preventDefault();
+		console.log("Queremos cargar la sección de catalogo");
+		app.navProducts("product-cat",true);
+		return false;
+		})
 		
+		$("#product-cat").on("tap singletap click","li",function(e){
+			e.preventDefault();
+			app.navProducts("product-carrousel",true);
+		return false;
+	
+	})
 	
 	
+	//Back button Productos
+	$("nav.productos").on("tap",".back-button",function(e){
+		if($("#product-cat").hasClass("current")){
+			app.navProducts("product-init",false);
+			return false;
+		}
+		
+		if($("#product-carrousel").hasClass("current")){
+			app.navProducts("product-cat",true);
+			return false;
+		}
+		
+		
+	})
 		
 		
     },
@@ -58,7 +84,16 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         
-    }
+    },
+	navProducts:function(section,backEnabled){
+		$("#productos section.current").addClass("next").removeClass("current");
+		$("#"+section).addClass("current").removeClass("next");
+		if(backEnabled){
+			$("nav.productos .back-button").show();
+		}else{
+			$("nav.productos .back-button").hide();
+		}
+	}
 };
 
 

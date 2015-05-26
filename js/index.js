@@ -21,6 +21,7 @@ var $loc;
 var app = {
     // Application Constructor
     initialize: function() {
+		console.log("Se inicializa la aplicación");
         this.manejadores();
 		LoadingDialog.init();
 		//console.log(cordova.file);
@@ -47,23 +48,43 @@ var app = {
 			e.preventDefault();
 			window.open($(this).attr('href'), "_system");
 	return false;
-		} )
+		})
 		
 		$(document).on("tap","#searchByCatalogo",function(e){
 			e.preventDefault();
 		console.log("Queremos cargar la sección de catalogo");
-		app.navProducts("product-cat",true);
+		app.navProducts("product-cat",false);
 		return false;
 		})
 		
+		$(document).on("tap","#showFamilia",function(e){
+			e.preventDefault();
+		
+		app.navProducts("product-fam",false);
+		return false;
+		})
+		
+		
+		
 		$("#product-cat").on("tap","li",function(e){
 			e.preventDefault();
-			app.navProducts("product-carrousel",true);
+			app.navProducts("product-carrousel",false);
 			//DataManager.carouselObject.goToPanel($(this).index()-1);
 			DataManager.carouselObject.goToPanel($(this).index());
 		return false;
 	
 	})
+	
+	$("#product-fam").on("tap","li",function(e){
+			e.preventDefault();
+			app.navProducts("product-carrousel");
+			//DataManager.carouselObject.goToPanel($(this).index()-1);
+			DataManager.carouselObject.goToPanel($(this).data('gotoproduct'),false);
+		return false;
+	
+	})
+	
+	
 	
 	window.addEventListener('orientationchange',app.orientationChange);
 	
@@ -72,7 +93,7 @@ var app = {
 		console.log("Quieres buscar");
 		var sr=DataManager.searchModel($(this).val());
 		if(sr!=null){
-			app.navProducts("product-carrousel",true);
+			app.navProducts("product-carrousel",false);
 			DataManager.carouselObject.goToPanel(sr);
 			$(this).blur();
 		}else{
@@ -87,7 +108,14 @@ var app = {
 	//Back button Productos
 	$("nav.productos").on("tap",".back-button",function(e){
 		e.preventDefault();
-		if($("#product-cat").hasClass("current")){
+		
+		app.navProducts($("#productos section.current").data('backto'),true);
+		/*if($("#product-cat").hasClass("current")){
+			app.navProducts("product-init",false);
+			return false;
+		}
+		
+		if($("#product-fam").hasClass("current")){
 			app.navProducts("product-init",false);
 			return false;
 		}
@@ -95,7 +123,8 @@ var app = {
 		if($("#product-carrousel").hasClass("current")){
 			app.navProducts("product-cat",true);
 			return false;
-		}
+		}*/
+		return false;
 		
 		
 	})
@@ -113,10 +142,15 @@ var app = {
     receivedEvent: function(id) {
         
     },
-	navProducts:function(section,backEnabled){
+	navProducts:function(section,backing){
+		var id=$("#productos section.current").attr("id");
+		
 		$("#productos section.current").addClass("next").removeClass("current");
 		$("#"+section).addClass("current").removeClass("next");
-		if(backEnabled){
+		if(!backing) $("#"+section).data('backto',id);
+		console.log("El contenido del product destino es "+$("#"+section).html());
+		console.log("El backEnabled es "+$("#"+section).data('backenabled'));
+		if($("#"+section).data('backenabled')===true){
 			$("nav.productos .back-button").show();
 		}else{
 			$("nav.productos .back-button").hide();

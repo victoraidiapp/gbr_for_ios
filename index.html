@@ -64,7 +64,7 @@
 function onDeviceReady() {
 	
 	console.log("El dispositivo ya está listo");
-    console.log(cordova.file);
+    //console.log(cordova.file);
 	app.initialize();
 }
 
@@ -112,14 +112,20 @@ function onDeviceReady() {
         
         </section>
         
-     <section id="product-cat" class="next">
+     <section id="product-cat" class="next product-list" data-backenabled="true">
       <div class="role-content"><ul class="list"><!--<li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E520</span></aside></div></li>
       <li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E525</span></aside></div></li>-->
       
       </ul>	</div>
       </section>
  
-		<section id="product-carrousel" class="next navigable">
+ <section id="product-fam" class="next product-list" data-backenabled="true" >
+      <div class="role-content"><ul class="list"><!--<li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E520</span></aside></div></li>
+      <li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/><span class="tit_modelo">E525</span></aside></div></li>-->
+      
+      </ul>	</div>
+      </section>
+		<section id="product-carrousel" class="next navigable" data-backenabled="true">
         <div id="product-viewer" style="width:100%;height:600px"></div>
         <!--
         	<div class="role-content">

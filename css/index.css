@@ -198,16 +198,17 @@ font-size:150%;
 }
 
 /*PRODUCT LIST*/
-#product-cat .list img{
+.product-list .list img,
+{
 height:40px;
 vertical-align:middle;	
 }
-#product-cat .list .tit_modelo{
+.product-list .list .tit_modelo{
 	padding-left:20px;
 	vertical-align:middle;
 	
 }
-#product-cat .list > li.nav::after{
+.product-list .list > li.nav::after{
 top:30px;	
 }
 .back-button{

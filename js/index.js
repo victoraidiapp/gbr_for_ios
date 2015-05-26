@@ -29,6 +29,13 @@ var app = {
 		
 		
     },
+	orientationChange:function(){
+		
+		console.log("Ha ocurrido un cambio de orientación");
+		$('#product-carrousel').addClass('navigable');
+		DataManager.carouselObject.resize();
+		$('#product-carrousel').removeClass('navigable');
+	},
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -57,6 +64,8 @@ var app = {
 		return false;
 	
 	})
+	
+	window.addEventListener('orientationchange',app.orientationChange);
 	
 	$(document).on("search","#search-model",function(e){
 		e.preventDefault();

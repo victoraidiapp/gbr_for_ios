@@ -6,12 +6,13 @@ var DataManager={
 	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
 	productCarrousel:new Array(),
 	carouselObject:null,
-	catalogueJSON:null
+	catalogueJSON:null,
+	userDNI:null
 	,
 	init:function(){
 		
 		//HABRÍA QUE COMPROBAR SI TENEMOS LA ÚLTIMA VERSIÓN DE LA BASE DE DATOS PARA NO TENER QUE VOLVER A DESCARGARLA
-		console.log("Inicializamos el Datamanager");
+		
 		DataManager.getProductsFromServer(function(r){
 			//console.log("Del servidor obtenemos "+r);
 			
@@ -59,7 +60,10 @@ var DataManager={
 		
 		});
 
-	
+	DataManager.userDNI=localStorage.getItem("dni");
+	if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+		app.requestDNI();	
+	}
 		
 	},
 	initCatalogue:function(){
@@ -76,13 +80,13 @@ var DataManager={
             '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'"/></div>'+
             '<div class="center"><span class="material">'+DataManager.gamaName(DataManager.catalogueJSON.producto[p].idGama)+'</span></div>'+
-            '<h3>DESCRIPCIÓN</h3>'+
+            '<div class="details"><h3>DESCRIPCIÓN</h3>'+
             '<p>'+DataManager.catalogueJSON.producto[p].descripcion+'</p>'+
             '<h3>USO</h3>'+
             '<p>'+DataManager.catalogueJSON.producto[p].uso+'</p>'+
             '<h3 class="inline">TALLA: </h3><span class="value">9</span>'+
             '<h3 class="inline">EMPAQUETADO: </h3><span class="value">120 pares</span>'+
-            '<h3 class="inline">P.V.P: </h3><span class="value">9</span>');
+            '<h3 class="inline">P.V.P: </h3><span class="value">9</span></div>');
 			}
 			
 		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: true,pagination:true });
@@ -95,8 +99,10 @@ var DataManager={
 		 for(f in DataManager.catalogueJSON.familia){
 				
 				
-				console.log("Queremos cargar la familia "+DataManager.catalogueJSON.familia[f].familia);
+				//console.log("Queremos cargar la familia "+DataManager.catalogueJSON.familia[f].familia);
 				var idP=DataManager.searchFirstProductOfFamily(DataManager.catalogueJSON.familia[f].idFamilia);
+				//console.log("Queremos cargar la familia "+DataManager.catalogueJSON.familia[f].familia+" cuyo primer producto tiene el id "+idP);
+				
 				jQuery("#product-fam ul.list").append('<li class="nav comp" data-gotoproduct="'+idP+'"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[idP].fotoGrande+'" height="25"/></aside><div><h2>'+DataManager.catalogueJSON.familia[f].familia+'</h2></div></li>');
 				

@@ -7,6 +7,7 @@ var DataManager={
 	productCarrousel:new Array(),
 	carouselObject:null,
 	catalogueJSON:null,
+	clientsJSON:null,
 	userDNI:null
 	,
 	init:function(){
@@ -63,6 +64,8 @@ var DataManager={
 	DataManager.userDNI=localStorage.getItem("dni");
 	if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		app.requestDNI();	
+	}else{
+		DataManager.syncClients();
 	}
 		
 	},
@@ -107,6 +110,33 @@ var DataManager={
 				DataManager.catalogueJSON.producto[idP].fotoGrande+'" height="25"/></aside><div><h2>'+DataManager.catalogueJSON.familia[f].familia+'</h2></div></li>');
 				
 		 }
+	},
+	getClientsFromServer:function(dni,callBack){
+		var today = new Date();
+		
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+var token=jQuery.sha256(today.dateFormat('Ymd')+'SecretoPublicoGahibre2014');
+
+token=dni.trim()+"::"+token.trim();
+console.log("El token es "+token);
+
+var values = { };
+values['token']=token;
+
+		$.ajax({
+			type:"POST",
+			url:"http://datic.es/gahibre/webservice/cliente.php",
+			dataType:"text",
+			data:values,
+			success:function(r){
+				console.log("El resultado obtenido es "+r);
+			callBack(r)	
+			}
+		})
+		
 	},
 	getProductsFromServer:function(callBack){
 		var today = new Date();
@@ -247,6 +277,16 @@ xhr.send();
 			i++;
 		}
 		
+	},
+	syncClients:function(dni){
+		DataManager.getClientsFromServer(DataManager.userDNI,function(r){
+		LocalFileManager.writeToClients(r);
+			DataManager.clientsJSON=jQuery.parseJSON(r);
+			console.log("Los datos de cliente son "+DataManager.clientsJSON);
+			if(dni!=="undefined" && dni!==null){
+				localStorage.setItem("dni",dni);	
+			}
+		})
 	}
 	
 };

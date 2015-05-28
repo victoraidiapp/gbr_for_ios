@@ -156,6 +156,12 @@ var app = {
 		}else{
 			$("nav.productos .back-button").hide();
 		}
+		
+		if($("#"+section).data('shopenabled')===true){
+			$("nav.productos .shop-button").show();
+		}else{
+			$("nav.productos .shop-button").hide();
+		}
 	},
 	requestDNI:function(){
 		$.UIPopup({
@@ -165,8 +171,9 @@ var app = {
           cancelButton: 'Ahora no', 
           continueButton: 'Conectar', 
           callback: function() {
-            
-			
+			  console.log("El dni escrito es "+$("#dni").val());
+            DataManager.userDNI=$("#dni").val();
+			DataManager.syncClients(DataManager.userDNI);
           }
         });
 	}

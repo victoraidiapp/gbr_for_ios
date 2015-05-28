@@ -220,6 +220,19 @@ top:30px;
   display: none;
   
 }
+
+.shop-button{
+	  background-image: url(../img/iconos/shopping-btn.png);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-size: 100%;
+  display: none;
+  position:absolute;
+  right:10px;
+  top:25px;
+  
+}
 /*PRODUCT VIEWER*/
 #product-carrousel{
 background-color:#FFF;	

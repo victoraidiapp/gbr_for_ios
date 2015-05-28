@@ -2,6 +2,7 @@
 var LocalFileManager={
 	docDirectory:null,
 	catalogueFile:null,
+	clientesFile:null,
 	docsPath:null,
 	
 	init:function(){
@@ -21,6 +22,20 @@ var LocalFileManager={
 			
 			
 				})
+		
+		/*CREAMOS EL ARCHIVO DE CLIENTES*/
+		dirEntry.getFile('clientes.txt', {}, function(fileEntry) {
+			LocalFileManager.clientesFile=fileEntry;
+			console.log("He asignado el arcihvo que ya existía "+fileEntry.fullPath );
+				},function(err){
+					dirEntry.getFile('clientes.txt',{create: true, exclusive: true}, function(fileEntry) {
+						LocalFileManager.clientesFile=fileEntry;
+						console.log("He creado el archivo de clientes");
+					})
+			
+			
+			
+				})		
 		LocalFileManager.docsPath=dirEntry.toURL();
 		//Creamos la carpeta de imagenes de productos
 		/*dirEntry.getDirectory("src",{create: true}, function(dirEntry) {
@@ -73,9 +88,50 @@ console.log("Ya he escrito el archivo");
 	console.log("Ha ocurrido un error al crear el writer");	
 	});	
 	},
+	writeToClients:function(r){
+		console.log("Invocada la función para escribir en el archivo de clientes");
+		//console.log("Queremos escribir "+r);
+		LocalFileManager.clientesFile.createWriter(function(fileWriter) {
+
+      fileWriter.onwriteend = function(e) {
+        console.log('Write completed.');
+      };
+
+      fileWriter.onerror = function(e) {
+        console.log('Write failed: ' + e.toString());
+      };
+
+      // Create a new Blob and write it to log.txt.
+      var blob = new Blob([r], {type: "text/plain"});
+	
+      fileWriter.write(blob);
+console.log("Ya he escrito el archivo");
+    }, function(err){
+	console.log("Ha ocurrido un error al crear el writer");	
+	});	
+	},
 	readCatalogue:function(callback){
 		console.log("Iniciamos la lectura");
 		LocalFileManager.catalogueFile.file(function(file) {
+       var reader = new FileReader();
+		console.log("Hemos creado el FileReader");
+       reader.onloadend = function(e) {
+		   callback(reader.result);
+		   
+		 
+       };
+	reader.onerror=function(){
+	console.log("Ha ocurrido un error al leer");	
+	}
+       reader.readAsText(file);
+    }, function(err){
+	console.log("Ha ocurrido un error al obtener el file");	
+	});
+  
+	},
+	readClients:function(callback){
+		console.log("Iniciamos la lectura");
+		LocalFileManager.clientesFile.file(function(file) {
        var reader = new FileReader();
 		console.log("Hemos creado el FileReader");
        reader.onloadend = function(e) {

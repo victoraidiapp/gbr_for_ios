@@ -9,19 +9,29 @@
 
 ChocolateChip-UI
 ChUI.js
-Copyright 2014 Sourcebits www.sourcebits.com
+Copyright 2015 Sourcebits www.sourcebits.com
 License: MIT
-Version: 3.5.4
+Version: 3.8.5
 */
+window.CHUIJSLIB;
+if(window.jQuery) {
+  window.CHUIJSLIB = window.jQuery;
+} else if (window.$chocolatechipjs) {
+  window.CHUIJSLIB = window.$chocolatechipjs;
+}
 (function($) {
-  'use strict';
+
   $.extend({
     ///////////////
     // Create Uuid:
     ///////////////
+    UuidBit : 1,
+
     Uuid : function() {
-      return Date.now().toString(36);
+      this.UuidBit++;
+      return Date.now().toString(36) + this.UuidBit;
     },
+
     ///////////////////////////
     // Concat array of strings:
     ///////////////////////////
@@ -35,8 +45,8 @@ Version: 3.5.4
     forEach : function ( obj, callback, args ) {
       function isArraylike( obj ) {
         var length = obj.length,
-          type = jQuery.type( obj );
-        if ( type === "function" || jQuery.isWindow( obj ) ) {
+          type = typeof obj;
+        if ( type === "function" || obj === window ) {
           return false;
         }
         if ( obj.nodeType === 1 && length ) {
@@ -85,26 +95,59 @@ Version: 3.5.4
       }
     }
   });
+
   $.fn.extend({
+    
+    ///////////////////////////////////
+    // forEach method for jQuery to
+    // preserve normal parameter order.
+    ///////////////////////////////////
+    forEach : function( callback, args ) {
+      var $this = this;
+      return $.forEach( $this, callback, args );
+    },
+
     //////////////////////
     // Return element that 
     // matches selector:
     //////////////////////
     iz : function ( selector ) {
-      var ret = $();
-      this.forEach(function(ctx) {
-        if ($(ctx).is(selector)) {
+      if (window.jQuery) {
+        var ret = $();
+        this.forEach(function(ctx) {
+          if ($(ctx).is(selector)) {
+            ret.push(ctx);
+          }
+        });
+        return ret;
+
+      } else if (window.$chocolatechipjs) {
+        return this.is(selector);
+      }
+    },
+    ////////////////////////////////
+    // Return array of unique items:
+    ////////////////////////////////
+    unique : function() {
+      var ret = [];
+      var sort = this.sort();
+      sort.forEach(function(ctx, idx) {
+        if (ret.indexOf(ctx) === -1) {
           ret.push(ctx);
         }
       });
-      return ret;
+      return ret.length ? ret : [];
     },
     //////////////////////////////
     // Return element that doesn't 
     // match selector:
     //////////////////////////////
     iznt : function ( selector ) {
-      return this.not(selector);
+      if (window.jQuery) {
+        return this.not(selector);
+      } else if (window.$chocolatechipjs) {
+        return this.isnt(selector);
+      }
     },
  
     ///////////////////////////////////
@@ -114,79 +157,104 @@ Version: 3.5.4
     haz : function ( selector ) {
       return this.has(selector);
     },
- 
     ///////////////////////////////////
     // Return element whose descendants 
     // don't match selector:
     ///////////////////////////////////
     haznt : function ( selector ) {
-      var ret = $();
-      this.forEach(function(ctx) {
-        if (!$(ctx).has(selector)[0]) {
-          ret.push(ctx);
-        }
-      });
-      return ret;
+      if (window.jQuery) {
+        var ret = $();
+        this.forEach(function(ctx) {
+          if (!$(ctx).has(selector)[0]) {
+            ret.push(ctx);
+          }
+        });
+        return ret;        
+      } else if (window.$chocolatechipjs) {
+        return this.hasnt(selector);
+      }
     },
     //////////////////////////////////////
     // Return element that has class name:
     //////////////////////////////////////
     hazClass : function ( className ) {
-      var ret = $();
-      this.forEach(function(ctx) {
-        if ($(ctx).hasClass(className)) {
-          ret.push(ctx);
-        }
-      });
-      return ret;
+      if (window.jQuery) {
+        var ret = $();
+        this.forEach(function(ctx) {
+          if ($(ctx).hasClass(className)) {
+            ret.push(ctx);
+          }
+        });
+        return ret;
+      } else if(window.$chocolatechipjs) {
+        return this.hasClass(className);
+      }
     },
     //////////////////////////////
     // Return element that doesn't 
     // have class name:
     //////////////////////////////
     hazntClass : function ( className ) {
-      var ret = $();
-      this.forEach(function(ctx) {
-        if (!$(ctx).hasClass(className)) {
-          ret.push(ctx);
-        }
-      });
-      return ret;
+      if (window.jQuery) {
+        var ret = $();
+        this.forEach(function(ctx) {
+          if (!$(ctx).hasClass(className)) {
+            ret.push(ctx);
+          }
+        });
+        return ret;
+      } else if (window.$chocolatechipjs) {
+        var ret = [];
+        this.forEach(function(ctx) {
+          if (ctx.classList.contains(className)) {
+            ret.push(ctx);
+          }
+        });
+        return ret;
+      }
     },
     /////////////////////////////////////
     // Return element that has attribute:
     /////////////////////////////////////
     hazAttr : function ( property ) {
-      var ret = $();
-      this.forEach(function(ctx){
-        if ($(ctx).attr(property)) {
-          ret.push(ctx);
-        }
-      });
-      return ret;
+      if (window.jQuery) {
+        var ret = $();
+        this.forEach(function(ctx){
+          if ($(ctx).attr(property)) {
+            ret.push(ctx);
+          }
+        });
+        return ret;
+      } else if (window.$chocolatechipjs) {
+        var ret = [];
+
+        return ret;
+      }
     },
     //////////////////////////
     // Return element that 
     // doesn't have attribute:
     //////////////////////////
     hazntAttr : function ( property ) {
-      var ret = $();
-      this.forEach(function(ctx){
-        if (!$(ctx).attr(property)) {
-          ret.push(ctx);
-        }
-      });
-      return ret;
-    },
-    ////////////////////////////
-    // Version of each that uses
-    // regular paramater order:
-    ////////////////////////////
-    forEach : function ( callback, args ) {
-      return $.forEach( this, callback, args );
+      if (window.jQuery) {
+        var ret = $();
+        this.forEach(function(ctx){
+          if (!$(ctx).attr(property)) {
+            ret.push(ctx);
+          }
+        });
+        return ret;
+      } else if (window.$chocolatechipjs) {
+        var ret = [];
+          if (!ctx.hasAttribute(property)){
+            ret.push(ctx);
+          }
+        return ret;        
+      }
     }
-  }); 
- 
+  });
+
+
   $.extend({
     eventStart : null,
     eventEnd : null,
@@ -195,6 +263,7 @@ Version: 3.5.4
     // Define min-length for gesture detection:
     gestureLength : 30 
   });
+
   $(function() {
     //////////////////////////
     // Setup Event Variables:
@@ -212,7 +281,7 @@ Version: 3.5.4
       $.eventMove = 'MSPointerMove';
       $.eventCancel = 'MSPointerCancel';
     // Touch events for iOS & Android:
-    } else if ('ontouchstart' in window) {
+    } else if ('ontouchstart' in window && /mobile/img.test(navigator.userAgent)) {
       $.eventStart = 'touchstart';
       $.eventEnd = 'touchend';
       $.eventMove = 'touchmove';
@@ -225,8 +294,8 @@ Version: 3.5.4
       $.eventCancel = 'mouseout';
     }
   });
- 
- 
+
+
   $.extend({
     isiPhone : /iphone/img.test(navigator.userAgent),
     isiPad : /ipad/img.test(navigator.userAgent),
@@ -243,21 +312,20 @@ Version: 3.5.4
     isWin : /trident/img.test(navigator.userAgent),
     isWinPhone : (/trident/img.test(navigator.userAgent) && /mobile/img.test(navigator.userAgent)),
     isIE10 : navigator.userAgent.match(/msie 10/i),
-    isIE11 : navigator.userAgent.match(/msie 11/i),
+    isIE11 : (navigator.userAgent.match(/windows nt/i) && navigator.userAgent.match(/trident/i)),
+    isIEEdge : (navigator.userAgent.match(/windows nt/i) && navigator.userAgent.match(/edge/i)),
     isWebkit : navigator.userAgent.match(/webkit/),
     isMobile : /mobile/img.test(navigator.userAgent),
     isDesktop : !(/mobile/img.test(navigator.userAgent)),
     isSafari : (!/Chrome/img.test(navigator.userAgent) && /Safari/img.test(navigator.userAgent) && !/android/img.test(navigator.userAgent)),
     isChrome : /Chrome/img.test(navigator.userAgent),
-    isNativeAndroid : (/android/i.test(navigator.userAgent) && /webkit/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent))
-  });
-  //////////////////////////////////
-  // Flag if native Android browser:
-  //////////////////////////////////
-  if ((/android/img.test(navigator.userAgent)) && (/webkit/img.test(navigator.userAgent) ) && (!/Chrome/img.test(navigator.userAgent))) {
-    document.body.classList.add('isNativeAndroidBrowser');
-  }
-  'use strict';
+    isNativeAndroid : (/android/i.test(navigator.userAgent) && /webkit/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent)),
+    isWideScreen : window.innerWidth >= 960 && (window.orientation === 90 || window.orentation === -90),
+    isWideScreenPortrait : window.innerWidth >= 960 && (window.orientation !== 90 || window.orientation !== -90)
+    });
+
+
+  
   /////////////////////////////
   // Determine browser version:
   /////////////////////////////
@@ -272,12 +340,17 @@ Version: 3.5.4
       return m[1];
     }
   });
+
   $(function() {
     ////////////////////////////////
     // Added classes for client side
     // os-specific styles:
     ////////////////////////////////
     $.body = $('body');
+  
+    if ((/android/img.test(navigator.userAgent)) && (/webkit/img.test(navigator.userAgent) ) && (!/Chrome/img.test(navigator.userAgent))) {
+      $.body.addClass('isNativeAndroidBrowser');
+    }
     if ($.isWin) {
       $.body.addClass('isWindows');
     } else if ($.isiOS) {
@@ -289,9 +362,11 @@ Version: 3.5.4
       $.body.addClass('isSafari6');
     }
     if ($.isNativeAndroid) {
-      $.body.addClass('isNativeAndroidBrowser')
+      $.body.addClass('isNativeAndroidBrowser');
     }
   });
+
+
   //////////////////////////////////////////////////////
   // Swipe Gestures for ChocolateChip-UI.
   // Includes mouse gestures for desktop compatibility.
@@ -302,6 +377,7 @@ Version: 3.5.4
   var tapTimeout;
   var longTapDelay = 750;
   var singleTapDelay = 150;
+  if ($.isAndroid) singleTapDelay = 200;
   var longTapTimeout;
   function parentIfText(node) {
     return 'tagName' in node ? node : node.parentNode;
@@ -413,7 +489,7 @@ Version: 3.5.4
         }
       }
       if ($.isAndroid) {
-        $.gestureLength = 10;
+        $.gestureLength = 50;
         if (!!touch.el) {
           // Swipe detection:
           if ((touch.x2 && Math.abs(touch.x1 - touch.x2) > $.gestureLength) ||
@@ -515,6 +591,8 @@ Version: 3.5.4
       }
     });
   });
+
+
   /////////////////////////////////////////
   // Set classes for desktop compatibility:
   /////////////////////////////////////////
@@ -530,15 +608,18 @@ Version: 3.5.4
   $(function() {
     $.UIDesktopCompat();
   });
- 
+
+
   $(function() { 
     $.body = $('body');
+
     //////////////////////
     // Add the global nav:
     //////////////////////
     if (!$.body[0].classList.contains('splitlayout')) {
       $('body').prepend("<nav id='global-nav'></nav>");
     }
+
     /////////////////////////////////////////////////
     // Fix Split Layout to display properly on phone:
     /////////////////////////////////////////////////
@@ -547,6 +628,7 @@ Version: 3.5.4
         $('meta[name=viewport]').attr('content','width=device-width, initial-scale=0.45, maximum-scale=2, user-scalable=yes');
       }
     }
+
     /////////////////////////////////////////////////////////
     // Add class to nav when button on right.
     // This allows us to adjust the nav h1 for small screens.
@@ -556,14 +638,38 @@ Version: 3.5.4
         ctx.classList.add('buttonOnRight');
       }
     });
+
     //////////////////////////////////////////
     // Get any toolbars and adjust the bottom 
     // of their corresponding articles:
     //////////////////////////////////////////
     $('.toolbar').prev('article').addClass('has-toolbar');
+
+    if ($.isiOS && $.isStandalone) {
+      $.body[0].classList.add('isStandalone');
+    }
   });
+
+
+  /////////////////////////
+  // Hide and show navbars:
+  /////////////////////////
+  $.extend({    
+    UIHideNavBar : function () {
+      $('nav').hide();
+      $.body.addClass('hide-navbars');
+    },
+
+    UIShowNavBar : function () {
+      $('nav').show();
+      $.body.removeClass('hide-navbars');
+    }
+  });
+
+
   $.extend({
     subscriptions : {},
+
     // Topic: string defining topic: /some/topic
     // Data: a string, number, array or object.
     subscribe : function (topic, callback) {
@@ -577,6 +683,7 @@ Version: 3.5.4
       });
       return token;
     },
+
     unsubscribe : function ( token ) {
       setTimeout(function() {
         for (var m in $.subscriptions) {
@@ -592,6 +699,7 @@ Version: 3.5.4
         return false;
       });
     },
+
     publish : function ( topic, args ) {
       if (!$.subscriptions[topic]) {
         return false;
@@ -606,6 +714,8 @@ Version: 3.5.4
       return true;
    }
   });
+
+
   ////////////////////////////////////
   // Create custom navigationend event
   ////////////////////////////////////
@@ -634,9 +744,9 @@ Version: 3.5.4
     ////////////////////////////////////////////////
     // Manage location.hash for client side routing:
     ////////////////////////////////////////////////
-    UITrackHashNavigation : function ( url, delimeter ) {
+    UITrackHashNavigation : function ( url, delimiter ) {
       url = url || true;
-      $.UISetHashOnUrl($.UINavigationHistory[$.UINavigationHistory.length-1], delimeter);
+      $.UISetHashOnUrl($.UINavigationHistory[$.UINavigationHistory.length-1], delimiter);
     },
     /////////////////////////////////////////////////////
     // Set the hash according to where the user is going:
@@ -685,7 +795,7 @@ Version: 3.5.4
       currentArticle[0].scrollTop = 0;
       destination[0].scrollTop = 0;
       if (prevArticles.length) {
-        $.each(prevArticles, function(_, ctx) {
+        $.forEach(prevArticles, function(ctx) {
           $(ctx).removeClass('previous').addClass('next');
           $(ctx).prev().removeClass('previous').addClass('next');
         });
@@ -782,7 +892,7 @@ Version: 3.5.4
     ///////////////////////////////////////////////////////////
     // Make sure that navs and articles have navigation states:
     ///////////////////////////////////////////////////////////
-    $('nav:not(#global-nav)').each(function(idx, ctx) {
+    $('nav:not(#global-nav)').forEach(function(ctx, idx) {
       // Prevent if splitlayout for tablets:
       if ($('body')[0].classList.contains('splitlayout')) return;
       if (idx === 0) {
@@ -792,7 +902,7 @@ Version: 3.5.4
       }
     });
   
-    $('article').each(function(idx, ctx) {
+    $('article').forEach(function(ctx, idx) {
       // Prevent if splitlayout for tablets:
       if ($('body')[0].classList.contains('splitlayout')) return;
       if ($('body')[0].classList.contains('slide-out-app')) return;
@@ -805,7 +915,7 @@ Version: 3.5.4
       ///////////////////////////
     // Initialize Back Buttons:
     ///////////////////////////
-    $('body').on('singletap', 'a.back', function() {
+    $('body').on('singletap', '.back', function() {
       if (this.classList.contains('back')) {
         $.UIGoBack();
       }
@@ -821,16 +931,22 @@ Version: 3.5.4
       if (!this.getAttribute('data-goto')) return;
       if (!document.getElementById(this.getAttribute('data-goto'))) return;
       if ($(this).parent()[0].classList.contains('deletable')) return;
-      $(destinationHref).addClass('navigable');
       $this.addClass('selected');
       var destinationHref = '#' + this.getAttribute('data-goto');
+      $(destinationHref).addClass('navigable');
       setTimeout(function() {
         $this.removeClass('selected');
-      }, 500);
+      }, 1000);
       var destination = $(destinationHref);
-      $.UIGoToArticle(destination);
+      if ($.isAndroid || $.isChrome) {
+        setTimeout(function() {
+          $.UIGoToArticle(destination);
+        }, 200);
+      } else {
+        $.UIGoToArticle(destination);
+      }
     });
-    $('li[data-goto]').each(function(idx, ctx) {
+    $('li[data-goto]').forEach(function(ctx) {
       $(ctx).closest('article').addClass('navigable');
       var navigable =  '#' + ctx.getAttribute('data-goto');
       $(navigable).addClass('navigable');
@@ -850,24 +966,24 @@ Version: 3.5.4
       e.preventDefault();
     });
   });
- 
- 
+
+
   $(function() {
     ///////////////////////////////////
     // Initialize singletap on buttons:
     ///////////////////////////////////
-    $('body').on('singletap', '.button', function() {
+    $('body').on('singletap', 'button', function() {
       var $this = $(this);
-      if ($this.parent('.segmented')[0]) return;
-      if ($this.parent('.tabbar')[0]) return;
+      if ($this.parent('.segmented')[0] || $this.parent('.tabbar')[0]) return;
+      if (this.classList.contains('slide-out-button') || this.classList.contains('back') || this.classList.contains('backTo')) return;
       $this.addClass('selected');
       setTimeout(function() {
         $this.removeClass('selected');
-      }, 500);
+      }, 1000);
     });
   });
- 
- 
+
+
   $.fn.extend({
     /////////////////////////
     // Block Screen with Mask
@@ -878,6 +994,7 @@ Version: 3.5.4
       $('article.current').attr('aria-hidden',true);
       return this;
     },
+
     //////////////////////////
     // Remove Mask from Screen
     //////////////////////////
@@ -887,17 +1004,24 @@ Version: 3.5.4
       return this;
     }
   });
+
+
   $.fn.extend({
     //////////////////////////////
     // Center an Element on Screen
     //////////////////////////////
-    UICenter : function ( ) {
+    UICenter : function ( position ) {
+      var position = position;
       if (!this[0]) return;
       var $this = $(this);
       var parent = $this.parent();
-      var position;
-      if ($this.css('position') !== 'absolute') position = 'relative';
-      else position = 'absolute';
+      if (position) {
+        $(this.css('position', position));
+      } else if ($this.css('position') === 'absolute') {
+        position = 'absolute';
+      } else {
+        position = 'relative';
+      }
       var height, width, parentHeight, parentWidth;
       if (position === 'absolute') {
         height = $this[0].clientHeight;
@@ -909,6 +1033,7 @@ Version: 3.5.4
         width = parseInt($this.css('width'),10);
         parentHeight = parseInt(parent.css('height'),10);
         parentWidth = parseInt(parent.css('width'),10);
+        $(this).css({'margin-left': 'auto', 'margin-right': 'auto'});
       }
       var tmpTop, tmpLeft;
       if (parent[0].nodeName === 'body') {
@@ -923,6 +1048,8 @@ Version: 3.5.4
       $this.css({left: tmpLeft, top: tmpTop});
     }
   });
+
+
   $.fn.extend({
     ////////////////////////
     // Create Busy indicator
@@ -935,43 +1062,59 @@ Version: 3.5.4
       }
     */
     UIBusy : function ( options ) {
+      var count = 1;
       options = options || {};
+      var settings = {
+        size: 43,
+        color: '#000',
+        position: false,
+        duration: '2s'
+      };
+      $.extend(settings, options);
       var $this = this;
-      var color = options.color || '#000';
-      var size = options.size || '80px';
-      var position = (options && options.position === 'right') ? 'align-flush' : null;
-      var duration = options.duration || '2s';
       var spinner;
       // For iOS:
       var iOSBusy = function() {
-        var webkitAnim = {'-webkit-animation-duration': duration};
+        var webkitAnim = {'-webkit-animation-duration': settings.duration};
         spinner = $('<span class="busy"></span>');
-        $(spinner).css({'background-color': color, 'height': size, 'width': size});
+        $(spinner).css({'background-color': settings.color, 'height': settings.size + 'px', 'width': settings.size + 'px'});
         $(spinner).css(webkitAnim);
         $(spinner).attr('role','progressbar');
-        if (position) $(spinner).addClass(position);
+        if (settings.position) $(spinner).addClass(settings.position);
         $this.append(spinner);
         return this;
       };
       // For Android:
       var androidBusy = function() {
-        var webkitAnim = {'-webkit-animation-duration': duration};
-        spinner = $('<div class="busy"><div></div><div></div></div>');
-        $(spinner).css({'height': size, 'width': size, "background-image":  'url(' + '"data:image/svg+xml;utf8,<svg xmlns:svg=' + "'http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.1' x='0px' y='0px' width='400px' height='400px' viewBox='0 0 400 400' enable-background='new 0 0 400 400' xml:space='preserve'><circle fill='none' stroke='" + color + "' stroke-width='20' stroke-miterlimit='10' cx='199' cy='199' r='174'/>" + '</svg>"' + ')'});
-        $(spinner).css(webkitAnim);
-        $(spinner).attr('role','progressbar');
-        $(spinner).innerHTML = "<div></div><div></div>";
-        if (position) $(spinner).addClass('align-' + position);
-        $this.append(spinner);
-        return this;
+        settings.id = $.Uuid();
+        var androidActivityIndicator = null;
+        var position = settings.position ? (' ' + settings.position) : '';
+        if ($.isNativeAndroid) {
+          androidActivityIndicator = '<svg class="busy' + position + '" version="1.1" id="' + settings.id + '" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><g><path fill="none" stroke="' + settings.color + '" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M74.2,65c2.7-4.4,4.3-9.5,4.3-15c0-15.7-12.8-28.5-28.5-28.5S21.5,34.3,21.5,50c0,5.5,1.6,10.6,4.3,15"/></g><polyline fill="none" stroke="' + settings.color + '" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="89.4,56.1 74.3,65 65.4,49.9 "/></svg>';
+
+          $this.append(androidActivityIndicator);
+          return;
+        } else {
+          androidActivityIndicator = '<svg id="'+ settings.id +'" class="busy' + position + '" x="0px" y="0px" viewBox="0 0 100 100"><circle stroke="url(#SVGID_1_)" cx="50" cy="50" r="28.5"/></svg>';
+          $this.append(androidActivityIndicator);
+          $this.addClass('hasActivityIndicator');
+          if (settings.position) {
+            $('#' + settings.id).addClass(settings.position);
+          }
+          if (options.color) {
+            $('#' + settings.id).find('circle').css('stroke', options.color);
+          }
+        }
+        $('#' + settings.id).css({'height': settings.size + 'px', 'width': settings.size + 'px'});
+        return $('#' + settings.id);
       };
       // For Windows 8/WP8:
       var winBusy = function() {
         spinner = $('<progress class="busy"></progress>');
-        $(spinner).css({ 'color': color });
+        $(spinner).css({ 'color': settings.color });
         $(spinner).attr('role','progressbar');
         $(spinner).addClass('win-ring');
-        if (position) $(spinner).addClass('align-' + position);
+        if (settings.position) $(spinner).addClass(settings.position);
         $this.append(spinner);
         return this;
       };
@@ -985,6 +1128,8 @@ Version: 3.5.4
       }
     }
   });
+
+
   $.extend({
     ///////////////
     // Create Popup
@@ -997,40 +1142,50 @@ Version: 3.5.4
         message: 'This is a message from me to you.',
         cancelButton: 'Cancel',
         continueButton: 'Go Ahead',
-        callback: function() { // do nothing }
+        callback: function() { // do nothing },
+        empty: true
       }
       */
       if (!options) return;
-      var id = options.id || $.Uuid();
-      var title = options.title ? '<header><h1>' + options.title + '</h1></header>' : '';
-      var message = options.message ? '<p role="note">' + options.message + '</p>' : '';
-      var cancelButton = options.cancelButton ? '<a href="javascript:void(null)" class="button cancel" role="button">' + options.cancelButton + '</a>' : '';
-      var continueButton = options.continueButton  ? '<a href="javascript:void(null)" class="button continue" role="button">' + options.continueButton + '</a>' : '';
-      var callback = options.callback || $.noop;
-      var padding = options.empty ? ' style="padding: 40px 0;" ' : '';
-      var panelOpen, panelClose;
-      if (options.empty) {
-        panelOpen = '';
-        panelClose = '';
+      var settings = {};
+      settings.id = $.Uuid();
+      settings.content = true;
+      $.extend(settings, options);
+
+      var id = settings.id;
+      var title = settings.title ? '<header><h1>' + settings.title + '</h1></header>' : '';
+      var message = settings.message ? '<p role="note">' + options.message + '</p>' : '';
+      var cancelButton = options.cancelButton ? '<button class="cancel" role="button">' + settings.cancelButton + '</button>' : '';
+      var continueButton = settings.continueButton  ? '<button class="continue" role="button">' + settings.continueButton + '</button>' : '';
+      var callback = settings.callback || $.noop;
+      var panelOpen, panelClose, popup;
+      if (settings.empty) {
+        popup = $.concat('<div class="popup closed" role="alertdialog" id="', id, '"><div class="panel"></div></div>');
       } else {
-        panelOpen = '<div class="panel">';
-        panelClose = '</div>';
+        popup = $.concat('<div class="popup closed', '" role="alertdialog" id="', id, '"><div class="panel">', title, message, '</div><footer>', cancelButton, continueButton, '</footer>', panelClose, '</div>');
       }
-      var popup = '<div class="popup closed" role="alertdialog" id="' + id + '"' + padding + '>' + panelOpen + title + message + '<footer>' + cancelButton + continueButton + '</footer>' + panelClose + '</div>';
     
       $('body').append(popup);
       if (callback && continueButton) {
         $('.popup').find('.continue').on($.eventStart, function() {
-			console.log("Invocamos el callback");
-			 callback.call(callback);
-			 console.log("Cerramosel popup");
-          $('.popup').UIPopupClose();
-         
+          var $this = $(this);
+          if ($.isAndroid || $.isChrome) {
+            $this.addClass('selected');
+            setTimeout(function() {
+              $this.removeClass('selected');
+              $('.popup').UIPopupClose();
+              callback.call(callback);
+            }, 300);
+          } else {
+            $('.popup').UIPopupClose();
+            callback.call(callback);
+          }
         });
       }
     
       $.UICenterPopup();
       setTimeout(function() {
+      	$('body').find('.popup').addClass('opened');
         $('body').find('.popup').removeClass('closed');
       }, 200);
       $('body').find('.popup').UIBlock('0.5');
@@ -1075,93 +1230,94 @@ Version: 3.5.4
     // Handle Closing Popups:
     //////////////////////////
     $('body').on($.eventStart, '.cancel', function() {
-      if ($(this).closest('.popup')[0]) {
-        $(this).closest('.popup').UIPopupClose();
+      var $this = $(this);
+      if ($this.closest('.popup')[0]) {
+        if ($.isAndroid || $.isChrome) {
+          $this.addClass('selected');
+          setTimeout(function() {
+            $this.closest('.popup').UIPopupClose();
+            $this.removeClass('selected');
+          }, 300);
+        } else {
+          $this.closest('.popup').UIPopupClose();
+        }
       }
     });
     /////////////////////////////////////////////////
     // Reposition popups on window resize:
     /////////////////////////////////////////////////
-    window.onresize = function() {
+    $(window).on('resize', function() {
       $.UICenterPopup();
-    };
-  });  
-  $.fn.extend({ 
+    });
+  });
+
+
+  $.extend({    
     /////////////////
     // Create Popover
     /////////////////
     /*
       id: myUniqueID,
       title: 'Great',
-      callback: myCallback
+      callback: myCallback,
     */
     UIPopover : function ( options ) {
-      if (!options) return [];
-      var triggerEl = $(this);
-      var triggerID;
-      if (this[0].id) {
-        triggerID = this[0].id;
+      options = options || {};
+      var settings = {
+        id: $.Uuid(),
+        callback: $.noop,
+        title: '',
+      };
+      $.extend(settings, options);
+      if (options && options.content) {
+        settings.content = options.content;
       } else {
-        triggerID = $.Uuid();
-        triggerEl.attr('id', triggerID);
+        settings.content = '';
       }
-      var id = options.id ? options.id : $.Uuid();
-      var header = options.title ? ('<header><h1>' + options.title + '</h1></header>') : '';
-      var callback = options.callback ? options.callback : $.noop;
-      var popover = '<div class="popover" id="' + id + '">' + header + '<section></section></div>';
-    
+      var header = '<header><h1>' + settings.title + '</h1></header>';
+      var popover = '<div class="popover" id="' + settings.id + '">' + header + '<section></section></div>';
+      var popoverID = '#' + settings.id;
+      
       // Calculate position of popover relative to the button that opened it:
       var _calcPopPos = function (element) {
         var offset = $(element).offset();
         var left = offset.left;
         var calcLeft;
         var calcTop;
-        var popover = $('.popover');
+        var popover = $(popoverID);
         var popoverOffset = popover.offset();
         calcLeft = popoverOffset.left;
         calcTop = offset.top + $(element)[0].clientHeight;
         if ((popover.width() + offset.left) > window.innerWidth) {
           popover.css({
             'left': ((window.innerWidth - popover.width())-20) + 'px',
-            'top': (calcTop + 20) + 'px'
+            'top': (calcTop - 30) + 'px'
           });
         } else {
-          popover.css({'left': left + 'px', 'top': (calcTop + 20) + 'px'});
+          popover.css({'left': left + 'px', 'top': (calcTop - 30) + 'px'});
         }
       };
-      $(this).on($.eventStart, function() {
-        if ($('.mask')[0]) {
-          $.UIPopoverClose();
-          $('body').UIUnblock();
-          return;
-        }
-        var $this = this;
-        $(this).addClass('selected');
+
+      if ($('.mask')[0]) {
+        $.UIPopoverClose();
+        $('body').UIUnblock();
+        return;
+      }
+      $('body').append(popover);   
+      if ($.isAndroid || $.isChrome) {
         setTimeout(function() {
-          $($this).removeClass('selected');
-        }, 1000);
-        $('body').append(popover);
-        $('.popover').UIBlock('.5');
-        var event = 'singletap';
-        if ($.isWin && $.isDesktop) {
-          event = $.eventStart + ' singletap ' + $.eventEnd;
-        }
-        $('.mask').on(event, function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-        });
-        $('.popover').data('triggerEl', triggerID);
-        if ($.isWin) {
-          _calcPopPos($this);
-          $('.popover').addClass('open');
-        } else {
-          $('.popover').addClass('open');
-          setTimeout(function () {
-             _calcPopPos($this);
-          });
-        }
-        callback.call(callback, $this);
-      });
+          $(popoverID).addClass('opened'); 
+        }, 50);
+      } 
+      if ($.isWin) {
+        $(popoverID).addClass('open');
+      }
+      $(popoverID).data('triggerEl', settings.trigger);
+      $(popoverID).find('section').append(settings.content);
+      settings.callback.call(settings.callback, settings.trigger);
+      _calcPopPos(settings.trigger);
+      $('.popover').UIBlock('.5');
+      
     }
   });
   $.extend({
@@ -1172,7 +1328,7 @@ Version: 3.5.4
       var popover = $('.popover');
       if (!popover.length) return;
       var triggerID = popover.data('triggerEl');
-      var offset = $('#'+triggerID).offset();
+      var offset = $(triggerID).offset();
       var left = offset.left;
       if (($(popover).width() + offset.left) > window.innerWidth) {
         popover.css({
@@ -1196,9 +1352,9 @@ Version: 3.5.4
     /////////////////////////////////////////////////
     // Reposition popovers on window resize:
     /////////////////////////////////////////////////
-    window.onresize = function() {
+    $(window).on('resize', function() {
       $.UIAlignPopover();
-    };
+    });
     var events = $.eventStart + ' singletap ' + $.eventEnd;
     $('body').on(events, '.mask', function(e) {
       if (!$('.popover')[0]) {
@@ -1208,40 +1364,36 @@ Version: 3.5.4
         $.UIPopoverClose();
       }
     });
-  }); 
+  });
+
+
   $.fn.extend({
     ///////////////////////////////
     // Initialize Segmented Control
     ///////////////////////////////
     UISegmented : function ( options ) {
-      if (this.hasClass('paging')) return;
-      var callback = (options && options.callback) ? options.callback : $.noop;
-      var selected;
-      if (options && options.selected) selected = options.selected;
-      if (options && options.callback) {
-        callback = options.callback;
-      }
-      this.find('a').each(function(idx, ctx) {
-        $(ctx).find('a').attr('role','radio');
-        if (selected === 0 && idx === 0) {
-          ctx.setAttribute('aria-checked', 'true');
-          ctx.classList.add('selected');
+      /*
+        var options = {
+          selected: 0,
+          callback: function() { alert('Boring!'); }
         }
+      */
+      if ($(this).hazClass('paging').length) return;
+      var callback = (options && options.callback) ? options.callback : $.noop;
+      var selected = (options && options.selected > 0) ? options.selected : 0;
+      this.find('button').forEach(function(ctx, idx) {
+        $(ctx).attr('role','radio');
+        $(ctx).addClass('segment');
         if (idx === selected) {
           ctx.setAttribute('aria-checked', 'true');
           ctx.classList.add('selected');
         }
       });
-      if (!selected) {
-        if (!this.find('.selected')[0]) {
-          this.children().eq(0).addClass('selected');
-        }
-      }
-      this.on('singletap', '.button', function(e) {
+      this.on('singletap', 'button', function(e) {
         var $this = $(this);
         if (this.parentNode.classList.contains('paging')) return;
-        $this.siblings('a').removeClass('selected');
-        $this.siblings('a').removeAttr('aria-checked');
+        $this.siblings('button').removeClass('selected');
+        $this.siblings('button').removeAttr('aria-checked');
         $this.addClass('selected');
         $this.attr('aria-checked', true);
         callback.call(this, e);
@@ -1258,9 +1410,11 @@ Version: 3.5.4
           id : '#myId',
           className : 'special' || '',
           labels : ['first','second','third'],
-          selected : 0 based number of selected button
+          selected: 0
         }
       */
+      var segmented;
+      var id = (options && options.id) ? options.id : $.Uuid();
       var className = (options && options.className) ? options.className : '';
       var labels = (options && options.labels) ? options.labels : [];
       var selected = (options && options.selected) ? options.selected : 0;
@@ -1268,26 +1422,20 @@ Version: 3.5.4
       if (className) _segmented.push(' ' + className);
       _segmented.push('">');
       labels.forEach(function(ctx, idx) {
-        _segmented.push('<a role="radio" class="button');
-        if (selected === idx) {
-          _segmented.push(' selected" aria-checked="true"');
-        } else {
-          _segmented.push('"');
-        }
+        _segmented.push('<button role="radio" class="segment"');
+        _segmented.push('"');
         _segmented.push('>');
         _segmented.push(ctx);
-        _segmented.push('</a>');
+        _segmented.push('</button>');
       });
       _segmented.push('</div>');
-      return _segmented.join('');
+      segmented = $(_segmented.join(''));
+      segmented.attr('id', id);
+      return segmented;
     }
   });
-  $(function() {
-    /////////////////////////////////////
-    // Handle Existing Segmented Buttons:
-    /////////////////////////////////////
-    $('.segmented').UISegmented();
-  });
+
+
   $.fn.extend({
     ////////////////////////////////////////////
     // Allow Segmented Control to toggle panels
@@ -1303,175 +1451,250 @@ Version: 3.5.4
       }
       panels.eq(selected).siblings().css({display: 'none'});
       if (callback) callback.apply(this, arguments);
-      this.on($.eventEnd, 'a', function() {
+      this.on($.eventEnd, 'button', function() {
         panels.eq($(this).index()).css({display:'block'})
           .siblings().css('display','none');
       });
     
-      this.on('singletap', '.button', function() {
+      this.on('singletap', 'button', function() {
         var $this = $(this);
         if (this.parentNode.classList.contains('paging')) return;
-        $this.siblings('a').removeClass('selected');
-        $this.siblings('a').removeAttr('aria-checked');
+        $this.siblings('button').removeClass('selected');
+        $this.siblings('button').removeAttr('aria-checked');
         $this.addClass('selected');
         $this.attr('aria-checked', true);
       });
     }
   });
- 
- 
+
+
   $.extend({
     ///////////////////////
     // Setup Paging Control
     ///////////////////////
-      UIPaging : function ( ) {
-        var currentArticle = $('.segmented.paging').closest('nav').next();
-        if (window && window.jQuery && $ === window.jQuery) {
-          if ($('.segmented.paging').hasClass('horizontal')) {
-            currentArticle.addClass('horizontal');
-          } else if ($('.segmented.paging').hasClass('vertical')) {
-            currentArticle.addClass('vertical');
-          }
+    UIPaging : function ( ) {
+      var currentArticle = $('.segmented.paging').closest('nav').next();
+      if ($('.segmented.paging').hazClass('horizontal').length) {
+        currentArticle.addClass('horizontal');
+      } else if ($('.segmented.paging').hazClass('vertical').length) {
+        currentArticle.addClass('vertical');
+      }
+      
+      currentArticle.children().eq(0).addClass('current');
+      currentArticle.children().eq(0).siblings().addClass('next');
+      var sections = function() {
+        return currentArticle.children().length;
+      };
+      var pageBack = function($this) {
+        if (sections() === 1) return;
+        $this.next().removeClass('selected');
+        $this.addClass('selected');
+        var currentSection;
+        currentSection = $('section.current');
+        if (currentSection.index() === 0)  {
+          currentSection.removeClass('current');
+          currentArticle.children().eq(sections() - 1).addClass('current').removeClass('next');
+          currentArticle.children().eq(sections() - 1).siblings().removeClass('next').addClass('previous');
         } else {
-          if ($('.segmented.paging').hasClass('horizontal')[0]) {
-            currentArticle.addClass('horizontal');
-          } else if ($('.segmented.paging').hasClass('vertical')[0]) {
-            currentArticle.addClass('vertical');
-          }
+          currentSection.removeClass('current').addClass('next');
+          currentSection.prev().removeClass('previous').addClass('current');
         }
-        currentArticle.children().eq(0).addClass('current');
-        currentArticle.children().eq(0).siblings().addClass('next');
-        var sections = function() {
-          return currentArticle.children().length;
-        };
-        $('.segmented.paging').on($.eventStart, '.button:first-of-type', function() {
-          if (sections() === 1) return;
-          var $this = $(this);
-          $this.next().removeClass('selected');
-          $this.addClass('selected');
-          var currentSection;
-          currentSection = $('section.current');
-          if (currentSection.index() === 0)  {
-            currentSection.removeClass('current');
-            currentArticle.children().eq(sections() - 1).addClass('current').removeClass('next');
-            currentArticle.children().eq(sections() - 1).siblings().removeClass('next').addClass('previous');
-          } else {
-            currentSection.removeClass('current').addClass('next');
-            currentSection.prev().removeClass('previous').addClass('current');
-          }
-          setTimeout(function() {
-            $this.removeClass('selected');
-          }, 250);
+        setTimeout(function() {
+          $this.removeClass('selected');
+        }, 250);
+      };
+      var pageForward = function ($this) {
+        if (sections() === 1) return;
+        $this.prev().removeClass('selected');
+        $this.addClass('selected');
+        var currentSection;
+        if ($this[0].classList.contains('disabled')) return;
+        currentSection = $('section.current');
+        if (currentSection.index() === sections() - 1) {
+          // start again!
+          currentSection.removeClass('current');
+          currentArticle.children().eq(0).addClass('current').removeClass('previous');
+          currentArticle.children().eq(0).siblings().removeClass('previous').addClass('next');
+        } else {
+          currentSection.removeClass('current').addClass('previous');
+          currentSection.next().removeClass('next').addClass('current');
+        }
+        setTimeout(function() {
+          $this.removeClass('selected');
+        }, 250);
+      };
+      $('.segmented.paging').on($.eventStart, 'button:first-of-type', function() {
+        pageBack($(this));
+      });
+      $('.segmented.paging').on($.eventStart, 'button:last-of-type', function() {
+        pageForward($(this));
+      });
+      // Handle swipe gestures for paging:
+      if ($('article.paging.horizontal')[0]) {
+        $('article.paging').on('swiperight', function() {
+          pageBack($('button:first-of-type'));
         });
-        $('.segmented.paging').on($.eventStart, '.button:last-of-type', function() {
-          if (sections() === 1) return;
-          var $this = $(this);
-          $this.prev().removeClass('selected');
-          $this.addClass('selected');
-          var currentSection;
-          if (this.classList.contains('disabled')) return;
-          currentSection = $('section.current');
-          if (currentSection.index() === sections() - 1) {
-              // start again!
-            currentSection.removeClass('current');
-            currentArticle.children().eq(0).addClass('current').removeClass('previous');
-            currentArticle.children().eq(0).siblings().removeClass('previous').addClass('next');
-          } else {
-            currentSection.removeClass('current').addClass('previous');
-            currentSection.next().removeClass('next').addClass('current');
-          }
-          setTimeout(function() {
-            $this.removeClass('selected');
-          }, 250);
+        $('article.paging').on('swipeleft', function() {
+          pageForward($('button:last-of-type'));
         });
       }
+      if ($('article.paging.vertical')[0]) {
+        $('article.paging').on('swipeup', function() {
+          pageBack($('button:first-of-type'));
+        });
+        $('article.paging').on('swipeudown', function() {
+          pageForward($('button:last-of-type'));
+        });
+      }
+    }
   });
- 
- 
-  $.extend({
+
+
+  $.fn.extend({
+    
     ////////////////////////////
-    // Initialize Deletable List
+    // Initialize Editable List,
+    // allows moving items and
+    // deleting them.
     ////////////////////////////
-    UIDeletable : function ( options ) {
+    UIEditList : function ( options ) {
       /*
         options = {
-          list: selector,
-          editLabel : labelName || Edit,
-          doneLabel : labelName || Done,
-          deleteLabel : labelName || Delete,
-          placement: left || right,
-          callback : callback
+          editLabel : labelName,
+          doneLabel : labelName,
+          deleteLabel : labelName,
+          callback : callback (Tapping "Done" fires this),
+          deletable: false (no deletables),
+          movable: false (no movables)
         }
       */
-      if (!options || !options.list || !options instanceof Array) {
+      var settings = {
+        editLabel : 'Edit',
+        doneLabel : 'Done',
+        deleteLabel : 'Delete',
+        callback : $.noop,
+        deletable: true,
+        movable: true
+      };
+      if (!options) {
         return;
       }
-      var list = $(options.list);
-      var editLabel = options.editLabel || 'Edit';
-      var doneLabel = options.doneLabel || 'Done';
-      var deleteLabel = options.deleteLabel || 'Delete';
-      var placement = options.placement || 'right';
-      var callback = options.callback || $.noop;
+      $.extend(settings, options);
+
+      if (!settings.deletable && !settings.movable) {
+        return;
+      }
+
+      var transform = ($.isiOS || $.isSafari) ? transform: 'transform';
+      var editLabel = settings.editLabel;
+      var doneLabel = settings.doneLabel;
+      var deleteLabel = settings.deleteLabel;
+      var placement = settings.placement;
+      var callback = settings.callback;
+
       var deleteButton;
       var editButton;
       var deletionIndicator;
       var button;
-      var swipe = 'swiperight';
-      if ($('html').attr('dir') === 'rtl') swipe = 'swipeleft';
+      var dispelDeletable = 'swiperight';
+      var enableDeletable = 'swipeleft';
+      var moveUpIndicator;
+      var moveDownIndicator;
+      var dir = $('html').attr('dir');
+      dir = dir ? dir.toLowerCase() : '';
+      if (dir === 'rtl') {
+        dispelDeletable = 'swipeleft';
+        enableDeletable = 'swiperight';
+      }
       // Windows uses an icon for the delete button:
       if ($.isWin) deleteLabel = '';
-      var height = $('li').eq(1)[0].clientHeight;
-      deleteButton = $.concat('<a href="javascript:void(null)" class="button delete">', deleteLabel, '</a>');
-      editButton = $.concat('<a href="javascript:void(null)" class="button edit">', editLabel, '</a>');
-      deletionIndicator = '<span class="deletion-indicator"></span>';
-      if (placement === 'left') {
-        if (!list[0].classList.contains('deletable')) {
-          list.closest('article').prev().prepend(editButton);
-        }
-      } else {
-        if (!list[0].classList.contains('deletable')) {
-          list.closest('article').prev().append(editButton);
-          list.closest('article').prev().find('h1').addClass('buttonOnRight');
-          list.closest('article').prev().find('.edit').addClass('align-flush');
-          button = list.closest('article').prev().find('.edit');
-        }
+      var height = $('li').eq(0)[0].clientHeight;
+
+      if (settings.deletable) {
+        deleteButton = $.concat('<button class="delete"><label>', deleteLabel, '</label></button>');
+        deletionIndicator = '<span class="deletion-indicator"></span>';
+        $(this).addClass('deletable');
       }
-      list.find('li').each(function(_, ctx) {
-        if (!$(ctx).has('.deletion-indicator')[0]) {
-          $(ctx).prepend(deletionIndicator);
-          $(ctx).append(deleteButton);
+      if (settings.movable) {
+        var moveUpIndicator = "<span class='move-up'></span>";
+        var moveDownIndicator = "<span class='move-down'></span>";
+        $(this).addClass('editable');
+      }
+      editButton = $.concat('<button class="edit">', editLabel, '</button>');
+      if (!$(this).closest('article').prev().find('.edit')[0] && !$(this).closest('article').prev().find('.done')[0]) {
+        $(this).closest('article').prev().append(editButton);
+      }
+
+      button = $(this).closest('article').prev().find('.edit');
+      $(this).find('li').forEach(function(ctx) {
+        if (!$(ctx).has('.deletion-indicator').length) {
+          if (settings.deletable) {
+            $(ctx).prepend(deletionIndicator);
+          }
+          if (settings.movable) {
+            $(ctx).append(moveUpIndicator);
+            $(ctx).append(moveDownIndicator);
+          }
+          if (settings.deletable) {
+            $(ctx).append(deleteButton);
+          }
         }
       });
-      list.addClass('deletable');
-      var setupDeletability = function(callback, list, button) {
-        var deleteSlide;
-        if ($.isiOS) {
-          deleteSlide = '100px';
-        } else if ($.isAndroid) {
-          deleteSlide = '140px';
+
+      // Setup identifiers for list items.
+      // These will help determine position & deletion.
+      var listItemPosition = [];
+      $(this).find('li').forEach(function(ctx, idx) {
+        if (idx === 0) {
+          $(ctx).attr('data-list-position', '0')
+        } else {
+          $(ctx).attr('data-list-position', idx)
         }
+        listItemPosition.push(idx);
+      });
+      $(this).attr('data-list-items-position', listItemPosition.join(','));
+
+      // Callback to setup indicator interactions:
+      var setupDeletability = function(callback, list, button) {
         $(function() {
           button.on('singletap', function() {
             var $this = this;
+
+            // When button is in "Edit" state:
             if (this.classList.contains('edit')) {
               setTimeout(function() {
                 $this.classList.remove('edit');
                 $this.classList.add('done');
-                $($this).text(doneLabel);
+                $($this).text(settings.doneLabel);
                 $(list).addClass('showIndicators');
               });
+
+            // When button is in "Done" state:
             } else if (this.classList.contains('done')) {
+              // Execute callback if edit was performed:
+              //========================================
+              if ($(list).data('list-edit')) {
+                callback.call(callback, list);
+              }
               setTimeout(function() {
                 $this.classList.remove('done');
                 $this.classList.add('edit');
-                $($this).text(editLabel);
+                $($this).text(settings.editLabel);
                 $(list).removeClass('showIndicators');
                 $(list).find('li').removeClass('selected');
-              });            
+              });     
+              var movedItems = [];
+              $(list).find('li').forEach(function(ctx, idx) {
+                movedItems.push($(ctx).attr('data-list-position'));
+              });  
+              $(list).attr('data-list-items-position', movedItems.join(','));        
             }
           });
+
+          // Handle deletion indicators:
+          $(list).off('singletap', '.deletion-indicator');
           $(list).on('singletap', '.deletion-indicator', function() {
-            if ($(this).parent('li').hasClass('selected')) {
+            if ($(this).parent('li').hazClass('selected').length) {
               $(this).parent('li').removeClass('selected');
               return;
             } else {
@@ -1479,27 +1702,129 @@ Version: 3.5.4
             }
           });
         
-          if ($.isiOS || $.isSafari) {
-            $(list).on(swipe, 'li', function() {
-              $(this).removeClass('selected');
-            });
-          }
+          // Handle swipe gestures:
+          $(list).on(dispelDeletable, 'li', function() {
+            // If no deletables, disable swipes:
+            if (!settings.deletable) return;
+            // Else reveal delete button:
+            $(this).removeClass('selected');
+          });
+          
+          $(list).on(enableDeletable, 'li', function() {
+            // If no deletables, disable swipes:
+            if (!settings.deletable) return;
+            // Else reveal delete button:
+            $(this).addClass('selected');
+          });
+
+          // Move list item up:
+          $(list).on('singletap', '.move-up', function(e) {
+            var item = $(this).closest('li');
+            if ((window.$chocolatechipjs && item.is('li:first-child')[0]) || window.jQuery && item.is('li:first-child')) {
+              return;
+            } else {
+              // Mark list as edited:
+              $(list).data('list-edit', true);
+              var item = $(this).closest('li');
+              var prev = item.prev();
+              // Clone the items to replace the
+              // transitioned ones alter:
+              var itemClone = item.clone();
+              var prevClone = prev.clone();
+              var height = item[0].offsetHeight;
+              item.css({
+                "-webkit-transform": "translate3d(0,-" + height + "px,0)",
+                "transform": "translate3d(0,-" + height + "px,0)"
+              });
+
+              prev.css({
+                "-webkit-transform": "translate3d(0," + height + "px,0)",
+                "transform": "translate3d(0," + height + "px,0)"
+              });              
+              setTimeout(function() {
+                if (window.$chocolatechipjs) {
+                  $.replace(prevClone, item);
+                  $.replace(itemClone, prev);
+                } else {
+                  item.replaceWith(prevClone)
+                  prev.replaceWith(itemClone)
+                }
+              }, 250);
+            }
+          });
+
+          // Move list item down:
+          $(list).on('singletap', '.move-down', function(e) {
+            var item = $(this).closest('li');
+            var next = item.next();
+            // Clone the items to replace the
+            // transitioned ones alter:
+            var itemClone = item.clone();
+            var nextClone = next.clone();
+            if ((window.$chocolatechipjs && item.is('li:last-child')[0]) || window.jQuery && item.is('li:last-child')) {
+              return;
+            } else {
+              // Mark list as edited:
+              $(list).data('list-edit', true);
+
+              var height = item[0].offsetHeight;
+              item.css({
+                '-webkit-transform': 'translate3d(0,' + height + 'px,0)',
+                transform: 'translate3d(0,' + height + 'px,0)'
+              });
+              next.css({
+                "-webkit-transform": "translate3d(0,-" + height + "px,0)",
+                "transform": "translate3d(0,-" + height + "px,0)"
+              });
+              setTimeout(function() {
+                if (window.$chocolatechipjs) {
+                   $.replace(nextClone, item);
+                   $.replace(itemClone, next);
+                } else {
+                  item.replaceWith(nextClone)
+                  next.replaceWith(itemClone)
+                }
+              }, 250);
+            }
+          });
+
+          // Handle deletion of list item:
           $(list).on('singletap', '.delete', function() {
             var $this = this;
-            var direction = '-1000%';
+            // Mark list as edited:
+            $(list).data('list-edit', true);
+            var direction = '-1200%';
             if ($('html').attr('dir') === 'rtl') direction = '1000%';
-            $(this).siblings().css({'-webkit-transform': 'translate3d(' + direction + ',0,0)', '-webkit-transition': 'all 1s ease-out'});
+            $(this).siblings().css({
+              '-webkit-transform': 'translate3d(' + direction + ',0,0)', 
+              '-webkit-transition': 'all 1s ease-out', 
+              'transform': 'translate3d(' + direction + ',0,0)', 
+              'transition': 'all 1s ease-out'
+            });
+
+            // Handle storing info about deleted items on the list itself:
+            var deletedItems = $(list).attr('data-list-items-deleted');
+            if (deletedItems === undefined) {
+              deletedItems = [$(this).closest('li').attr('data-list-position')];
+            } else {
+              deletedItems = deletedItems.split(',');
+              deletedItems.push($(this).closest('li').attr('data-list-position'));
+            }
+            $(list).attr('data-list-items-deleted', deletedItems.sort().join(','));
+
             setTimeout(function() {
-              callback.call(callback, $this);
               $($this).parent().remove();
             }, 500);
           });
         });    
       };
-      return setupDeletability(callback, list, button);
-      //return list;
+      // Initialize the editable list:
+      return setupDeletability(settings.callback, $(this), button);
     }
+
   });
+
+
   $.fn.extend({
     /////////////////////////
     // Initialize Select List
@@ -1513,21 +1838,18 @@ Version: 3.5.4
       // callback example:
       function () {
         // this is the selected list item:
-        //console.log($(this).text());
+        console.log($(this).text());
       }
     }
     */
     UISelectList : function (options) {
       var name = (options && options.name) ? options.name : $.Uuid();
       var list = this[0];
-      if (list && !$(list).hasClass('select')) {
-        this.addClass('select');
-      }
-      if (!list) return [];
       list.classList.add('select');
       $(list).find('li').forEach(function(ctx, idx) {
         var value = ctx.getAttribute("data-select-value") !== null ? ctx.getAttribute("data-select-value") : "";
         ctx.setAttribute('role', 'radio');
+        $(ctx).removeClass('selected').find('input').removeAttr('checked');
         if (options && options.selected === idx) {
           ctx.setAttribute('aria-checked', 'true');
           ctx.classList.add('selected');
@@ -1556,6 +1878,8 @@ Version: 3.5.4
       });
     }
   });
+
+
   $.extend({
     ///////////////////////////////////////////////
     // UISheet: Create an Overlay for Buttons, etc.
@@ -1565,32 +1889,44 @@ Version: 3.5.4
         id : 'starTrek',
         listClass :'enterprise',
         background: 'transparent',
+        handle: false
       }
     */
     UISheet : function ( options ) {
-      var id = $.Uuid();
-      var listClass = '';
-      var background = '';
-      if (options) {
-        id = options.id ? options.id : id;
-        listClass = options.listClass ? ' ' + options.listClass : '';
-        background = ' style="background-color:' + options.background + ';" ' || '';
-      }
-      var sheet = '<div id="' + id + '" class="sheet' + listClass + '"><div class="handle"></div><section class="scroller-vertical"></section></div>';
+      if (!options) var options = {};
+      if (options.background) options.background =  $.concat(' style="background-color:', options.background, '" ');
+      if (options.handle === false) options.handle = '';
+      var settings = {};
+      settings.id = $.Uuid();
+      settings.listClass = '';
+      settings.background = '';
+      settings.handle = '<div class="handle"><span></span></div>';
+      if (options) $.extend(settings, options);
+      var sheet = $.concat('<div id="', settings.id, '" class="sheet', settings.listClass, '"', settings.background, '>', settings.handle, '<section class="scroller-vertical"></section></div>');
       $('body').append(sheet);
       $('.sheet .handle').on($.eventStart, function() {
-        $.UIHideSheet();
+        var $this = $(this);
+        if ($.isAndroid || $.isChrome) {
+          $this.addClass('selected');
+          setTimeout(function() {
+            $this.removeClass('selected');
+            $.UIHideSheet();
+          }, 500);
+        } else {
+          $.UIHideSheet();
+        }
       });
     },
-    UIShowSheet : function ( ) {
+    UIShowSheet : function ( id ) {
+      var sheet = id ? id : '.sheet';
       $('article.current').addClass('blurred');
       if ($.isAndroid || $.isChrome) {
-        $('.sheet').css('display','block');
+        $(sheet).css('display','block');
         setTimeout(function() {
-          $('.sheet').addClass('opened');
+          $(sheet).addClass('opened');
         }, 20);
       } else {
-        $('.sheet').addClass('opened');
+        $(sheet).addClass('opened');
       }
     },
     UIHideSheet : function ( ) {
@@ -1602,20 +1938,42 @@ Version: 3.5.4
       },500);
     }
   });
+
+
   $.extend({
     ////////////////////////////////////////////////
     // Create Slideout with toggle button.
     // Use $.UISlideout.populate to polate slideout.
     // See widget-factor.js for details.
     ////////////////////////////////////////////////
-    UISlideout : function ( position ) {
-      var slideoutButton = $("<a class='button slide-out-button' href='javascript:void(null)'></a>");
+    /* 
+    var options = {
+      position: position, 
+      dynamic: false,
+      callback: $.noop
+    };
+    */
+    UISlideout : function ( options ) {
+      var position, dynamic, callback = $.noop;
+      if (options && options.position)  {
+        position = options.position;
+      } else {
+        position = 'left';
+      }
+      if (options && options.dynamic) {
+        dynamic = options.dynamic;
+      } else {
+        dynamic = false;
+      }
+      if (options && options.callback) {
+        callback = options.callback;
+      }
+      var slideoutButton = $("<button class='slide-out-button'></button>");
       var slideOut = '<div class="slide-out"><section></section></div>';
       $('article').removeClass('next');
       $('article').removeClass('current');
       $('article').prev().removeClass('next');
       $('article').prev().removeClass('current');
-      position = position || 'left';
       $('body').append(slideOut);
       $('body').addClass('slide-out-app');
       $('article:first-of-type').addClass('show');
@@ -1623,19 +1981,51 @@ Version: 3.5.4
       $('#global-nav').append(slideoutButton);
       $('.slide-out-button').on($.eventStart, function() {
         $('.slide-out').toggleClass('open');
+        $(this).toggleClass('focused');
       });
-      $('.slide-out').on('singletap', 'li', function() {
-        var whichArticle = '#' + $(this).attr('data-show-article');
-        $.UINavigationHistory[0] = whichArticle;
-        $.UISetHashOnUrl(whichArticle);
-        $.publish('chui/navigate/leave', $('article.show')[0].id);
-        $.publish('chui/navigate/enter', whichArticle);
-        $('.slide-out').removeClass('open');
-        $('article').removeClass('show');
-        $('article').prev().removeClass('show');
-        $(whichArticle).addClass('show');
-        $(whichArticle).prev().addClass('show');
-      });
+      if (!dynamic) {
+        $('.slide-out').on('singletap', 'li', function() {
+          var $this = $(this);
+          $this.addClass('selected');
+          setTimeout(function() {
+            $this.removeClass('selected');
+          }, 500);
+          var whichArticle = '#' + $(this).attr('data-show-article');
+          $.UINavigationHistory[0] = whichArticle;
+          $.UISetHashOnUrl(whichArticle);
+          $.publish('chui/navigate/leave', $('article.show')[0].id);
+          $.publish('chui/navigate/enter', whichArticle);
+          if ($.isAndroid || $.isChrome) {
+            setTimeout(function() {
+            $('.slide-out').removeClass('open');
+            $('article').removeClass('show');
+            $('article').prev().removeClass('show');
+            $(whichArticle).addClass('show');
+            $(whichArticle).prev().addClass('show');
+            $('.slide-out-button').removeClass('focused');
+            }, 400);
+          } else {
+            $('.slide-out').removeClass('open');
+            $('article').removeClass('show');
+            $('article').prev().removeClass('show');
+            $(whichArticle).addClass('show');
+            $(whichArticle).prev().addClass('show');
+            $('.slide-out-button').removeClass('focused');
+          }
+        });
+      } else {
+        $('.slide-out').on('singletap', 'li', function() {
+          if ($.isAndroid || $.isChrome) {
+            setTimeout(function() {
+              callback(this);
+              $('.slide-out-button').removeClass('focused');
+            }, 400);
+          } else {
+            callback(this);
+            $('.slide-out-button').removeClass('focused');
+          }
+        });
+      }
     }
   });
   $.extend($.UISlideout, {
@@ -1666,6 +2056,8 @@ Version: 3.5.4
       }
     }
   });
+
+
   $.fn.extend({
     /////////////////
     // Create stepper
@@ -1691,9 +2083,9 @@ Version: 3.5.4
          increaseSymbol = '';
          decreaseSymbol = '';
       }
-      var decreaseButton = '<a href="javascript:void(null)" class="button decrease">' + decreaseSymbol + '</a>';
+      var decreaseButton = '<button class="decrease"><span>' + decreaseSymbol + '</span></button>';
       var label = '<label>' + defaultValue + '</label><input type="text" value="' + defaultValue + '">';
-      var increaseButton = '<a href="javascript:void(null)" class="button increase">' + increaseSymbol + '</a>';
+      var increaseButton = '<button class="increase"><span>' + increaseSymbol + '</span></button>';
       stepper.append(decreaseButton + label + increaseButton);
       stepper.data('ui-value', {start: start, end: end, defaultValue: defaultValue});
     
@@ -1706,7 +2098,7 @@ Version: 3.5.4
           $(this).addClass('disabled');
         } else {
           newValue = Number(currentValue) - 1;
-          stepper.find('.button:last-of-type').removeClass('disabled');
+          stepper.find('button:last-of-type').removeClass('disabled');
           stepper.find('label').text(newValue);
           stepper.find('input')[0].value = newValue;
           if (currentValue === start) {
@@ -1724,7 +2116,7 @@ Version: 3.5.4
           $(this).addClass('disabled');
         } else {
           newValue = Number(currentValue) + 1;
-          stepper.find('.button:first-of-type').removeClass('disabled');
+          stepper.find('button:first-of-type').removeClass('disabled');
           stepper.find('label').text(newValue);
           stepper.find('input')[0].value = newValue;
           if (currentValue === end) {
@@ -1732,10 +2124,10 @@ Version: 3.5.4
           }
         }
       };
-      stepper.find('.button:first-of-type').on('singletap', function() {
+      stepper.find('button:first-of-type').on('singletap', function() {
         decreaseStepperValue.call(this, stepper);
       });
-      stepper.find('.button:last-of-type').on('singletap', function() {
+      stepper.find('button:last-of-type').on('singletap', function() {
         increaseStepperValue.call(this, stepper);
       });
     }
@@ -1752,12 +2144,21 @@ Version: 3.5.4
       stepper.find('input')[0].value = defaultValue;
     }
   });
+
+
   $.fn.extend({
     ////////////////////////////
     // Initialize Switch Control
     ////////////////////////////
     UISwitch : function ( ) {
       var hasThumb = false;
+      // Abrstract swipe for left-to-right and right-to-left:
+      var swipeOn = "swiperight";
+      var swipeOff = "swipeleft"
+      if (document.documentElement.dir === "rtl") {
+        swipeOn = "swipeleft";
+        swipeOff = "swiperight";
+      }
       this.forEach(function(ctx, idx) {
         ctx.setAttribute('role','checkbox');
         if ($(ctx).data('ui-setup') === true) return;
@@ -1783,7 +2184,7 @@ Version: 3.5.4
             ctx.setAttribute('aria-checked', true);
           }
         });
-        $(ctx).on('swipeleft', function() {
+        $(ctx).on(swipeOn, function() {
           var checkbox = ctx.querySelector('input');
           if (ctx.classList.contains('on')) {
             ctx.classList.remove('on');
@@ -1791,7 +2192,7 @@ Version: 3.5.4
             checkbox.removeAttribute('checked');
           }
         });
-        $(ctx).on('swiperight', function() {
+        $(ctx).on(swipeOff, function() {
           var checkbox = ctx.querySelector('input');
           if (!ctx.classList.contains('on')) {
             ctx.classList.add('on');
@@ -1813,17 +2214,24 @@ Version: 3.5.4
           name: 'fruit.mango'
           state : 'on' || 'off' //(off is default),
           value : 'Mango' || '',
+          checked: 'on' || '',
+          style: 'traditional' || '',
           callback : callback
         }
       */
-      var id = options ? options.id : $.Uuid();
-      var name = options && options.name ? (' name="' + options.name + '"') : '';
-      var value= options && options.value ? (' value="' + options.value + '"') : '';
-      var state = (options && options.state === 'on') ? (' ' + options.state) : '';
-      var checked = (options && options.state === 'on') ? ' checked="checked"' : '';
-      var _switch = $.concat('<span class="switch', state, 
-        '" id="', id, '"><em></em>','<input type="checkbox"',
-        name, checked, value, '></span>');
+      var settings = {
+        id: $.Uuid(),
+        name: '',
+        value: '',
+        state: '',
+        checked: '',
+        style: ''
+      };
+      $.extend(settings, options);
+      if (settings.state === 'off') settings.state = '';
+      var _switch = $.concat('<span class="switch', " ", settings.style, " ", settings.state, 
+        '" id="', settings.id, '"><em></em>','<input type="checkbox"',
+        settings.name, settings.checked, ' value="', settings.value, '"></span>');
       return $(_switch);
     }
   });
@@ -1833,10 +2241,12 @@ Version: 3.5.4
     //////////////////////////
     $('.switch').UISwitch();
   });
- 
+
+
   document.addEventListener('touchstart', function (e) {
     var parent = e.target,
       i = 0;
+
     for (i = 0; i < 10; i += 1) {
       if (parent !== null) {
         if (parent.className !== undefined) {
@@ -1852,6 +2262,8 @@ Version: 3.5.4
       }
     }
   });
+
+
   $.extend({
     ///////////////////////////////////////////
     // Creates a Tab Bar for Toggling Articles:
@@ -1867,66 +2279,117 @@ Version: 3.5.4
       }
       */
       if (!options) return;
+      var settings = {
+        id : $.Uuid(),
+        selected : 0
+      };
+      $.extend(settings, options);
       $('body').addClass('hasTabBar');
       if ($.isiOS6) $('body').addClass('isiOS6');
-      var id = options.id || $.Uuid();
-      var selected = options.selected || '';
-      var tabbar = '<div class="tabbar" id="' + id + '">';
+      var tabbar = '<div class="tabbar" id="' + settings.id + '">';
       var icon = ($.isiOS || $.isSafari) ? '<span class="icon"></span>' : '';
-      for (var i = 0; i < options.tabs; i++) {
-        tabbar += '<a class="button ' + options.icons[i];
-        if (selected === i+1) {
+      var articles = $('article');
+      for (var i = 0; i < settings.tabs; i++) {
+        tabbar += '<button class="' + settings.icons[i];
+        if (settings.selected === i+1) {
           tabbar += ' selected';
         }
-        tabbar += '">' + icon + '<label>' + options.labels[i] + '</label></a>';
+        tabbar += '">' + icon + '<label>' + settings.labels[i] + '</label></button>';
       }
       tabbar += '</div>';
       $('body').append(tabbar);
+
+      //////////////////////////////////////////////////////
+      // Add article id as history data attribute to button:
+      //////////////////////////////////////////////////////
+      $('#' + settings.id).find('button').forEach(function(ctx, idx){
+        $(ctx).data('history', ['#' + articles.eq(idx)[0].id]);
+      });
       $('nav').removeClass('current').addClass('next');
-      $('nav').eq(selected).removeClass('next').addClass('current');
+      $('#global-nav').removeClass('next');
+      $('nav').eq(settings.selected).removeClass('next').addClass('current');
       $('article').removeClass('current').addClass('next');
-      $('article').eq(selected-1).removeClass('next').addClass('current');
-      $('body').find('.tabbar').on('singletap', '.button', function() {
+      $('article').eq(settings.selected-1).removeClass('next').addClass('current');
+
+      // Setup events on tabs:
+      var tabButtonTap = 'singletap';
+      if ($.isAndroid) {
+        tabButtonTap = $.eventStart;
+      }
+      $('.tabbar').on(tabButtonTap, 'button', function() {
         var $this = this;
         var index;
         var id;
         $.publish('chui/navigate/leave', $('article.current')[0].id);
+
+        //////////////////////////////////////////////////
+        // Set the data attribute for the current history:
+        //////////////////////////////////////////////////
+
         $this.classList.add('selected');
-        $(this).siblings('a').removeClass('selected');
+        $($this).siblings('button').removeClass('selected');
         index = $(this).index();
         $('article.previous').removeClass('previous').addClass('next');
         $('nav.previous').removeClass('previous').addClass('next');
-        $('article.current').removeClass('current').addClass('next');
-        $('nav.current').removeClass('current').addClass('next');
+
+        /////////////////////////////////////////////////////////////////
+        // Update the history array with the current tabs stored history:
+        /////////////////////////////////////////////////////////////////
+        var history = $(this).data('history');
+
+        ///////////////////////////////////////////////
+        // If the history array has more than one item, 
+        // we know that it is a navigation link.
+        ///////////////////////////////////////////////
+        if (history.length > 1) {
+          $('article.current').removeClass('current').addClass('next');
+          $('nav.current').removeClass('current').addClass('next');
+
+          /////////////////////////////////////////////////
+          // Set saved state of navigation list to current:
+          /////////////////////////////////////////////////
+          $(history[history.length-1]).removeClass('next').addClass('current');
+          $(history[history.length-1]).prev().removeClass('next').addClass('current');
+
+          ////////////////////////////////////////////////////
+          // Set state for earlier screens of navigation list:
+          ////////////////////////////////////////////////////
+          var prevScreens = history.length-1;
+          for (var i = 0; i < prevScreens; i++) {
+            $(history[i]).removeClass('next').addClass('previous');
+            $(history[i]).prev().removeClass('next').addClass('previous');
+          }
+
+        ////////////////////////////////////////////////
+        // Otherwise, since the array has only one item, 
+        // we are dealing with a single tabbar panel.
+        ////////////////////////////////////////////////
+        } else {
+          $('article.current').removeClass('current').addClass('next');
+          $('nav.current').removeClass('current').addClass('next');
+          $('article').eq(index).removeClass('next').addClass('current');
+          $('nav').eq(index+1).removeClass('next').addClass('current');
+        }
+
         id = $('article').eq(index)[0].id;
         $.publish('chui/navigate/enter', id);
-        if (window && window.jQuery) {
-          $('article').each(function(idx, ctx) {
+
+        // Set the chosen tab article's scroll to top:
+        //============================================
+        $('article').forEach(function(ctx) {
+          if (window.jQuery) {
             $(ctx).scrollTop(0);
-          });
-        } else {
-          $('article').eq(index).siblings('article').forEach(function(ctx) {
+          } else if (window.$chocolatechipjs) {
             ctx.scrollTop = 0;
-          });
-        }
-      
-        $.UISetHashOnUrl('#'+id);
-        if ($.UINavigationHistory[0] === ('#' + id)) {
-          $.UINavigationHistory = [$.UINavigationHistory[0]];
-        } else if ($.UINavigationHistory.length === 1) {
-          if ($.UINavigationHistory[0] !== ('#' + id)) {
-            $.UINavigationHistory.push('#'+id);
           }
-        } else if($.UINavigationHistory.length === 3) {
-          $.UINavigationHistory.pop();
-        } else {
-          $.UINavigationHistory[1] = '#'+id;
-        }
-        $('article').eq(index).removeClass('next').addClass('current');
-        $('nav').eq(index+1).removeClass('next').addClass('current');
+        });
+        $.UISetHashOnUrl('#'+id);
+        $.UINavigationHistory = $(this).data('history');
       });
     }
   });
+
+
   $.extend({
   /////////////////////////////
   // Templating:
@@ -1947,7 +2410,56 @@ Version: 3.5.4
         "return p.join('');");
       return template;
     }
-  });  /////////////////////////
+  });
+
+  // Define repeater.
+  // This lets you output a template repeatedly,
+  // using an array of data.
+
+
+  $.template.data = {};
+  
+  $.template.index = 0;
+
+  $.template.repeater = function( element, tmpl, data) {
+    if (!element) {
+      var repeaters = $('[data-repeater]');
+      $.template.index = 0;
+      repeaters.forEach(function(repeater) {
+        var template = repeater.innerHTML;
+        repeater = $(repeater);
+        var d = repeater.attr('data-repeater');
+        if (!d || !$.template.data[d]) {
+          console.error("No matching data for template. Check your data assignment on $.template.data or the template's data-repeater value.");
+          return;
+        }
+        repeater.empty();
+        repeater.removeClass('cloak');
+        var t = $.template(template);
+        $.template.data[d].forEach(function(item) {
+          repeater.append(t(item));
+          $.template.index += 1;
+        });
+        delete $.template.data[d];
+      });      
+    } else {
+      // Exit if data is not repeatable:
+      if (!$.isArray(data)) {
+        console.error('$.template.repeater() requires data of type Array.');
+        return '$.template.repeater() requires data of type Array.';
+      } else {
+        var template = $.template(tmpl);
+        if ($.isArray(data)) {
+          data.forEach(function(item) {
+            $(element).append(template(item));
+          });
+        }
+      }
+    }
+  };
+
+
+  /////////////////////////
   // Create a search input:
   /////////////////////////
   /*
@@ -1972,8 +2484,10 @@ Version: 3.5.4
       }
     }
   });
+
+
   //////////////////////////////////
-  // Initialize a swipable carousel:
+  // Initialize a swipeable carousel:
   //////////////////////////////////
   $(function() {
     var UICarousel = (function () {
@@ -1989,79 +2503,84 @@ Version: 3.5.4
             }
           }
           return false;
-        })(),
-        cssVendor = vendor ? '-' + vendor.toLowerCase() + '-' : '',
-        transform = prefixStyle('transform'),
-        transitionDuration = prefixStyle('transitionDuration'),
-        hasTouch = 'ontouchstart' in window;
-        var startEvent = $.eventStart;
-        var moveEvent = $.eventMove;
-        var endEvent = $.eventEnd;
-        var cancelEvent = $.eventCancel;
-        var transitionEndEvent = (function () {
-          if ( vendor === false ) return false;
-          var transitionEnd = {
-            '': 'transitionend',
-            'webkit': 'webkitTransitionEnd'
-            };
-          return transitionEnd[vendor];
-        })(),
-        
-        UICarousel = function ( options ) {
-          var ul, li, className;
-          this.wrapper = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
-          this.options = {
-            panels: options.panels || 3,
-            snapThreshold: null,
-            loop: options.loop || true
+        })();
+      var cssVendor = vendor ? '-' + vendor.toLowerCase() + '-' : '';
+      var transform = prefixStyle('transform');
+      var transitionDuration = prefixStyle('transitionDuration');
+      var hasTouch = 'ontouchstart' in window;
+      if (window.navigator.pointerEnabled || window.navigator.msPointerEnabled) hasTouch = false;
+      var startEvent = $.eventStart;
+      var moveEvent = $.eventMove;
+      var endEvent = $.eventEnd;
+      var cancelEvent = $.eventCancel;
+      var transitionEndEvent = (function () {
+        if ( vendor === false ) return false;
+        var transitionEnd = {
+          '': 'transitionend',
+          'webkit': 'webkitTransitionEnd'
           };
-          // Adjustment for RTL carousels:
-          if ($.isRTL) {
-            options.loop = true;
-          }
-          // Include user's options:
-          for (var i in options) this.options[i] = options[i];
-          this.wrapper.style.overflow = 'hidden';
-          this.wrapper.style.position = 'relative';
-          this.carouselPanels = [];
-          ul = document.createElement('ul');
-          ul.className = 'carousel-track';
-          ul.style.cssText = 'position:relative;top:0;height:100%;width:100%;' + cssVendor + 'transition-duration:0;' + cssVendor + 'transform:translateZ(0);' + cssVendor + 'transition-timing-function:ease-out';
-          this.wrapper.appendChild(ul);
-          this.track = ul;
-          this.refreshSize();
-          var whichPanelIndex;
-          for (var j = -1; j < 2; j++) {
-            li = document.createElement('li');
-            li.id = 'carousel-panel-' + (j + 1);
-            li.style.cssText = cssVendor + 'transform:translateZ(0);position:absolute;top:0;height:100%;width:100%;left:' + j * 100 + '%';
-            whichPanelIndex = j === -1 ? this.options.panels - 1 : j;
-            $(li).data('upcomingPanelIndex', whichPanelIndex);
-            if (!this.options.loop && j === -1) li.style.visibility = 'hidden';
-            this.track.appendChild(li);
-            this.carouselPanels.push(li);
-          }
-          className = this.carouselPanels[1].className;
-          this.carouselPanels[1].className = !className ? 'carousel-panel-active' : className + ' carousel-panel-active';
-		  //console.log("El classname es "+  this.carouselPanels[1].className);
-          this.wrapper.addEventListener(startEvent, this, false);
-          this.wrapper.addEventListener(moveEvent, this, false);
-          this.wrapper.addEventListener(endEvent, this, false);
-          this.track.addEventListener(transitionEndEvent, this, false);
-          var pagination;
-          if (options.pagination) {
-            pagination = document.createElement('ul');
-            pagination.className = 'pagination';
-            for (var k = 0; k < options.panels.length; k++) {
-              li = document.createElement('li');
-              if (k === 0) {
-                li.className = 'selected';
-              }
-              pagination.appendChild(li);
-            }
-            $(this.wrapper).after(pagination);
-          }
+        return transitionEnd[vendor];
+      })();
+        
+      var UICarousel = function ( options ) {
+        if (!options) return;
+        var ul, li, className;
+        this.carouselContainer = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+        this.options = {
+          panels: options.panels || 3,
+          snapThreshold: null,
+          loop: options.loop || true
         };
+        // Adjustment for RTL carousels:
+        if ($.isRTL) {
+          options.loop = true;
+        }
+        // Include user's options:
+        for (var i in options) this.options[i] = options[i];
+        this.carouselContainer.style.overflow = 'hidden';
+        this.carouselContainer.style.position = 'relative';
+        this.carouselPanels = [];
+        ul = document.createElement('ul');
+        ul.className = 'carousel-track';
+        ul.style.cssText = 'position:relative;top:0;height:100%;width:100%;' + cssVendor + 'transition-duration:0;' + cssVendor + 'transform:translateZ(0);' + cssVendor + 'transition-timing-function:ease-out';
+        this.carouselContainer.appendChild(ul);
+        this.track = ul;
+        this.refreshSize();
+        var whichPanelIndex;
+        for (var j = -1; j < 2; j++) {
+          li = document.createElement('li');
+          li.id = 'carousel-panel-' + (j + 1);
+          li.style.cssText = cssVendor + 'transform:translateZ(0);position:absolute;top:0;height:100%;width:100%;left:' + j * 100 + '%';
+          whichPanelIndex = j === -1 ? this.options.panels - 1 : j;
+          $(li).data('upcomingPanelIndex', whichPanelIndex);
+          if (!this.options.loop && j === -1) li.style.visibility = 'hidden';
+          this.track.appendChild(li);
+          this.carouselPanels.push(li);
+        }
+        className = this.carouselPanels[1].className;
+        this.carouselPanels[1].className = !className ? 'carousel-panel-active' : className + ' carousel-panel-active';
+        this.carouselContainer.addEventListener(startEvent, this, false);
+        this.carouselContainer.addEventListener(moveEvent, this, false);
+        this.carouselContainer.addEventListener(endEvent, this, false);
+        this.track.addEventListener(transitionEndEvent, this, false);
+        var pagination;
+        if (options.pagination) {
+          pagination = document.createElement('ul');
+          pagination.className = 'pagination';
+          for (var k = 0; k < this.options.panels; k++) {
+            li = document.createElement('li');
+            if (k === 0) {
+              li.className = 'selected';
+            }
+            pagination.appendChild(li);
+          }
+          if (window.$chocolatechipjs) {
+            this.carouselContainer.insertAdjacentElement('afterEnd', pagination);
+          } else {
+            $(this.carouselContainer).after(pagination);
+          }
+        }
+      };
       UICarousel.prototype = {
         currentPanel: 1,
         x: 0,
@@ -2069,30 +2588,25 @@ Version: 3.5.4
         customEvents: [],
         
         onSlide: function (fn) {
-          this.wrapper.addEventListener('carousel-panel-move', fn, false);
+          this.carouselContainer.addEventListener('carousel-panel-move', fn, false);
           this.customEvents.push(['move', fn]);
         },
         destroy: function () {
           while ( this.customEvents.length ) {
-            this.wrapper.removeEventListener('carousel-panel-' + this.customEvents[0][0], this.customEvents[0][1], false);
+            this.carouselContainer.removeEventListener('carousel-panel-' + this.customEvents[0][0], this.customEvents[0][1], false);
             this.customEvents.shift();
           }
           // Remove event listeners:
-          this.wrapper.removeEventListener(startEvent, this, false);
-          this.wrapper.removeEventListener(moveEvent, this, false);
-          this.wrapper.removeEventListener(endEvent, this, false);
+          this.carouselContainer.removeEventListener(startEvent, this, false);
+          this.carouselContainer.removeEventListener(moveEvent, this, false);
+          this.carouselContainer.removeEventListener(endEvent, this, false);
           this.track.removeEventListener(transitionEndEvent, this, false);
         },
         refreshSize: function () {
-			//console.log("PROPIEDADES DEL WRAPPER");
-			for(var i in this.wrapper){
-				//console.log("El valor de "+i+" es "+this.wrapper[i]);
-			}
-          this.wrapperWidth = this.wrapper.clientWidth;
-          this.wrapperHeight = this.wrapper.clientHeight;
-		  //console.log("function refreshSize "+this.wrapperWidth);
-          this.panelWidth = this.wrapperWidth;
-          this.maxX = -this.options.panels * this.panelWidth + this.wrapperWidth;
+          this.carouselContainerWidth = this.carouselContainer.clientWidth;
+          this.carouselContainerHeight = this.carouselContainer.clientHeight;
+          this.panelWidth = this.carouselContainerWidth;
+          this.maxX = -this.options.panels * this.panelWidth + this.carouselContainerWidth;
           this.snapThreshold = this.options.snapThreshold === null ?
             Math.round(this.panelWidth * 0.15) :
             /%/.test(this.options.snapThreshold) ?
@@ -2102,18 +2616,17 @@ Version: 3.5.4
         
         updatePanelCount: function (n) {
           this.options.panels = n;
-          this.maxX = -this.options.panels * this.panelWidth + this.wrapperWidth;
+          this.maxX = -this.options.panels * this.panelWidth + this.carouselContainerWidth;
         },
         
         goToPanel: function (p) {
           this.carouselPanels[this.currentPanel].className = this.carouselPanels[this.currentPanel].className.replace(/(^|\s)carousel-panel-active(\s|$)/, '');
           p = p < 0 ? 0 : p > this.options.panels-1 ? this.options.panels - 1 : p;
+          console.log('p: ' , p);
           this.panel = p;
           this.track.style[transitionDuration] = '0s';
           this.getPosition(-p * this.panelWidth);
-		  //console.log("El panel marcado es "+this.panel);
           this.currentPanel = (this.panel + 1) - Math.floor((this.panel + 1) / 3) * 3;
-		   //console.log("El panel actual es "+this.currentPanel);
           this.carouselPanels[this.currentPanel].className = this.carouselPanels[this.currentPanel].className + ' carousel-panel-active';
           if (this.currentPanel === 0) {
             this.carouselPanels[2].style.left = this.panel * 100 - 100 + '%';
@@ -2197,7 +2710,7 @@ Version: 3.5.4
           if (this.stepsX < 10 && this.stepsY < 10) {
             return;
           }
-          // If scrolling verticallly, cancel:
+          // If scrolling vertically, cancel:
           if (!this.directionLocked && this.stepsY > this.stepsX) {
             this.initiated = false;
             return;
@@ -2232,8 +2745,7 @@ Version: 3.5.4
           var panelMove;
           var pageFlipIndex;
           var className;
-		  //console.log("El panel actual es "+this.currentPanel);
-          this.carouselPanels[this.currentPanel].className = this.carouselPanels[this.currentPanel].className.replace(/(^|\s)carousel-panel-active(\s|$)/, '');
+          this.carouselPanels[this.currentPanel].className = '';
           // Slide the panel:
           if (this.directionX > 0) {
             this.panel = -Math.ceil(this.x / this.panelWidth);
@@ -2243,12 +2755,10 @@ Version: 3.5.4
             this.carouselPanels[panelMove].style.left = this.panel * 100 - 100 + '%';
             pageFlipIndex = this.panel - 1;
           } else {
-			  //console.log("El this.x es "+this.x+" "+this.panelWidth);
             this.panel = -Math.floor(this.x / this.panelWidth);
             this.currentPanel = (this.panel + 1) - Math.floor((this.panel + 1) / 3) * 3;
             panelMove = this.currentPanel + 1;
             panelMove = panelMove > 2 ? 0 : panelMove;
-			//console.log("El panelMove es "+panelMove);
             this.carouselPanels[panelMove].style.left = this.panel * 100 + 100 + '%';
             pageFlipIndex = this.panel + 1;
           }
@@ -2279,7 +2789,7 @@ Version: 3.5.4
         event: function (type) {
           var ev = document.createEvent("Event");
           ev.initEvent('carousel-panel-' + type, true, true);
-          this.wrapper.dispatchEvent(ev);
+          this.carouselContainer.dispatchEvent(ev);
         }
       };
       function prefixStyle (style) {
@@ -2312,22 +2822,22 @@ Version: 3.5.4
           panels: options.panels.length,
           loop: options.loop,
           pagination: options.pagination
-        }); 
+        });
         $(options.target).data('carousel', carousel);
         // Reverse array of data if RTL:
         if ($.isRTL) options.panels = reverseList(options.panels);
         var panel;
         // Load initial data:
         for (var i = 0; i < 3; i++) {
-          panel = i === 0 ? options.panels.length - 1 : i - 1;
-          carousel.carouselPanels[i].innerHTML = options.panels[panel];
+          panel = (i === 0) ? options.panels.length - 1 : i - 1;
+          carousel.carouselPanels[i].innerHTML = options.panels[Number(panel)];
         }
         var index = 0;
-        var pagination = $(options.target).next('.pagination');
+        var pagination = $(options.target).next('ul.pagination');
         carousel.onSlide(function () {
           for (var i = 0; i < 3; i++) {
             var upcoming = $(carousel.carouselPanels[i]).data('upcomingPanelIndex');
-            carousel.carouselPanels[i].innerHTML = options.panels[upcoming];
+            carousel.carouselPanels[i].innerHTML = options.panels[Number(upcoming)];
           }
           index = $('.carousel-panel-active').data('upcomingPanelIndex');
           pagination.find('li').removeClass('selected');
@@ -2344,8 +2854,8 @@ Version: 3.5.4
           }
         }); 
         $(options.target).on('mousedown', 'img', function() {return false;});
-        var width = $(options.target).width();
-        pagination.width(width);
+        var width = $(options.target).css('width');
+        pagination.css('width', width);
         pagination.on('click', 'li', function() {
           $(this).siblings('li').removeClass('selected');
           $(this).addClass('selected');
@@ -2371,11 +2881,13 @@ Version: 3.5.4
         });
       }
     });
-  }); 
+  });
+
+
   $.fn.extend({
     UIRange : function () {
       if ($.isWin) return;
-      if (this.nodeName !== 'INPUT') return;
+      if (this[0].nodeName !== 'INPUT') return;
       var input = $(this);    
       var newPlace;  
       var width = input.width();
@@ -2388,15 +2900,126 @@ Version: 3.5.4
       } else { 
         newPlace = width * newPoint + offset; offset -= newPoint; 
       }
-      input.css({'background-size': Math.round(newPlace) + 'px 10px'});         
+      if ($.isAndroid || $.isChrome) input.css({'background-size': Math.round(newPlace) + 'px 3px, 100% 2px'});
+      else input.css({'background-size': Math.round(newPlace) + 'px 10px'});         
     }
   });
   $(function() {
-    $('input[type=range]').each(function(_, ctx) {
+    $('input[type=range]').forEach(function(ctx) {
       $(ctx).UIRange();
     });
     $('body').on('input', 'input[type=range]', function() {
       $(this).UIRange();
     });
   });
-})(window.jQuery);
+
+
+  // Widget to enable styled select boxes (pickers):
+  $.extend({
+    UISelectBox: function() {
+      var showSelectBox = function (element) {
+          var event;
+          event = document.createEvent('MouseEvents');
+          event.initMouseEvent('mousedown', true, true, window);
+          element.dispatchEvent(event);
+      };
+      if (!$.isDesktop && $.isiOS) {
+        $('.select-box-label').forEach(function(ctx) {
+          var label = $(ctx);
+          var select = label.prev();
+          if (!select[0].id) {
+            select.attr('id', $.Uuid());
+          }
+          select.trigger('singletap');
+          label.text(select.val());
+          label.attr('for', select.attr('id'));
+        });
+        $('.select-box select').on('change', function() {
+          $(this).next().text($(this).val());
+        });
+      } else if (!$.isDesktop) {
+        var showDropdown = function (element) {
+            var event;
+            event = document.createEvent('MouseEvents');
+            event.initMouseEvent('mousedown', true, true, window);
+            element.dispatchEvent(event);
+        };
+        if (!$.isDesktop) {
+          $('.select-box-label').forEach(function(ctx) {
+            if (!ctx.id) {
+              $(ctx).prev().attr('id', $.Uuid());
+            }
+            var val = $(ctx).siblings('select').val();
+            $(ctx).text(val);
+          });
+          $('.select-box select').on('change', function() {
+            var val = $(this).find("option:selected").text();
+            var $this = $(this);
+            $this.next('label').text($(this).val());
+            $this.siblings('label').text(val);
+          });
+          $('body').on('singletap', '.select-box-label', function() {
+            showDropdown($('select')[0]);
+          });
+        } 
+      }
+    }
+  });
+  $(function() {
+    $.UISelectBox();
+  });
+
+
+  //////////////////////////////////////////
+  // Plugin to setup automatic data binding:
+  //////////////////////////////////////////
+  $.extend($, {
+    UIBindData : function (controller) {
+      var controllers;
+      // If user provides controller,
+      // only bind to that one:
+      if (controller) {
+        controllers = $('[data-controller=' + controller +']');
+      // Otherwise get all controllers:
+      } else {
+        controllers = $('[data-controller]');
+      }
+      var broadcasts = [];
+
+      // Define function to create broadcasts:
+      //======================================
+      var createBroadcaster = function(controller) {
+        var broadcast = 'data-binding-' + $(controller).attr('data-controller');
+        broadcasts.push(broadcast);
+      };
+
+      // Loop controllers, create broadcasts,
+      // subscribe models to broadcasts:
+      //=====================================
+      controllers.forEach(function(ctx, idx) {
+        var model = $(ctx).attr('data-controller');
+        createBroadcaster(ctx);
+        // Subscribe and update elements with data:
+        $.subscribe(broadcasts[idx], function(event, value) {
+          var element = '[data-model=' + model + ']';
+          $(element).text(value);
+        });
+      });
+
+      // Bind events to controllers to publish broadcasts:
+      //==================================================
+      $('body').on('input change', '[data-controller]', function(event) {
+        var broadcast = 'data-binding-' + $(this).attr('data-controller');
+        $.publish(broadcast, $(this).val());
+      });
+    },
+
+    //////////////////////////////////////
+    // Unbind a specific controller/model:
+    //////////////////////////////////////
+    UIUnBindData : function (controller) {
+      delete $.subscriptions['data-binding-' + controller];
+    }
+  });
+
+})(window.CHUIJSLIB);

@@ -21,6 +21,7 @@ var $loc;
 var app = {
     // Application Constructor
     initialize: function() {
+		console.log("Se inicializa la aplicación");
         this.manejadores();
 		LoadingDialog.init();
 		//console.log(cordova.file);
@@ -28,7 +29,15 @@ var app = {
 		DataManager.init();
 		
 		
+		
     },
+	orientationChange:function(){
+		
+		console.log("Ha ocurrido un cambio de orientación");
+		$('#product-carrousel').addClass('navigable');
+		DataManager.carouselObject.resize();
+		$('#product-carrousel').removeClass('navigable');
+	},
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -36,30 +45,78 @@ var app = {
     manejadores: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
 		
-		$(document).on("tap singletap click","a.external",function(e){
+		$(document).on("tap","a.external",function(e){
 			e.preventDefault();
 			window.open($(this).attr('href'), "_system");
 	return false;
-		} )
+		})
 		
-		$(document).on("tap singletap click","#searchByCatalogo",function(e){
+		$(document).on("tap","#searchByCatalogo",function(e){
 			e.preventDefault();
 		console.log("Queremos cargar la sección de catalogo");
-		app.navProducts("product-cat",true);
+		app.navProducts("product-cat",false);
 		return false;
 		})
 		
-		$("#product-cat").on("tap singletap click","li",function(e){
+		$(document).on("tap","#showFamilia",function(e){
 			e.preventDefault();
-			app.navProducts("product-carrousel",true);
+		
+		app.navProducts("product-fam",false);
+		return false;
+		})
+		
+		
+		
+		$("#product-cat").on("tap","li",function(e){
+			e.preventDefault();
+			app.navProducts("product-carrousel",false);
+			//DataManager.carouselObject.goToPanel($(this).index()-1);
+			DataManager.carouselObject.goToPanel($(this).index());
+		return false;
+	
+	})
+	
+	$("#product-fam").on("tap","li",function(e){
+			e.preventDefault();
+			app.navProducts("product-carrousel");
+			//DataManager.carouselObject.goToPanel($(this).index()-1);
+			DataManager.carouselObject.goToPanel($(this).data('gotoproduct'),false);
 		return false;
 	
 	})
 	
 	
+	
+	window.addEventListener('orientationchange',app.orientationChange);
+	
+	$(document).on("search","#search-model",function(e){
+		e.preventDefault();
+		console.log("Quieres buscar");
+		var sr=DataManager.searchModel($(this).val());
+		if(sr!=null){
+			app.navProducts("product-carrousel",false);
+			DataManager.carouselObject.goToPanel(sr);
+			$(this).blur();
+		}else{
+		console.log("No lo encuentro");	
+		};
+		return true;
+	})
+	$(document).on("searh submit","#form-search",function(e){
+		e.preventDefault();
+		console.log("Quieres buscar desde el form");
+	})
 	//Back button Productos
 	$("nav.productos").on("tap",".back-button",function(e){
-		if($("#product-cat").hasClass("current")){
+		e.preventDefault();
+		
+		app.navProducts($("#productos section.current").data('backto'),true);
+		/*if($("#product-cat").hasClass("current")){
+			app.navProducts("product-init",false);
+			return false;
+		}
+		
+		if($("#product-fam").hasClass("current")){
 			app.navProducts("product-init",false);
 			return false;
 		}
@@ -67,7 +124,8 @@ var app = {
 		if($("#product-carrousel").hasClass("current")){
 			app.navProducts("product-cat",true);
 			return false;
-		}
+		}*/
+		return false;
 		
 		
 	})
@@ -85,14 +143,39 @@ var app = {
     receivedEvent: function(id) {
         
     },
-	navProducts:function(section,backEnabled){
+	navProducts:function(section,backing){
+		var id=$("#productos section.current").attr("id");
+		
 		$("#productos section.current").addClass("next").removeClass("current");
 		$("#"+section).addClass("current").removeClass("next");
-		if(backEnabled){
+		if(!backing) $("#"+section).data('backto',id);
+		console.log("El contenido del product destino es "+$("#"+section).html());
+		console.log("El backEnabled es "+$("#"+section).data('backenabled'));
+		if($("#"+section).data('backenabled')===true){
 			$("nav.productos .back-button").show();
 		}else{
 			$("nav.productos .back-button").hide();
 		}
+		
+		if($("#"+section).data('shopenabled')===true){
+			$("nav.productos .shop-button").show();
+		}else{
+			$("nav.productos .shop-button").hide();
+		}
+	},
+	requestDNI:function(){
+		$.UIPopup({
+          id: "requestDNI",
+          title: 'NIF NECESARIO', 
+          message: 'Por favor introduzca dni para poder realizar pedidos<br/><input type="text" placeholder="dni o nif" id="dni"/>', 
+          cancelButton: 'Ahora no', 
+          continueButton: 'Conectar', 
+          callback: function() {
+			  console.log("El dni escrito es "+$("#dni").val());
+            DataManager.userDNI=$("#dni").val();
+			DataManager.syncClients(DataManager.userDNI);
+          }
+        });
 	}
 };
 

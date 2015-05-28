@@ -174,7 +174,7 @@ article.current .loading.visible{
 .product-search input{
 margin-top:1%;	
 }
-.product-search input[type="text"]{
+.product-search input[type="search"]{
 font-size:150%;
 display:block;
 margin-left:auto;
@@ -198,16 +198,17 @@ font-size:150%;
 }
 
 /*PRODUCT LIST*/
-#product-cat .list img{
+.product-list .list img,
+{
 height:40px;
 vertical-align:middle;	
 }
-#product-cat .list .tit_modelo{
+.product-list .list .tit_modelo{
 	padding-left:20px;
 	vertical-align:middle;
 	
 }
-#product-cat .list > li.nav::after{
+.product-list .list > li.nav::after{
 top:30px;	
 }
 .back-button{
@@ -217,6 +218,19 @@ top:30px;
   height: 30px;
   background-size: 100%;
   display: none;
+  
+}
+
+.shop-button{
+	  background-image: url(../img/iconos/shopping-btn.png);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-size: 100%;
+  display: none;
+  position:absolute;
+  right:10px;
+  top:25px;
   
 }
 /*PRODUCT VIEWER*/

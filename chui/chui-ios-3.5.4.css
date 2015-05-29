@@ -1428,9 +1428,11 @@ html[dir=rtl] body.splitlayout > article.detail {
   align-items: flex-start;
 }
 .popup > .panel > p {
-  padding: 0 15px;
+    padding: 0 15px;
   margin-top: 0;
   text-align: center;
+  font-size: 1.3em;
+  text-transform: none;
 }
 .popup > .panel .button {
   border-top: solid 1px #b5b5b5;

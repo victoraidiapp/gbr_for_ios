@@ -179,14 +179,15 @@ font-size:150%;
 display:block;
 margin-left:auto;
 margin-right:auto;
-width:46%;
+width:54%;
 margin-top:35%;
 padding:2%;
+padding-left:5%;
 }
 
-input.gahibre-button{
+.gahibre-button{
 color:#FFF;
-border-radius:5px;
+border-radius:10px;
 padding:2%;
 background-color:#043680;
 display:block;
@@ -194,18 +195,20 @@ width:50%;
 margin-left:auto;
 margin-right:auto;
 font-size:150%;
+margin-top:3%;
+	text-align:center;
 	
 }
 
 /*PRODUCT LIST*/
-.product-list .list img,
-{
+.img-inlist{
 height:40px;
 vertical-align:middle;	
 }
 .product-list .list .tit_modelo{
-	padding-left:20px;
-	vertical-align:middle;
+	  padding-left: 20px;
+  vertical-align: middle;
+  font-size: 1.3em;
 	
 }
 .product-list .list > li.nav::after{
@@ -216,8 +219,10 @@ top:30px;
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
-  background-size: 100%;
+  background-size: 80%;
   display: none;
+  top: 25px;
+  position: absolute;
   
 }
 
@@ -233,6 +238,15 @@ top:30px;
   top:25px;
   
 }
+
+/*POPUP DNI REQUEST*/
+.dnireq{
+  font-size: 1.2em;
+  margin-top: 0.4em;
+  padding: 0.3em;	
+}
+
+
 /*PRODUCT VIEWER*/
 #product-carrousel{
 background-color:#FFF;	

@@ -167,7 +167,7 @@ var app = {
 		$.UIPopup({
           id: "requestDNI",
           title: 'NIF NECESARIO', 
-          message: 'Por favor introduzca dni para poder realizar pedidos<br/><input type="text" placeholder="dni o nif" id="dni"/>', 
+          message: 'Por favor introduzca dni para poder realizar pedidos<br/><input class="dnireq" type="text" placeholder="dni o nif" id="dni"/>', 
           cancelButton: 'Ahora no', 
           continueButton: 'Conectar', 
           callback: function() {

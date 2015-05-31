@@ -202,7 +202,7 @@ margin-top:3%;
 
 /*PRODUCT LIST*/
 .img-inlist{
-height:40px;
+height:50px;
 vertical-align:middle;	
 }
 .product-list .list .tit_modelo{
@@ -213,6 +213,11 @@ vertical-align:middle;
 }
 .product-list .list > li.nav::after{
 top:30px;	
+}
+.product-list .list h2{
+margin-top: 20px;
+  font-size: 1.2em;
+
 }
 .back-button{
 	  background-image: url(../img/iconos/back_57.png);
@@ -308,4 +313,55 @@ text-align: left;
 }
 .mini-logo{
 max-height:40px;	
+}
+
+/*ADD-TO-CART*/
+
+#add-to-cart .first-line,
+#add-to-cart .second-line{
+	display:block;
+	position:static;
+	text-transform:none;
+}
+
+#add-to-cart .first-line .article{
+margin-left:40px;	
+	
+}
+
+#add-to-cart .first-line .size-label{
+margin-left:110px;	
+font-size:0.8em;
+	
+}
+
+#add-to-cart .first-line .size-value{
+margin-left:20px;	
+color:#043680;	
+}
+#add-to-cart .second-line{
+	
+}
+#add{
+font-size:1.4em;	
+}
+#quantity{
+font-size: 12px;
+  text-align: right;
+  background-color: #eee;
+  padding: 3px;
+  border-radius: 4px;
+  width: 60%;	
+}
+.quantity-button{
+	background-color: #ccc;
+  border-radius: 4px;
+  padding: 3px;
+  width: 13%;
+  margin-left: 10px;
+  font-size: 13px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  color:#043680;
 }

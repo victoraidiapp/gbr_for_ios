@@ -79,6 +79,7 @@ var DataManager={
 	},
 	initCatalogue:function(){
 		console.log("Empieza la carga del catálogo");
+		var nproduct=0;
 		for(p in DataManager.catalogueJSON.producto){
 				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
 				/*console.log('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
@@ -93,7 +94,7 @@ var DataManager={
 				}
 				
 				DataManager.productCarrousel.push(
-            '<h2>Modelo '+DataManager.catalogueJSON.producto[p].modelo+'</h2>'+
+            '<h2 data-nproduct="'+nproduct+'">Modelo '+DataManager.catalogueJSON.producto[p].modelo+'</h2>'+
             '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'"/></div>'+
             '<div class="center"><span class="material">'+DataManager.catalogueJSON.producto[p].gama.gama+'</span></div>'+
@@ -108,6 +109,7 @@ var DataManager={
 				DataManager.catalogueJSON.producto[p].logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].categoria.categoria+'" class="mini-logo"/></p>'+
 				'<p>'+normativas+'</p></div>');
+				nproduct++;
 			}
 			console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
 			console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());

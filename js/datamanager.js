@@ -36,10 +36,18 @@ var DataManager={
 				arrProds.push(DataManager.SERVER.categorias+DataManager.catalogueJSON.categoria[p].categoria);
 			}
 			
+			//Vamos a descargar las imagenes de las normativas
+			for(p in DataManager.catalogueJSON.normativa){
+				//console.log("Imagen de categoria:"+DataManager.catalogueJSON.producto[p].fotoGrande)
+				arrProds.push(DataManager.SERVER.normativas+DataManager.catalogueJSON.normativa[p].normativa);
+			}
+			
 			//Incluimos tambien las imágenes de los logotipos
 			for(p in DataManager.catalogueJSON.logotipo){
 				arrProds.push(DataManager.SERVER.logotipos+DataManager.catalogueJSON.logotipo[p].logotipo);
 			}
+			
+			
 			
 			//Cargamos los productos en el carrousel
 			
@@ -76,22 +84,33 @@ var DataManager={
 				/*console.log('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');*/
 				jQuery("#product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="25"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].modelo+'</h2></div></li>');
+				DataManager.catalogueJSON.producto[p].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].modelo+'</h2></div></li>');
+				
+				normativas='';
+				for(n in DataManager.catalogueJSON.producto[p].normativas){
+					normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].normativas[n]+'"/>';
+				}
 				
 				DataManager.productCarrousel.push(
             '<h2>Modelo '+DataManager.catalogueJSON.producto[p].modelo+'</h2>'+
             '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'"/></div>'+
-            '<div class="center"><span class="material">'+DataManager.gamaName(DataManager.catalogueJSON.producto[p].idGama)+'</span></div>'+
+            '<div class="center"><span class="material">'+DataManager.catalogueJSON.producto[p].gama.gama+'</span></div>'+
             '<div class="details"><h3>DESCRIPCIÓN</h3>'+
             '<p>'+DataManager.catalogueJSON.producto[p].descripcion+'</p>'+
             '<h3>USO</h3>'+
             '<p>'+DataManager.catalogueJSON.producto[p].uso+'</p>'+
-            '<h3 class="inline">TALLA: </h3><span class="value">9</span>'+
-            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">120 pares</span>'+
-            '<h3 class="inline">P.V.P: </h3><span class="value">9</span></div>');
+            '<h3 class="inline">TALLA: </h3><span class="value">'+DataManager.catalogueJSON.producto[p].tallas.join()+'</span>'+
+            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+DataManager.catalogueJSON.producto[p].empaquetado+'</span>'+
+            '<h3 class="inline">P.V.P: </h3><span class="value">'+DataManager.catalogueJSON.producto[p].precio+'</span>'+
+			'<p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].categoria.categoria+'" class="mini-logo"/></p>'+
+				'<p>'+normativas+'</p></div>');
 			}
-			
+			console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
+			console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());
 		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
 		DataManager.carouselObject=$('#product-viewer').data('carousel');
@@ -154,7 +173,7 @@ values['token']=token;
 
 		$.ajax({
 			type:"POST",
-			url:"http://datic.es/gahibre/webservice/servicio.php",
+			url:"http://datic.es/gahibre/webservice/servicio_ios.php",
 			dataType:"text",
 			data:values,
 			success:function(r){
@@ -252,26 +271,11 @@ xhr.send();
 		return null;
 	},
 	searchFirstProductOfFamily:function(idFamily){
-		var idSubfamilia;
-		for(g in DataManager.catalogueJSON.subfamilia){
-			if(DataManager.catalogueJSON.subfamilia[g].idFamilia==idFamily){
-			idSubfamilia=DataManager.catalogueJSON.subfamilia[g].idSubFamilia;
-			break;
-			}
-		}
-		
-		var idGama;
-		for(g in DataManager.catalogueJSON.gama){
-			if(DataManager.catalogueJSON.gama[g].idSubFamilia==idSubfamilia){
-			idGama=DataManager.catalogueJSON.gama[g].idGama;
-			break;
-			}
-		}
-		
+			
 		var i=0;
 		for(g in DataManager.catalogueJSON.producto){
 			
-			if(DataManager.catalogueJSON.producto[g].idGama==idGama){
+			if(DataManager.catalogueJSON.producto[g].gama.idFamilia==idFamily){
 			return i;	
 			}
 			i++;

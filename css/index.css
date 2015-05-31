@@ -255,8 +255,9 @@ background-color:#FFF;
 #product-carrousel .center{
 text-align:center;	
 }
-#product-carrousel img{
+#product-carrousel .center img{
 margin-bottom:15px;	
+height:150px;
 }
 #product-carrousel h2{
 color:#043680;
@@ -304,4 +305,7 @@ text-align: left;
 }
 #product-carrousel .value::after{
 	content:"\A"; white-space:pre;
+}
+.mini-logo{
+max-height:40px;	
 }

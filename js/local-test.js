@@ -31,6 +31,7 @@ $.UISetupCarousel({ target: '#product-viewer', panels: panelproducts, loop: true
 DataManager.carouselObject=$('#product-viewer').data('carousel');	
 $('#product-carrousel').removeClass('navigable');
 app.manejadores();
+LoadingDialog.init();
 app.requestDNI();
 }
 

@@ -161,12 +161,13 @@ article .loading{
 	position:absolute;
 	top:10px;
 	left:0px;
-	z-index:35000;
+	z-index:-5;
 	-webkit-transition:opacity 1s;
 }
 
 article.current .loading.visible{
 	opacity:0.7;
+	z-index:35000;
 
 }
 
@@ -233,6 +234,19 @@ margin-top: 20px;
 
 .shop-button{
 	  background-image: url(../img/iconos/shopping-btn.png);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-size: 100%;
+  display: none;
+  position:absolute;
+  right:10px;
+  top:25px;
+  
+}
+
+.add-button{
+	  background-image: url(../img/iconos/add_new_57.png);
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
@@ -345,7 +359,7 @@ color:#043680;
 #add{
 font-size:1.4em;	
 }
-#quantity{
+.quantity{
 font-size: 12px;
   text-align: right;
   background-color: #eee;
@@ -364,4 +378,20 @@ font-size: 12px;
   display: inline-block;
   font-weight: bold;
   color:#043680;
+}
+.addtocart-buttons{
+margin-top:20px;	
+text-align:center;
+}
+.addtocart-buttons .checkout-button{
+padding:10px;
+border-radius:5px;
+color:#FFF;
+background-color:	#043680;
+display:inline-block;
+width:30%;
+margin-left:5%;
+margin-right:5%;
+font-weight:bold;
+	
 }

@@ -8,8 +8,9 @@ var DataManager={
 	carouselObject:null,
 	catalogueJSON:null,
 	clientsJSON:null,
-	userDNI:null
-	,
+	userDNI:null,
+	currentProduct:null,
+	shopCart:Array(),
 	init:function(){
 		
 		//HABRÍA QUE COMPROBAR SI TENEMOS LA ÚLTIMA VERSIÓN DE LA BASE DE DATOS PARA NO TENER QUE VOLVER A DESCARGARLA

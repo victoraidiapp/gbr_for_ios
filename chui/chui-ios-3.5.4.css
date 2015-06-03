@@ -125,6 +125,7 @@ article {
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
   align-items: flex-start;
+  background-color:#FFF;
 }
 @media only screen and (min-width: 768px) {
   article {

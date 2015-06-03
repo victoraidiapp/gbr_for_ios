@@ -19,6 +19,7 @@
 
 var $loc;
 var app = {
+	
     // Application Constructor
     initialize: function() {
 		console.log("Se inicializa la aplicación");
@@ -51,11 +52,14 @@ var app = {
 	return false;
 		})
 		
-		$(document).on("tap","#more-products",function(e){
+		$(document).on("tap",".more-products",function(e){
+			$('.popup').UIPopupClose();
 			app.navProducts("product-cat",true);
+			
 		})
 		
-		$(document).on("tap","#goto-checkout",function(e){
+		$(document).on("tap",".goto-checkout",function(e){
+			$('.popup').UIPopupClose();
 			app.addToCart();
 			$.UIGoToArticle("#pedidos");
 			app.navProducts("product-cat",true);
@@ -119,22 +123,18 @@ var app = {
 	})
 	
 	$("nav.productos").on("tap",".add-button",function(e){
-		app.addToCart();
+		
 		$.UIPopup({
           id: "addToCart",
           title: 'PRODUCTO AÑADIDO', 
-          message: '', 
-          cancelButton: 'Añadir más', 
-          continueButton: 'Ir al pedido', 
-          callback: function() {
-			  console.log("El dni escrito es "+$("#dni").val());
-            DataManager.userDNI=$("#dni").val();
-			DataManager.syncClients(DataManager.userDNI);
-          }
+          message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout">Ir al pedido</span></div>', 
         });
+		app.addToCart();
 	})
 	
 	$("nav.productos").on("tap",".shop-button",function(e){
+		
+		
 		var n=$("#product-viewer .carousel-panel-active h2").data("nproduct");
 		var tallas=DataManager.catalogueJSON.producto[n].tallas;
 		$("#product-sizes").html('');

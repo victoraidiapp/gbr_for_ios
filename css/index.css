@@ -395,3 +395,156 @@ margin-right:5%;
 font-weight:bold;
 	
 }
+
+.popup-buttons{
+	width:100%;
+}
+
+.popup-button{
+	
+	display:inline-block;
+	width:50%;
+	text-align:center;
+	color:#666;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+/*ORDER DETAILS*/
+
+.blue-tag{
+	
+color:#043680;	
+}
+.customer-line{
+	padding-top: 20px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.customer-line .blue-tag{
+	
+font-size:1.2em;	
+}
+
+#customerSelect{
+	  width: 60%;
+  float: right;
+  margin-right: 20px;
+  background-color: #ddd;
+  border: none;
+  padding: 10px;
+  display: block;
+  line-height: 1.4em;
+  font-size: 1.2em;
+	
+}
+
+#order-details .article{
+font-size: 0.8em;
+  font-weight: bold;
+  display: inline-block;
+  width: 30%;
+}
+
+#order-details .size-label{
+	font-size: 0.8em;
+  color: #043680;
+  display: inline-block;
+  width: 15%;
+  text-align: right;
+	
+}
+
+#order-details .size-value{
+	  font-size: 0.8em;
+  display: inline-block;
+  width: 5%;
+  text-align: center;
+	
+}
+
+#order-details .discount-label{
+	font-size: 0.8em;
+  color: #043680;
+  display: inline-block;
+  width: 15%;
+  text-align: right;
+	
+}
+
+#order-details .discount-value{
+	
+	  background-color: #DDD;
+  width: 25%;
+  display: inline-block;
+  text-align: right;
+  font-size:0.9em;
+}
+
+#order-details .quantity-label{
+	  background-color: #DDD;
+  width: 18%;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.9em;
+	
+}
+
+#order-details .quantity-value{
+	  display: inline-block;
+  font-size: 0.8em;
+  color: #043680;
+  width: 10%;
+  text-align: center;
+	
+}
+
+#order-details .price-label{
+	background-color: #DDD;
+  width: 18%;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.9em;
+	
+}
+
+#order-details .price-value{
+	  display: inline-block;
+  font-size: 0.8em;
+  color: #043680;
+  width: 10%;
+  text-align: center;
+	
+}
+
+#order-details .subtotal{
+	background-color: #DDD;
+  width: 25%;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.9em;
+	
+}
+
+#order-details .del-button{
+	background-color: #DDD;
+  width: 5%;
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  color: red;
+  margin-left: 2%;
+	
+}
+
+#order-details .first-line{
+	
+	
+}
+
+#order-details .second-line{
+	margin-top:5px;
+	
+}
+

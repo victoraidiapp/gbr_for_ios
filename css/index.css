@@ -540,11 +540,20 @@ font-size: 0.8em;
 
 #order-details .first-line{
 	
-	
+	text-transform:none;
 }
 
 #order-details .second-line{
 	margin-top:5px;
+	text-transform:none;
 	
 }
 
+#aboutGahibre{
+margin-top: 60px;
+  text-transform: none;
+  text-align: justify;
+  padding-left: 15px;
+  padding-right: 20px;
+
+}

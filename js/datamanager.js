@@ -74,6 +74,7 @@ var DataManager={
 	if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		app.requestDNI();	
 	}else{
+		console.log("El dni es "+DataManager.userDNI);
 		DataManager.syncClients();
 	}
 		
@@ -112,8 +113,8 @@ var DataManager={
 				'<p>'+normativas+'</p></div>');
 				nproduct++;
 			}
-			console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
-			console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());
+			//console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
+			//console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());
 		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
 		DataManager.carouselObject=$('#product-viewer').data('carousel');
@@ -289,9 +290,28 @@ xhr.send();
 		DataManager.getClientsFromServer(DataManager.userDNI,function(r){
 		LocalFileManager.writeToClients(r);
 			DataManager.clientsJSON=jQuery.parseJSON(r);
-			console.log("Los datos de cliente son "+DataManager.clientsJSON);
+			console.log("Los datos de cliente son "+DataManager.clientsJSON.cliente);
 			if(dni!=="undefined" && dni!==null){
+				console.log("VAMOS A GUARDAR EL DNI "+dni);
 				localStorage.setItem("dni",dni);	
+			}
+			
+			/* cargamos los clientes en el select de pedidos*/
+			console.log("Este perico tiene "+DataManager.clientsJSON.cliente.length);
+			$("#customerSelect").html('');
+			
+			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
+				var clientes=DataManager.clientsJSON.cliente[0].representado;
+				var idcli=1;
+				$("#customerSelect").append('<option value="0">NUEVO CLIENTE</option>');
+				for(cli in clientes){
+					
+					$("#customerSelect").append('<option value="'+idcli+'">'+clientes[cli].nombre+'</option>');
+					idcli++;
+				}
+			
+			}else{
+				$("#customerSelect").append('<option value="0">'+DataManager.clientsJSON.cliente[0].nombre+'</option>');
 			}
 		})
 	}

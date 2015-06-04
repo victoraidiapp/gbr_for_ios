@@ -60,7 +60,7 @@ var app = {
 		
 		$(document).on("tap",".goto-checkout",function(e){
 			$('.popup').UIPopupClose();
-			app.addToCart();
+			OrderManager.addToCart();
 			$.UIGoToArticle("#pedidos");
 			app.navProducts("product-cat",true);
 			
@@ -129,11 +129,14 @@ var app = {
           title: 'PRODUCTO AÑADIDO', 
           message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout">Ir al pedido</span></div>', 
         });
-		app.addToCart();
+		OrderManager.addToCart();
 	})
 	
 	$("nav.productos").on("tap",".shop-button",function(e){
-		
+		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+		DataManager.requestDNI();	
+		return;
+	}
 		
 		var n=$("#product-viewer .carousel-panel-active h2").data("nproduct");
 		var tallas=DataManager.catalogueJSON.producto[n].tallas;
@@ -245,49 +248,8 @@ var app = {
 		}else{
 			$("nav.productos .add-button").hide();
 		}
-	},
-	requestDNI:function(){
-		$.UIPopup({
-          id: "requestDNI",
-          title: 'NIF NECESARIO', 
-          message: 'Por favor introduzca dni para poder realizar pedidos<br/><input class="dnireq" type="text" placeholder="dni o nif" id="dni"/>', 
-          cancelButton: 'Ahora no', 
-          continueButton: 'Conectar', 
-          callback: function() {
-			  console.log("El dni escrito es "+$("#dni").val());
-            DataManager.userDNI=$("#dni").val();
-			DataManager.syncClients(DataManager.userDNI);
-          }
-        });
-	},
-	addToCart:function(){
-		console.log("Vamos a añadir el currentProduct al shopcart ");
-	var product=Array();
-	product["detail"]=DataManager.currentProduct;
-	console.log("El current product "+DataManager.currentProduct);
-	product["tallas"]=Array();
-	
-	$("#product-sizes li").each(function(i){
-		var v=$(this).find('.quantity').val();
-		
-		var ta=$(this).find('.size-value').html();
-		
-		if(parseInt(v)>0){
-		var t=Array();
-		t["talla"]=	ta;
-		t["cantidad"]=v;
-console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
-		product["tallas"].push(t);
-		}
-	})
-	
-	DataManager.shopCart[DataManager.currentProduct.modelo]=product;
-	console.log("El contenido del shopcart es "+DataManager.shopCart);
-	for(x in DataManager.shopCart){
-	console.log("Producto añadido "+x);	
 	}
-		
-	}
+	
 };
 
 

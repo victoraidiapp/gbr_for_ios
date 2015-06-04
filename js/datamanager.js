@@ -72,7 +72,8 @@ var DataManager={
 
 	DataManager.userDNI=localStorage.getItem("dni");
 	if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
-		app.requestDNI();	
+		console.log("No hay DNI");
+		DataManager.requestDNI();	
 	}else{
 		console.log("El dni es "+DataManager.userDNI);
 		DataManager.syncClients();
@@ -314,6 +315,21 @@ xhr.send();
 				$("#customerSelect").append('<option value="0">'+DataManager.clientsJSON.cliente[0].nombre+'</option>');
 			}
 		})
+	},
+	requestDNI:function(){
+		console.log("Me han pedido solicitar el DNI");
+		$.UIPopup({
+          id: "requestDNI",
+          title: 'NIF NECESARIO', 
+          message: 'Por favor introduzca dni para poder realizar pedidos<br/><input class="dnireq" type="text" placeholder="dni o nif" id="dni"/>', 
+          cancelButton: 'Ahora no', 
+          continueButton: 'Conectar', 
+          callback: function() {
+			  console.log("El dni escrito es "+$("#dni").val());
+            DataManager.userDNI=$("#dni").val();
+			DataManager.syncClients(DataManager.userDNI);
+          }
+        });
 	}
 	
 };

@@ -291,7 +291,7 @@ xhr.send();
 		LocalFileManager.writeToClients(r);
 			DataManager.clientsJSON=jQuery.parseJSON(r);
 			console.log("Los datos de cliente son "+DataManager.clientsJSON.cliente);
-			if(dni!=="undefined" && dni!==null){
+			if(typeof(dni)!="undefined" && dni!==null){
 				console.log("VAMOS A GUARDAR EL DNI "+dni);
 				localStorage.setItem("dni",dni);	
 			}

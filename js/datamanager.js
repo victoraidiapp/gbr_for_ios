@@ -131,7 +131,7 @@ var DataManager={
 				//console.log("Queremos cargar la familia "+DataManager.catalogueJSON.familia[f].familia+" cuyo primer producto tiene el id "+idP);
 				
 				jQuery("#product-fam ul.list").append('<li class="nav comp" data-gotoproduct="'+idP+'"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[idP].fotoGrande+'" height="25"/></aside><div><h2>'+DataManager.catalogueJSON.familia[f].familia+'</h2></div></li>');
+				DataManager.catalogueJSON.producto[idP].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.familia[f].familia+'</h2></div></li>');
 				
 		 }
 	},

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+       
+        
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+       <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <meta name="msapplication-tap-highlight" content="no" />
+        <title>Gahibre</title>
+        
+        <!-- Hojas de estilo -->
+        
+        <link rel="stylesheet" type="text/css" href="chui/chui-ios-3.5.4.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
+        <!-- javascript funciones personalizadas -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.sha256.js"></script>   
+        <script type="text/javascript" src="js/date-functions.js"></script>  
+        <script type="text/javascript" src="js/util.js"></script>  
+        
+        <script type="text/javascript" src="chui/chui-3.5.4.min.js"></script>
+        <!--<script type="text/javascript" src="chui/chui-3.8.7.js"></script>-->
+        <script type="text/javascript" src="js/lang.js"></script>
+        <script type="text/javascript" src="js/loadingdialog.js"></script>
+        <script type="text/javascript" src="js/localfilemanager.js"></script>
+        <script type="text/javascript" src="js/datamanager.js"></script>
+        <script type="text/javascript" src="js/ordermanager.js"></script>
+        <script type="text/javascript" src="js/local-test.js"></script>
+        <!--<script type="text/javascript" src="js/mapmanager.js"></script>  -->      
+        
+    </head>
+    <body>
+                    
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        
+        
+        <!--Aqui va el contenido HTML siguiendo la doc chocolatechip ui-->
+        
+        <script type="text/javascript">
+		document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	
+	console.log("El dispositivo ya está listo");
+    //console.log(cordova.file);
+	app.initialize();
+}
+
+		var $lang;
+    	$(function() {
+			
+			$lang = navigator.language || navigator.userLanguage
+		$lang=$lang.substr(0,2);
+			
+      		var opts = {
+         		tabs : 4,
+         		imagePath : "icons/",
+         		icons : ["gahibre", "productos", "pedidos", "outlet"],
+         		labels : ["Gahibre","Productos","Pedidos", "Outlet"],
+         		selected : 1
+      		};
+      		$.UITabbar(opts);
+			//console.log(cordova.file);			
+			localTest();
+			$.UIPaging();
+			
+			
+			//app.manejadores();
+        	      	
+    	});  	   		
+  		</script>
+  <nav class="current"><h1>Gahibre</h1></nav>
+  	<article id="home" class="current navigable">
+    	<section>
+        
+        	<div id="aboutGahibre" class="role-content"><p>Los fundadores iniciaron la andadura de su proyecto común con un pequeño negocio dedicado a la fabricación de guantes y basado en unos principios que han sabido mantener y transmitir a la siguiente generación: la referencia a los orígenes y a los valores de honestidad, esfuerzo, cumplimiento e ilusión.</p>
+
+<p>Teniendo en cuenta las raíces de su tierra natal, León, los primeros guantes diseñados y fabricados en GAHIBRE se destinaron al sector de la minería, el más tradicional y de mayor arraigo en la región.</p>
+
+<p>Desde los guantes creados para el trabajo en las minas de León hasta los diseñados para facilitar la tarea de recogida de cítricos en el levante y Andalucía, pasando por los guantes de conductor, soldador, albañil… Siempre atendiendo las características concretas de cada cliente y de cada sector y demostrando su capacidad de adaptación e innovación.</p>
+
+<p>Precisamente, esa atención a los cambios del mercado es lo que lleva a GAHIBRE, a finales de los ’80, a romper las fronteras de nuestro país para desembarcar en Asia con la idea de establecer allí líneas de producción propias que pudieran seguir garantizando la calidad y el diseño de nuestros productos a precios competitivos.</p>
+
+<p>En la década de los ’90 se consolida la diversificación con la estructura de producción repartida entre España y Asia. Esta apertura de mercados permite a GAHIBRE incorporar otros artículos relacionados con el ámbito de la protección laboral y añadir las prendas de abrigo a la amplia oferta de su catálogo.</p>
+
+<p>Bajo esta premisa de productos de calidad a precios competitivos, GAHIBRE afronta sus retos para el siglo XXI. En esta nueva etapa nuestro trabajo se orienta a incrementar el catálogo de productos manteniendo la relación equilibrada entre calidad, precio y diseño, y con la vista puesta en la apertura de líneas de negocio en mercados en plena expansión.</p>
+</div>
+        </section>
+    </article>
+    <nav class="next productos"><h1>Productos</h1><span class="back-button"></span><span class="shop-button"></span><span class="add-button"></span></nav>
+  	<article id="productos" class="next paging navigable">
+    <section id="product-init" class="current">
+    
+    <div class="center-vertical product-search">
+    <form id="form-search">
+    <input id="search-model" type="search" placeholder="Modelo" />
+    </form>
+    <div class="gahibre-button" id="searchByCatalogo">CATÁLOGO</div>
+    <div class="gahibre-button" id="showFamilia">FAMILIA</div>
+    </div>
+        
+        </section>
+        
+     <section id="product-cat" class="next product-list" data-backenabled="true">
+      <div class="role-content"><ul class="list">
+      <li class="nav comp"><aside><img src="file:///Users/escueladecienciasinformaticas/Library/Developer/CoreSimulator/Devices/917FFE3F-2421-4765-ADEB-6A3C0C63CEB8/data/Containers/Data/Application/461F77C0-2893-4747-9655-BC98DEABFE22/Documents/src/img_prod/Gahibre_20150528170408-51915.jpg" class="img-inlist"></aside><div><h2>321F</h2></div></li><li class="nav comp"><aside><img src="file:///Users/escueladecienciasinformaticas/Library/Developer/CoreSimulator/Devices/917FFE3F-2421-4765-ADEB-6A3C0C63CEB8/data/Containers/Data/Application/461F77C0-2893-4747-9655-BC98DEABFE22/Documents/src/img_prod/Gahibre_20150528101258-488183.jpg" class="img-inlist"></aside><div><h2>Action</h2></div></li><li class="nav comp"><aside><img src="file:///Users/escueladecienciasinformaticas/Library/Developer/CoreSimulator/Devices/917FFE3F-2421-4765-ADEB-6A3C0C63CEB8/data/Containers/Data/Application/461F77C0-2893-4747-9655-BC98DEABFE22/Documents/src/img_prod/Gahibre_20150525234516-395820.jpg" class="img-inlist"></aside><div><h2>322PU</h2></div></li><li class="nav comp"><aside><img src="file:///Users/escueladecienciasinformaticas/Library/Developer/CoreSimulator/Devices/917FFE3F-2421-4765-ADEB-6A3C0C63CEB8/data/Containers/Data/Application/461F77C0-2893-4747-9655-BC98DEABFE22/Documents/src/img_prod/Gahibre_20150527091429-548289.jpg" class="img-inlist"></aside><div><h2>Hydra</h2></div></li><li class="nav comp"><aside><img src="file:///Users/escueladecienciasinformaticas/Library/Developer/CoreSimulator/Devices/917FFE3F-2421-4765-ADEB-6A3C0C63CEB8/data/Containers/Data/Application/461F77C0-2893-4747-9655-BC98DEABFE22/Documents/src/img_prod/Gahibre_20150528100045-133099.jpg" class="img-inlist"></aside><div><h2>322ECO</h2></div></li><li class="nav comp"><aside><img src="file:///Users/escueladecienciasinformaticas/Library/Developer/CoreSimulator/Devices/917FFE3F-2421-4765-ADEB-6A3C0C63CEB8/data/Containers/Data/Application/461F77C0-2893-4747-9655-BC98DEABFE22/Documents/src/img_prod/Gahibre_20150528103504-621653.jpg" class="img-inlist"></aside><div><h2>321</h2></div></li>
+     
+      </ul>	</div>
+      </section>
+ 
+ <section id="product-fam" class="next product-list" data-backenabled="true"  >
+      <div class="role-content"><ul class="list"><li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"  class="img-inlist"/><span class="tit_modelo">FAMILIA 1</span></aside></div></li>
+      <li class="comp nav"><div><aside><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg" class="img-inlist"/><span class="tit_modelo">FAMILIA 2</span></aside></div></li>
+      
+      </ul>	</div>
+      </section>
+      
+      
+    
+		<section id="product-carrousel" class="next navigable" data-backenabled="true" data-shopenabled="true">
+        <div id="product-viewer" style="width:100%;height:800px"></div>
+        
+        	<div class="role-content">
+            <div class="product-item">
+            <h2>Modelo E520</h2>
+            <div class="center"><img src="fotos_productos_test/Gahibre_20150327193059-592166.jpg"/></div>
+            <div class="center"><span class="material">PIEL ECOLÓGICA</span></div>
+            <h3>DESCRIPCIÓN</h3>
+            <p>Guante interlock palma piel alta calidad,dorso spandex ventilado.Elástico de ajuste en la muñeca</p>
+            <h3>USO</h3>
+            <p>Industria, manipulación, automoción...</p>
+            <h3 class="inline">TALLA: </h3><span class="value">9</span>
+            <h3 class="inline">EMPAQUETADO: </h3><span class="value">120 pares</span>
+            <h3 class="inline">P.V.P: </h3><span class="value">9</span>
+            </div>
+            
+            </div>
+        </section>
+    <section id="add-to-cart" class="next product-list" data-backenabled="true" data-shopenabled="false" data-addenabled="true">
+    	<ul id="product-sizes" class="list">
+            	<li><div class="first-line"><input type="checkbox" id="add"><span class="article">322PU</span><span class="size-label">Talla</span><span class="size-value">7</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"><span class="quantity-button plus" data-operation="+120">+</span><span class="quantity-button minor" data-operation="-120">-</span></div></li><li><div class="first-line"><input type="checkbox" id="add"><span class="article">322PU</span><span class="size-label">Talla</span><span class="size-value">8</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"><span class="quantity-button plus" data-operation="+120">+</span><span class="quantity-button minor" data-operation="-120">-</span></div></li><li><div class="first-line"><input type="checkbox" id="add"><span class="article">322PU</span><span class="size-label">Talla</span><span class="size-value">9</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"><span class="quantity-button plus" data-operation="+120">+</span><span class="quantity-button minor" data-operation="-120">-</span></div></li><li><div class="first-line"><input type="checkbox" id="add"><span class="article">322PU</span><span class="size-label">Talla</span><span class="size-value">10</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"><span class="quantity-button plus" data-operation="+120">+</span><span class="quantity-button minor" data-operation="-120">-</span></div></li>
+        
+        </ul>
+        <div class="addtocart-buttons"><span id="more-products" class="checkout-button more-products">AÑADIR MÁS</span><span id="goto-checkout" class="checkout-button goto-checkout">IR AL PEDIDO</span></div>
+    </section>
+    
+        </article>
+     
+     <nav class="next zonas"><h1>Pedidos</h1></nav>
+  	<article id="pedidos" class="next paging">
+    
+   
+    
+    
+    
+    
+    <section id="checkout" class="current">
+    	<div class="customer-line"><span class="blue-tag">CLIENTES:</span>
+        <select id="customerSelect">
+        	<option value="1">Cliente 1</option>
+        <option value="2">Cliente 2</option>
+        <option value="3">Cliente 3</option>
+        </select>
+        </div>
+        <ul class="list" id="order-details">
+        	<li>
+            		<div class="first-line">
+                    	<span class="article">322</span>
+						<span class="size-label">Talla</span>
+                        <span class="size-value">9</span>
+                    	<span class="discount-label">% Dto:</span>
+                        <input type="number" class="discount-value updater" value="0"/>
+                        </div>
+                    <div class="second-line">
+                    	<input type="number" class="quantity-value updater" value="0"/>
+                        <span class="quantity-label">uds</span>
+                        <input type="number" class="price-value updater" value="0"/>
+                        <span class="price-label">€/ud</span>
+                        <span class="subtotal">0</span>
+                        <span class="del-button">X</span>
+                    </div>
+            </li>
+        </ul>
+      <div id="order-summary">
+      <div class="total-line"><span class="total-label">Total:</span><span class="total-value">0.0</span></div>
+        <textarea rows="5" id="observaciones" placeholder="Observaciones"></textarea>
+        <div class="buttons"><span id="send-order" class="checkout-button">ENVIAR</span><span id="empty-order" class="checkout-button">VACIAR</span><span id="more-products" class="checkout-button">AÑADIR MÁS</span></div>
+        
+        </div>
+    </section>  	
+        
+        </article>
+        
+    <nav class="next zonas"><h1>Outlet</h1></nav>
+  	<article id="outlet" class="next navigable">
+    <section>
+        	<div class="role-content"></div>
+        </section>
+        </article>    
+           
+    </body>
+</html>

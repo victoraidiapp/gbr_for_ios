@@ -5,8 +5,13 @@ var OrderManager={
 		$('#order-details').on('update','li',function(){
 			console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
 			var subtotal=eval($(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val());
+			var desc=$(this).find('.discount-value').val();
+			if(desc>0){
+			subtotal=subtotal-(subtotal*(desc/100));	
+			}
 			$(this).find('.subtotal').text(subtotal);
 			
+			OrderManager.updateTotal();
 		})
 		
 		$('#order-details').on('tap','.del-button',function(e){
@@ -26,6 +31,12 @@ var OrderManager={
 			$(this).parents('li').remove();
 			console.log("Despues de eliminar el numero de tallas de "+p+" es "+DataManager.shopCart[p].tallas.length);
 			OrderManager.summaryOrder();
+		})
+		
+		$('#order-details').on('blur','.updater',function(){
+			console.log("Quremos actualizar esta linea de pedido");
+			$(this).parents('li').trigger('update');
+			
 		})
 		
 		$("#checkout").on('tap','#empty-order',function(e){
@@ -83,12 +94,12 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 								'<span class="size-label">Talla</span>'+
 								'<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+
 								'<span class="discount-label">% Dto:</span>'+
-								'<input type="number" class="discount-value" value="0"/>'+
+								'<input type="number" class="discount-value updater" value="0"/>'+
 								'</div>'+
 							'<div class="second-line" data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
-								'<input type="number" class="quantity-value" value="'+DataManager.shopCart[x].tallas[tt].cantidad+'"/>'+
+								'<input type="number" class="quantity-value updater" value="'+DataManager.shopCart[x].tallas[tt].cantidad+'"/>'+
 								'<span class="quantity-label">uds</span>'+
-								'<input type="number" class="price-value" value="'+DataManager.shopCart[x].detail.precio+'"/>'+
+								'<input type="number" class="price-value updater" value="'+DataManager.shopCart[x].detail.precio+'"/>'+
 								'<span class="price-label">€/ud</span>'+
 								'<span class="subtotal">0</span>'+
 								'<span class="del-button">X</span>'+
@@ -135,6 +146,14 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 	}else{
 		$("#order-summary").hide();
 	}
+	
+	},
+	updateTotal:function(){
+		var total=0;
+	$('#order-details .subtotal').each(function(){
+		total+=parseFloat($(this).text());
+	})
+	$('#order-summary .total-value').text(total);
 	
 	}
 	

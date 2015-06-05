@@ -78,7 +78,7 @@ function onDeviceReady() {
       		var opts = {
          		tabs : 4,
          		imagePath : "icons/",
-         		icons : ["estacion", "ruta", "carril", "rutabici"],
+         		icons : ["gahibre", "productos", "pedidos", "outlet"],
          		labels : ["Gahibre","Productos","Pedidos", "Outlet"],
          		selected : 1
       		};
@@ -204,7 +204,12 @@ function onDeviceReady() {
                     </div>
             </li>
         </ul>
+      <div id="order-summary">
+      <div class="total-line"><span class="total-label">Total:</span><span class="total-value">0.0</span></div>
+        <textarea rows="5" id="observaciones" placeholder="Observaciones"></textarea>
+        <div class="buttons"><span id="send-order" class="checkout-button">ENVIAR</span><span id="empty-order" class="checkout-button">VACIAR</span><span id="more-products" class="checkout-button">AÑADIR MÁS</span></div>
         
+        </div>
     </section>  	
         
         </article>

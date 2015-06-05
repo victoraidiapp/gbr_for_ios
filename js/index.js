@@ -28,7 +28,7 @@ var app = {
 		//console.log(cordova.file);
 		LocalFileManager.init();
 		DataManager.init();
-		
+		OrderManager.init();
 		
 		
     },
@@ -54,6 +54,7 @@ var app = {
 		
 		$(document).on("tap",".more-products",function(e){
 			$('.popup').UIPopupClose();
+			OrderManager.addToCart();
 			app.navProducts("product-cat",true);
 			
 		})
@@ -61,7 +62,8 @@ var app = {
 		$(document).on("tap",".goto-checkout",function(e){
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
-			$.UIGoToArticle("#pedidos");
+			//$.UIGoToArticle("#pedidos");
+			$(".button.pedidos").trigger('singletap');
 			app.navProducts("product-cat",true);
 			
 		})

@@ -552,14 +552,27 @@ font-size: 0.8em;
 }
 
 #aboutGahibre{
-margin-top: 60px;
+  margin-top: 60px;
   text-transform: none;
   text-align: justify;
   padding-left: 15px;
   padding-right: 20px;
+  background-image: url(../img/gbr_imagenes/gahibre_historia.png);
+  background-size: 100% 30%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 100px;
 
 }
-
+#aboutGahibre img{
+  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:10px;
+  margin-bottom:10px;	
+	
+}
 #checkout .total-line{
 	padding-left: 15px;
   padding-right: 20px;

@@ -30,6 +30,7 @@ var OrderManager={
 			var output=PDFGenerator.create(DataManager.clientsJSON.cliente[0].nombre,customer,DataManager.shopCart,$('#observaciones').val());
 			
 			console.log("Ya hemos generado el PDF");
+			console.log("El PDF generado es "+output);
 			
 		})
 		

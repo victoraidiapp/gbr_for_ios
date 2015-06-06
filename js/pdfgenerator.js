@@ -85,7 +85,7 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 					console.log("GEnerando la linea de precio "+shopcart[x].detail.precio+" de "+x);
 					doc.text(150, initY, shopcart[x].detail.precio);
 					console.log("GEnerando la linea de subtotal "+shopcart[x].tallas[tt].subtotal+" de "+x);
-					//doc.text(175, initY, shopcart[x].tallas[tt].subtotal);
+					doc.text(175, initY, '+'+shopcart[x].tallas[tt].subtotal);
 					console.log("Y ahora vamos a realizar la operacione de total ");
 				total=eval(total+'+'+shopcart[x].tallas[tt].subtotal);
 				console.log("El total es "+total);
@@ -96,7 +96,7 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 	
 		
 	
-	console.log("Las observcaiones son "+observaciones);
+	
 	// Texto al margen ALBARÁN
 	doc.setFontSize (10);
 	doc.text(12, 170, 'ALBARÁN DE PEDIDO', null, 90);
@@ -104,14 +104,15 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 	doc.rect(115, 220, 85, 10); // TOTAL 
 	doc.setFontSize(10);
 	doc.text(118, 226, 'TOTAL: ');
-	doc.text(138, 226, total);
-	
+	doc.text(138, 226, ' '+total+' €');
+	console.log("Las observcaiones son "+observaciones);
 	doc.rect(20, 235, 180, 40);	// Observaciones
 	doc.text(23, 241, 'OBSERVACIONES: ');
 	doc.setFontSize(8);
 	doc.setFontType('regular');
+	if(observaciones!=null && typeof(observaciones)!='undefined'){
 	doc.text(23, 251, observaciones);
-	
+	}
 
 	footer();
 	

@@ -5,13 +5,33 @@ var OrderManager={
 		$('#order-details').on('update','li',function(){
 			console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
 			var subtotal=eval($(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val());
+			
 			var desc=$(this).find('.discount-value').val();
+			DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].descuento=desc;
 			if(desc>0){
 			subtotal=subtotal-(subtotal*(desc/100));	
 			}
 			$(this).find('.subtotal').text(subtotal);
-			
+			DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].subtotal=subtotal;
 			OrderManager.updateTotal();
+		})
+		
+		$(document).on('tap','#send-order',function(e){
+			console.log("Queremos mandar el pedido");
+			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
+				console.log("Es representante");
+				console.log("El valor es "+$('#customerSelect').val()-1);
+					customer=DataManager.clientsJSON.cliente[0].representado[$('#customerSelect').val()-1];
+					
+			}else{
+				customer=DataManager.clientsJSON.cliente[0];
+			}
+			console.log("El cliente seleccionado es "+customer.nombre);
+			var output=PDFGenerator.create(DataManager.clientsJSON.cliente[0].nombre,customer,DataManager.shopCart,$('#observaciones').val());
+			
+			console.log("Ya hemos generado el PDF");
+			console.log("El PDF generado es "+output);
+			
 		})
 		
 		$('#order-details').on('tap','.del-button',function(e){
@@ -88,7 +108,7 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 			console.log("Vamos a añadir el producto "+x)
 				var t=0;
 				for(tt in DataManager.shopCart[x].tallas){
-				$('#order-details').append('<li>'+
+				$('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
 							'<div class="first-line">'+
 							'	<span class="article">'+x+'</span>'+
 								'<span class="size-label">Talla</span>'+

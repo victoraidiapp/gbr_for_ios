@@ -19,6 +19,7 @@
 
 var $loc;
 var app = {
+	
     // Application Constructor
     initialize: function() {
 		console.log("Se inicializa la aplicación");
@@ -27,7 +28,7 @@ var app = {
 		//console.log(cordova.file);
 		LocalFileManager.init();
 		DataManager.init();
-		
+		OrderManager.init();
 		
 		
     },
@@ -49,6 +50,22 @@ var app = {
 			e.preventDefault();
 			window.open($(this).attr('href'), "_system");
 	return false;
+		})
+		
+		$(document).on("tap",".more-products",function(e){
+			$('.popup').UIPopupClose();
+			OrderManager.addToCart();
+			app.navProducts("product-cat",true);
+			
+		})
+		
+		$(document).on("tap",".goto-checkout",function(e){
+			$('.popup').UIPopupClose();
+			OrderManager.addToCart();
+			//$.UIGoToArticle("#pedidos");
+			$(".button.pedidos").trigger('singletap');
+			app.navProducts("product-cat",true);
+			
 		})
 		
 		$(document).on("tap","#searchByCatalogo",function(e){
@@ -106,6 +123,71 @@ var app = {
 		e.preventDefault();
 		console.log("Quieres buscar desde el form");
 	})
+	
+	$("nav.productos").on("tap",".add-button",function(e){
+		
+		$.UIPopup({
+          id: "addToCart",
+          title: 'PRODUCTO AÑADIDO', 
+          message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout">Ir al pedido</span></div>', 
+        });
+		OrderManager.addToCart();
+	})
+	
+	$("nav.productos").on("tap",".shop-button",function(e){
+		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+		DataManager.requestDNI();	
+		return;
+	}
+		
+		var n=$("#product-viewer .carousel-panel-active h2").data("nproduct");
+		var tallas=DataManager.catalogueJSON.producto[n].tallas;
+		$("#product-sizes").html('');
+		for(t in tallas){
+			$("#product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
+		}
+		
+		DataManager.currentProduct=DataManager.catalogueJSON.producto[n];
+		
+		app.navProducts("add-to-cart",false);
+		console.log("La lista de tallas del pedido es "+$("#product-sizes").html());
+	})
+	
+	$("#add-to-cart").on("tap","li",function(e){
+		console.log("Alguien me ha picado y mi contenido es "+$(this).html());
+	})
+	//Quantity-Buttons
+	$("#product-sizes").on("tap",".quantity-button",function(e){
+		console.log("Has picado en un boton de cantidad");
+		$(this).siblings('.quantity').trigger('updateVal',[$(this).data('operation')]);
+	})
+	
+	
+	
+	$('#product-sizes').on("updateVal",".quantity",function(e,operation){
+		var v=$(this).val();
+		console.log("El valor actual es "+v);
+		console.log("El valor recibido "+operation);
+		v=eval(v+operation);
+		if(v<0) return;
+		$(this).val(v);
+		$(this).parents('li').trigger("updateCheck");
+	})
+	$('#product-sizes').on("updateCheck","li",function(e){
+		var v=$(this).find('.quantity').val();
+		console.log("El valor de la talla es "+v);
+		if(v>0){
+			console.log("Marcamos el checkbox");
+			 $(this).find('#add').prop('checked',true);
+			 
+		}else{
+			$(this).find('#add').prop('checked',false);
+			console.log("Marcamos el checkbox");
+			
+		}
+		
+	})
+	
 	//Back button Productos
 	$("nav.productos").on("tap",".back-button",function(e){
 		e.preventDefault();
@@ -149,8 +231,8 @@ var app = {
 		$("#productos section.current").addClass("next").removeClass("current");
 		$("#"+section).addClass("current").removeClass("next");
 		if(!backing) $("#"+section).data('backto',id);
-		console.log("El contenido del product destino es "+$("#"+section).html());
-		console.log("El backEnabled es "+$("#"+section).data('backenabled'));
+		//console.log("El contenido del product destino es "+$("#"+section).html());
+		//console.log("El backEnabled es "+$("#"+section).data('backenabled'));
 		if($("#"+section).data('backenabled')===true){
 			$("nav.productos .back-button").show();
 		}else{
@@ -162,21 +244,14 @@ var app = {
 		}else{
 			$("nav.productos .shop-button").hide();
 		}
-	},
-	requestDNI:function(){
-		$.UIPopup({
-          id: "requestDNI",
-          title: 'NIF NECESARIO', 
-          message: 'Por favor introduzca dni para poder realizar pedidos<br/><input type="text" placeholder="dni o nif" id="dni"/>', 
-          cancelButton: 'Ahora no', 
-          continueButton: 'Conectar', 
-          callback: function() {
-			  console.log("El dni escrito es "+$("#dni").val());
-            DataManager.userDNI=$("#dni").val();
-			DataManager.syncClients(DataManager.userDNI);
-          }
-        });
+		
+		if($("#"+section).data('addenabled')===true){
+			$("nav.productos .add-button").show();
+		}else{
+			$("nav.productos .add-button").hide();
+		}
 	}
+	
 };
 
 

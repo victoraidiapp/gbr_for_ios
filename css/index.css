@@ -161,12 +161,13 @@ article .loading{
 	position:absolute;
 	top:10px;
 	left:0px;
-	z-index:35000;
+	z-index:-5;
 	-webkit-transition:opacity 1s;
 }
 
 article.current .loading.visible{
 	opacity:0.7;
+	z-index:35000;
 
 }
 
@@ -179,14 +180,15 @@ font-size:150%;
 display:block;
 margin-left:auto;
 margin-right:auto;
-width:46%;
+width:54%;
 margin-top:35%;
 padding:2%;
+padding-left:5%;
 }
 
-input.gahibre-button{
+.gahibre-button{
 color:#FFF;
-border-radius:5px;
+border-radius:10px;
 padding:2%;
 background-color:#043680;
 display:block;
@@ -194,30 +196,39 @@ width:50%;
 margin-left:auto;
 margin-right:auto;
 font-size:150%;
+margin-top:3%;
+	text-align:center;
 	
 }
 
 /*PRODUCT LIST*/
-.product-list .list img,
-{
-height:40px;
+.img-inlist{
+height:50px;
 vertical-align:middle;	
 }
 .product-list .list .tit_modelo{
-	padding-left:20px;
-	vertical-align:middle;
+	  padding-left: 20px;
+  vertical-align: middle;
+  font-size: 1.3em;
 	
 }
 .product-list .list > li.nav::after{
 top:30px;	
+}
+.product-list .list h2{
+margin-top: 20px;
+  font-size: 1.2em;
+
 }
 .back-button{
 	  background-image: url(../img/iconos/back_57.png);
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
-  background-size: 100%;
+  background-size: 80%;
   display: none;
+  top: 25px;
+  position: absolute;
   
 }
 
@@ -233,6 +244,28 @@ top:30px;
   top:25px;
   
 }
+
+.add-button{
+	  background-image: url(../img/iconos/add_new_57.png);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-size: 100%;
+  display: none;
+  position:absolute;
+  right:10px;
+  top:25px;
+  
+}
+
+/*POPUP DNI REQUEST*/
+.dnireq{
+  font-size: 1.2em;
+  margin-top: 0.4em;
+  padding: 0.3em;	
+}
+
+
 /*PRODUCT VIEWER*/
 #product-carrousel{
 background-color:#FFF;	
@@ -241,8 +274,9 @@ background-color:#FFF;
 #product-carrousel .center{
 text-align:center;	
 }
-#product-carrousel img{
+#product-carrousel .center img{
 margin-bottom:15px;	
+height:150px;
 }
 #product-carrousel h2{
 color:#043680;
@@ -290,4 +324,301 @@ text-align: left;
 }
 #product-carrousel .value::after{
 	content:"\A"; white-space:pre;
+}
+.mini-logo{
+max-height:40px;	
+}
+
+/*ADD-TO-CART*/
+
+#add-to-cart .first-line,
+#add-to-cart .second-line{
+	display:block;
+	position:static;
+	text-transform:none;
+}
+
+#add-to-cart .first-line .article{
+margin-left:40px;	
+	
+}
+
+#add-to-cart .first-line .size-label{
+margin-left:110px;	
+font-size:0.8em;
+	
+}
+
+#add-to-cart .first-line .size-value{
+margin-left:20px;	
+color:#043680;	
+}
+#add-to-cart .second-line{
+	
+}
+#add{
+font-size:1.4em;	
+}
+.quantity{
+font-size: 12px;
+  text-align: right;
+  background-color: #eee;
+  padding: 3px;
+  border-radius: 4px;
+  width: 60%;	
+}
+.quantity-button{
+	background-color: #ccc;
+  border-radius: 4px;
+  padding: 3px;
+  width: 13%;
+  margin-left: 10px;
+  font-size: 13px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  color:#043680;
+}
+.addtocart-buttons{
+margin-top:20px;	
+text-align:center;
+}
+.addtocart-buttons .checkout-button,
+#checkout .checkout-button{
+padding:10px;
+border-radius:5px;
+color:#FFF;
+background-color:	#043680;
+display:inline-block;
+width:30%;
+margin-left:5%;
+margin-right:5%;
+font-weight:bold;
+	
+}
+
+.popup-buttons{
+	width:100%;
+}
+
+.popup-button{
+	
+	display:inline-block;
+	width:50%;
+	text-align:center;
+	color:#666;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+/*ORDER DETAILS*/
+
+.blue-tag{
+	
+color:#043680;	
+}
+.customer-line{
+	padding-top: 20px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.customer-line .blue-tag{
+	
+font-size:1.2em;	
+}
+
+#customerSelect{
+	  width: 60%;
+  float: right;
+  margin-right: 20px;
+  background-color: #ddd;
+  border: none;
+  padding: 10px;
+  display: block;
+  line-height: 1.4em;
+  font-size: 1.2em;
+	
+}
+
+#order-details .article{
+font-size: 0.8em;
+  font-weight: bold;
+  display: inline-block;
+  width: 30%;
+}
+
+#order-details .size-label{
+	font-size: 0.8em;
+  color: #043680;
+  display: inline-block;
+  width: 15%;
+  text-align: right;
+	
+}
+
+#order-details .size-value{
+	  font-size: 0.8em;
+  display: inline-block;
+  width: 5%;
+  text-align: center;
+	
+}
+
+#order-details .discount-label{
+	font-size: 0.8em;
+  color: #043680;
+  display: inline-block;
+  width: 15%;
+  text-align: right;
+	
+}
+
+#order-details .discount-value{
+	
+	  background-color: #DDD;
+  width: 25%;
+  display: inline-block;
+  text-align: right;
+  font-size:0.9em;
+}
+
+#order-details .quantity-label{
+	  
+	display: inline-block;
+  font-size: 0.8em;
+  color: #043680;
+  width: 10%;
+  text-align: center;
+}
+
+#order-details .quantity-value{
+	  background-color: #DDD;
+  width: 18%;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.9em;
+	
+}
+
+#order-details .price-label{
+	
+	display: inline-block;
+  font-size: 0.8em;
+  color: #043680;
+  width: 10%;
+  text-align: center;
+}
+
+#order-details .price-value{
+	  
+	background-color: #DDD;
+  width: 18%;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.9em;
+}
+
+#order-details .subtotal{
+	background-color: #DDD;
+  width: 25%;
+  display: inline-block;
+  text-align: right;
+  font-size: 0.9em;
+  padding:2px;
+	
+}
+
+#order-details .del-button{
+	background-color: #DDD;
+  width: 5%;
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  color: red;
+  margin-left: 2%;
+	
+}
+
+#order-details .first-line{
+	
+	text-transform:none;
+}
+
+#order-details .second-line{
+	margin-top:5px;
+	text-transform:none;
+	
+}
+
+#aboutGahibre{
+  margin-top: 60px;
+  text-transform: none;
+  text-align: justify;
+  padding-left: 15px;
+  padding-right: 20px;
+  background-image: url(../img/gbr_imagenes/gahibre_historia.png);
+  background-size: 100% 30%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 100px;
+
+}
+#aboutGahibre img{
+  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:10px;
+  margin-bottom:10px;	
+	
+}
+#checkout .total-line{
+	padding-left: 15px;
+  padding-right: 20px;
+  font-size: 1.4em;
+	
+}
+
+#checkout .total-line .total-label{
+	
+	  width: 18%;
+  display: inline-block;
+  font-size: 0.9em;
+}
+
+#checkout .total-line .total-value{
+	width: 75%;
+  background-color: #DDD;
+  display: inline-block;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 5%;
+	
+}
+
+#observaciones{
+	width: 85%;
+  border-color: #EEE;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 20px;
+  margin-top: 20px;
+  padding: 5px;
+}
+#checkout .buttons{
+margin-left: 15px;
+  margin-right: 20px;
+  margin-top: 15px;	
+	
+}
+
+#checkout .buttons .checkout-button{
+	  width: 23%;
+  margin-left: 1%;
+  margin-right: 1%;
+  text-align: center;
+	
 }

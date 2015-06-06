@@ -69,6 +69,211 @@ body {
     }
 }
 
+/****************************************/
+/********** RESPONSIVE iPhone ***********/
+/****************************************/
+
+/* iPhone 3G, 3GS, 4G y 4GS*/
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px)
+and (-webkit-min-device-pixel-ratio: 1)
+{
+  /* STYLES GO HERE */
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 1)
+{
+  /* STYLES GO HERE */
+}
+
+/* iPhone 5, 5C, 5S*/
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (-webkit-min-device-pixel-ratio: 2)
+{
+  /* STYLES GO HERE */
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) 
+and (-webkit-min-device-pixel-ratio: 2)
+{ /* STYLES GO HERE */
+}
+
+/* iPhone 6*/
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (-webkit-min-device-pixel-ratio: 2)
+{
+  /* STYLES GO HERE */
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px)
+and (orientation : landscape) 
+and (-webkit-min-device-pixel-ratio: 2)
+{
+  /* STYLES GO HERE */
+}
+
+/* iPhone 6Plus*/
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px)
+and (-webkit-min-device-pixel-ratio: 2)
+ {
+  /* STYLES GO HERE */  
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : landscape) 
+and (-webkit-min-device-pixel-ratio: 2)
+{ 
+/* STYLES GO HERE */
+}
+
+
+/************************************/
+/********* RESPONSIVE iPad **********/
+/************************************/
+
+/* iPad 1 y 2*/
+
+@media only screen 
+and (min-device-width : 768px)
+and (-webkit-min-device-pixel-ratio: 1)
+{
+	nav > h1 {font-size:35px; margin:0; top:22px;}
+	#aboutGahibre p 
+	{	
+			font-size: 23px; 
+			padding: 2px 22px 2px 22px; 
+			font-family: "Arial", Helvetica, sans-serif;
+	} 
+	.tabbar > .button {font-size:20px}
+	.isDesktop .tabbar > .button:hover, .tabbar > .button.selected {font-weight:bold;}
+	.product-search	{font-size:160%;}
+	input[type="search"]
+	{		
+		background-size:35px 35px; 
+		border:1px solid #BBB6B6; 
+		border-radius:5px;
+		background-position:18px center;		
+	}
+	.loading {visibility:hidden;}
+	#customerSelect 
+	{
+		margin-bottom:2%;
+		margin-top:-1%;
+	}
+	.customer-line .blue-tag {font-size:1.73em;margin-left:3%;}
+	.customer-line 
+	{
+		margin-right:24px;
+		margin-top:4%;
+		padding-left:30px;
+		font-size:19px;
+		font-weight:bold;
+	}
+	div.role-content {font-size:1.8em; text-align:justify;}
+	#product-carrousel h3 {font-weight:bold;}
+	body.hasTabBar nav .back-button {width:40px; top:13px;}
+	section h2 {height:34px; }
+	#order-details.list > li {font-size:1.5em; margin-left:0%;}
+	.list > li.nav::after {height: 29px; width:29px; right:6%;}
+	.product-list .list h2 {font-size:1.5em;overflow:inherit;}
+	#product-carrousel h2 
+	{
+		font-size:35px;
+		padding:7px;
+		margin-top:5%;
+	}
+	body.hasTabBar nav .shop-button 
+	{
+		width:35px; 
+		height:35px; 
+		right: 2%; 
+		top: 10px;
+	}
+	#product-carrousel .material {font-size: 1.4em;}
+	.carousel-track > li {font-size: 1.8em; margin-left:2%;}
+	#product-carrousel h3 {font-weight:bold;}
+	li.comp > div 
+	{
+		padding: 0px 0px 20px 0px; 
+		font-size:1.6em;
+		margin-left:4%;
+	}
+	.popup {width:60%;margin-left:-9%;font-size:1.6em;height:29%;}
+	.popup > .panel .button {font-size:1.4em;padding:16px;border-right: solid 1px #b5b5b5}
+	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:13px;}
+	.popup footer {border-top: solid 1px #b5b5b5}
+	/*article.paging > section {font-size:1.5em;}*/
+	#order-details .article {margin-left:3%;}
+	#order-details .first-line {padding-bottom:12px;}	
+	#checkout .total-line .total-label {font-weight:bold;margin-left:3%;}
+	#checkout .total-line .total-value {font-size:1.6em;}
+	article.paging > section #observaciones 
+	{
+		font-size:1.4em; 
+		font-family: "Arial", Helvetica, sans-serif;
+		width:87%;		
+	}
+	#checkout .buttons {font-size:21px;}
+}
+
+@media only screen 
+and (max-device-height: 1024px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 1)
+{
+	.loading {visibility:hidden;}	
+	article.paging > section #order-details .discount-value {width:27%;}
+	article.paging > section form {margin-top:-23%;}
+	article.paging > section #order-details .quantity-value {width:20%;}
+	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}
+	article.paging > section #observaciones {width: 89%;}
+	.popup {height:35%;margin:-12% 4px 12px 20px;}
+}
+
+/*iPad 3 y 4 retina*/
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) { 
+	/* STYLES GO HERE */
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 2) { 
+	/* STYLES GO HERE */
+}
+
+/*************************************/
+/********** RESPONSIVE END ***********/
+/*************************************/
+
 nav h1 {
     
     font-weight:normal;
@@ -183,7 +388,7 @@ margin-right:auto;
 width:54%;
 margin-top:35%;
 padding:2%;
-padding-left:5%;
+padding-left:8%;
 }
 
 .gahibre-button{
@@ -441,14 +646,16 @@ font-size:1.2em;
 }
 
 #order-details .article{
-font-size: 0.8em;
+font-size: 1.5em;
   font-weight: bold;
   display: inline-block;
   width: 30%;
+  margin-lef.t:3%;
 }
 
 #order-details .size-label{
-	font-size: 0.8em;
+	font-size: 1.5em;
+	font-weight:bold;
   color: #043680;
   display: inline-block;
   width: 15%;
@@ -457,7 +664,7 @@ font-size: 0.8em;
 }
 
 #order-details .size-value{
-	  font-size: 0.8em;
+	  font-size: 1.5em;
   display: inline-block;
   width: 5%;
   text-align: center;
@@ -465,9 +672,10 @@ font-size: 0.8em;
 }
 
 #order-details .discount-label{
-	font-size: 0.8em;
+	font-size: 1.5em;
   color: #043680;
   display: inline-block;
+  font-weight:bold;
   width: 15%;
   text-align: right;
 	
@@ -479,13 +687,14 @@ font-size: 0.8em;
   width: 25%;
   display: inline-block;
   text-align: right;
-  font-size:0.9em;
+  font-size:1.5em;
 }
 
 #order-details .quantity-label{
 	  
 	display: inline-block;
-  font-size: 0.8em;
+  font-size: 1.5em;
+  font-weight:bold;
   color: #043680;
   width: 10%;
   text-align: center;
@@ -496,14 +705,16 @@ font-size: 0.8em;
   width: 18%;
   display: inline-block;
   text-align: right;
-  font-size: 0.9em;
+  font-size: 1.5em;
+  margin-left:3%;
 	
 }
 
 #order-details .price-label{
 	
 	display: inline-block;
-  font-size: 0.8em;
+	font-weight:bold;
+  font-size: 1.5em;
   color: #043680;
   width: 10%;
   text-align: center;
@@ -515,7 +726,7 @@ font-size: 0.8em;
   width: 18%;
   display: inline-block;
   text-align: right;
-  font-size: 0.9em;
+  font-size: 1.5em;
 }
 
 #order-details .subtotal{
@@ -523,7 +734,7 @@ font-size: 0.8em;
   width: 25%;
   display: inline-block;
   text-align: right;
-  font-size: 0.9em;
+  font-size: 1.5em;
   padding:2px;
 	
 }
@@ -533,10 +744,10 @@ font-size: 0.8em;
   width: 5%;
   display: inline-block;
   text-align: center;
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: bold;
   color: red;
-  margin-left: 2%;
+  margin-left: 3%;
 	
 }
 
@@ -588,7 +799,7 @@ font-size: 0.8em;
 }
 
 #checkout .total-line .total-value{
-	width: 75%;
+	width: 70%;
   background-color: #DDD;
   display: inline-block;
   font-weight: bold;
@@ -599,17 +810,17 @@ font-size: 0.8em;
 
 #observaciones{
 	width: 85%;
-  border-color: #EEE;
+  border-color: #BBB6B6;
   border-style: solid;
   border-width: 1px;
   display: inline-block;
-  margin-left: 15px;
+  margin-left: 5%;
   margin-right: 20px;
   margin-top: 20px;
   padding: 5px;
 }
 #checkout .buttons{
-margin-left: 15px;
+margin-left: 11%;
   margin-right: 20px;
   margin-top: 15px;	
 	

@@ -73,23 +73,108 @@ body {
 /********** RESPONSIVE iPhone ***********/
 /****************************************/
 
-/* iPhone 3G, 3GS, 4G y 4GS*/
+/* iPhone 3G Y 3GS*/
 
 @media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 480px)
-and (-webkit-min-device-pixel-ratio: 1)
+and (min-device-width : 320px)
+and (-webkit-min-device-pixel-ratio: 2)
 {
-  /* STYLES GO HERE */
+/*	STYLES GO HERE*/
+}
+
+/* iPhone 4 y 4S*/
+
+@media only screen 
+and (min-device-width : 320px)
+and (max-device-width : 480px)
+and (-webkit-min-device-pixel-ratio: 2)
+{  	
+	article {top:41px;}
+	nav {font-size:35px; margin:0; top:0px;heigth:41px;}
+	nav > h1 {top:0px;}
+	#aboutGahibre p 
+	{	
+		font-size: 12px;  
+		font-family: "Arial", Helvetica, sans-serif;
+	} 
+	.tabbar > .button {font-weight:bold; font-size:11px}
+	.tabbar {height:34px;}
+	body.hasTabBar article {bottom:34px;}
+	.product-search	{font-size:90%;}
+	input[type="search"]
+	{		
+		background-size:17px 18px; 
+		border:1px solid #BBB6B6; 
+		border-radius:5px;
+		background-position:4px center;		
+	}
+	.gahibre-button {border-radius:5px;}
+	.back-button {margin-top:-5%;}
+	.list > li.nav::after {width:20px; height:20px; right:29px;}
+	.product-list .list > li.nav::after {top:24px;}
+	products current > span.shop-button {top:8px;right:15px;}
+	body.hasTabBar nav .shop-button 
+	{ 
+		right: 15px; 
+		top: 8px;
+	}
+	.popup {width:76%;margin-left:7%;font-size:10px;height:35%;}
+	.popup > .panel .button {font-size:14px;}
+	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:2px;}
+	.popup footer {height:41px;}
+	a.button {padding:0px;}
+	#customerSelect {margin-bottom:5%;margin-top:-2%;}
+	body.isiOS.hasTabBar .customer-line .blue-tag {font-weight:bold;}
+	#order-details .first-line {font-size:10px;}
+	#order-details .second-line {font-size:10px;}
+	#pedidos #order-details .discount-label {width:21%;}
+	#pedidos #order-details .article {width:24%;}
+	#pedidos #order-details .discount-value {margin-left:11px;}
+	#pedidos #order-details .quantity-value {margin-left:0px;}
+	#pedidos #order-details .price-label {margin-left:2%;}
+	#checkout .total-line .total-value {margin-left:6.5%;}
+	#checkout .total-line .total-label {font-weight:bold;}
+	article.paging > section #observaciones {font-family:"Arial", Helvetica, sans-serif;}
+	#more-products {font-size:9px;}
 }
 
 @media only screen 
-and (min-device-width : 320px) 
+and (min-device-width : 320px)
 and (max-device-width : 480px) 
 and (orientation : landscape)
-and (-webkit-min-device-pixel-ratio: 1)
-{
-  /* STYLES GO HERE */
+and (-webkit-min-device-pixel-ratio: 2)
+{	
+	input[type="search"]
+	{		
+		background-size:29px 23px; 
+		border:1px solid #BBB6B6; 
+		border-radius:5px;
+		background-position:7px center;	
+		
+	}
+	.gahibre-button {border-radius:5px;}
+	/*article.paging > section #order-details .discount-value {width:27%;}*/
+	article.paging > section form {margin-top:-29%;}
+	.popup {width:70%;margin-left:-3%;font-size:10px;height:47.3%;}
+	.popup > .panel .button {font-size:14px;}
+	.popup .panel .cancel {border-right: solid 1px #b5b5b5;}
+	.popup > panel .button.cancel {border-right:solid 1px #b5b5b5;}
+	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:2px;}
+	.popup footer {height:41px;}
+	a.button {padding:0px;}
+	article.paging > section #order-details .size-value {width:8%;}
+	article.paging > section #order-details .quantity-label {width:13%;}
+	/*article.paging > section #order-details .quantity-value {width:20%;}
+	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}
+	article.paging > section #observaciones {width: 89%;}
+	.popup 
+	{
+		display:block;
+		position: absolute;
+		padding:0;
+		height:35%;
+		margin-left: -14%;
+	}*/
 }
 
 /* iPhone 5, 5C, 5S*/
@@ -157,6 +242,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 
 @media only screen 
 and (min-device-width : 768px)
+and (max-device-width : 1024px)
 and (-webkit-min-device-pixel-ratio: 1)
 {
 	nav > h1 {font-size:35px; margin:0; top:22px;}
@@ -176,7 +262,7 @@ and (-webkit-min-device-pixel-ratio: 1)
 		border-radius:5px;
 		background-position:18px center;		
 	}
-	.loading {visibility:hidden;}
+	/*.loading {visibility:hidden;}*/
 	#customerSelect 
 	{
 		margin-bottom:2%;
@@ -221,10 +307,10 @@ and (-webkit-min-device-pixel-ratio: 1)
 		margin-left:4%;
 	}
 	.popup {width:60%;margin-left:-9%;font-size:1.6em;height:29%;}
-	.popup > .panel .button {font-size:1.4em;padding:16px;border-right: solid 1px #b5b5b5}
+	.popup > .panel .button {font-size:1.4em;padding:16px;}
+	.popup .panel .cancel {font-size:1.4em;padding:16px;border-right: solid 1px #b5b5b5;}
 	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:13px;}
 	.popup footer {border-top: solid 1px #b5b5b5}
-	/*article.paging > section {font-size:1.5em;}*/
 	#order-details .article {margin-left:3%;}
 	#order-details .first-line {padding-bottom:12px;}	
 	#checkout .total-line .total-label {font-weight:bold;margin-left:3%;}
@@ -239,35 +325,132 @@ and (-webkit-min-device-pixel-ratio: 1)
 }
 
 @media only screen 
-and (max-device-height: 1024px)
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 1)
 {
-	.loading {visibility:hidden;}	
+	/*.loading {visibility:hidden;}*/	
+	article.paging > section #order-details .discount-value {width:27%; }
+	article.paging > section form {margin-top:-23%;}
+	article.paging > section #order-details .quantity-value {width:20%;}
+	#checkout .total-line .total-label {margin-left:30px; font-size: 1.6em !important;}
+	article.paging > section #observaciones {width: 89%;}
+	.popup 
+	{
+		display:block;
+		position: absolute;
+		padding:0;
+		height:35%;
+		margin-left: -14%;
+	}
+}
+
+/* iPad 3 y 4 retina*/
+
+@media only screen 
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) 
+{ 
+	nav > h1 {font-size:35px; margin:0; top:22px;}
+	#aboutGahibre p 
+	{	
+			font-size: 23px; 
+			padding: 2px 22px 2px 22px; 
+			font-family: "Arial", Helvetica, sans-serif;
+	} 
+	.tabbar > .button {font-size:20px}
+	.isDesktop .tabbar > .button:hover, .tabbar > .button.selected {font-weight:bold;}
+	.product-search	{font-size:160%;}
+	input[type="search"]
+	{		
+		background-size:35px 35px; 
+		border:1px solid #BBB6B6; 
+		border-radius:5px;
+		background-position:18px center;		
+	}
+	/*.loading {visibility:hidden;}*/
+	#customerSelect 
+	{
+		margin-bottom:2%;
+		margin-top:-1%;
+	}
+	.customer-line .blue-tag {font-size:1.73em;margin-left:3%;}
+	.customer-line 
+	{
+		margin-right:24px;
+		margin-top:4%;
+		padding-left:30px;
+		font-size:19px;
+		font-weight:bold;
+	}
+	div.role-content {font-size:1.8em; text-align:justify;}
+	#product-carrousel h3 {font-weight:bold;}
+	body.hasTabBar nav .back-button {width:40px; top:13px;}
+	section h2 {height:34px; }
+	#order-details.list > li {font-size:1.5em; margin-left:0%;}
+	.list > li.nav::after {height: 29px; width:29px; right:6%;}
+	.product-list .list h2 {font-size:1.5em;overflow:inherit;}
+	#product-carrousel h2 
+	{
+		font-size:35px;
+		padding:7px;
+		margin-top:5%;
+	}
+	body.hasTabBar nav .shop-button 
+	{
+		width:35px; 
+		height:35px; 
+		right: 2%; 
+		top: 10px;
+	}
+	#product-carrousel .material {font-size: 1.4em;}
+	.carousel-track > li {font-size: 1.8em; margin-left:2%;}
+	#product-carrousel h3 {font-weight:bold;}
+	li.comp > div 
+	{
+		padding: 0px 0px 20px 0px; 
+		font-size:1.6em;
+		margin-left:4%;
+	}
+	.popup {width:60%;margin-left:-9%;font-size:1.6em;height:29%;}
+	.popup > .panel .button {font-size:1.4em;padding:16px;}
+	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:13px;}
+	.popup footer {border-top: solid 1px #b5b5b5}
+	#order-details .article {margin-left:3%;}
+	#order-details .first-line {padding-bottom:12px;}	
+	#checkout .total-line .total-label {font-weight:bold;margin-left:3%;font-size:1.6em !important;}
+	#checkout .total-line .total-value {font-size:1.6em;}
+	article.paging > section #observaciones 
+	{
+		font-size:1.4em; 
+		font-family: "Arial", Helvetica, sans-serif;
+		width:87%;		
+	}
+	#checkout .buttons {font-size:21px;}
+}
+
+@media only screen 
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) 
+{ 
+	/*.loading {visibility:hidden;}*/	
 	article.paging > section #order-details .discount-value {width:27%;}
 	article.paging > section form {margin-top:-23%;}
 	article.paging > section #order-details .quantity-value {width:20%;}
-	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}
+	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}	
 	article.paging > section #observaciones {width: 89%;}
-	.popup {height:35%;margin:-12% 4px 12px 20px;}
-}
-
-/*iPad 3 y 4 retina*/
-
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)
-and (orientation : landscape)
-and (-webkit-min-device-pixel-ratio: 2) { 
-	/* STYLES GO HERE */
-}
-
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)
-and (orientation : portrait)
-and (-webkit-min-device-pixel-ratio: 2) { 
-	/* STYLES GO HERE */
+	.popup 
+	{
+		display:block;
+		position: absolute;
+		padding:0;
+		height:34.3%;
+		margin-left: -14%;
+	}
 }
 
 /*************************************/
@@ -276,7 +459,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
 nav h1 {
     
-    font-weight:normal;
+    font-weight:bold;
     overflow:visible;
     padding:0px;
     text-align:center;

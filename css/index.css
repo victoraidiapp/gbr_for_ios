@@ -135,7 +135,8 @@ and (-webkit-min-device-pixel-ratio: 2)
 	#checkout .total-line .total-value {margin-left:6.5%;}
 	#checkout .total-line .total-label {font-weight:bold;}
 	article.paging > section #observaciones {font-family:"Arial", Helvetica, sans-serif;}
-	#more-products {font-size:9px;}
+	#checkout .buttons {margin-left:8%;}
+	#more-products {font-size:9px; padding:13px 10px 11px 11px !important;}
 }
 
 @media only screen 
@@ -164,17 +165,6 @@ and (-webkit-min-device-pixel-ratio: 2)
 	a.button {padding:0px;}
 	article.paging > section #order-details .size-value {width:8%;}
 	article.paging > section #order-details .quantity-label {width:13%;}
-	/*article.paging > section #order-details .quantity-value {width:20%;}
-	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}
-	article.paging > section #observaciones {width: 89%;}
-	.popup 
-	{
-		display:block;
-		position: absolute;
-		padding:0;
-		height:35%;
-		margin-left: -14%;
-	}*/
 }
 
 /* iPhone 5, 5C, 5S*/
@@ -202,7 +192,15 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (-webkit-min-device-pixel-ratio: 2)
 {
-  /* STYLES GO HERE */
+	#aboutGahibre p {font-size:16px;}
+	.tabbar > .button {font-size:13px;}
+	.popup {height:27.5%;}
+	.popup header > h1 {font-size:2.1em;}
+	.popup > .panel > p {font-size:1.5em;}
+	.popup footer {border-top: solid 1px #b5b5b5}
+	.product-list .list > li.nav::after {top:26px;}
+	#checkout .buttons {margin-left: 8% !important;}
+	#more-products {font-size:11px;padding:11px !important;}	
 }
 
 @media only screen 
@@ -211,7 +209,24 @@ and (max-device-width : 667px)
 and (orientation : landscape) 
 and (-webkit-min-device-pixel-ratio: 2)
 {
-  /* STYLES GO HERE */
+  	.tabbar > .button {font-size:16px;font-weight:bold;}
+	nav > h1 {font:normal 16pt/12pt HelveticaNeue, Sans-serif; top:5px !important;}
+	.product-search	{font-size:160%;margin-top:-27%;}
+	input[type="search"]
+	{		
+		background-size:32px 28px; 
+		border:1px solid #BBB6B6; 
+		border-radius:5px;
+		background-position:9px center;		
+	}
+	#productos > section ul.list {padding-top:12px;}
+	.product-list .list > li.nav::after {top:26px;width:20px;height:20px;margin-right:3%;}
+	.popup {height:56.8% !important;margin-top:-2%;width:54%;}
+	.popup footer {border-top:none;}
+	.back-button {width:32px !important; height:32px !important; margin-top:-8px; }
+	.shop-button {width:26px !important; height:26px !important; margin-top:-8px; margin-right: 8px;}
+	#checkout .buttons {margin-left:14% !important;font-size:1.2em !important;}
+	#more-products {font-size:1em !important;padding-top: 10px !important; padding-bottom: 10px !important;}
 }
 
 /* iPhone 6Plus*/

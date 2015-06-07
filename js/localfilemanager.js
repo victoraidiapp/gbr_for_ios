@@ -63,6 +63,15 @@ var LocalFileManager={
 		console.log("El directorio no exite, lo vamos a crear");
 		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
 		})
+		
+		LocalFileManager.docDirectory.getDirectory('albaranes',{},function(){
+			console.log("El direcotio albaranes ya existe");
+		},function(err){
+		var path2='albaranes';
+		console.log("El directorio no exite, lo vamos a crear");
+		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
+		})
+		
 	});
 		
 	},
@@ -190,6 +199,55 @@ console.log("Ya he escrito el archivo");
   }, function(err){
 	console.log("Error al crear dir "+err.code);  
   });
-}
+},
+writePDF:function(customer,output,success){
+	var f=new Date();
+	var file_name='Alabaran_'+f.getFullYear()+f.getMonth()+f.getDay()+f.getHours()+f.getMinutes()+f.getSeconds()+'.pdf';
+	console.log("Queremos crear el PDF "+file_name);
+	LocalFileManager.docDirectory.getFile('albaranes/'+file_name,{create:true,exclusive:true},function(fEntry){
+				console.log("Queremos escribir en "+fEntry.toURL())
+				
+				fEntry.createWriter(function(writer) {
+					console.log("Hemos creado un writer");
+					console.log("Empezamos a escribir");
+					writer.write(output);
+					console.log("Hemos escrito en local en "+fEntry.toURL());
+					success(fEntry.toURL());
+					
+				})
+		 
+		 
+		 
+					
+					
+				
+				
+	},LocalFileManager.errorHandler)
+	
+},
+errorHandler:function(e) {
+  var msg = '';
+  switch (e.code) {
+    case FileError.QUOTA_EXCEEDED_ERR:
+      msg = 'QUOTA_EXCEEDED_ERR';
+      break;
+    case FileError.NOT_FOUND_ERR:
+      msg = 'NOT_FOUND_ERR';
+      break;
+    case FileError.SECURITY_ERR:
+      msg = 'SECURITY_ERR';
+      break;
+    case FileError.INVALID_MODIFICATION_ERR:
+      msg = 'INVALID_MODIFICATION_ERR';
+      break;
+    case FileError.INVALID_STATE_ERR:
+      msg = 'INVALID_STATE_ERR';
+      break;
+    default:
+      msg = 'Unknown Error';
+      break;
+  };
 
+console.log('ERROR '+msg);
+}
 };

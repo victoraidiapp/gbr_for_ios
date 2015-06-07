@@ -30,7 +30,14 @@ var OrderManager={
 			var output=PDFGenerator.create(DataManager.clientsJSON.cliente[0].nombre,customer,DataManager.shopCart,$('#observaciones').val());
 			
 			console.log("Ya hemos generado el PDF");
-			console.log("El PDF generado es "+output);
+			//console.log("El PDF generado es "+output);
+			LocalFileManager.writePDF(customer.nombre,output,function(r){
+				
+				console.log("El archivo se ha guardado en "+r);
+					cordova.plugins.email.open({
+					attachments: r, 
+					});
+			})
 			
 		})
 		

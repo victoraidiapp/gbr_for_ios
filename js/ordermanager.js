@@ -162,6 +162,9 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 				
 		}
 		OrderManager.updateValues();
+	},initDNI:function(){
+		
+		
 	},
 	checkDNI:function(){
 		DataManager.userDNI=localStorage.getItem("dni");

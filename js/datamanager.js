@@ -11,7 +11,7 @@ var DataManager={
 	userDNI:null,
 	currentProduct:null,
 	shopCart:Array(),
-	init:function(){
+	init:function(callbackInit){
 		
 		//HABRÍA QUE COMPROBAR SI TENEMOS LA ÚLTIMA VERSIÓN DE LA BASE DE DATOS PARA NO TENER QUE VOLVER A DESCARGARLA
 		
@@ -57,6 +57,8 @@ var DataManager={
 				if(onProgress.finished===true) {
 					DataManager.initCatalogue();
 					LoadingDialog.hide(300);
+					callbackInit();
+					DataManager.initDNI();
 				return;
 				}
 				
@@ -70,7 +72,11 @@ var DataManager={
 		
 		});
 
-	DataManager.userDNI=localStorage.getItem("dni");
+	
+		
+	},
+	initDNI:function(){
+		DataManager.userDNI=localStorage.getItem("dni");
 	if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		console.log("No hay DNI");
 		DataManager.requestDNI();	
@@ -78,7 +84,6 @@ var DataManager={
 		console.log("El dni es "+DataManager.userDNI);
 		DataManager.syncClients();
 	}
-		
 	},
 	initCatalogue:function(){
 		console.log("Empieza la carga del catálogo");

@@ -26,9 +26,13 @@ var app = {
         this.manejadores();
 		LoadingDialog.init();
 		//console.log(cordova.file);
-		LocalFileManager.init();
-		DataManager.init();
-		OrderManager.init();
+		LocalFileManager.init(function(){
+			DataManager.init(function(){
+				OrderManager.init();
+			});
+		});
+		
+		
 		
 		
     },

@@ -5,7 +5,7 @@ var LocalFileManager={
 	clientesFile:null,
 	docsPath:null,
 	
-	init:function(){
+	init:function(callback){
 	//Inicializamos el sistema
 	window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dirEntry){
 		LocalFileManager.docDirectory=dirEntry;
@@ -21,7 +21,7 @@ var LocalFileManager={
 			
 			
 			
-				})
+		})
 		
 		/*CREAMOS EL ARCHIVO DE CLIENTES*/
 		dirEntry.getFile('clientes.txt', {}, function(fileEntry) {
@@ -72,6 +72,8 @@ var LocalFileManager={
 		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
 		})
 		
+		
+		callback();
 	});
 		
 	},

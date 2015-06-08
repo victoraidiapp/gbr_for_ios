@@ -4,7 +4,7 @@ var OrderManager={
 	
 	init:function(){
 		$('#order-details').on('update','li',function(){
-			console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
+			//console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
 			var subtotal=eval($(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val());
 			
 			var desc=$(this).find('.discount-value').val();
@@ -15,10 +15,23 @@ var OrderManager={
 			$(this).find('.subtotal').text(subtotal);
 			DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].subtotal=subtotal;
 			OrderManager.updateTotal();
+			OrderManager.summaryOrder();
 		})
 		$('#checkout').on('tap','input',function(e){
 			console.log("Has hecho tap en un input del checkout");
 			if(OrderManager.checkoutEnabled==false){
+				e.preventDefault();
+				return false;
+			}
+			
+			
+		})
+		$('#checkout').on('focus','input',function(e){
+			console.log("Has hecho focus en un input del checkout");
+			
+			if(OrderManager.checkoutEnabled==false){
+				console.log("Pero lo interceptamos");
+				$(this).blur();
 				e.preventDefault();
 				return false;
 			}
@@ -76,10 +89,12 @@ var OrderManager={
 		})
 		
 		$("#checkout").on('tap','#empty-order',function(e){
-			$("#order-details li").each(function(){
-				console.log("Vaciamos esta linea");
-				$(this).find('.del-button').trigger('tap');
-			})
+			DataManager.shopCart=new Array();
+			DataManager.currentProduct=null;
+			OrderManager.updateOrder();
+			OrderManager.summaryOrder();
+
+			
 		})
 		
 		$("#checkout").on('tap','#more-products',function(e){
@@ -87,7 +102,7 @@ var OrderManager={
 			app.navProducts("product-cat",true);
 		})
 		
-		//OrderManager.summaryOrder();
+		OrderManager.summaryOrder();
 		
 	},
 	addToCart:function(){

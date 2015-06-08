@@ -72,6 +72,19 @@ var DataManager={
 		
 		});
 
+//INTERCEPTAMOS LA CARGA DE PEDIDOS
+$(document).on('singletap tap click',".button.pedidos",function(e){
+	e.preventDefault();
+if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+	
+	e.stopPropagation();
+		console.log("No hay DNI");
+		
+		
+		DataManager.requestDNI();
+		return true;	
+	}
+});
 	
 		
 	},

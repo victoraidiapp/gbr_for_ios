@@ -52,19 +52,22 @@ var app = {
 	return false;
 		})
 		
-		$(document).on("tap",".more-products",function(e){
+		$(document).on("singletap",".more-products",function(e){
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
 			app.navProducts("product-cat",true);
 			
 		})
 		
-		$(document).on("tap",".goto-checkout",function(e){
+		$(document).on("singletap",".goto-checkout",function(e){
+			$(".button.pedidos").trigger('singletap');
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
 			//$.UIGoToArticle("#pedidos");
-			$(".button.pedidos").trigger('singletap');
+			
+			OrderManager.checkoutEnabled=false;
 			app.navProducts("product-cat",true);
+			setTimeout(function f(){ console.log("Activamos los input del chekout");OrderManager.checkoutEnabled=true},500);
 			
 		})
 		

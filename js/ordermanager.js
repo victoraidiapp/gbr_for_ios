@@ -1,5 +1,6 @@
 // JavaScript Document
 var OrderManager={
+	checkoutEnabled:false,
 	
 	init:function(){
 		$('#order-details').on('update','li',function(){
@@ -15,8 +16,16 @@ var OrderManager={
 			DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].subtotal=subtotal;
 			OrderManager.updateTotal();
 		})
-		
-		$(document).on('tap','#send-order',function(e){
+		$('#checkout').on('tap','input',function(e){
+			console.log("Has hecho tap en un input del checkout");
+			if(OrderManager.checkoutEnabled==false){
+				e.preventDefault();
+				return false;
+			}
+			
+			
+		})
+		$(document).on('singletap','#send-order',function(e){
 			console.log("Queremos mandar el pedido");
 			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
 				console.log("Es representante");
@@ -68,6 +77,7 @@ var OrderManager={
 		
 		$("#checkout").on('tap','#empty-order',function(e){
 			$("#order-details li").each(function(){
+				console.log("Vaciamos esta linea");
 				$(this).find('.del-button').trigger('tap');
 			})
 		})

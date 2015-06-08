@@ -77,7 +77,7 @@ body {
 
 @media only screen 
 and (min-device-width : 320px)
-and (-webkit-min-device-pixel-ratio: 1)
+and (-webkit-min-device-pixel-ratio: 2)
 {
 /*	STYLES GO HERE*/
 }
@@ -256,10 +256,13 @@ and (min-device-width : 414px)
 and (max-device-width : 736px)
 and (-webkit-min-device-pixel-ratio: 3)
  {
-	body.isiOS.hasTabBar .back-button {top:31px !important;}
 	#order-details .discount-value {width: 27.5% !important;}
 	#order-details .quantity-value {width: 19% !important;}
 	#order-details .price-value {width: 19% !important;}
+	.popup {height:24.5% !important; margin-left:0% !important;}
+	.popup footer {border-top: 1px solid #b5b5b5 !important; height: 39px !important;}
+	.popup > .panel .button {border-top: none !important;}
+	
 }
 
 @media only screen 
@@ -268,7 +271,56 @@ and (max-device-width : 736px)
 and (orientation : landscape) 
 and (-webkit-min-device-pixel-ratio: 3)
 { 
-/* STYLES GO HERE prueba commit*/
+	nav > h1 {top:5px;font:normal 19pt/6pt HelveticaNeue, Sans-serif;}
+	#aboutGahibre {font-size:14pt;}
+	a.button {font-size:15pt !important; font-weight:bold;}
+	.product-search	{font-size:160% !important;margin-top:-31% !important;}
+	input[type="search"]
+	{		
+		background-size:32px 36px; 
+		border:1px solid #BBB6B6; 
+		border-radius:5px;
+		background-position:9px center;		
+	}
+	.back-button 
+	{
+		width:32px !important; 
+		height:32px !important; 
+		margin-top:-8px !important; 
+	}
+	.list > li.nav::after 
+	{
+		width:24px; 
+		height:24px; 
+		margin-top:-7px; 
+		margin-right:17px;
+	}
+	.shop-button 
+	{
+		right:18px !important; 
+		top:16px !important;
+		width:28px !important; 
+		height:28px !important;
+	}
+	section h2 {padding:5px !important;}
+	.popup {height:47.5% !important; margin-top: -2%; width:48%;}
+	#checkout .buttons .checkout-button {font-size:13pt;}
+	.customer-line {font-size:12pt;padding-bottom:20px;}
+	#customerSelect {margin-top: -8px;}
+	article > section > .list > li {font-size:1em !important;}
+	.customer-line .blue-tag {font-weight:bold; font-size:1.4em !important;}
+	#order-details .discount-label {width:17% !important; margin-right:21px;}
+	#order-details .price-label {width:13% !important;}
+	#order-details .quantity-value {margin-left:0px !important;}
+	#order-details .subtotal {padding:0px 21px 0px 0px !important;}
+	#checkout .total-line .total-label {font-size:1.1em !important; font-weight:bold;}
+	#checkout .total-line .total-value {padding-left:47px; padding-right:5%;}
+	#observaciones 
+	{
+		width:93.1% !important; 
+		margin-left:2% !important; 
+		font-family:"Arial", Helvetica, sans-serif;
+	}
 }
 
 

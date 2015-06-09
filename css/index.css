@@ -222,7 +222,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 		border-radius:5px;
 		background-position:9px center;		
 	}
-	#productos > section ul.list {padding-top:12px;}
+	#productos > section ul.list,#outlet > section ul.list {padding-top:12px;}
 	.product-list .list > li.nav::after {top:26px;width:20px;height:20px;margin-right:3%;}
 	.popup {height:56.8% !important;margin-top:-2%;width:54%;}
 	.popup footer {border-top:none;}
@@ -368,13 +368,13 @@ and (-webkit-min-device-pixel-ratio: 1)
 		font-weight:bold;
 	}
 	div.role-content {font-size:1.8em; text-align:justify;}
-	#product-carrousel h3 {font-weight:bold;}
+	.product-carrousel h3 {font-weight:bold;}
 	body.hasTabBar nav .back-button {width:40px; top:13px;}
 	section h2 {height:34px; }
 	#order-details.list > li {font-size:1.5em; margin-left:0%;}
 	.list > li.nav::after {height: 29px; width:29px; right:6%;}
 	.product-list .list h2 {font-size:1.5em;overflow:inherit;}
-	#product-carrousel h2 
+	.product-carrousel h2 
 	{
 		font-size:35px;
 		padding:7px;
@@ -387,9 +387,9 @@ and (-webkit-min-device-pixel-ratio: 1)
 		right: 2%; 
 		top: 10px;
 	}
-	#product-carrousel .material {font-size: 1.4em;}
+	.product-carrousel .material {font-size: 1.4em;}
 	.carousel-track > li {font-size: 1.8em; margin-left:2%;}
-	#product-carrousel h3 {font-weight:bold;}
+	.product-carrousel h3 {font-weight:bold;}
 	li.comp > div 
 	{
 		padding: 0px 0px 20px 0px; 
@@ -476,13 +476,13 @@ and (-webkit-min-device-pixel-ratio: 2)
 		font-weight:bold;
 	}
 	div.role-content {font-size:1.8em; text-align:justify;}
-	#product-carrousel h3 {font-weight:bold;}
+	.product-carrousel h3 {font-weight:bold;}
 	body.hasTabBar nav .back-button {width:40px; top:13px;}
 	section h2 {height:34px; }
 	#order-details.list > li {font-size:1.5em; margin-left:0%;}
 	.list > li.nav::after {height: 29px; width:29px; right:6%;}
 	.product-list .list h2 {font-size:1.5em;overflow:inherit;}
-	#product-carrousel h2 
+	.product-carrousel h2 
 	{
 		font-size:35px;
 		padding:7px;
@@ -495,9 +495,9 @@ and (-webkit-min-device-pixel-ratio: 2)
 		right: 2%; 
 		top: 10px;
 	}
-	#product-carrousel .material {font-size: 1.4em;}
+	.product-carrousel .material {font-size: 1.4em;}
 	.carousel-track > li {font-size: 1.8em; margin-left:2%;}
-	#product-carrousel h3 {font-weight:bold;}
+	.product-carrousel h3 {font-weight:bold;}
 	li.comp > div 
 	{
 		padding: 0px 0px 20px 0px; 
@@ -745,24 +745,25 @@ margin-top: 20px;
 
 
 /*PRODUCT VIEWER*/
-#product-carrousel{
+.product-carrousel{
 background-color:#FFF;	
 }
-#product-carrousel h2,
-#product-carrousel .center{
+.product-carrousel h2,
+.product-carrousel .center{
 text-align:center;	
 }
-#product-carrousel .center img{
+.product-carrousel .center img,
+#outlet-product-carrousel .center img{
 margin-bottom:15px;	
 height:150px;
 }
-#product-carrousel h2{
+.product-carrousel h2{
 color:#043680;
 font-size:1.4em;
 margin-left:0px;	
 font-weight:bold;
 }
-#product-carrousel .material{
+.product-carrousel .material{
 	background-color:#043680;
 	opacity:0.5;
 	border-radius:5px;
@@ -770,7 +771,7 @@ font-weight:bold;
 	color:#FFF;
 }
 
-#product-carrousel h3{
+.product-carrousel h3{
 color:#043680;
 opacity:0.5;
 margin-left:0px;
@@ -779,12 +780,12 @@ text-align:left;
 padding-left:10px;	
 margin-bottom:0em;
 }
-#product-carrousel h3.inline{
+.product-carrousel h3.inline{
 display:inline;	
 line-height:2em;
 
 }
-#product-carrousel p{
+.product-carrousel p{
 text-align: left;
   padding-left: 10px;
   text-transform: none;
@@ -793,14 +794,14 @@ text-align: left;
   margin-bottom:0.5em;
 }
 
-#product-carrousel .value{
+.product-carrousel .value{
 	text-align: left;
   padding-left: 10px;
   text-transform: none;
   font-size: 1.2em;
   margin-top:0.5em;	
 }
-#product-carrousel .value::after{
+.product-carrousel .value::after{
 	content:"\A"; white-space:pre;
 }
 .mini-logo{

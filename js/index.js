@@ -59,7 +59,7 @@ var app = {
 		$(document).on("singletap",".more-products",function(e){
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
-			app.navProducts("product-cat",true);
+			app.navProducts("#productos","product-cat",true);
 			
 		})
 		
@@ -70,7 +70,7 @@ var app = {
 			//$.UIGoToArticle("#pedidos");
 			
 			OrderManager.checkoutEnabled=false;
-			app.navProducts("product-cat",true);
+			app.navProducts("#productos","product-cat",true);
 			setTimeout(function f(){ console.log("Activamos los input del chekout");OrderManager.checkoutEnabled=true},500);
 			
 		})
@@ -78,14 +78,14 @@ var app = {
 		$(document).on("tap","#searchByCatalogo",function(e){
 			e.preventDefault();
 		console.log("Queremos cargar la sección de catalogo");
-		app.navProducts("product-cat",false);
+		app.navProducts("#productos","product-cat",false);
 		return false;
 		})
 		
 		$(document).on("tap","#showFamilia",function(e){
 			e.preventDefault();
 		
-		app.navProducts("product-fam",false);
+		app.navProducts("#productos","product-fam",false);
 		return false;
 		})
 		
@@ -93,21 +93,31 @@ var app = {
 		
 		$("#product-cat").on("tap","li",function(e){
 			e.preventDefault();
-			app.navProducts("product-carrousel",false);
+			app.navProducts("#productos","product-carrousel",false);
 			//DataManager.carouselObject.goToPanel($(this).index()-1);
 			DataManager.carouselObject.goToPanel($(this).index());
 		return false;
 	
 	})
 	
+	$("#outlet-product-cat").on("tap","li",function(e){
+			e.preventDefault();
+			app.navProducts("#outlet","outlet-product-carrousel",false);
+			//DataManager.carouselObject.goToPanel($(this).index()-1);
+			DataManager.outletCarouselObject.goToPanel($(this).index());
+		return false;
+	
+	})
+	
 	$("#product-fam").on("tap","li",function(e){
 			e.preventDefault();
-			app.navProducts("product-carrousel");
+			app.navProducts("#productos","product-carrousel");
 			//DataManager.carouselObject.goToPanel($(this).index()-1);
 			DataManager.carouselObject.goToPanel($(this).data('gotoproduct'),false);
 		return false;
 	
 	})
+	
 	
 	
 	
@@ -118,7 +128,7 @@ var app = {
 		console.log("Quieres buscar");
 		var sr=DataManager.searchModel($(this).val());
 		if(sr!=null){
-			app.navProducts("product-carrousel",false);
+			app.navProducts("#productos","product-carrousel",false);
 			DataManager.carouselObject.goToPanel(sr);
 			$(this).blur();
 		}else{
@@ -156,7 +166,7 @@ var app = {
 		
 		DataManager.currentProduct=DataManager.catalogueJSON.producto[n];
 		
-		app.navProducts("add-to-cart",false);
+		app.navProducts("#productos","add-to-cart",false);
 		console.log("La lista de tallas del pedido es "+$("#product-sizes").html());
 	})
 	
@@ -199,21 +209,8 @@ var app = {
 	$("nav.productos").on("tap",".back-button",function(e){
 		e.preventDefault();
 		
-		app.navProducts($("#productos section.current").data('backto'),true);
-		/*if($("#product-cat").hasClass("current")){
-			app.navProducts("product-init",false);
-			return false;
-		}
+		app.navProducts("#productos",$("#productos section.current").data('backto'),true);
 		
-		if($("#product-fam").hasClass("current")){
-			app.navProducts("product-init",false);
-			return false;
-		}
-		
-		if($("#product-carrousel").hasClass("current")){
-			app.navProducts("product-cat",true);
-			return false;
-		}*/
 		return false;
 		
 		
@@ -232,10 +229,10 @@ var app = {
     receivedEvent: function(id) {
         
     },
-	navProducts:function(section,backing){
-		var id=$("#productos section.current").attr("id");
+	navProducts:function(article,section,backing){
+		var id=$(article+" section.current").attr("id");
 		
-		$("#productos section.current").addClass("next").removeClass("current");
+		$(article+" section.current").addClass("next").removeClass("current");
 		$("#"+section).addClass("current").removeClass("next");
 		if(!backing) $("#"+section).data('backto',id);
 		//console.log("El contenido del product destino es "+$("#"+section).html());

@@ -65,6 +65,7 @@ var DataManager={
 				//console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
 					DataManager.initCatalogue();
+					DataManager.initOutlet();
 					LoadingDialog.hide(300);
 					callbackInit();
 					DataManager.initDNI();

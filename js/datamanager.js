@@ -5,7 +5,9 @@ var DataManager={
 	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
 	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
 	productCarrousel:new Array(),
+	outletProductCarrousel:new Array(),
 	carouselObject:null,
+	outletCarouselObject:null,
 	catalogueJSON:null,
 	clientsJSON:null,
 	userDNI:null,
@@ -28,6 +30,12 @@ var DataManager={
 			for(p in DataManager.catalogueJSON.producto){
 				//console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
 				arrProds.push(DataManager.SERVER.products+DataManager.catalogueJSON.producto[p].fotoGrande);
+				
+			}
+			
+			for(p in DataManager.catalogueJSON.outlet){
+				//console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
+				arrProds.push(DataManager.SERVER.products+DataManager.catalogueJSON.outlet[p].fotoGrande);
 				
 			}
 			
@@ -98,6 +106,7 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		DataManager.syncClients();
 	}
 	},
+	
 	initCatalogue:function(){
 		console.log("Empieza la carga del catálogo");
 		var nproduct=0;
@@ -152,6 +161,51 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 				DataManager.catalogueJSON.producto[idP].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.familia[f].familia+'</h2></div></li>');
 				
 		 }
+	},
+	initOutlet:function(){
+		console.log("Empieza la carga del outlet");
+		var nproduct=0;
+		for(p in DataManager.catalogueJSON.outlet){
+				console.log(DataManager.catalogueJSON.outlet[p].fotoGrande)
+				/*console.log('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');*/
+				jQuery("#outlet-product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.outlet[p].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].outlet+'</h2></div></li>');
+				
+				normativas='';
+				for(n in DataManager.catalogueJSON.outlet[p].normativas){
+					normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.outlet[p].normativas[n]+'"/>';
+				}
+				
+				DataManager.outletProductCarrousel.push(
+            '<h2 data-nproduct="'+nproduct+'">Modelo '+DataManager.catalogueJSON.outlet[p].modelo+'</h2>'+
+            '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.outlet[p].fotoGrande+'"/></div>'+
+            '<div class="center"><span class="material">'+DataManager.catalogueJSON.outlet[p].gama.gama+'</span></div>'+
+            '<div class="details"><h3>DESCRIPCIÓN</h3>'+
+            '<p>'+DataManager.catalogueJSON.outlet[p].descripcion+'</p>'+
+            '<h3>USO</h3>'+
+            '<p>'+DataManager.catalogueJSON.outlet[p].uso+'</p>'+
+            '<h3 class="inline">TALLA: </h3><span class="value">'+DataManager.catalogueJSON.outlet[p].tallas.join()+'</span>'+
+            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+DataManager.catalogueJSON.outlet[p].empaquetado+'</span>'+
+            '<h3 class="inline">P.V.P: </h3><span class="value">'+DataManager.catalogueJSON.outlet[p].precio+'</span>'+
+			'<p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.outlet[p].logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.outlet[p].categoria.categoria+'" class="mini-logo"/></p>'+
+				'<p>'+normativas+'</p></div>');
+				nproduct++;
+			}
+			//console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
+			//console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());
+		$.UISetupCarousel({ target: '#outlet-product-viewer', panels: DataManager.outletProductCarrousel, loop: true,pagination:true });
+		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
+		DataManager.outletCarouselObject=$('#outlet-product-viewer').data('carousel');
+		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
+		 $('#outlet-product-carrousel').removeClass('navigable');
+		
+		 
+		 
 	},
 	getClientsFromServer:function(dni,callBack){
 		var today = new Date();

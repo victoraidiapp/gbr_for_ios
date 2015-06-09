@@ -5,6 +5,7 @@ var DataManager={
 	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
 	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
 	productCarrousel:new Array(),
+	searchProductCarrousel:new Array(),
 	outletProductCarrousel:new Array(),
 	carouselObject:null,
 	outletCarouselObject:null,
@@ -114,31 +115,17 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
 				/*console.log('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');*/
-				jQuery("#product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[p].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].modelo+'</h2></div></li>');
+				DataManager.addProductToList("#product-cat ul.list",DataManager.catalogueJSON.producto[p]);
+				/*jQuery("#product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.producto[p].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].modelo+'</h2></div></li>');*/
 				
-				normativas='';
+				/*normativas='';
 				for(n in DataManager.catalogueJSON.producto[p].normativas){
 					normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].normativas[n]+'"/>';
-				}
+				}*/
 				
-				DataManager.productCarrousel.push(
-            '<h2 data-nproduct="'+nproduct+'">Modelo '+DataManager.catalogueJSON.producto[p].modelo+'</h2>'+
-            '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[p].fotoGrande+'"/></div>'+
-            '<div class="center"><span class="material">'+DataManager.catalogueJSON.producto[p].gama.gama+'</span></div>'+
-            '<div class="details"><h3>DESCRIPCIÓN</h3>'+
-            '<p>'+DataManager.catalogueJSON.producto[p].descripcion+'</p>'+
-            '<h3>USO</h3>'+
-            '<p>'+DataManager.catalogueJSON.producto[p].uso+'</p>'+
-            '<h3 class="inline">TALLA: </h3><span class="value">'+DataManager.catalogueJSON.producto[p].tallas.join()+'</span>'+
-            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+DataManager.catalogueJSON.producto[p].empaquetado+'</span>'+
-            '<h3 class="inline">P.V.P: </h3><span class="value">'+DataManager.catalogueJSON.producto[p].precio+'</span>'+
-			'<p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[p].logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.producto[p].categoria.categoria+'" class="mini-logo"/></p>'+
-				'<p>'+normativas+'</p></div>');
+				DataManager.productCarrousel.push(DataManager.getProductDetail(nproduct,DataManager.catalogueJSON.producto[p]));
 				nproduct++;
 			}
 			//console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
@@ -169,31 +156,17 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 				console.log(DataManager.catalogueJSON.outlet[p].fotoGrande)
 				/*console.log('<li><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.producto[p].fotoGrande+'" height="100"/></li>');*/
-				jQuery("#outlet-product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.outlet[p].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].outlet+'</h2></div></li>');
+				DataManager.addProductToList("#outlet-product-cat ul.list",DataManager.catalogueJSON.outlet[p]);
+				/*jQuery("#outlet-product-cat ul.list").append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				DataManager.catalogueJSON.outlet[p].fotoGrande+'" class="img-inlist"/></aside><div><h2>'+DataManager.catalogueJSON.producto[p].outlet+'</h2></div></li>');*/
 				
-				normativas='';
+				/*normativas='';
 				for(n in DataManager.catalogueJSON.outlet[p].normativas){
 					normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				DataManager.catalogueJSON.outlet[p].normativas[n]+'"/>';
-				}
+				}*/
 				
-				DataManager.outletProductCarrousel.push(
-            '<h2 data-nproduct="'+nproduct+'">Modelo '+DataManager.catalogueJSON.outlet[p].modelo+'</h2>'+
-            '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.outlet[p].fotoGrande+'"/></div>'+
-            '<div class="center"><span class="material">'+DataManager.catalogueJSON.outlet[p].gama.gama+'</span></div>'+
-            '<div class="details"><h3>DESCRIPCIÓN</h3>'+
-            '<p>'+DataManager.catalogueJSON.outlet[p].descripcion+'</p>'+
-            '<h3>USO</h3>'+
-            '<p>'+DataManager.catalogueJSON.outlet[p].uso+'</p>'+
-            '<h3 class="inline">TALLA: </h3><span class="value">'+DataManager.catalogueJSON.outlet[p].tallas.join()+'</span>'+
-            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+DataManager.catalogueJSON.outlet[p].empaquetado+'</span>'+
-            '<h3 class="inline">P.V.P: </h3><span class="value">'+DataManager.catalogueJSON.outlet[p].precio+'</span>'+
-			'<p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.outlet[p].logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				DataManager.catalogueJSON.outlet[p].categoria.categoria+'" class="mini-logo"/></p>'+
-				'<p>'+normativas+'</p></div>');
+				DataManager.outletProductCarrousel.push(DataManager.getProductDetail(nproduct,DataManager.catalogueJSON.outlet[p]));
 				nproduct++;
 			}
 			//console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
@@ -336,6 +309,7 @@ xhr.send();
 		}
 	},
 	searchModel:function(model){
+		
 		var i=0;
 		for(g in DataManager.catalogueJSON.producto){
 			
@@ -402,6 +376,35 @@ xhr.send();
 			DataManager.syncClients(DataManager.userDNI);
           }
         });
+	},
+	getProductDetail:function(nproduct,product){
+		
+		normativas='';
+				for(n in product.normativas){
+					normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				product.normativas[n]+'"/>';
+				}
+				
+		return '<h2 data-nproduct="'+nproduct+'">Modelo '+product.modelo+'</h2>'+
+            '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				product.fotoGrande+'"/></div>'+
+            '<div class="center"><span class="material">'+product.gama.gama+'</span></div>'+
+            '<div class="details"><h3>DESCRIPCIÓN</h3>'+
+            '<p>'+product.descripcion+'</p>'+
+            '<h3>USO</h3>'+
+            '<p>'+product.uso+'</p>'+
+            '<h3 class="inline">TALLA: </h3><span class="value">'+product.tallas.join()+'</span>'+
+            '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+product.empaquetado+'</span>'+
+            '<h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+'</span>'+
+			'<p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				product.logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				product.categoria.categoria+'" class="mini-logo"/></p>'+
+				'<p>'+normativas+'</p></div>';
+	},
+	addProductToList:function(list,product){
+	
+	jQuery(list).append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+				product.fotoGrande+'" class="img-inlist"/></aside><div><h2>'+product.modelo+'</h2></div></li>');	
 	}
 	
 };

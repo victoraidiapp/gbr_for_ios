@@ -151,7 +151,7 @@ var app = {
 		OrderManager.addToCart();
 	})
 	
-	$("nav.productos").on("tap",".shop-button",function(e){
+	$("nav.productos").on("tap",".shop-button.catalogue",function(e){
 		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		DataManager.requestDNI();	
 		return;
@@ -159,9 +159,9 @@ var app = {
 		
 		var n=$("#product-viewer .carousel-panel-active h2").data("nproduct");
 		var tallas=DataManager.catalogueJSON.producto[n].tallas;
-		$("#product-sizes").html('');
+		$("#productos #product-sizes").html('');
 		for(t in tallas){
-			$("#product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
+			$("#productos #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
 		}
 		
 		DataManager.currentProduct=DataManager.catalogueJSON.producto[n];
@@ -169,6 +169,26 @@ var app = {
 		app.navProducts("#productos","add-to-cart",false);
 		console.log("La lista de tallas del pedido es "+$("#product-sizes").html());
 	})
+	
+	$("nav.productos").on("tap",".shop-button.outlet",function(e){
+		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+		DataManager.requestDNI();	
+		return;
+	}
+		
+		var n=$("#outlet-product-viewer .carousel-panel-active h2").data("nproduct");
+		var tallas=DataManager.catalogueJSON.outlet[n].tallas;
+		$("#outlet #product-sizes").html('');
+		for(t in tallas){
+			$("#outlet #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.outlet[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.outlet[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.outlet[n].cantidad+'">-</span></div></li>')
+		}
+		
+		DataManager.currentProduct=DataManager.catalogueJSON.outlet[n];
+		
+		app.navProducts("#outlet","outlet-add-to-cart",false);
+		console.log("La lista de tallas del pedido es "+$("#outlet #product-sizes").html());
+	})
+	
 	
 	$("#add-to-cart").on("tap","li",function(e){
 		console.log("Alguien me ha picado y mi contenido es "+$(this).html());
@@ -208,8 +228,9 @@ var app = {
 	//Back button Productos
 	$("nav.productos").on("tap",".back-button",function(e){
 		e.preventDefault();
-		
-		app.navProducts("#productos",$("#productos section.current").data('backto'),true);
+		var article=$(this).parent().next().attr('id');
+		console.log("El article es "+article);
+		app.navProducts("#"+article,$("#"+article+" section.current").data('backto'),true);
 		
 		return false;
 		
@@ -237,6 +258,7 @@ var app = {
 		if(!backing) $("#"+section).data('backto',id);
 		//console.log("El contenido del product destino es "+$("#"+section).html());
 		//console.log("El backEnabled es "+$("#"+section).data('backenabled'));
+		console.log("Vamos a la section "+section+" cuyo backenabled es "+$("#"+section).data('backenabled'));
 		if($("#"+section).data('backenabled')===true){
 			$("nav.productos .back-button").show();
 		}else{

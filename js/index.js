@@ -194,14 +194,14 @@ var app = {
 		console.log("Alguien me ha picado y mi contenido es "+$(this).html());
 	})
 	//Quantity-Buttons
-	$("#product-sizes").on("tap",".quantity-button",function(e){
+	$(".sizes-list").on("tap",".quantity-button",function(e){
 		console.log("Has picado en un boton de cantidad");
 		$(this).siblings('.quantity').trigger('updateVal',[$(this).data('operation')]);
 	})
 	
 	
 	
-	$('#product-sizes').on("updateVal",".quantity",function(e,operation){
+	$('.sizes-list').on("updateVal",".quantity",function(e,operation){
 		var v=$(this).val();
 		console.log("El valor actual es "+v);
 		console.log("El valor recibido "+operation);
@@ -210,7 +210,7 @@ var app = {
 		$(this).val(v);
 		$(this).parents('li').trigger("updateCheck");
 	})
-	$('#product-sizes').on("updateCheck","li",function(e){
+	$('.sizes-list').on("updateCheck","li",function(e){
 		var v=$(this).find('.quantity').val();
 		console.log("El valor de la talla es "+v);
 		if(v>0){

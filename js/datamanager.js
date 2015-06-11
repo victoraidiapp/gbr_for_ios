@@ -20,13 +20,44 @@ var DataManager={
 		
 		DataManager.getProductsFromServer(function(r){
 			//console.log("Del servidor obtenemos "+r);
+			if(r.exito==0){
+			console.log("Algo ha fallado tenemos que leer");	
+			LocalFileManager.readCatalogue(function(r){
+			console.log("El resultado almacenado es "+r);
+			DataManager.syncImages(r)	;
+			});
+			}else{
+				console.log("Hay conexion así que aprovechamos para descargar el catalogo");
+				LocalFileManager.writeToCatalogue(r);
+				DataManager.syncImages(r);
+			}
 			
-			LocalFileManager.writeToCatalogue(r);
-			//LocalFileManager.readCatalogue();
-			
-			//Vamos a descargarnos las imágenes de los productos
-			
-			DataManager.catalogueJSON=jQuery.parseJSON(r);
+		},function(){
+			console.log("Ha habido un problema de conexion");
+			LocalFileManager.readCatalogue(function(r){
+			console.log("El resultado almacenado es "+r);
+			DataManager.syncImages(r)	;
+			});
+		});
+
+//INTERCEPTAMOS LA CARGA DE PEDIDOS
+$(document).on('singletap tap click',".button.pedidos",function(e){
+	e.preventDefault();
+if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+	
+	e.stopPropagation();
+		console.log("No hay DNI");
+		
+		
+		DataManager.requestDNI();
+		return true;	
+	}
+});
+	
+		
+	},
+	syncImages:function(r){
+		DataManager.catalogueJSON=jQuery.parseJSON(r);
 			var arrProds=new Array();
 			for(p in DataManager.catalogueJSON.producto){
 				//console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
@@ -75,27 +106,6 @@ var DataManager={
 		
 				LoadingDialog.show('<strong>Actualizando base de datos</strong><p>Descargando imágenes de producto</br>Quedan '+onProgress.left);
 			});
-			
-				
-				
-			
-		
-		});
-
-//INTERCEPTAMOS LA CARGA DE PEDIDOS
-$(document).on('singletap tap click',".button.pedidos",function(e){
-	e.preventDefault();
-if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
-	
-	e.stopPropagation();
-		console.log("No hay DNI");
-		
-		
-		DataManager.requestDNI();
-		return true;	
-	}
-});
-	
 		
 	},
 	initDNI:function(){
@@ -208,7 +218,7 @@ values['token']=token;
 		})
 		
 	},
-	getProductsFromServer:function(callBack){
+	getProductsFromServer:function(callBack,errorCallBack){
 		var today = new Date();
 		
 var dd = today.getDate();
@@ -230,6 +240,9 @@ values['token']=token;
 			success:function(r){
 				//console.log("El resultado obtenido es "+r);
 			callBack(r)	
+			},
+			error:function(r){
+				errorCallBack(r);
 			}
 		})
 	},
@@ -335,13 +348,25 @@ xhr.send();
 		
 	},
 	syncClients:function(dni){
+		LoadingDialog.show("Comprobando credenciales...");
 		DataManager.getClientsFromServer(DataManager.userDNI,function(r){
 		LocalFileManager.writeToClients(r);
 			DataManager.clientsJSON=jQuery.parseJSON(r);
 			console.log("Los datos de cliente son "+DataManager.clientsJSON.cliente);
+			LoadingDialog.hide();
 			if(typeof(dni)!="undefined" && dni!==null){
 				console.log("VAMOS A GUARDAR EL DNI "+dni);
 				localStorage.setItem("dni",dni);	
+				$.UIPopover({
+					title: 'DNI VÁLIDO',
+                   content: "Su dni es válido y hemos obtenido sus datos correctamente",
+				})
+			}else{
+				//Este DNI NO ES VÁLIDO
+				$.UIPopover({
+					title: 'DNI INCORRECTO',
+                   content: "Los datos proporcionados no son correctos",
+				})
 			}
 			
 			/* cargamos los clientes en el select de pedidos*/
@@ -373,6 +398,7 @@ xhr.send();
           continueButton: 'Conectar', 
           callback: function() {
 			  console.log("El dni escrito es "+$("#dni").val());
+			  
             DataManager.userDNI=$("#dni").val();
 			DataManager.syncClients(DataManager.userDNI);
           }

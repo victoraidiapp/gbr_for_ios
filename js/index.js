@@ -236,7 +236,8 @@ var app = {
 		
 		
 	})
-		
+	
+	
 		
     },
     // deviceready Event Handler

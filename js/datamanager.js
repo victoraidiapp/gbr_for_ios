@@ -3,7 +3,8 @@ var DataManager={
 	SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/',
 	categorias:'http://datic.es/gahibre/img/bbdd/categorias/',
 	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
-	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/'},
+	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/',
+	promociones:'http://datic.es/gahibre/img/bbdd/empresas/'},
 	productCarrousel:new Array(),
 	searchProductCarrousel:new Array(),
 	outletProductCarrousel:new Array(),
@@ -53,10 +54,20 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		return true;	
 	}
 });
+
+//INTERCEPTAMOS LA CARGA DEL HOME
+$(document).on('singletap tap click',".button.gahibre",function(e){
+	if($('#about').hasClass('current')){
+	return true;	
+	}
 	
+	app.navProducts('#home','about',true);
+})
 		
 	},
 	syncImages:function(r){
+		console.log("Vamos a sincronizar las imagenes");
+		
 		DataManager.catalogueJSON=jQuery.parseJSON(r);
 			var arrProds=new Array();
 			for(p in DataManager.catalogueJSON.producto){
@@ -88,6 +99,11 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 				arrProds.push(DataManager.SERVER.logotipos+DataManager.catalogueJSON.logotipo[p].logotipo);
 			}
 			
+			//Incluimos la imagen de promocion
+			for(pr in DataManager.catalogueJSON.promocion){
+				console.log("Quremos incluir la imagen "+DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
+				arrProds.push(DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
+			}
 			
 			
 			//Cargamos los productos en el carrousel
@@ -95,6 +111,7 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 			DataManager.updateImages(arrProds,function(onProgress){
 				//console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
+					DataManager.initPromo();
 					DataManager.initCatalogue();
 					DataManager.initOutlet();
 					LoadingDialog.hide(300);
@@ -117,6 +134,13 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		console.log("El dni es "+DataManager.userDNI);
 		DataManager.syncClients();
 	}
+	},
+	initPromo:function(){
+		//CArgamos la promo
+		console.log("Cargamos la imagen de promo como html "+'<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
+		$("#promo").html('<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
+		app.navProducts('#home','promo',true);
+		
 	},
 	
 	initCatalogue:function(){
@@ -191,7 +215,7 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		 
 		 
 	},
-	getClientsFromServer:function(dni,callBack){
+	getClientsFromServer:function(dni,callBack,errorCallBack){
 		var today = new Date();
 		
 var dd = today.getDate();
@@ -214,6 +238,10 @@ values['token']=token;
 			success:function(r){
 				console.log("El resultado obtenido es "+r);
 			callBack(r)	
+			},
+			error:function(r){
+				
+			errorCallBack(r);	
 			}
 		})
 		
@@ -347,13 +375,11 @@ xhr.send();
 		}
 		
 	},
-	syncClients:function(dni){
-		LoadingDialog.show("Comprobando credenciales...");
-		DataManager.getClientsFromServer(DataManager.userDNI,function(r){
-		LocalFileManager.writeToClients(r);
-			DataManager.clientsJSON=jQuery.parseJSON(r);
+	loadClients:function(dni,r){
+		DataManager.clientsJSON=jQuery.parseJSON(r);
 			console.log("Los datos de cliente son "+DataManager.clientsJSON.cliente);
-			LoadingDialog.hide();
+			
+			
 			if(typeof(dni)!="undefined" && dni!==null){
 				console.log("VAMOS A GUARDAR EL DNI "+dni);
 				localStorage.setItem("dni",dni);	
@@ -386,6 +412,30 @@ xhr.send();
 			}else{
 				$("#customerSelect").append('<option value="0">'+DataManager.clientsJSON.cliente[0].nombre+'</option>');
 			}
+		
+	},
+	syncClients:function(dni){
+		LoadingDialog.show("Comprobando credenciales...");
+		DataManager.getClientsFromServer(dni,function(r){
+		LocalFileManager.writeToClients(r);
+		LoadingDialog.hide();
+			if(r.exito==0){
+				$.UIPopover({
+					title: 'DNI INCORRECTO',
+                   content: "Los datos proporcionados no son correctos",
+				})
+				/*LocalFileManager.readClients(function(r){
+					DataManager.loadClients(dni,r);
+				})*/
+			}else{
+				DataManager.loadClients(dni,r);	
+			}
+			
+		},function(r){
+			console.log("Error al intentar conectar los clientes");
+			LocalFileManager.readClients(function(r){
+					DataManager.loadClients(dni,r);
+				})
 		})
 	},
 	requestDNI:function(){

@@ -40,9 +40,24 @@ var DataManager={
 		},function(){
 			console.log("Ha habido un problema de conexion");
 			LocalFileManager.readCatalogue(function(r){
-			console.log("El resultado almacenado es "+r);
-			DataManager.syncImages(r,callbackInit)	;
-			});
+												console.log("El resultado almacenado es "+r);
+												if(r!=null && typeof(r)!='undefined' && r.length>1){
+												DataManager.syncImages(r,callbackInit)	;
+												}else{
+												console.log("No hay datos guardados en local");	
+												$.UIPopup({
+          id: "NOTDATABASE",
+          title: 'Sin datos', 
+          message: 'La aplicación no ha podido descargarse los datos del servidor. Vuelva a intentarlo más tarde',
+		  cancelButton:"Cerrar"
+		  
+				})
+													
+												}
+										},function(){
+												console.log("No hay datos guardados en local");	
+				
+										});
 		});
 
 
@@ -377,7 +392,7 @@ xhr.send();
 		var regexp=new RegExp(".*"+model+".*");
 		//console.log("La expresión regular es "+regexp.toString());
 		var i=0;
-		
+		DataManager.searchProductCarrousel=new Array();
 		for(g in DataManager.catalogueJSON.producto){
 			//console.log("Recorremos el catálogo");
 			//console.log("Vamos a comprobar la coincidencia con "+DataManager.catalogueJSON.producto[g].modelo);
@@ -393,6 +408,7 @@ xhr.send();
 		if(i>0){
 			
 			if(DataManager.searchCarouselObject!=null) DataManager.searchCarouselObject.destroy();
+			
 			$('#search-product-carrousel').addClass('navigable');
 			$.UISetupCarousel({ target: '#search-product-viewer', panels: DataManager.searchProductCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });

@@ -48,30 +48,46 @@ var LocalFileManager={
 		/*LocalFileManager.createDirectory(LocalFileManager.docDirectory,"src");
 		LocalFileManager.createDirectory(LocalFileManager.docDirectory.getDirectory("src"),"img_prod");
 		LocalFileManager.createDirectory(LocalFileManager.docDirectory.getDirectory("src"),"img_main");*/
-		LocalFileManager.docDirectory.getDirectory('src/img_prod',{},function(){
-			console.log("El direcotio ya existe");
+		
+		LocalFileManager.docDirectory.getDirectory('src',{},function(){
+			console.log("El directorio SRC no existe");
 		},function(err){
-			console.log("El dir no existe");
+			LocalFileManager.createDirectory(LocalFileManager.docDirectory,'src',function(){
+					
+					LocalFileManager.createDirectory(LocalFileManager.docDirectory,'src/img_prod',null,null);
+					LocalFileManager.createDirectory(LocalFileManager.docDirectory,'src/img_main',null,null);
+					LocalFileManager.createDirectory(LocalFileManager.docDirectory,'src/albaranes',null,null);
+				
+			},null);
+			
+			
+		});
+		
+		/*
+		LocalFileManager.docDirectory.getDirectory('src/img_prod',{},function(){
+			console.log("El directorio de img_prod ya existe");
+		},function(err){
+			console.log("El dir img_prod no existe");
 		var path1='src/img_prod';
 		LocalFileManager.createDirs(LocalFileManager.docDirectory,path1.split('/'));
 		});
 		
 		LocalFileManager.docDirectory.getDirectory('src/img_main',{},function(){
-			console.log("El direcotio main ya existe");
+			console.log("El direcotio img_main ya existe");
 		},function(err){
 		var path2='src/img_main';
-		console.log("El directorio no exite, lo vamos a crear");
+		console.log("El directorio img_main no exite, lo vamos a crear");
 		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
 		})
 		
 		LocalFileManager.docDirectory.getDirectory('albaranes',{},function(){
 			console.log("El direcotio albaranes ya existe");
 		},function(err){
-		var path2='albaranes';
-		console.log("El directorio no exite, lo vamos a crear");
+		var path2='src/albaranes';
+		console.log("El directorio de albaranes no exite, lo vamos a crear");
 		LocalFileManager.createDirs(LocalFileManager.docDirectory,path2.split('/'));
 		})
-		
+		*/
 		
 		callback();
 	});
@@ -121,7 +137,7 @@ console.log("Ya he escrito el archivo");
 	console.log("Ha ocurrido un error al crear el writer");	
 	});	
 	},
-	readCatalogue:function(callback){
+	readCatalogue:function(callback,errorCallBack){
 		console.log("Iniciamos la lectura");
 		LocalFileManager.catalogueFile.file(function(file) {
        var reader = new FileReader();
@@ -133,10 +149,12 @@ console.log("Ya he escrito el archivo");
        };
 	reader.onerror=function(){
 	console.log("Ha ocurrido un error al leer");	
+	errorCallBack();
 	}
        reader.readAsText(file);
     }, function(err){
 	console.log("Ha ocurrido un error al obtener el file");	
+	errorCallBack();
 	});
   
 	},
@@ -177,16 +195,21 @@ console.log("Ya he escrito el archivo");
 			},errorf)
 		},errorf)
 	},
-	createDirectory:function(rootDirEntry, name) {
+	createDirectory:function(rootDirEntry, name,callBack,errorCallBack) {
   // Throw out './' or '/' and move on to prevent something like '/foo/.//bar'.
   console.log("Creamos el directorio "+name);
   console.log(" en el directorio "+rootDirEntry.fullPath)
   rootDirEntry.getDirectory(name, {create: true}, function(dirEntry) {
     console.log("Creado el directorio "+dirEntry.fullPath);
+	if(callBack!=null) callBack();
   }, function(err){
-	console.log("Fallo al crear el directorio "+err.code);  
+	console.log("Fallo al crear el directorio ");  
+	if(errorCallBack!=null) errorCallBack();
   });
-},createDirs:function(rootDirEntry, folders) {
+},
+
+
+createDirs:function(rootDirEntry, folders) {
   // Throw out './' or '/' and move on to prevent something like '/foo/.//bar'.
   
   if (folders[0] == '.' || folders[0] == '') {
@@ -199,14 +222,16 @@ console.log("Ya he escrito el archivo");
       LocalFileManager.createDirs(dirEntry, folders.slice(1));
     }
   }, function(err){
-	console.log("Error al crear dir "+err.code);  
+	console.log("Error al crear dir "+folders[0]);  
   });
 },
+
+
 writePDF:function(customer,output,success){
 	var f=new Date();
 	var file_name='Alabaran_'+f.getFullYear()+f.getMonth()+f.getDay()+f.getHours()+f.getMinutes()+f.getSeconds()+'.pdf';
 	console.log("Queremos crear el PDF "+file_name);
-	LocalFileManager.docDirectory.getFile('albaranes/'+file_name,{create:true,exclusive:true},function(fEntry){
+	LocalFileManager.docDirectory.getFile('src/albaranes/'+file_name,{create:true,exclusive:true},function(fEntry){
 				console.log("Queremos escribir en "+fEntry.toURL())
 				
 				fEntry.createWriter(function(writer) {

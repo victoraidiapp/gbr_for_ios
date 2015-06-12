@@ -42,6 +42,17 @@ var app = {
 		$('#product-carrousel').addClass('navigable');
 		DataManager.carouselObject.resize();
 		$('#product-carrousel').removeClass('navigable');
+		
+		$('#outlet-product-carrousel').addClass('navigable');
+		DataManager.outletCarouselObject.resize();
+		$('#outlet-product-carrousel').removeClass('navigable');
+		
+		if(DataManager.searchCarouselObject!=null){
+		$('#search-product-carrousel').addClass('navigable');
+		DataManager.searchCarouselObject.resize();
+		$('#search-product-carrousel').removeClass('navigable');
+		
+		}
 	},
     // Bind Event Listeners
     //

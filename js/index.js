@@ -237,6 +237,9 @@ var app = {
 		
 	})
 	
+	//Asociamos Función de preexecute en el tabbar pedidos
+	console.log("Asociamos la función nav-pre-pedidos al pre-execute del tabbar pedidos");
+	$('.tabbar .button.pedidos').data('nav-pre-execute','app.nav_pre_pedidos');
 	
 		
     },
@@ -277,6 +280,21 @@ var app = {
 		}else{
 			$("nav.productos .add-button").hide();
 		}
+	},
+	nav_pre_pedidos:function(){
+		
+		console.log("Ejecutamos la función nav_pre_pedidos");
+		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+	
+	
+		console.log("No hay DNI");
+		
+		
+		DataManager.requestDNI();
+		return true;	
+	}
+		return false;
+		
 	}
 	
 };

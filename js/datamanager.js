@@ -18,6 +18,9 @@ var DataManager={
 	init:function(callbackInit){
 		
 		//HABRÍA QUE COMPROBAR SI TENEMOS LA ÚLTIMA VERSIÓN DE LA BASE DE DATOS PARA NO TENER QUE VOLVER A DESCARGARLA
+		console.log("Inicializa el DataManager");
+		
+		
 		
 		DataManager.getProductsFromServer(function(r){
 			//console.log("Del servidor obtenemos "+r);
@@ -25,24 +28,29 @@ var DataManager={
 			console.log("Algo ha fallado tenemos que leer");	
 			LocalFileManager.readCatalogue(function(r){
 			console.log("El resultado almacenado es "+r);
-			DataManager.syncImages(r)	;
+			DataManager.syncImages(r,callbackInit)	;
 			});
 			}else{
 				console.log("Hay conexion así que aprovechamos para descargar el catalogo");
 				LocalFileManager.writeToCatalogue(r);
-				DataManager.syncImages(r);
+				DataManager.syncImages(r,callbackInit);
 			}
 			
 		},function(){
 			console.log("Ha habido un problema de conexion");
 			LocalFileManager.readCatalogue(function(r){
 			console.log("El resultado almacenado es "+r);
-			DataManager.syncImages(r)	;
+			DataManager.syncImages(r,callbackInit)	;
 			});
 		});
 
+
+//Desvinculamos el bnotón de pedidos del tabbar
+
+
 //INTERCEPTAMOS LA CARGA DE PEDIDOS
-$(document).on('singletap tap click',".button.pedidos",function(e){
+/*$(document).on('singletap',".button.pedidos",function(e){
+	console.log("Has picado en el botón de pedidos");
 	e.preventDefault();
 if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 	
@@ -54,7 +62,7 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		return true;	
 	}
 });
-
+*/
 //INTERCEPTAMOS LA CARGA DEL HOME
 $(document).on('singletap tap click',".button.gahibre",function(e){
 	if($('#about').hasClass('current')){
@@ -65,7 +73,7 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 })
 		
 	},
-	syncImages:function(r){
+	syncImages:function(r,callbackInit){
 		console.log("Vamos a sincronizar las imagenes");
 		
 		DataManager.catalogueJSON=jQuery.parseJSON(r);
@@ -101,7 +109,7 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 			
 			//Incluimos la imagen de promocion
 			for(pr in DataManager.catalogueJSON.promocion){
-				console.log("Quremos incluir la imagen "+DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
+				//console.log("Quremos incluir la imagen "+DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
 				arrProds.push(DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
 			}
 			
@@ -111,12 +119,14 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 			DataManager.updateImages(arrProds,function(onProgress){
 				//console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
+					
 					DataManager.initPromo();
 					DataManager.initCatalogue();
 					DataManager.initOutlet();
 					LoadingDialog.hide(300);
-					callbackInit();
 					DataManager.initDNI();
+					callbackInit();
+					
 				return;
 				}
 				
@@ -126,13 +136,15 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 		
 	},
 	initDNI:function(){
+		console.log("Se ejecuta la función de initDNI");
 		DataManager.userDNI=localStorage.getItem("dni");
+		
 	if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		console.log("No hay DNI");
 		DataManager.requestDNI();	
 	}else{
 		console.log("El dni es "+DataManager.userDNI);
-		DataManager.syncClients();
+		DataManager.syncClients(DataManager.userDNI);
 	}
 	},
 	initPromo:function(){
@@ -236,7 +248,7 @@ values['token']=token;
 			dataType:"text",
 			data:values,
 			success:function(r){
-				console.log("El resultado obtenido es "+r);
+				console.log("El resultado obtenido de los clientes es "+r);
 			callBack(r)	
 			},
 			error:function(r){
@@ -383,16 +395,9 @@ xhr.send();
 			if(typeof(dni)!="undefined" && dni!==null){
 				console.log("VAMOS A GUARDAR EL DNI "+dni);
 				localStorage.setItem("dni",dni);	
-				$.UIPopover({
-					title: 'DNI VÁLIDO',
-                   content: "Su dni es válido y hemos obtenido sus datos correctamente",
-				})
+				
 			}else{
-				//Este DNI NO ES VÁLIDO
-				$.UIPopover({
-					title: 'DNI INCORRECTO',
-                   content: "Los datos proporcionados no son correctos",
-				})
+			return;	
 			}
 			
 			/* cargamos los clientes en el select de pedidos*/
@@ -417,18 +422,29 @@ xhr.send();
 	syncClients:function(dni){
 		LoadingDialog.show("Comprobando credenciales...");
 		DataManager.getClientsFromServer(dni,function(r){
-		LocalFileManager.writeToClients(r);
+		
 		LoadingDialog.hide();
-			if(r.exito==0){
-				$.UIPopover({
-					title: 'DNI INCORRECTO',
-                   content: "Los datos proporcionados no son correctos",
+		console.log("El resultado que llega a syncClientes es "+r);
+		cli=jQuery.parseJSON(r);
+		console.log("El exito es "+cli.exito);
+			if(cli.exito==0){
+				console.log("No es el cliente correcto");
+				DataManager.userDNI=null;
+				$.UIPopup({
+          id: "requestDNI",
+          title: 'NIF INCORRECTO', 
+          message: 'EL dni introducido no es correcto',
+		  cancelButton:"Cerrar"
+		  
 				})
 				/*LocalFileManager.readClients(function(r){
 					DataManager.loadClients(dni,r);
 				})*/
 			}else{
+				LocalFileManager.writeToClients(r);
 				DataManager.loadClients(dni,r);	
+				//Loguardamos en el localstorage
+				
 			}
 			
 		},function(r){

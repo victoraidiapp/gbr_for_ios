@@ -3,6 +3,9 @@ var OrderManager={
 	checkoutEnabled:false,
 	
 	init:function(){
+		
+		
+
 		$('#order-details').on('update','li',function(){
 			//console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
 			var subtotal=eval($(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val());

@@ -64,30 +64,36 @@
         
         <script type="text/javascript">
 		document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-	
-	console.log("El dispositivo ya está listo");
-    //console.log(cordova.file);
-	app.initialize();
-}
-
-		var $lang;
-    	$(function() {
-			
-			$lang = navigator.language || navigator.userLanguage
-		$lang=$lang.substr(0,2);
-			
-      		var opts = {
+var $lang;
+var opts = {
          		tabs : 4,
          		imagePath : "icons/",
          		icons : ["gahibre", "productos", "pedidos", "outlet"],
          		labels : ["Gahibre","Productos","Pedidos", "Outlet"],
          		selected : 1
       		};
+			
+function onDeviceReady() {
+	
+	console.log("El dispositivo ya está listo");
+    //console.log(cordova.file);
+	
+	
+	app.initialize();
+}
+
+		
+    	$(function() {
+			
+			$lang = navigator.language || navigator.userLanguage
+		$lang=$lang.substr(0,2);
+			
       		$.UITabbar(opts);
+      		$.UIPaging();
 			//console.log(cordova.file);			
 			//localTest();
-			$.UIPaging();
+			/*$.UITabbar(opts);
+	$.UIPaging();*/
 			
 			
 			//app.manejadores();

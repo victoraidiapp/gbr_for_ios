@@ -388,16 +388,18 @@ xhr.send();
 		}
 	},
 	searchModel:function(model){
+		$('#search-model').blur();
 		//console.log("Queremos buscar "+model);
 		var regexp=new RegExp(".*"+model+".*");
 		//console.log("La expresión regular es "+regexp.toString());
+		regexp.ignoreCase=true;
 		var i=0;
 		DataManager.searchProductCarrousel=new Array();
 		for(g in DataManager.catalogueJSON.producto){
 			//console.log("Recorremos el catálogo");
 			//console.log("Vamos a comprobar la coincidencia con "+DataManager.catalogueJSON.producto[g].modelo);
-			//console.log("Comprobamos si "+regexp.toString()+" coincide con "+DataManager.catalogueJSON.producto[g].modelo);
-			//console.log("El resultado es "+regexp.test(DataManager.catalogueJSON.producto[g].modelo));
+			console.log("Comprobamos si "+regexp.toString()+" coincide con "+DataManager.catalogueJSON.producto[g].modelo);
+			console.log("El resultado es "+regexp.test(DataManager.catalogueJSON.producto[g].modelo));
 			if(regexp.test(DataManager.catalogueJSON.producto[g].modelo)){
 				console.log("Hemos encontrado el producto "+DataManager.catalogueJSON.producto[g].modelo);
 				DataManager.searchProductCarrousel.push(DataManager.getProductDetail(i,DataManager.catalogueJSON.producto[g]));
@@ -407,15 +409,20 @@ xhr.send();
 		}
 		if(i>0){
 			
-			if(DataManager.searchCarouselObject!=null) DataManager.searchCarouselObject.destroy();
-			
+			if(DataManager.searchCarouselObject!=null){
+			console.log("Eliminamos el carousel del search");	
+				 DataManager.searchCarouselObject.destroy();
+				 $('#search-product-viewer').html('');
+			}else{
+			console.log("No es nulo");	
+			}
 			$('#search-product-carrousel').addClass('navigable');
 			$.UISetupCarousel({ target: '#search-product-viewer', panels: DataManager.searchProductCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
 		DataManager.searchCarouselObject=$('#search-product-viewer').data('carousel');
 		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
 		 $('#search-product-carrousel').removeClass('navigable');
-		 
+		 console.log("Retornamos");
 			return true;
 			
 			

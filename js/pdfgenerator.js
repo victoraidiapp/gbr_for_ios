@@ -37,9 +37,9 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 	doc.rect(100,20,100,50);
 	doc.text(132, 30, comercial);
 	doc.text(105, 46, customer.nombre);
-	doc.text(105, 54, customer.nif);
-	doc.text(105, 62, customer.direccion+' ('+customer.codigoPostal+')');
-	doc.text(105, 70, customer.municipio+' ('+customer.provincia+')');
+	doc.text(105, 52, customer.nif);
+	doc.text(105, 58, customer.direccion+' ('+customer.codigoPostal+')');
+	doc.text(105, 64, customer.municipio+' ('+customer.provincia+')');
 	
 	console.log("La dirección del customer es "+customer.direccion+' ('+customer.codigoPostal+')');
 	
@@ -83,9 +83,9 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 					console.log("GEnerando la linea de descuento "+shopcart[x].tallas[tt].descuento+" de "+x);
 					doc.text(138, initY, shopcart[x].tallas[tt].descuento);
 					console.log("GEnerando la linea de precio "+shopcart[x].detail.precio+" de "+x);
-					doc.text(150, initY, shopcart[x].detail.precio);
+					doc.text(150, initY, shopcart[x].detail.precio+' €');
 					console.log("GEnerando la linea de subtotal "+shopcart[x].tallas[tt].subtotal+" de "+x);
-					doc.text(175, initY, '+'+shopcart[x].tallas[tt].subtotal);
+					doc.text(175, initY, shopcart[x].tallas[tt].subtotal+' €');
 					console.log("Y ahora vamos a realizar la operacione de total ");
 				total=eval(total+'+'+shopcart[x].tallas[tt].subtotal);
 				console.log("El total es "+total);
@@ -117,7 +117,7 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 	footer();
 	
 	console.log("Devolvemos el doc");
-	return doc.output();
+	return doc.output("blob");
 	
 }
 

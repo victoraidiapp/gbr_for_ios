@@ -75,14 +75,14 @@ var app = {
 			
 		})
 		
-		$(document).on("tap","#searchByCatalogo",function(e){
+		$(document).on("singletap","#searchByCatalogo",function(e){
 			e.preventDefault();
 		console.log("Queremos cargar la sección de catalogo");
 		app.navProducts("#productos","product-cat",false);
 		return false;
 		})
 		
-		$(document).on("tap","#showFamilia",function(e){
+		$(document).on("singletap","#showFamilia",function(e){
 			e.preventDefault();
 		
 		app.navProducts("#productos","product-fam",false);
@@ -91,7 +91,7 @@ var app = {
 		
 		
 		
-		$("#product-cat").on("tap","li",function(e){
+		$("#product-cat").on("singletap","li",function(e){
 			e.preventDefault();
 			app.navProducts("#productos","product-carrousel",false);
 			//DataManager.carouselObject.goToPanel($(this).index()-1);
@@ -100,7 +100,7 @@ var app = {
 	
 	})
 	
-	$("#outlet-product-cat").on("tap","li",function(e){
+	$("#outlet-product-cat").on("singletap","li",function(e){
 			e.preventDefault();
 			app.navProducts("#outlet","outlet-product-carrousel",false);
 			//DataManager.carouselObject.goToPanel($(this).index()-1);
@@ -109,7 +109,7 @@ var app = {
 	
 	})
 	
-	$("#product-fam").on("tap","li",function(e){
+	$("#product-fam").on("singletap","li",function(e){
 			e.preventDefault();
 			app.navProducts("#productos","product-carrousel");
 			//DataManager.carouselObject.goToPanel($(this).index()-1);
@@ -156,7 +156,7 @@ var app = {
 		console.log("Quieres buscar desde el form");
 	})
 	
-	$("nav.productos").on("tap",".add-button",function(e){
+	$("nav.productos").on("singletap",".add-button",function(e){
 		
 		$.UIPopup({
           id: "addToCart",
@@ -166,7 +166,7 @@ var app = {
 		OrderManager.addToCart();
 	})
 	
-	$("nav.productos").on("tap",".shop-button.catalogue",function(e){
+	$("nav.productos").on("singletap",".shop-button.catalogue",function(e){
 		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		DataManager.requestDNI();	
 		return;
@@ -185,7 +185,7 @@ var app = {
 		console.log("La lista de tallas del pedido es "+$("#product-sizes").html());
 	})
 	
-	$("nav.productos").on("tap",".shop-button.outlet",function(e){
+	$("nav.productos").on("singletap",".shop-button.outlet",function(e){
 		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		DataManager.requestDNI();	
 		return;
@@ -205,11 +205,11 @@ var app = {
 	})
 	
 	
-	$("#add-to-cart").on("tap","li",function(e){
+	$("#add-to-cart").on("singletap","li",function(e){
 		console.log("Alguien me ha picado y mi contenido es "+$(this).html());
 	})
 	//Quantity-Buttons
-	$(".sizes-list").on("tap",".quantity-button",function(e){
+	$(".sizes-list").on("singletap",".quantity-button",function(e){
 		console.log("Has picado en un boton de cantidad");
 		$(this).siblings('.quantity').trigger('updateVal',[$(this).data('operation')]);
 	})
@@ -241,7 +241,7 @@ var app = {
 	})
 	
 	//Back button Productos
-	$("nav.productos").on("tap",".back-button",function(e){
+	$("nav.productos").on("singletap",".back-button",function(e){
 		e.preventDefault();
 		var article=$(this).parent().next().attr('id');
 		console.log("El article es "+article);

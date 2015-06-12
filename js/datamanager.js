@@ -79,6 +79,13 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 		
 		DataManager.catalogueJSON=jQuery.parseJSON(r);
 			var arrProds=new Array();
+			
+			//Incluimos la imagen de promocion
+			for(pr in DataManager.catalogueJSON.promocion){
+				//console.log("Quremos incluir la imagen "+DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
+				arrProds.push(DataManager.SERVER.promociones+DataManager.catalogueJSON.promocion[pr].portada);
+			}
+			
 			for(p in DataManager.catalogueJSON.producto){
 				//console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
 				arrProds.push(DataManager.SERVER.products+DataManager.catalogueJSON.producto[p].fotoGrande);
@@ -121,11 +128,12 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 				//console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
 					
-					DataManager.initPromo();
+					
 					DataManager.initCatalogue();
 					DataManager.initOutlet();
 					LoadingDialog.hide(300);
 					DataManager.initDNI();
+					DataManager.initPromo();
 					callbackInit();
 					
 				return;
@@ -151,6 +159,7 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 	initPromo:function(){
 		//CArgamos la promo
 		console.log("Cargamos la imagen de promo como html "+'<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
+		
 		$("#promo").html('<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
 		app.navProducts('#home','promo',true);
 		

@@ -46,7 +46,18 @@ var OrderManager={
 			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
 				console.log("Es representante");
 				console.log("El valor es "+$('#customerSelect').val()-1);
+				if($('#customerSelect').val()>0){
 					customer=DataManager.clientsJSON.cliente[0].representado[$('#customerSelect').val()-1];
+					
+				}else{
+				customer=new Object();
+				customer.nombre="NUEVO CLIENTE";
+				customer.nif='';
+				customer.direccion='';
+				customer.codigoPostal='';
+				customer.municipio='';
+				customer.provincia='';	
+				}
 					
 			}else{
 				customer=DataManager.clientsJSON.cliente[0];

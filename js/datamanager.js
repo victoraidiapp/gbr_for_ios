@@ -10,6 +10,7 @@ var DataManager={
 	outletProductCarrousel:new Array(),
 	carouselObject:null,
 	outletCarouselObject:null,
+	searchCarouselObject:null,
 	catalogueJSON:null,
 	clientsJSON:null,
 	userDNI:null,
@@ -363,17 +364,38 @@ xhr.send();
 		}
 	},
 	searchModel:function(model){
-		
+		//console.log("Queremos buscar "+model);
+		var regexp=new RegExp(".*"+model+".*");
+		//console.log("La expresión regular es "+regexp.toString());
 		var i=0;
-		for(g in DataManager.catalogueJSON.producto){
-			
-			if(DataManager.catalogueJSON.producto[g].modelo==model){
-			return i;	
-			}
-			i++;
-		}
 		
-		return null;
+		for(g in DataManager.catalogueJSON.producto){
+			//console.log("Recorremos el catálogo");
+			//console.log("Vamos a comprobar la coincidencia con "+DataManager.catalogueJSON.producto[g].modelo);
+			//console.log("Comprobamos si "+regexp.toString()+" coincide con "+DataManager.catalogueJSON.producto[g].modelo);
+			//console.log("El resultado es "+regexp.test(DataManager.catalogueJSON.producto[g].modelo));
+			if(regexp.test(DataManager.catalogueJSON.producto[g].modelo)){
+				console.log("Hemos encontrado el producto "+DataManager.catalogueJSON.producto[g].modelo);
+				DataManager.searchProductCarrousel.push(DataManager.getProductDetail(i,DataManager.catalogueJSON.producto[g]));
+			i++;
+			}
+			
+		}
+		if(i>0){
+			
+			if(DataManager.searchCarouselObject!=null) DataManager.searchCarouselObject.destroy();
+			$('#search-product-carrousel').addClass('navigable');
+			$.UISetupCarousel({ target: '#search-product-viewer', panels: DataManager.searchProductCarrousel, loop: true,pagination:true });
+		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
+		DataManager.searchCarouselObject=$('#search-product-viewer').data('carousel');
+		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
+		 $('#search-product-carrousel').removeClass('navigable');
+		 
+			return true;
+			
+			
+			}
+		return false;
 	},
 	searchFirstProductOfFamily:function(idFamily){
 			

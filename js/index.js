@@ -127,13 +127,28 @@ var app = {
 		e.preventDefault();
 		console.log("Quieres buscar");
 		var sr=DataManager.searchModel($(this).val());
-		if(sr!=null){
+		
+		if(sr!=false){
+		console.log("Hay Resultados");
+		app.navProducts("#productos","search-product-carrousel",false);	
+			
+		}else{
+		console.log("No hay productos encontrados");	
+			$.UIPopup({
+          id: "noResults",
+          title: 'MODELO NO ENCONTRADO', 
+          message: 'Ningún producto coincide con la cadena de búsqueda',
+		  cancelButton:"Cerrar"
+		  
+				})
+		}
+		/*if(sr!=null){
 			app.navProducts("#productos","product-carrousel",false);
 			DataManager.carouselObject.goToPanel(sr);
 			$(this).blur();
 		}else{
 		console.log("No lo encuentro");	
-		};
+		};*/
 		return true;
 	})
 	$(document).on("searh submit","#form-search",function(e){

@@ -147,6 +147,8 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 	DataManager.shopCart[DataManager.currentProduct.modelo]=product;
 	//console.log("El contenido del shopcart es "+DataManager.shopCart);
 	OrderManager.updateOrder();
+	//Vaciamos el product-sizes
+	$("#product-sizes").html('');
 		DataManager.currentProduct=null;
 	},
 	

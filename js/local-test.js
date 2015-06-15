@@ -34,5 +34,6 @@ app.manejadores();
 LoadingDialog.init();
 //app.requestDNI();
 OrderManager.init();
+LoadingDialog.show("Ejemplo de dialogo cargando");
 }
 

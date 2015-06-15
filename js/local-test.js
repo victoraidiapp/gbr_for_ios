@@ -27,7 +27,7 @@ var panels = [
 
 function localTest(){
 $.UISetupCarousel({ target: '#product-viewer', panels: panelproducts, loop: true,pagination:true });
-
+DataManager.userDNI='koko';
 DataManager.carouselObject=$('#product-viewer').data('carousel');	
 $('#product-carrousel').removeClass('navigable');
 app.manejadores();

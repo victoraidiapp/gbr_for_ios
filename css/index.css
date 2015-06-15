@@ -97,9 +97,9 @@ and (min-device-width : 320px)
 and (max-device-width : 480px)
 and (-webkit-min-device-pixel-ratio: 2)
 {  	
-	article {top:41px;}
-	nav {font-size:35px; margin:0; top:0px;heigth:41px;}
-	nav > h1 {top:0px;}
+	
+	nav {font-size:35px; margin:0; top:0px;}
+	nav > h1 {top:15px;}
 	#aboutGahibre p 
 	{	
 		font-size: 12px;  
@@ -117,19 +117,18 @@ and (-webkit-min-device-pixel-ratio: 2)
 		background-position:4px center;		
 	}
 	.gahibre-button {border-radius:5px;}
-	.back-button {margin-top:-5%;}
 	.list > li.nav::after {width:20px; height:20px; right:29px;}
 	.product-list .list > li.nav::after {top:24px;}
 	products current > span.shop-button {top:8px;right:15px;}
 	body.hasTabBar nav .shop-button 
 	{ 
 		right: 15px; 
-		top: 8px;
+		
 	}
-	.popup {width:76%;margin-left:7%;font-size:10px;height:35%;}
+	
 	.popup > .panel .button {font-size:14px;}
 	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:2px;}
-	.popup footer {height:41px;}
+	
 	a.button {padding:0px;}
 	#customerSelect {margin-bottom:5%;margin-top:-2%;}
 	body.isiOS.hasTabBar .customer-line .blue-tag {font-weight:bold;}
@@ -164,12 +163,8 @@ and (-webkit-min-device-pixel-ratio: 2)
 	.gahibre-button {border-radius:5px;}
 	/*article.paging > section #order-details .discount-value {width:27%;}*/
 	article.paging > section form {margin-top:-29%;}
-	.popup {width:70%;margin-left:-3%;font-size:10px;height:47.3%;}
-	.popup > .panel .button {font-size:14px;}
-	.popup .panel .cancel {border-right: solid 1px #b5b5b5;}
-	.popup > panel .button.cancel {border-right:solid 1px #b5b5b5;}
-	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:2px;}
-	.popup footer {height:41px;}
+	
+	
 	a.button {padding:0px;}
 	article.paging > section #order-details .size-value {width:8%;}
 	article.paging > section #order-details .quantity-label {width:13%;}
@@ -182,8 +177,7 @@ and (min-device-width : 320px)
 and (max-device-width : 568px) 
 and (-webkit-min-device-pixel-ratio: 2)
 {
-	.popup {height: 30%;}
-	.popup footer {height:49px;}
+	
 }
 
 @media only screen 
@@ -193,7 +187,7 @@ and (orientation : landscape)
 and (-webkit-min-device-pixel-ratio: 2)
 { 
 	body.isiOS.hasTabBar .popup > .panel {font-size:8px !important;}
-	.popup {height:54.8%;width:45% !important;margin-left:5% !important;margin-top:1% !important;}
+	
 }
 
 /* iPhone 6*/
@@ -205,9 +199,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 {
 	#aboutGahibre p {font-size:16px;}
 	.tabbar > .button {font-size:13px;}
-	.popup {height:27.5%;}
-	.popup header > h1 {font-size:2.1em;}
-	.popup > .panel > p {font-size:1.5em;}
+	
 	/*.popup footer {border-top: solid 1px #b5b5b5}*/
 	.product-list .list > li.nav::after {top:26px;}
 	#checkout .buttons {margin-left: 8% !important;}
@@ -428,7 +420,7 @@ and (max-device-width: 1024px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 1)
 {
-	/*.loading {visibility:hidden;}*/	
+	/*.loading {visibility:hidden;}
 	article.paging > section #order-details .discount-value {width:27%; }
 	article.paging > section form {margin-top:-23%;}
 	article.paging > section #order-details .quantity-value {width:20%;}
@@ -441,7 +433,7 @@ and (-webkit-min-device-pixel-ratio: 1)
 		padding:0;
 		height:35%;
 		margin-left: -14%;
-	}
+	}*/	
 }
 
 /* iPad 3 y 4 retina*/
@@ -535,7 +527,7 @@ and (max-device-width : 1024px)
 and (orientation : landscape)
 and (-webkit-min-device-pixel-ratio: 2) 
 { 
-	/*.loading {visibility:hidden;}*/	
+	/*.loading {visibility:hidden;}	
 	article.paging > section #order-details .discount-value {width:27%;}
 	article.paging > section form {margin-top:-23%;}
 	article.paging > section #order-details .quantity-value {width:20%;}
@@ -548,7 +540,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 		padding:0;
 		height:34.3%;
 		margin-left: -14%;
-	}
+	}*/
 }
 
 /*************************************/
@@ -987,11 +979,11 @@ font-size: 1.5em;
 
 #order-details .quantity-value{
 	  background-color: #DDD;
-  width: 18%;
+  width: 17%;
   display: inline-block;
   text-align: right;
   font-size: 1.5em;
-  margin-left:3%;
+  margin-left:0px;
 	
 }
 
@@ -1008,7 +1000,7 @@ font-size: 1.5em;
 #order-details .price-value{
 	  
 	background-color: #DDD;
-  width: 18%;
+  width: 17%;
   display: inline-block;
   text-align: right;
   font-size: 1.5em;
@@ -1016,7 +1008,7 @@ font-size: 1.5em;
 
 #order-details .subtotal{
 	background-color: #DDD;
-  width: 25%;
+  width: 22%;
   display: inline-block;
   text-align: right;
   font-size: 1.5em;

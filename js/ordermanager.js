@@ -15,7 +15,7 @@ var OrderManager={
 			if(desc>0){
 			subtotal=subtotal-(subtotal*(desc/100));	
 			}
-			$(this).find('.subtotal').text(subtotal);
+			$(this).find('.subtotal').text(subtotal.toFixed(2));
 			DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].subtotal=subtotal;
 			OrderManager.updateTotal();
 			OrderManager.summaryOrder();

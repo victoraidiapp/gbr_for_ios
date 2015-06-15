@@ -5,9 +5,14 @@ var LocalFileManager={
 	clientesFile:null,
 	docsPath:null,
 	
+	
 	init:function(callback){
 	//Inicializamos el sistema
-	window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dirEntry){
+	//Inicializamos el sistema
+	console.log("Inicializamos el localfilemanager");
+	deviceDir={'iOS':cordova.file.documentsDirectory,'Android':cordova.file.dataDirectory};
+	console.log("La plataforma es "+device.platform);
+	window.resolveLocalFileSystemURL(deviceDir[device.platform], function(dirEntry){
 		LocalFileManager.docDirectory=dirEntry;
 		console.log("El directorio raiz es "+dirEntry.fullPath);
 		dirEntry.getFile('catalogue.txt', {}, function(fileEntry) {

@@ -375,7 +375,9 @@ text-align: left;
 .mini-logo{
 max-height:40px;	
 }
-
+.product-carrousel .details{
+width:100%;	
+}
 /*ADD-TO-CART*/
 
 #add-to-cart .first-line,
@@ -820,7 +822,28 @@ and (-webkit-min-device-pixel-ratio: 1)
 #order-details li {
   font-size: 150%;
 }
+body{
+font-size:16px;	
+}
 
+.product-carrousel .center img,
+#outlet-product-carrousel .center img{
+margin-bottom:15px;	
+height:300px;
+}
+
+.product-carrousel h2{
+font-size:1.6em;
+line-height:1.6em;
+}
+
+.product-carrousel .material{
+font-size:1.4em;	
+}
+
+.popup{
+width:50%;	
+}
 }
 
 @media only screen 
@@ -847,6 +870,28 @@ and (-webkit-min-device-pixel-ratio: 1)
 .img-inlist{
 		height:100px;
 	}
+	
+	body{
+font-size:16px;	
+}
+
+.product-carrousel .center img,
+#outlet-product-carrousel .center img{
+margin-bottom:15px;	
+height:300px;
+}
+
+.product-carrousel h2{
+font-size:1.6em;
+line-height:1.6em;
+}
+
+.product-carrousel .material{
+font-size:1.4em;	
+}
+.popup{
+width:50%;	
+}
 	/*.loading {visibility:hidden;}
 	article.paging > section #order-details .discount-value {width:27%; }
 	article.paging > section form {margin-top:-23%;}

@@ -304,22 +304,24 @@ var app = {
 		
 	},
 	checkNavButtons:function(){
+		
+		
 		if($("article.current section.current").data('backenabled')===true){
-			$("nav.productos .back-button").show();
+			$("nav.current.productos .back-button").show();
 		}else{
-			$("nav.productos .back-button").hide();
+			$("nav.current.productos .back-button").hide();
 		}
 		
 		if($("article.current section.current").data('shopenabled')===true){
-			$("nav.productos .shop-button").show();
+			$("nav.current.productos .shop-button").show();
 		}else{
-			$("nav.productos .shop-button").hide();
+			$("nav.current.productos .shop-button").hide();
 		}
 		
 		if($("article.current section.current").data('addenabled')===true){
-			$("nav.productos .add-button").show();
+			$("nav.current.productos .add-button").show();
 		}else{
-			$("nav.productos .add-button").hide();
+			$("nav.current.productos .add-button").hide();
 		}
 		
 	},

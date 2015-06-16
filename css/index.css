@@ -110,139 +110,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 	
 }
 
-/* iPhone 5, 5C, 5S*/
 
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) 
-and (orientation: portrait)
-and (-webkit-min-device-pixel-ratio: 2)
-{
-	
-
-}
-
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) 
-and (orientation : landscape) 
-and (-webkit-min-device-pixel-ratio: 2)
-{ 
-	
-	
-}
-
-/* iPhone 6*/
-
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 667px) 
-and (-webkit-min-device-pixel-ratio: 2)
-{
-	
-}
-
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 667px)
-and (orientation : landscape) 
-and (-webkit-min-device-pixel-ratio: 2)
-{
-  	
-}
-
-/* iPhone 6Plus*/
-
-@media only screen 
-and (min-device-width : 414px) 
-and (max-device-width : 736px)
-and (-webkit-min-device-pixel-ratio: 3)
- {
-	
-	
-}
-
-@media only screen 
-and (min-device-width : 414px) 
-and (max-device-width : 736px) 
-and (orientation : landscape) 
-and (-webkit-min-device-pixel-ratio: 3)
-{ 
-	
-}
-
-
-/************************************/
-/********* RESPONSIVE iPad **********/
-/************************************/
-
-/* iPad 1 y 2*/
-
-@media only screen 
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (-webkit-min-device-pixel-ratio: 1)
-{
-	
-}
-
-@media only screen 
-and (min-device-width: 768px)
-and (max-device-width: 1024px)
-and (orientation: landscape)
-and (-webkit-min-device-pixel-ratio: 1)
-{
-	/*.loading {visibility:hidden;}
-	article.paging > section #order-details .discount-value {width:27%; }
-	article.paging > section form {margin-top:-23%;}
-	article.paging > section #order-details .quantity-value {width:20%;}
-	#checkout .total-line .total-label {margin-left:30px; font-size: 1.6em !important;}
-	article.paging > section #observaciones {width: 89%;}
-	.popup 
-	{
-		display:block;
-		position: absolute;
-		padding:0;
-		height:35%;
-		margin-left: -14%;
-	}*/	
-}
-
-/* iPad 3 y 4 retina*/
-
-@media only screen 
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (-webkit-min-device-pixel-ratio: 2) 
-{ 
-	
-}
-
-@media only screen 
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape)
-and (-webkit-min-device-pixel-ratio: 2) 
-{ 
-	/*.loading {visibility:hidden;}	
-	article.paging > section #order-details .discount-value {width:27%;}
-	article.paging > section form {margin-top:-23%;}
-	article.paging > section #order-details .quantity-value {width:20%;}
-	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}	
-	article.paging > section #observaciones {width: 89%;}
-	.popup 
-	{
-		display:block;
-		position: absolute;
-		padding:0;
-		height:34.3%;
-		margin-left: -14%;
-	}*/
-}
-
-/*************************************/
-/********** RESPONSIVE END ***********/
-/*************************************/
 
 nav h1 {
     
@@ -381,7 +249,7 @@ margin-top:3%;
 
 /*PRODUCT LIST*/
 .img-inlist{
-height:50px;
+height:40px;
 vertical-align:middle;	
 }
 .product-list .list .tit_modelo{
@@ -394,8 +262,8 @@ vertical-align:middle;
 top:30px;	
 }
 .product-list .list h2{
-margin-top: 20px;
-  font-size: 1.2em;
+margin-top: 15px;
+  font-size: 1.1em;
 
 }
 .back-button{
@@ -842,3 +710,191 @@ width:49%;
 font-size:95%;	
 }
 }
+
+/* iPhone 5, 5C, 5S*/
+
+@media only screen 
+and (min-device-width : 320px) 
+and (min-device-height : 568px) 
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2)
+{
+	.product-list .list h2{
+margin-top: 20px;
+  font-size: 1.2em;
+
+}
+
+.img-inlist{
+height:50px;
+}
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) 
+and (-webkit-min-device-pixel-ratio: 2)
+{ 
+	
+	
+}
+
+/* iPhone 6*/
+
+@media only screen 
+and (min-device-width : 375px) 
+and (min-device-height : 667px) 
+and (-webkit-min-device-pixel-ratio: 2)
+{
+		body{
+	font-size:16px;	
+	}
+	
+	.product-list .list h2 {
+  margin-top: 25px;
+  font-size: 1.3em;
+}
+.img-inlist{
+height:60px;
+}
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px)
+and (orientation : landscape) 
+and (-webkit-min-device-pixel-ratio: 2)
+{
+  	
+}
+
+/* iPhone 6Plus*/
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+ {
+
+	
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : landscape) 
+and (-webkit-min-device-pixel-ratio: 3)
+{ 
+	
+}
+
+
+/************************************/
+/********* RESPONSIVE iPad **********/
+/************************************/
+
+/* iPad 1 y 2*/
+
+@media only screen 
+and (min-device-width : 768px)
+and (min-device-height : 1024px)
+and (-webkit-min-device-pixel-ratio: 1)
+{
+	.tabbar > .button{
+	font-size:18px!important;	
+	}
+	nav > h1{
+	font-size:20px;	
+	}
+	.img-inlist{
+		height:100px;
+	}
+	
+	.product-list .list h2 {
+ margin-top: 35px;
+  font-size: 1.8em;
+  line-height: 1.5em;
+}
+
+#order-details li {
+  font-size: 150%;
+}
+
+}
+
+@media only screen 
+and (min-device-width: 1024px)
+and (min-device-height: 768px)
+
+and (-webkit-min-device-pixel-ratio: 1)
+{
+	.tabbar > .button{
+	font-size:18px!important;	
+	}
+	
+	nav > h1{
+	font-size:20px;	
+	}
+	.product-list .list h2 {
+ margin-top: 35px;
+  font-size: 1.8em;
+  line-height: 1.5em;
+}
+	#order-details li {
+  font-size: 150%;
+}
+.img-inlist{
+		height:100px;
+	}
+	/*.loading {visibility:hidden;}
+	article.paging > section #order-details .discount-value {width:27%; }
+	article.paging > section form {margin-top:-23%;}
+	article.paging > section #order-details .quantity-value {width:20%;}
+	#checkout .total-line .total-label {margin-left:30px; font-size: 1.6em !important;}
+	article.paging > section #observaciones {width: 89%;}
+	.popup 
+	{
+		display:block;
+		position: absolute;
+		padding:0;
+		height:35%;
+		margin-left: -14%;
+	}*/	
+}
+
+/* iPad 3 y 4 retina*/
+
+@media only screen 
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) 
+{ 
+	
+}
+
+@media only screen 
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) 
+{ 
+	/*.loading {visibility:hidden;}	
+	article.paging > section #order-details .discount-value {width:27%;}
+	article.paging > section form {margin-top:-23%;}
+	article.paging > section #order-details .quantity-value {width:20%;}
+	#checkout .total-line .total-value {font-size: 1.6em; width:71%;margin-left:1.5%;}	
+	article.paging > section #observaciones {width: 89%;}
+	.popup 
+	{
+		display:block;
+		position: absolute;
+		padding:0;
+		height:34.3%;
+		margin-left: -14%;
+	}*/
+}
+
+/*************************************/
+/********** RESPONSIVE END ***********/
+/*************************************/

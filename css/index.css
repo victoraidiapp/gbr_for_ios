@@ -98,52 +98,7 @@ and (max-device-width : 480px)
 and (-webkit-min-device-pixel-ratio: 2)
 {  	
 	
-	nav {font-size:35px; margin:0; top:0px;}
-	nav > h1 {top:15px;}
-	#aboutGahibre p 
-	{	
-		font-size: 12px;  
-		font-family: "Arial", Helvetica, sans-serif;
-	} 
-	.tabbar > .button {font-weight:bold; font-size:11px}
-	.tabbar {height:34px;}
-	body.hasTabBar article {bottom:34px;}
-	.product-search	{font-size:90%;}
-	input[type="search"]
-	{		
-		background-size:17px 18px; 
-		border:1px solid #BBB6B6; 
-		border-radius:5px;
-		background-position:4px center;		
-	}
-	.gahibre-button {border-radius:5px;}
-	.list > li.nav::after {width:20px; height:20px; right:29px;}
-	.product-list .list > li.nav::after {top:24px;}
-	products current > span.shop-button {top:8px;right:15px;}
-	body.hasTabBar nav .shop-button 
-	{ 
-		right: 15px; 
-		
-	}
-	
-	.popup > .panel .button {font-size:14px;}
-	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:2px;}
-	
-	a.button {padding:0px;}
-	#customerSelect {margin-bottom:5%;margin-top:-2%;}
-	body.isiOS.hasTabBar .customer-line .blue-tag {font-weight:bold;}
-	#order-details .first-line {font-size:10px;}
-	#order-details .second-line {font-size:10px;}
-	#pedidos #order-details .discount-label {width:21%;}
-	#pedidos #order-details .article {width:24%;}
-	#pedidos #order-details .discount-value {margin-left:11px;}
-	#pedidos #order-details .quantity-value {margin-left:0px;}
-	#pedidos #order-details .price-label {margin-left:2%;}
-	#checkout .total-line .total-value {margin-left:6.5%;}
-	#checkout .total-line .total-label {font-weight:bold;}
-	article.paging > section #observaciones {font-family:"Arial", Helvetica, sans-serif;}
-	#checkout .buttons {margin-left:8%;}
-	#more-products {font-size:9px; padding:13px 10px 11px 11px !important;}
+
 }
 
 @media only screen 
@@ -152,22 +107,7 @@ and (max-device-width : 480px)
 and (orientation : landscape)
 and (-webkit-min-device-pixel-ratio: 2)
 {	
-	input[type="search"]
-	{		
-		background-size:29px 23px; 
-		border:1px solid #BBB6B6; 
-		border-radius:5px;
-		background-position:7px center;	
-		
-	}
-	.gahibre-button {border-radius:5px;}
-	/*article.paging > section #order-details .discount-value {width:27%;}*/
-	article.paging > section form {margin-top:-29%;}
 	
-	
-	a.button {padding:0px;}
-	article.paging > section #order-details .size-value {width:8%;}
-	article.paging > section #order-details .quantity-label {width:13%;}
 }
 
 /* iPhone 5, 5C, 5S*/
@@ -175,9 +115,11 @@ and (-webkit-min-device-pixel-ratio: 2)
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 568px) 
+and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2)
 {
 	
+
 }
 
 @media only screen 
@@ -186,7 +128,7 @@ and (max-device-width : 568px)
 and (orientation : landscape) 
 and (-webkit-min-device-pixel-ratio: 2)
 { 
-	body.isiOS.hasTabBar .popup > .panel {font-size:8px !important;}
+	
 	
 }
 
@@ -197,13 +139,7 @@ and (min-device-width : 375px)
 and (max-device-width : 667px) 
 and (-webkit-min-device-pixel-ratio: 2)
 {
-	#aboutGahibre p {font-size:16px;}
-	.tabbar > .button {font-size:13px;}
 	
-	/*.popup footer {border-top: solid 1px #b5b5b5}*/
-	.product-list .list > li.nav::after {top:26px;}
-	#checkout .buttons {margin-left: 8% !important;}
-	#more-products {font-size:11px;padding:11px !important;}	
 }
 
 @media only screen 
@@ -212,41 +148,7 @@ and (max-device-width : 667px)
 and (orientation : landscape) 
 and (-webkit-min-device-pixel-ratio: 2)
 {
-  	.tabbar > .button {font-size:16px;font-weight:bold;}
-	nav > h1 {font:normal 16pt/12pt HelveticaNeue, Sans-serif; top:5px !important;}
-	.product-search	{font-size:118%;margin-top:-31% !important;}
-	input[type="search"]
-	{		
-		background-size:32px 28px; 
-		border:1px solid #BBB6B6; 
-		border-radius:5px;
-		background-position:9px center;		
-	}
-	#productos > section ul.list,#outlet > section ul.list {padding-top:12px;}
-	.product-list .list > li.nav::after {top:26px;width:20px;height:20px;margin-right:3%;}
-	.popup {height:56.8% !important;margin-top:-2%;width:54%;}
-	.popup footer {border-top:none;}
-	.back-button {width:32px !important; height:32px !important; margin-top:-8px; }
-	.shop-button {width:26px !important; height:26px !important; margin-top:-8px; margin-right: 8px;}
-	#checkout .buttons {margin-left:14% !important;font-size:1.2em !important;}
-	#more-products {font-size:1em !important;padding-top: 10px !important; padding-bottom: 10px !important;}
-	.customer-line {padding-bottom: 31px !important;}
-	.customer-line .blue-tag {font-size:1.5em !important; font-weight:bold !important;}
-	#customerSelect {margin-top:-5px !important;}
-	article.paging > section #order-details .article {font-size:1em !important;}
-	article.paging > section #order-details .size-label {font-size:1em !important;}
-	#order-details .discount-label {font-size:1em !important;widt:1%;}
-	#order-details .discount-value {font-size:1.2em !important;width:28.2% !important;}
-	article.paging > section #order-details .size-value {width:8%; font-size:1em !important;}
-	#order-details .quantity-label {font-size:1em !important;}
-	#order-details .quantity-value {font-size:1em !important;margin-left:0px !important;}
-	#order-details .price-value {font-size:1em !important;}
-	#order-details .price-label {font-size:1em !important;}
-	#order-details .subtotal {font-size:1em !important;width:31% !important;}
-	#order-details .del-button {font-size:1em !important;}
-	#checkout .total-line .total-value {width:77% !important;}
-	#checkout .total-line .total-label {font-size:1em !important; font-weight: bold;}
-	#observaciones {width: 92% !important; margin-left:18px !important; font-family:"Arial", Helvetica, sans-serif;}
+  	
 }
 
 /* iPhone 6Plus*/
@@ -256,12 +158,7 @@ and (min-device-width : 414px)
 and (max-device-width : 736px)
 and (-webkit-min-device-pixel-ratio: 3)
  {
-	#order-details .discount-value {width: 27.5% !important;}
-	#order-details .quantity-value {width: 19% !important;}
-	#order-details .price-value {width: 19% !important;}
-	.popup {height:24.5% !important; margin-left:0% !important;}
-	.popup footer {border-top: 1px solid #b5b5b5 !important; height: 39px !important;}
-	.popup > .panel .button {border-top: none !important;}
+	
 	
 }
 
@@ -271,56 +168,7 @@ and (max-device-width : 736px)
 and (orientation : landscape) 
 and (-webkit-min-device-pixel-ratio: 3)
 { 
-	nav > h1 {top:5px;font:normal 19pt/6pt HelveticaNeue, Sans-serif;}
-	#aboutGahibre {font-size:14pt;}
-	a.button {font-size:15pt !important; font-weight:bold;}
-	.product-search	{font-size:160% !important;margin-top:-31% !important;}
-	input[type="search"]
-	{		
-		background-size:32px 36px; 
-		border:1px solid #BBB6B6; 
-		border-radius:5px;
-		background-position:9px center;		
-	}
-	.back-button 
-	{
-		width:32px !important; 
-		height:32px !important; 
-		margin-top:-8px !important; 
-	}
-	.list > li.nav::after 
-	{
-		width:24px; 
-		height:24px; 
-		margin-top:-7px; 
-		margin-right:17px;
-	}
-	.shop-button 
-	{
-		right:18px !important; 
-		top:16px !important;
-		width:28px !important; 
-		height:28px !important;
-	}
-	section h2 {padding:5px !important;}
-	.popup {height:47.5% !important; margin-top: -2%; width:48%;}
-	#checkout .buttons .checkout-button {font-size:13pt;}
-	.customer-line {font-size:12pt;padding-bottom:20px;}
-	#customerSelect {margin-top: -8px;}
-	article > section > .list > li {font-size:1em !important;}
-	.customer-line .blue-tag {font-weight:bold; font-size:1.4em !important;}
-	#order-details .discount-label {width:17% !important; margin-right:21px;}
-	#order-details .price-label {width:13% !important;}
-	#order-details .quantity-value {margin-left:0px !important;}
-	#order-details .subtotal {padding:0px 21px 0px 0px !important;}
-	#checkout .total-line .total-label {font-size:1.1em !important; font-weight:bold;}
-	#checkout .total-line .total-value {padding-left:47px; padding-right:5%;}
-	#observaciones 
-	{
-		width:93.1% !important; 
-		margin-left:2% !important; 
-		font-family:"Arial", Helvetica, sans-serif;
-	}
+	
 }
 
 
@@ -335,83 +183,7 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (-webkit-min-device-pixel-ratio: 1)
 {
-	nav > h1 {font-size:35px; margin:0; top:22px;}
-	#aboutGahibre p 
-	{	
-			font-size: 23px; 
-			padding: 2px 22px 2px 22px; 
-			font-family: "Arial", Helvetica, sans-serif;
-	} 
-	.tabbar > .button {font-size:20px}
-	.isDesktop .tabbar > .button:hover, .tabbar > .button.selected {font-weight:bold;}
-	.product-search	{font-size:160%;}
-	input[type="search"]
-	{		
-		background-size:35px 35px; 
-		border:1px solid #BBB6B6; 
-		border-radius:5px;
-		background-position:18px center;		
-	}
-	/*.loading {visibility:hidden;}*/
-	#customerSelect 
-	{
-		margin-bottom:2%;
-		margin-top:-1%;
-	}
-	.customer-line .blue-tag {font-size:1.73em;margin-left:3%;}
-	.customer-line 
-	{
-		margin-right:24px;
-		margin-top:4%;
-		padding-left:30px;
-		font-size:19px;
-		font-weight:bold;
-	}
-	div.role-content {font-size:1.8em; text-align:justify;}
-	.product-carrousel h3 {font-weight:bold;}
-	body.hasTabBar nav .back-button {width:40px; top:13px;}
-	section h2 {height:34px; }
-	#order-details.list > li {font-size:1.5em; margin-left:0%;}
-	.list > li.nav::after {height: 29px; width:29px; right:6%;}
-	.product-list .list h2 {font-size:1.5em;overflow:inherit;}
-	.product-carrousel h2 
-	{
-		font-size:35px;
-		padding:7px;
-		margin-top:5%;
-	}
-	body.hasTabBar nav .shop-button 
-	{
-		width:35px; 
-		height:35px; 
-		right: 2%; 
-		top: 10px;
-	}
-	.product-carrousel .material {font-size: 1.4em;}
-	.carousel-track > li {font-size: 1.8em; margin-left:2%;}
-	.product-carrousel h3 {font-weight:bold;}
-	li.comp > div 
-	{
-		padding: 0px 0px 20px 0px; 
-		font-size:1.6em;
-		margin-left:4%;
-	}
-	.popup {width:60%;margin-left:-9%;font-size:1.6em;height:29%;}
-	.popup > .panel .button {font-size:1.4em;padding:16px;}
-	.popup .panel .cancel {font-size:1.4em;padding:16px;border-right: solid 1px #b5b5b5;}
-	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:13px;}
-	.popup footer {border-top: solid 1px #b5b5b5}
-	#order-details .article {margin-left:3%;}
-	#order-details .first-line {padding-bottom:12px;}	
-	#checkout .total-line .total-label {font-weight:bold;margin-left:3%;}
-	#checkout .total-line .total-value {font-size:1.6em;}
-	article.paging > section #observaciones 
-	{
-		font-size:1.4em; 
-		font-family: "Arial", Helvetica, sans-serif;
-		width:87%;		
-	}
-	#checkout .buttons {font-size:21px;}
+	
 }
 
 @media only screen 
@@ -443,82 +215,7 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (-webkit-min-device-pixel-ratio: 2) 
 { 
-	nav > h1 {font-size:35px; margin:0; top:22px;}
-	#aboutGahibre p 
-	{	
-			font-size: 23px; 
-			padding: 2px 22px 2px 22px; 
-			font-family: "Arial", Helvetica, sans-serif;
-	} 
-	.tabbar > .button {font-size:20px}
-	.isDesktop .tabbar > .button:hover, .tabbar > .button.selected {font-weight:bold;}
-	.product-search	{font-size:160%;}
-	input[type="search"]
-	{		
-		background-size:35px 35px; 
-		border:1px solid #BBB6B6; 
-		border-radius:5px;
-		background-position:18px center;		
-	}
-	/*.loading {visibility:hidden;}*/
-	#customerSelect 
-	{
-		margin-bottom:2%;
-		margin-top:-1%;
-	}
-	.customer-line .blue-tag {font-size:1.73em;margin-left:3%;}
-	.customer-line 
-	{
-		margin-right:24px;
-		margin-top:4%;
-		padding-left:30px;
-		font-size:19px;
-		font-weight:bold;
-	}
-	div.role-content {font-size:1.8em; text-align:justify;}
-	.product-carrousel h3 {font-weight:bold;}
-	body.hasTabBar nav .back-button {width:40px; top:13px;}
-	section h2 {height:34px; }
-	#order-details.list > li {font-size:1.5em; margin-left:0%;}
-	.list > li.nav::after {height: 29px; width:29px; right:6%;}
-	.product-list .list h2 {font-size:1.5em;overflow:inherit;}
-	.product-carrousel h2 
-	{
-		font-size:35px;
-		padding:7px;
-		margin-top:5%;
-	}
-	body.hasTabBar nav .shop-button 
-	{
-		width:35px; 
-		height:35px; 
-		right: 2%; 
-		top: 10px;
-	}
-	.product-carrousel .material {font-size: 1.4em;}
-	.carousel-track > li {font-size: 1.8em; margin-left:2%;}
-	.product-carrousel h3 {font-weight:bold;}
-	li.comp > div 
-	{
-		padding: 0px 0px 20px 0px; 
-		font-size:1.6em;
-		margin-left:4%;
-	}
-	.popup {width:60%;margin-left:-9%;font-size:1.6em;height:29%;}
-	.popup > .panel .button {font-size:1.4em;padding:16px;}
-	.popup header > h1 {font-size:1.8em; font-weight:bold;padding:13px;}
-	.popup footer {border-top: solid 1px #b5b5b5}
-	#order-details .article {margin-left:3%;}
-	#order-details .first-line {padding-bottom:12px;}	
-	#checkout .total-line .total-label {font-weight:bold;margin-left:3%;font-size:1.6em !important;}
-	#checkout .total-line .total-value {font-size:1.6em;}
-	article.paging > section #observaciones 
-	{
-		font-size:1.4em; 
-		font-family: "Arial", Helvetica, sans-serif;
-		width:87%;		
-	}
-	#checkout .buttons {font-size:21px;}
+	
 }
 
 @media only screen 
@@ -820,42 +517,55 @@ max-height:40px;
 	text-transform:none;
 }
 
+
+
+
+
+
 #add-to-cart .first-line .article{
-margin-left:40px;	
+  width: 55%;
+  display: inline-block;
 	
 }
 
 #add-to-cart .first-line .size-label{
-margin-left:110px;	
-font-size:0.8em;
+  width: 18%;
+  display: inline-block;
+
 	
 }
 
 #add-to-cart .first-line .size-value{
-margin-left:20px;	
-color:#043680;	
+color: #043680;
+  display: inline-block;
+  width: 17%;
+  text-align: center;
 }
 #add-to-cart .second-line{
 	
 }
 #add{
-font-size:1.4em;	
+font-size:1.4em;
+width:5%;
+display:inline-block;	
 }
 .quantity{
-font-size: 12px;
+ font-size: 12px;
   text-align: right;
   background-color: #eee;
   padding: 3px;
   border-radius: 4px;
-  width: 60%;	
+  width: 60%;
+  display: inline-block;
+
 }
 .quantity-button{
 	background-color: #ccc;
   border-radius: 4px;
-  padding: 3px;
+  padding: 1%;
   width: 13%;
-  margin-left: 10px;
-  font-size: 13px;
+  margin-left: 3%;
+  font-size: 1em;
   text-align: center;
   display: inline-block;
   font-weight: bold;
@@ -922,88 +632,82 @@ font-size:1.2em;
 	
 }
 
+#order-details li{
+font-size:100%;	
+}
 #order-details .article{
-font-size: 1.5em;
-  font-weight: bold;
+font-weight: bold;
   display: inline-block;
-  width: 30%;
-  margin-lef.t:3%;
+  width: 35%;
+  
 }
 
 #order-details .size-label{
-	font-size: 1.5em;
-	font-weight:bold;
+	font-weight: bold;
   color: #043680;
   display: inline-block;
+  text-align: center;
   width: 15%;
-  text-align: right;
 	
 }
 
 #order-details .size-value{
-	  font-size: 1.5em;
-  display: inline-block;
-  width: 5%;
+	display: inline-block;
+  width: 10%;
   text-align: center;
-	
+
 }
 
 #order-details .discount-label{
-	font-size: 1.5em;
-  color: #043680;
+color: #043680;
   display: inline-block;
-  font-weight:bold;
+  font-weight: bold;
+  text-align: left;
   width: 15%;
-  text-align: right;
 	
 }
 
 #order-details .discount-value{
-	
-	  background-color: #DDD;
-  width: 25%;
+	background-color: #DDD;
+  width: 18%;
   display: inline-block;
   text-align: right;
-  font-size:1.5em;
+
+  
 }
 
 #order-details .quantity-label{
-	  
 	display: inline-block;
-  font-size: 1.5em;
-  font-weight:bold;
+  font-weight: bold;
   color: #043680;
   width: 10%;
   text-align: center;
 }
 
 #order-details .quantity-value{
-	  background-color: #DDD;
+	 background-color: #DDD;
   width: 17%;
   display: inline-block;
   text-align: right;
-  font-size: 1.5em;
-  margin-left:0px;
+  margin-left: 0px;
 	
 }
 
 #order-details .price-label{
-	
 	display: inline-block;
-	font-weight:bold;
-  font-size: 1.5em;
+  font-weight: bold;
   color: #043680;
-  width: 10%;
   text-align: center;
+  width: 10%;
 }
 
 #order-details .price-value{
 	  
 	background-color: #DDD;
-  width: 17%;
+  width: 21%;
   display: inline-block;
   text-align: right;
-  font-size: 1.5em;
+  
 }
 
 #order-details .subtotal{
@@ -1011,21 +715,17 @@ font-size: 1.5em;
   width: 22%;
   display: inline-block;
   text-align: right;
-  font-size: 1.5em;
-  padding:2px;
 	
 }
 
 #order-details .del-button{
 	background-color: #DDD;
-  width: 5%;
+  width: 7%;
   display: inline-block;
   text-align: center;
-  font-size: 1.5em;
   font-weight: bold;
   color: red;
-  margin-left: 3%;
-	
+  margin-left: 4%;
 }
 
 #order-details .first-line{
@@ -1040,7 +740,7 @@ font-size: 1.5em;
 }
 
 #aboutGahibre{
-  margin-top: 60px;
+  
   text-transform: none;
   text-align: justify;
   padding-left: 15px;
@@ -1109,4 +809,36 @@ margin-left: 11%;
   margin-right: 1%;
   text-align: center;
 	
+}
+
+@media only screen 
+and (orientation : landscape)
+{ 
+#add-to-cart .first-line{
+display:inline-block;
+width:55%;	
+
+}
+
+#add-to-cart .second-line {
+
+display:inline-block;
+width:44%;
+}
+
+#order-details .first-line{
+display:inline-block;
+width:49%;	
+
+}
+
+#order-details .second-line {
+
+display:inline-block;
+width:49%;
+}
+
+#order-details li{
+font-size:95%;	
+}
 }

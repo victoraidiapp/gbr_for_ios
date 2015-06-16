@@ -43,6 +43,7 @@ var OrderManager={
 		})
 		$(document).on('singletap','#send-order',function(e){
 			console.log("Queremos mandar el pedido");
+			LoadingDialog.show("Generando albarán de pedido");
 			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
 				console.log("Es representante");
 				console.log("El valor es "+$('#customerSelect').val()-1);
@@ -70,7 +71,7 @@ var OrderManager={
 			LocalFileManager.writePDF(customer.nombre,output,function(r){
 				//Vaciamos el carrito
 				$('#empty-order').trigger('tap');
-				
+				LoadingDialog.hide();
 				console.log("El archivo se ha guardado en "+r);
 					cordova.plugins.email.open({
 					attachments: r, 

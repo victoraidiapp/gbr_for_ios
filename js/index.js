@@ -59,7 +59,18 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     manejadores: function() {
+		
+		
+		
+		
         document.addEventListener('deviceready', this.onDeviceReady, false);
+		
+		$('article').on('navigationend', function(e) {
+       // e.target is the current article that loaded
+			  
+			  app.checkNavButtons();
+   		})
+
 		
 		$(document).on("tap","a.external",function(e){
 			e.preventDefault();
@@ -289,23 +300,28 @@ var app = {
 		//console.log("El contenido del product destino es "+$("#"+section).html());
 		//console.log("El backEnabled es "+$("#"+section).data('backenabled'));
 		console.log("Vamos a la section "+section+" cuyo backenabled es "+$("#"+section).data('backenabled'));
-		if($("#"+section).data('backenabled')===true){
+		app.checkNavButtons();
+		
+	},
+	checkNavButtons:function(){
+		if($("article.current section.current").data('backenabled')===true){
 			$("nav.productos .back-button").show();
 		}else{
 			$("nav.productos .back-button").hide();
 		}
 		
-		if($("#"+section).data('shopenabled')===true){
+		if($("article.current section.current").data('shopenabled')===true){
 			$("nav.productos .shop-button").show();
 		}else{
 			$("nav.productos .shop-button").hide();
 		}
 		
-		if($("#"+section).data('addenabled')===true){
+		if($("article.current section.current").data('addenabled')===true){
 			$("nav.productos .add-button").show();
 		}else{
 			$("nav.productos .add-button").hide();
 		}
+		
 	},
 	nav_pre_pedidos:function(){
 		

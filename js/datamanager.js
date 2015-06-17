@@ -391,9 +391,9 @@ xhr.send();
 	searchModel:function(model){
 		$('#search-model').blur();
 		//console.log("Queremos buscar "+model);
-		var regexp=new RegExp(".*"+model+".*");
+		var regexp=new RegExp(".*"+model+".*","i");
 		//console.log("La expresión regular es "+regexp.toString());
-		regexp.ignoreCase=true;
+		
 		var i=0;
 		DataManager.searchProductCarrousel=new Array();
 		for(g in DataManager.catalogueJSON.producto){
@@ -536,7 +536,7 @@ xhr.send();
 		return '<h2 data-nproduct="'+nproduct+'">Modelo '+product.modelo+'</h2>'+
             '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.fotoGrande+'"/></div>'+
-            '<div class="center"><span class="material">'+product.gama.gama+'</span></div>'+
+            '<div class="center"><span class="material" style="background-color:'+product.gama.color+';">'+product.gama.gama+'</span></div>'+
             '<div class="details"><h3>DESCRIPCIÓN</h3>'+
             '<p>'+product.descripcion+'</p>'+
             '<h3>USO</h3>'+

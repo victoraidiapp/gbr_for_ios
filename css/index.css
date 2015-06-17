@@ -819,7 +819,8 @@ and (-webkit-min-device-pixel-ratio: 1)
   line-height: 1.5em;
 }
 
-#order-details li {
+#order-details li,
+#product-sizes li {
   font-size: 150%;
 }
 body{
@@ -844,6 +845,11 @@ font-size:1.4em;
 .popup{
 width:50%;	
 }
+
+#order-details input,
+#product-sizes input{
+font-size:100%;	
+}
 }
 
 @media only screen 
@@ -864,7 +870,8 @@ and (-webkit-min-device-pixel-ratio: 1)
   font-size: 1.8em;
   line-height: 1.5em;
 }
-	#order-details li {
+	#order-details li,
+	#product-sizes li {
   font-size: 150%;
 }
 .img-inlist{
@@ -891,6 +898,11 @@ font-size:1.4em;
 }
 .popup{
 width:50%;	
+}
+
+#order-details input,
+#product-sizes input{
+font-size:100%;	
 }
 	/*.loading {visibility:hidden;}
 	article.paging > section #order-details .discount-value {width:27%; }

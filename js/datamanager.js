@@ -45,6 +45,7 @@ var DataManager={
 												DataManager.syncImages(r,callbackInit)	;
 												}else{
 												console.log("No hay datos guardados en local");	
+												navigator.splashscreen.hide();
 												$.UIPopup({
           id: "NOTDATABASE",
           title: 'Sin datos', 
@@ -143,7 +144,7 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 				//console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
 					
-					
+					navigator.splashscreen.hide();
 					DataManager.initCatalogue();
 					DataManager.initOutlet();
 					LoadingDialog.hide(300);

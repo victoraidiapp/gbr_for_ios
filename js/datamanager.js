@@ -458,7 +458,7 @@ xhr.send();
 			/* cargamos los clientes en el select de pedidos*/
 			console.log("Este perico tiene "+DataManager.clientsJSON.cliente.length);
 			$("#customerSelect").html('');
-			
+			$("#customerSelect").append('<option value="-1">Seleccionar Cliente</option>');
 			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
 				var clientes=DataManager.clientsJSON.cliente[0].representado;
 				var idcli=1;

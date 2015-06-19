@@ -4,7 +4,16 @@ var OrderManager={
 	
 	init:function(){
 		
-		
+		/*VALIDAR NUMEROS REALES EN EL FORMULARIO DE PEDIDO*/
+		$('#order-details').on('change','.double-val',function(){
+			console.log("Vamos a validar el valor");
+			var patron=new RegExp('[0-9,.]*');
+			if(patron.test($(this).val())){
+				console.log("El valor es correcto");
+			}else{
+				console.log("El valor introducido no es correcto");	
+			}
+		})
 
 		$('#order-details').on('update','li',function(){
 			//console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
@@ -21,7 +30,7 @@ var OrderManager={
 			OrderManager.summaryOrder();
 		})
 		$('#checkout').on('tap','input',function(e){
-			console.log("Has hecho tap en un input del checkout");
+			
 			if(OrderManager.checkoutEnabled==false){
 				e.preventDefault();
 				return false;
@@ -43,7 +52,21 @@ var OrderManager={
 		})
 		$(document).on('singletap','#send-order',function(e){
 			console.log("Queremos mandar el pedido");
+			
+			/*COMPROBAMOS SI HA SELECCIONADO ALGÚN CLIENTE*/
+			if($('#customerSelect').val()<0){
+			$.UIPopup({
+				  id: "noCustomer",
+				  title: 'SELECCIONE CLIENTE', 
+				  message: 'Por favor seleccione un cliente para realizar el pedido', 
+				  continueButton: 'Cerrar'
+				});	
+				
+				return;
+			}
 			LoadingDialog.show("Generando albarán de pedido");
+			
+			
 			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE"){
 				console.log("Es representante");
 				console.log("El valor es "+$('#customerSelect').val()-1);
@@ -118,7 +141,11 @@ var OrderManager={
 		
 		$("#checkout").on('tap','#more-products',function(e){
 			$(".button.productos").trigger('singletap');
-			app.navProducts("product-cat",true);
+			app.navProducts("#productos","product-carrousel",true);
+		})
+		
+		$("#checkout").on('tap','#back-products',function(e){
+			$('nav.current .back-button').trigger('singletap');
 		})
 		
 		OrderManager.summaryOrder();
@@ -126,6 +153,7 @@ var OrderManager={
 	},
 	addToCart:function(){
 		console.log("Vamos a añadir el currentProduct al shopcart ");
+		
 	var product=Array();
 	product["detail"]=DataManager.currentProduct;
 	console.log("El current product "+DataManager.currentProduct);
@@ -167,12 +195,12 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 								'<span class="size-label">Talla</span>'+
 								'<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+
 								'<span class="discount-label">% Dto:</span>'+
-								'<input type="number" class="discount-value updater" value="0"/>'+
+								'<input type="number" class="discount-value updater double-val" placeholder="0"/>'+
 								'</div>'+
 							'<div class="second-line" data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
-								'<input type="number" class="quantity-value updater" value="'+DataManager.shopCart[x].tallas[tt].cantidad+'"/>'+
+								'<input type="number" class="quantity-value updater double-val" placeholder="0" value="'+DataManager.shopCart[x].tallas[tt].cantidad+'"/>'+
 								'<span class="quantity-label">uds</span>'+
-								'<input type="number" class="price-value updater" value="'+DataManager.shopCart[x].detail.precio+'"/>'+
+								'<input type="number" class="price-value updater double-val" placeholder="0" value="'+DataManager.shopCart[x].detail.precio+'"/>'+
 								'<span class="price-label">€/ud</span>'+
 								'<span class="subtotal">0</span>'+
 								'<span class="del-button">X</span>'+

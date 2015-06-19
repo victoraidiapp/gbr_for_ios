@@ -275,9 +275,10 @@ var app = {
 	})
 	
 	//Asociamos Función de preexecute en el tabbar pedidos
-	console.log("Asociamos la función nav-pre-pedidos al pre-execute del tabbar pedidos");
-	$('.tabbar .button.pedidos').data('nav-pre-execute','app.nav_pre_pedidos');
 	
+	$('.tabbar .button.pedidos').data('nav-pre-execute','app.nav_pre_pedidos');
+	//Asociamos Funciónd e preexecute en el tabbar de productos
+	$('.tabbar .button.productos').data('nav-pre-execute','app.nav_pre_productos');
 		
     },
     // deviceready Event Handler
@@ -304,7 +305,8 @@ var app = {
 		
 	},
 	checkNavButtons:function(){
-		
+		$("nav.current.productos .shop-button").hide();
+		$("nav.current.productos .add-button").hide();
 		
 		if($("article.current section.current").data('backenabled')===true){
 			$("nav.current.productos .back-button").show();
@@ -324,6 +326,15 @@ var app = {
 			$("nav.current.productos .add-button").hide();
 		}
 		
+	},
+	nav_pre_productos:function(){
+		if(!$('#product-init').hasClass('current')){
+			//Hay que ir hasta la portada de productos
+			app.navProducts('#productos','product-init',true);
+			
+		}
+		
+		return false;
 	},
 	nav_pre_pedidos:function(){
 		

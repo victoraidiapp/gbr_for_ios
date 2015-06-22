@@ -80,8 +80,8 @@ var app = {
 		
 		$(document).on("singletap",".more-products",function(e){
 			$('.popup').UIPopupClose();
-			OrderManager.addToCart();
-			app.navProducts("#productos","product-cat",true);
+			
+			$("nav.current .back-button").trigger("singletap");
 			
 		})
 		
@@ -90,6 +90,17 @@ var app = {
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
 			//$.UIGoToArticle("#pedidos");
+			$(".button.pedidos").trigger('singletap');
+			OrderManager.checkoutEnabled=false;
+			//app.navProducts("#productos","product-cat",true);
+			setTimeout(function f(){ console.log("Activamos los input del chekout");OrderManager.checkoutEnabled=true},500);
+			
+		})
+		
+		$(document).on("singletap",".goto-checkout-popup",function(e){
+			
+			$('.popup').UIPopupClose();
+			
 			$(".button.pedidos").trigger('singletap');
 			OrderManager.checkoutEnabled=false;
 			//app.navProducts("#productos","product-cat",true);
@@ -183,7 +194,7 @@ var app = {
 		$.UIPopup({
           id: "addToCart",
           title: 'PRODUCTO AÑADIDO', 
-          message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout">Ir al pedido</span></div>', 
+          message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout-popup">Ir al pedido</span></div>', 
         });
 		OrderManager.addToCart();
 	})

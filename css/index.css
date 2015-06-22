@@ -81,34 +81,7 @@ width:80%;
 /********** RESPONSIVE iPhone ***********/
 /****************************************/
 
-/* iPhone 3G Y 3GS*/
 
-@media only screen 
-and (min-device-width : 320px)
-and (-webkit-min-device-pixel-ratio: 2)
-{
-/*	STYLES GO HERE*/
-}
-
-/* iPhone 4 y 4S*/
-
-@media only screen 
-and (min-device-width : 320px)
-and (max-device-width : 480px)
-and (-webkit-min-device-pixel-ratio: 2)
-{  	
-	
-
-}
-
-@media only screen 
-and (min-device-width : 320px)
-and (max-device-width : 480px) 
-and (orientation : landscape)
-and (-webkit-min-device-pixel-ratio: 2)
-{	
-	
-}
 
 
 
@@ -178,8 +151,14 @@ background-color: #043680;
 	
 }
 .tabbar >.button.selected{
-background-color:#fcfcf8;	
+background-color:#043680;	
 }
+
+.isDesktop .tabbar > .button:hover, .tabbar > .button.selected {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
 
 article .loading{
 	background-color: #043680;
@@ -269,38 +248,42 @@ margin-top: 15px;
 .back-button{
 	  background-image: url(../img/iconos/back_57.png);
   background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  background-size: 80%;
-  display: none;
-  top: 25px;
+  width: 45px;
+  height: 45px;
+  background-size: 60%;
+   display: none;
+  top: 0;
   position: absolute;
+  background-position: left center;
   
 }
 
 .shop-button{
-	  background-image: url(../img/iconos/shopping-btn.png);
+	background-image: url(../img/iconos/shopping-btn.png);
   background-repeat: no-repeat;
-  width: 24px;
-  height: 24px;
-  background-size: 100%;
+  width: 45px;
+  height: 45px;
+  background-size: 60%;
   display: none;
-  position:absolute;
-  right:10px;
-  top:25px;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  background-position: center center;
   
 }
 
 .add-button{
-	  background-image: url(../img/iconos/add_new_57.png);
+	background-image: url(../img/iconos/add_new_57.png);
   background-repeat: no-repeat;
-  width: 24px;
-  height: 24px;
-  background-size: 100%;
+  width: 45px;
+  height: 45px;
+  background-size: 60%;
   display: none;
-  position:absolute;
-  right:10px;
-  top:25px;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  background-position: center center;
+
   
 }
 
@@ -713,6 +696,19 @@ font-size:95%;
 }
 }
 
+
+/* iPhone 3G*/
+@media only screen 
+and (min-device-width : 320px)
+and (min-device-height : 480px)
+and (-webkit-max-device-pixel-ratio: 1)
+{  	
+	
+	
+}
+
+
+
 /* iPhone 5, 5C, 5S*/
 
 @media only screen 
@@ -821,7 +817,7 @@ and (-webkit-min-device-pixel-ratio: 1)
 
 #order-details li,
 #product-sizes li {
-  font-size: 150%;
+  font-size: 130%;
 }
 body{
 font-size:16px;	
@@ -872,7 +868,7 @@ and (-webkit-min-device-pixel-ratio: 1)
 }
 	#order-details li,
 	#product-sizes li {
-  font-size: 150%;
+  font-size: 130%;
 }
 .img-inlist{
 		height:100px;

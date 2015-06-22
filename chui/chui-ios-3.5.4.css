@@ -105,7 +105,7 @@ small,
    =========================== */
 article {
   position: absolute;
-  top: 60px;
+  top: 45px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -353,7 +353,7 @@ html[dir=rtl] .toolbar > .button.align-flush {
   overflow: hidden;
 }
 nav {
-	height: 60px;
+	height: 45px;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	display: -webkit-box;
@@ -388,7 +388,7 @@ nav > h1 {
   flex: 1 !important;
   font: normal 12pt/14pt HelveticaNeue, Sans-serif;
   position: absolute;
-  top: 15px;
+  top: 0px;
   left: 100px;
   right: 100px;
   z-index: -1;

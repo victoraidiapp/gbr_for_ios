@@ -134,6 +134,16 @@ nav h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
+#product-init,#product-fam{
+display:table;
+padding-bottom:0px!important;
+}
+
+.center-vertical,
+#product-fam .role-content{
+display:table-cell;
+vertical-align:middle;		
+}
 
 .tabbar > .button > .icon{
 display:none;	
@@ -210,7 +220,6 @@ display:block;
 margin-left:auto;
 margin-right:auto;
 width:54%;
-margin-top:35%;
 padding:2%;
 padding-left:8%;
 }

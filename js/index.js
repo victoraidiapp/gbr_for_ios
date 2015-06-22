@@ -86,13 +86,13 @@ var app = {
 		})
 		
 		$(document).on("singletap",".goto-checkout",function(e){
-			$(".button.pedidos").trigger('singletap');
+			
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
 			//$.UIGoToArticle("#pedidos");
-			
+			$(".button.pedidos").trigger('singletap');
 			OrderManager.checkoutEnabled=false;
-			app.navProducts("#productos","product-cat",true);
+			//app.navProducts("#productos","product-cat",true);
 			setTimeout(function f(){ console.log("Activamos los input del chekout");OrderManager.checkoutEnabled=true},500);
 			
 		})
@@ -227,9 +227,7 @@ var app = {
 	})
 	
 	
-	$("#add-to-cart").on("singletap","li",function(e){
-		console.log("Alguien me ha picado y mi contenido es "+$(this).html());
-	})
+	
 	//Quantity-Buttons
 	$(".sizes-list").on("singletap",".quantity-button",function(e){
 		console.log("Has picado en un boton de cantidad");
@@ -339,8 +337,8 @@ var app = {
 	nav_pre_pedidos:function(){
 		
 		console.log("Ejecutamos la función nav_pre_pedidos");
-		console.log("En el carrito hay "+DataManager.shopCart.length);
-		if(DataManager.shopCart.length>0){
+		console.log("En el carrito hay "+OrderManager.getOrderSize());
+		if(OrderManager.getOrderSize()>0){
 			
 		}else{
 		//El carrito de la compra notiene pedidos

@@ -274,7 +274,7 @@ values['token']=token;
 
 		$.ajax({
 			type:"POST",
-			url:"http://datic.es/gahibre/webservice/cliente.php",
+			url:"http://datic.es/gahibre/webservice/cliente_ios.php",
 			dataType:"text",
 			data:values,
 			success:function(r){

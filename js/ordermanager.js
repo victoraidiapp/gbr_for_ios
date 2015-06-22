@@ -186,7 +186,8 @@ var OrderManager={
 		
 		var ta=$(this).find('.size-value').html();
 		
-		if(parseInt(v)>0){
+		//if(parseInt(v)>0){
+		if($(this).find('#add').is(':checked')){
 		var t=Array();
 		t["talla"]=	ta;
 		t["cantidad"]=v;

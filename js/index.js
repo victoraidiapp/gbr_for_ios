@@ -87,6 +87,10 @@ var app = {
 		
 		$(document).on("singletap",".goto-checkout",function(e){
 			
+			var totalCheckout=$('section.current .sizes-list input[type="checkbox"]:checked').length;
+		console.log("Se han marcado "+totalCheckout);
+		
+		if(totalCheckout>0){
 			$('.popup').UIPopupClose();
 			OrderManager.addToCart();
 			//$.UIGoToArticle("#pedidos");
@@ -94,6 +98,18 @@ var app = {
 			OrderManager.checkoutEnabled=false;
 			//app.navProducts("#productos","product-cat",true);
 			setTimeout(function f(){ console.log("Activamos los input del chekout");OrderManager.checkoutEnabled=true},500);
+		}else{
+			
+			$.UIPopup({
+          id: "noItemsSelected",
+          title: 'PEDIDO', 
+          message: 'No ha seleccionado ningún producto', 
+		 continueButton:'ACEPTAR'
+        });
+		}
+		
+		
+			
 			
 		})
 		
@@ -190,13 +206,28 @@ var app = {
 	})
 	
 	$("nav.productos").on("singletap",".add-button",function(e){
+		//Hay que comprobar si hay productos añadidos
 		
-		$.UIPopup({
+		var totalCheckout=$('section.current .sizes-list input[type="checkbox"]:checked').length;
+		console.log("Se han marcado "+totalCheckout);
+		
+		if(totalCheckout>0){
+			$.UIPopup({
           id: "addToCart",
           title: 'PRODUCTO AÑADIDO', 
           message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout-popup">Ir al pedido</span></div>', 
         });
 		OrderManager.addToCart();
+		}else{
+			
+			$.UIPopup({
+          id: "noItemsSelected",
+          title: 'PEDIDO', 
+          message: 'No ha seleccionado ningún producto', 
+		 continueButton:'ACEPTAR'
+        });
+		}
+		
 	})
 	
 	$("nav.productos").on("singletap",".shop-button.catalogue",function(e){
@@ -263,10 +294,6 @@ var app = {
 			console.log("Marcamos el checkbox");
 			 $(this).find('#add').prop('checked',true);
 			 
-		}else{
-			$(this).find('#add').prop('checked',false);
-			console.log("Marcamos el checkbox");
-			
 		}
 		
 	})

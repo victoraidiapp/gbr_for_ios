@@ -144,7 +144,7 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 				//console.log("quedan "+onProgress.left);
 				if(onProgress.finished===true) {
 					
-					navigator.splashscreen.hide();
+					//navigator.splashscreen.hide();
 					DataManager.initCatalogue();
 					DataManager.initOutlet();
 					LoadingDialog.hide(300);
@@ -177,7 +177,11 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 		console.log("Cargamos la imagen de promo como html "+'<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
 		
 		$("#promo").html('<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
-		app.navProducts('#home','promo',true);
+		setTimeout(function(){
+			app.navProducts('#home','promo',true);
+	
+		},3500);
+		
 		
 	},
 	

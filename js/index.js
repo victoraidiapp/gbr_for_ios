@@ -339,6 +339,20 @@ var app = {
 	nav_pre_pedidos:function(){
 		
 		console.log("Ejecutamos la función nav_pre_pedidos");
+		console.log("En el carrito hay "+DataManager.shopCart.length);
+		if(DataManager.shopCart.length>0){
+			
+		}else{
+		//El carrito de la compra notiene pedidos
+		$.UIPopup({
+          id: "noArticles",
+          title: 'PEDIDO', 
+          message: 'No hay artículos en el pedido',
+		  cancelButton:"ACEPTAR"
+		  
+				})
+		return true;	
+		}
 		if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 	
 	

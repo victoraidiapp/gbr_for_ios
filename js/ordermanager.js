@@ -51,9 +51,78 @@ var OrderManager={
 			
 		})
 		$(document).on('singletap','#send-order',function(e){
-			console.log("Queremos mandar el pedido");
+			console.log("Queremos mandar el pedido con total "+$('#order-summary .total-value').text());
+			var total=parseFloat($('#order-summary .total-value').text());
+			console.log("El total es "+total);
+			if(total<300){
+				$.UIPopup({
+          id: "under300",
+          title: 'PEDIDO', 
+          message: 'Su pedido es inferior a 300 €. Se cargarán los portes de envío<br/><div class="popup-buttons"><span class="popup-button cancel-button">CANCELAR</span><span class="popup-button send-order-popup">ACEPTAR</span></div>', 
+        });
+			}else{
+			OrderManager.sendOrder();
+			}
 			
-			/*COMPROBAMOS SI HA SELECCIONADO ALGÚN CLIENTE*/
+		})
+		
+		$(document).on('singletap','.send-order-popup',function(){
+			$('.popup').UIPopupClose();
+			OrderManager.sendOrder();
+		})
+		
+		$(document).on('singletap','.cancel-button',function(){
+			$('.popup').UIPopupClose();
+		})
+		
+		$('#order-details').on('tap','.del-button',function(e){
+			var p=$(this).parent().data("idproduct");
+			var t=$(this).parent().data("idtalla");
+			console.log("Queremos eliminar la tall "+t+" del producto "+p);
+			console.log("Antes de eliminar el numero de tallas de "+p+" es "+DataManager.shopCart[p].tallas.length);
+			if(DataManager.shopCart[p].tallas.length==1)
+			{ DataManager.shopCart[p].tallas.pop();
+			}else{
+			var tr=DataManager.shopCart[p].tallas.splice(t,1);
+			}
+			console.log("Hemos eliminado la talla "+tr.talla);
+			for(t in DataManager.shopCart[p].tallas){
+			console.log("Todavía queda la talla "+	DataManager.shopCart[p].tallas[t].talla);
+			}
+			$(this).parents('li').remove();
+			console.log("Despues de eliminar el numero de tallas de "+p+" es "+DataManager.shopCart[p].tallas.length);
+			OrderManager.summaryOrder();
+		})
+		
+		$('#order-details').on('blur','.updater',function(){
+			console.log("Quremos actualizar esta linea de pedido");
+			$(this).parents('li').trigger('update');
+			
+		})
+		
+		$("#checkout").on('tap','#empty-order',function(e){
+			DataManager.shopCart=new Array();
+			DataManager.currentProduct=null;
+			OrderManager.updateOrder();
+			OrderManager.summaryOrder();
+
+			
+		})
+		
+		$("#checkout").on('tap','#more-products',function(e){
+			$(".button.productos").trigger('singletap');
+			app.navProducts("#productos","product-carrousel",true);
+		})
+		
+		$("#checkout").on('tap','#back-products',function(e){
+			$('nav.current .back-button').trigger('singletap');
+		})
+		
+		OrderManager.summaryOrder();
+		
+	},
+	sendOrder:function(){
+		/*COMPROBAMOS SI HA SELECCIONADO ALGÚN CLIENTE*/
 			if($('#customerSelect').val()<0){
 			$.UIPopup({
 				  id: "noCustomer",
@@ -102,53 +171,6 @@ var OrderManager={
 					
 					
 			})
-			
-		})
-		
-		$('#order-details').on('tap','.del-button',function(e){
-			var p=$(this).parent().data("idproduct");
-			var t=$(this).parent().data("idtalla");
-			console.log("Queremos eliminar la tall "+t+" del producto "+p);
-			console.log("Antes de eliminar el numero de tallas de "+p+" es "+DataManager.shopCart[p].tallas.length);
-			if(DataManager.shopCart[p].tallas.length==1)
-			{ DataManager.shopCart[p].tallas.pop();
-			}else{
-			var tr=DataManager.shopCart[p].tallas.splice(t,1);
-			}
-			console.log("Hemos eliminado la talla "+tr.talla);
-			for(t in DataManager.shopCart[p].tallas){
-			console.log("Todavía queda la talla "+	DataManager.shopCart[p].tallas[t].talla);
-			}
-			$(this).parents('li').remove();
-			console.log("Despues de eliminar el numero de tallas de "+p+" es "+DataManager.shopCart[p].tallas.length);
-			OrderManager.summaryOrder();
-		})
-		
-		$('#order-details').on('blur','.updater',function(){
-			console.log("Quremos actualizar esta linea de pedido");
-			$(this).parents('li').trigger('update');
-			
-		})
-		
-		$("#checkout").on('tap','#empty-order',function(e){
-			DataManager.shopCart=new Array();
-			DataManager.currentProduct=null;
-			OrderManager.updateOrder();
-			OrderManager.summaryOrder();
-
-			
-		})
-		
-		$("#checkout").on('tap','#more-products',function(e){
-			$(".button.productos").trigger('singletap');
-			app.navProducts("#productos","product-carrousel",true);
-		})
-		
-		$("#checkout").on('tap','#back-products',function(e){
-			$('nav.current .back-button').trigger('singletap');
-		})
-		
-		OrderManager.summaryOrder();
 		
 	},
 	addToCart:function(){

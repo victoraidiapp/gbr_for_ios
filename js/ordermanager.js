@@ -196,7 +196,8 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 		}
 	})
 	
-	DataManager.shopCart[DataManager.currentProduct.modelo]=product;
+	//DataManager.shopCart[DataManager.currentProduct.modelo]=product;
+	DataManager.shopCart.push(product);
 	//console.log("El contenido del shopcart es "+DataManager.shopCart);
 	OrderManager.updateOrder();
 	//Vaciamos el product-sizes
@@ -214,7 +215,7 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 				for(tt in DataManager.shopCart[x].tallas){
 				$('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
 							'<div class="first-line">'+
-							'	<span class="article">'+x+'</span>'+
+							'	<span class="article">'+DataManager.shopCart[x].detail.modelo+'</span>'+
 								'<span class="size-label">Talla</span>'+
 								'<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+
 								'<span class="discount-label">% Dto:</span>'+

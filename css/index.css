@@ -134,13 +134,12 @@ nav h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-#product-init,#product-fam{
+.centrable.current{
 display:table;
 padding-bottom:0px!important;
 }
 
-.center-vertical,
-#product-fam .role-content{
+section.current .center-vertical{
 display:table-cell;
 vertical-align:middle;		
 }
@@ -222,6 +221,9 @@ margin-right:auto;
 width:54%;
 padding:2%;
 padding-left:8%;
+  border-color: #ccc;
+  border-style: solid;
+  background-color:#eee;
 }
 
 .gahibre-button{
@@ -238,7 +240,9 @@ margin-top:3%;
 	text-align:center;
 	
 }
-
+.product-search .gahibre-button{
+margin-top:7%;	
+}
 /*PRODUCT LIST*/
 .img-inlist{
 height:40px;

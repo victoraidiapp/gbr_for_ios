@@ -538,8 +538,8 @@ xhr.send();
 				}
 				
 		return '<h2 data-nproduct="'+nproduct+'">Modelo '+product.modelo+'</h2>'+
-            '<div class="center"><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-				product.fotoGrande+'"/></div>'+
+            '<div class="center big_image"><img src="'+LocalFileManager.docsPath+'src/img_prod/'+
+				product.fotoGrande+'" /></div>'+
             '<div class="center"><span class="material" style="background-color:'+product.gama.color+';">'+product.gama.gama+'</span></div>'+
             '<div class="details"><h3>DESCRIPCIÓN</h3>'+
             '<p>'+product.descripcion+'</p>'+

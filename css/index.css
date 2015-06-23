@@ -338,8 +338,14 @@ margin-bottom:15px;
 }
 .product-carrousel .center img,
 #outlet-product-carrousel .center img{
-margin-bottom:15px;	
+
 height:150px;
+
+}
+.big_image{
+height:100%;
+margin-bottom:30px;	
+	
 }
 .product-carrousel h2{
 color:#043680;

@@ -333,7 +333,8 @@ background-color:#FFF;
 }
 .product-carrousel h2,
 .product-carrousel .center{
-text-align:center;	
+text-align:center;
+margin-bottom:15px;	
 }
 .product-carrousel .center img,
 #outlet-product-carrousel .center img{
@@ -345,10 +346,10 @@ color:#043680;
 font-size:1.4em;
 margin-left:0px;	
 font-weight:bold;
+line-height:1.6em;
 }
 .product-carrousel .material{
 	background-color:#043680;
-	opacity:0.5;
 	border-radius:5px;
 	padding:5px;
 	color:#FFF;

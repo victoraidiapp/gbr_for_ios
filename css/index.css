@@ -152,7 +152,7 @@ padding-bottom:0px!important;
 }
 
 section.current .center-vertical{
-display:table-cell;
+display:table-cell!important;
 vertical-align:middle;		
 }
 

@@ -80,14 +80,7 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 	}
 });
 */
-//INTERCEPTAMOS LA CARGA DEL HOME
-$(document).on('singletap tap click',".button.gahibre",function(e){
-	if($('#about').hasClass('current')){
-	return true;	
-	}
-	
-	app.navProducts('#home','about',true);
-})
+
 		
 	},
 	syncImages:function(r,callbackInit){

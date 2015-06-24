@@ -315,6 +315,15 @@ var app = {
 	$('.tabbar .button.pedidos').data('nav-pre-execute','app.nav_pre_pedidos');
 	//Asociamos Funciónd e preexecute en el tabbar de productos
 	$('.tabbar .button.productos').data('nav-pre-execute','app.nav_pre_productos');
+	//Asociamos Funciónd e preexecute en el tabbar de home
+	$('.tabbar .button.gahibre').data('nav-pre-execute','app.nav_pre_home');
+	//Asociamos Funciónd e preexecute en el tabbar de outlet
+	$('.tabbar .button.outlet').data('nav-pre-execute','app.nav_pre_outlet');
+	
+	$('article').on('navigationend',function(e){
+		console.log("Comprobamos los botones de navegación");
+		app.checkNavButtons();
+	})
 		
     },
     // deviceready Event Handler
@@ -341,6 +350,7 @@ var app = {
 		
 	},
 	checkNavButtons:function(){
+		console.log("Checamos los nav buttons");
 		$("nav.current.productos .shop-button").hide();
 		$("nav.current.productos .add-button").hide();
 		
@@ -372,6 +382,25 @@ var app = {
 		
 		return false;
 	},
+	nav_pre_outlet:function(){
+		if(!$('#outlet-product-cat').hasClass('current')){
+			//Hay que ir hasta la portada de productos
+			app.navProducts('#outlet','outlet-product-cat',true);
+			
+		}
+		
+		return false;
+	},
+	nav_pre_home:function(){
+		if(!$('#about').hasClass('current')){
+			app.navProducts('#home','about',true);	
+		}else{
+			app.navProducts('#home','promo',true);
+		}
+		
+		return false;
+	},
+	
 	nav_pre_pedidos:function(){
 		
 		console.log("Ejecutamos la función nav_pre_pedidos");

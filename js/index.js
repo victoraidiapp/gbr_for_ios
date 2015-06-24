@@ -86,7 +86,29 @@ var app = {
 		})
 		
 		$(document).on("singletap",".goto-checkout",function(e){
+			//Hay que comprobar si hay productos añadidos
+		
+		var totalCheckout=$('section.current .sizes-list input[type="checkbox"]:checked').length;
+		console.log("Se han marcado "+totalCheckout);
+		
+		if(totalCheckout>0){
+			$.UIPopup({
+          id: "addToCart",
+          title: 'PRODUCTO AÑADIDO', 
+          message: '<div class="popup-buttons"><span class="popup-button more-products">Añadir más</span><span class="popup-button goto-checkout-popup">Ir al pedido</span></div>', 
+        });
+		OrderManager.addToCart();
+		}else{
 			
+			$.UIPopup({
+          id: "noItemsSelected",
+          title: 'PEDIDO', 
+          message: 'No ha seleccionado ningún producto', 
+		 continueButton:'ACEPTAR'
+        });
+		}
+			
+			/*
 			var totalCheckout=$('section.current .sizes-list input[type="checkbox"]:checked').length;
 		console.log("Se han marcado "+totalCheckout);
 		
@@ -108,7 +130,7 @@ var app = {
         });
 		}
 		
-		
+		*/
 			
 			
 		})
@@ -116,7 +138,7 @@ var app = {
 		$(document).on("singletap",".goto-checkout-popup",function(e){
 			
 			$('.popup').UIPopupClose();
-			
+			OrderManager.emptyProductSizes();
 			$(".button.pedidos").trigger('singletap');
 			OrderManager.checkoutEnabled=false;
 			//app.navProducts("#productos","product-cat",true);

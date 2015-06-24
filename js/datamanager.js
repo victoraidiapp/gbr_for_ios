@@ -176,9 +176,11 @@ $(document).on('singletap tap click',".button.gahibre",function(e){
 		//CArgamos la promo
 		console.log("Cargamos la imagen de promo como html "+'<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
 		
-		$("#promo").html('<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
+		/*$("#promo").html('<img src="'+LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada+'" class="promo"/>');
+		*/
 		setTimeout(function(){
-			app.navProducts('#home','promo',true);
+			$("#promo img").attr('src',LocalFileManager.docsPath+'src/img_prod/'+DataManager.catalogueJSON.promocion[0].portada);
+			//app.navProducts('#home','promo',true);
 	
 		},3500);
 		

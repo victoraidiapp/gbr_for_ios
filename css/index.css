@@ -50,11 +50,12 @@ body {
 }
 li.comp > aside:first-child {
 margin-left:5%;
-margin-right:10%;	
+margin-right:7%;	
 }
 
 li.comp > div{
 border:none;	
+margin-right:20%;
 }
 li.comp{
 	border-bottom-width: 1px;
@@ -275,6 +276,7 @@ margin-right:10%;
 .product-list .list h2{
 margin-top: 15px;
   font-size: 1.1em;
+  white-space:normal;
 
 }
 .back-button{
@@ -756,12 +758,12 @@ and (min-device-height : 568px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2)
 {
-	.product-list .list h2{
+	/*.product-list .list h2{
 margin-top: 20px;
   font-size: 1.2em;
 
 }
-
+*/
 .img-inlist{
 height:50px;
 }

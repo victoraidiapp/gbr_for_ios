@@ -138,7 +138,7 @@ var app = {
 		$(document).on("singletap",".goto-checkout-popup",function(e){
 			
 			$('.popup').UIPopupClose();
-			OrderManager.emptyProductSizes();
+			OrderManager.emptyProductSizes();css 
 			$(".button.pedidos").trigger('singletap');
 			OrderManager.checkoutEnabled=false;
 			//app.navProducts("#productos","product-cat",true);

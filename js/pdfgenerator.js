@@ -75,11 +75,16 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 			console.log("Vamos a generar en el PDF la linea de producto "+x)
 				
 				for(tt in shopcart[x].tallas){
+					//Si la cantidad es 0 nos lo saltamos
+					if(shopcart[x].tallas[tt].cantidad<1) break;
+					
 					console.log("GEnerando la linea de talla "+shopcart[x].tallas[tt].talla+" de "+x);
 					doc.text(23, initY, x);
 					doc.text(76, initY, shopcart[x].tallas[tt].talla);
 					console.log("GEnerando la linea de cantidad "+shopcart[x].tallas[tt].cantidad+" de "+x);
 					doc.text(110, initY, shopcart[x].tallas[tt].cantidad);
+					//sólo se calcula la cantidad si no es centro comercial
+					if(customer.tipo!="CENTRO COMERCIAL"){
 					console.log("GEnerando la linea de descuento "+shopcart[x].tallas[tt].descuento+" de "+x);
 					doc.text(138, initY, shopcart[x].tallas[tt].descuento);
 					console.log("GEnerando la linea de precio "+shopcart[x].detail.precio+" de "+x);
@@ -89,6 +94,7 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 					console.log("Y ahora vamos a realizar la operacione de total ");
 				total=eval(total+'+'+shopcart[x].tallas[tt].subtotal);
 				console.log("El total es "+total);
+					}
 				initY+=8;	
 				}
 				
@@ -100,11 +106,13 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 	// Texto al margen ALBARÁN
 	doc.setFontSize (10);
 	doc.text(12, 170, 'ALBARÁN DE PEDIDO', null, 90);
-
+if(customer.tipo!="CENTRO COMERCIAL"){
 	doc.rect(115, 220, 85, 10); // TOTAL 
+	
 	doc.setFontSize(10);
 	doc.text(118, 226, 'TOTAL: ');
 	doc.text(138, 226, ' '+total+' €');
+}
 	console.log("Las observcaiones son "+observaciones);
 	doc.rect(20, 235, 180, 40);	// Observaciones
 	doc.text(23, 241, 'OBSERVACIONES: ');

@@ -123,7 +123,8 @@ var OrderManager={
 	},
 	sendOrder:function(){
 		/*COMPROBAMOS SI HA SELECCIONADO ALGÚN CLIENTE*/
-			if($('#customerSelect').val()<0){
+		
+			if(DataManager.clientsJSON.cliente[0].tipo=="REPRESENTANTE" && $('#customerSelect').val()<0){
 			$.UIPopup({
 				  id: "noCustomer",
 				  title: 'SELECCIONE CLIENTE', 

@@ -16,6 +16,7 @@ var DataManager={
 	userDNI:null,
 	currentProduct:null,
 	shopCart:Array(),
+	prices:false,
 	init:function(callbackInit){
 		
 		//HABRÍA QUE COMPROBAR SI TENEMOS LA ÚLTIMA VERSIÓN DE LA BASE DE DATOS PARA NO TENER QUE VOLVER A DESCARGARLA
@@ -467,7 +468,12 @@ xhr.send();
 					$("#customerSelect").append('<option value="'+idcli+'">'+clientes[cli].nombre+'</option>');
 					idcli++;
 				}
-			
+			DataManager.showPrices(true);
+			}else if(DataManager.clientsJSON.cliente[0].tipo=="CENTRO COMERCIAL"){
+			//Ocultamos el selector de cliente
+			$('.customer-line').css('display','none');
+			//Ocultamos los precios
+			DataManager.showPrices(false);	
 			}else{
 				$("#customerSelect").append('<option value="0">'+DataManager.clientsJSON.cliente[0].nombre+'</option>');
 			}
@@ -523,6 +529,14 @@ xhr.send();
 			DataManager.syncClients(DataManager.userDNI);
           }
         });
+	},
+	showPrices:function(bl){
+		DataManager.prices=bl;
+		if(bl){
+			$('.product_price').css('visibility','visible');
+		}else{
+			$('.product_price').css('visibility','hidden');
+		}
 	},
 	getProductDetail:function(nproduct,product){
 		

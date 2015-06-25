@@ -746,6 +746,10 @@ font-size:95%;
   top: 20px;
   left: 20px;	
 }
+.img_product img{
+height:auto;
+width:110px;	
+}
 
 .product-carrousel h2 {
   color: #043680;

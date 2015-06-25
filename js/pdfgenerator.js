@@ -79,7 +79,7 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 					if(shopcart[x].tallas[tt].cantidad<1) break;
 					
 					console.log("GEnerando la linea de talla "+shopcart[x].tallas[tt].talla+" de "+x);
-					doc.text(23, initY, x);
+					doc.text(23, initY, shopcart[x].detail.modelo);
 					doc.text(76, initY, shopcart[x].tallas[tt].talla);
 					console.log("GEnerando la linea de cantidad "+shopcart[x].tallas[tt].cantidad+" de "+x);
 					doc.text(110, initY, shopcart[x].tallas[tt].cantidad);

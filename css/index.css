@@ -535,6 +535,9 @@ font-weight: bold;
   width: 35%;
   
 }
+#order-details .condensed .article{
+width:30%;	
+}
 
 #order-details .size-label{
 	font-weight: bold;

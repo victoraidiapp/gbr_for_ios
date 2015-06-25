@@ -474,7 +474,12 @@ xhr.send();
 			$('.customer-line').css('display','none');
 			//Ocultamos los precios
 			DataManager.showPrices(false);	
-			}else{
+			
+				
+			}else{//cliente final
+			DataManager.showPrices(true);	
+			//Ocultamos el selector de cliente
+			$('.customer-line').css('display','none');
 				$("#customerSelect").append('<option value="0">'+DataManager.clientsJSON.cliente[0].nombre+'</option>');
 			}
 		
@@ -501,8 +506,18 @@ xhr.send();
 					DataManager.loadClients(dni,r);
 				})*/
 			}else{
+				if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+					$.UIPopup({
+          id: "requestDNI",
+          title: 'NIF CORRECTO', 
+          message: 'Ha iniciado sesión correctamente. Sus datos quedarán guardados en la aplicación.',
+		  cancelButton:"Cerrar"
+		  
+				})
+				}
 				LocalFileManager.writeToClients(r);
 				DataManager.loadClients(dni,r);	
+				
 				//Loguardamos en el localstorage
 				
 			}

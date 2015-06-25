@@ -533,20 +533,22 @@ xhr.send();
 				}
 				
 		return '<h2 data-nproduct="'+nproduct+'">Modelo '+product.modelo+'</h2>'+
-            '<div class="center big_image"><img src="'+LocalFileManager.docsPath+'src/img_prod/'+
+            '<div class="center big_image img_product"><img src="'+LocalFileManager.docsPath+'src/img_prod/'+
 				product.fotoGrande+'" /></div>'+
-            '<div class="center"><span class="material" style="background-color:'+product.gama.color+';">'+product.gama.gama+'</span></div>'+
+            '<div class="center label_family"><span class="material" style="background-color:'+product.gama.color+';">'+product.gama.gama+'</span></div>'+
             '<div class="details"><h3>DESCRIPCIÓN</h3>'+
             '<p>'+product.descripcion+'</p>'+
             '<h3>USO</h3>'+
             '<p>'+product.uso+'</p>'+
             '<h3 class="inline">TALLA: </h3><span class="value">'+product.tallas.join()+'</span>'+
             '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+product.empaquetado+'</span>'+
-            '<h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+'</span>'+
-			'<p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
+            
+			'<div class="product_logos"><p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.categoria.categoria+'" class="mini-logo"/></p>'+
-				'<p>'+normativas+'</p></div>';
+				'<p>'+normativas+'</p></div>'+
+			'<div class="product_price"><h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+'</span></div>'+	
+				'</div>';
 	},
 	addProductToList:function(list,product){
 	

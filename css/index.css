@@ -735,6 +735,81 @@ width:49%;
 #order-details li{
 font-size:95%;	
 }
+
+/*MAQUETACIÓN LANDSCAPE DETALLE DE PRODUCTO*/
+.img_product{
+  position: absolute;
+  top: 20px;
+  left: 20px;	
+}
+
+.product-carrousel h2 {
+  color: #043680;
+  font-size: 1.4em;
+  font-weight: bold;
+  line-height: 1.6em;
+    position: absolute;
+  top: 20px;
+  left: 140px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.label_family{
+position: absolute;
+  top: 20px;
+  right: 20px;	
+}
+
+.product-carrousel .details {
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  left: 130px;
+}
+
+.product-carrousel h3 {
+  color: #043680;
+  opacity: 0.5;
+  margin-left: 0px;
+  font-size: 1.1em;
+  text-align: left;
+  padding-left: 10px;
+  margin-bottom: 0em;
+  clear: both;
+  float: left;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+
+.product-carrousel p {
+  text-align: left;
+  padding-left: 10px;
+  text-transform: none;
+  font-size: 1em;
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  /* float: right; */
+  margin-left: 120px;
+  width: 200px;
+}
+.product-carrousel h3.inline {
+  display: block;
+  line-height: 1em;
+}
+
+.product-carrousel .value {
+  text-align: left;
+  padding-left: 10px;
+  text-transform: none;
+  font-size: 1em;
+  /* margin-top: 0.5em; */
+  display: block;
+  margin-left: 120px;
+  margin-bottom: 0.5em;
+}
+
 }
 
 

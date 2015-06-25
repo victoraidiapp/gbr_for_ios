@@ -62,6 +62,7 @@ var OrderManager={
         });
 			}else{
 			OrderManager.sendOrder();
+			$('.button.productos').trigger('singletap');
 			}
 			
 		})
@@ -69,6 +70,7 @@ var OrderManager={
 		$(document).on('singletap','.send-order-popup',function(){
 			$('.popup').UIPopupClose();
 			OrderManager.sendOrder();
+			$('.button.productos').trigger('singletap');
 		})
 		
 		$(document).on('singletap','.cancel-button',function(){
@@ -105,6 +107,7 @@ var OrderManager={
 			DataManager.currentProduct=null;
 			OrderManager.updateOrder();
 			OrderManager.summaryOrder();
+			$('.button.productos').trigger('singletap');
 
 			
 		})

@@ -213,12 +213,20 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 		console.log("Me han pedido actualizar la orden de pedido");
 		$('#order-details').html('');
 		
+		//En función del tipo de cliente si es centro comercial le colutamos la primera linea
+		if(DataManager.clientsJSON.cliente[0].tipo=="CENTRO COMERCIAL"){
+				
+		}else{
+			
+		}
+		
 		for(x in DataManager.shopCart){
 			console.log("Vamos a añadir el producto "+x)
 				var t=0;
+				
 				for(tt in DataManager.shopCart[x].tallas){
 				$('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
-							'<div class="first-line">'+
+							'<div class="first-line" '+$customcss+'>'+
 							'	<span class="article">'+DataManager.shopCart[x].detail.modelo+'</span>'+
 								'<span class="size-label">Talla</span>'+
 								'<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+

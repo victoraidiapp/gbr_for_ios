@@ -533,9 +533,9 @@ xhr.send();
 	showPrices:function(bl){
 		DataManager.prices=bl;
 		if(bl){
-			$('.product_price').css('visibility','visible');
+			$('#pricestyle').html('.product_price {visibility: visible }');
 		}else{
-			$('.product_price').css('visibility','hidden');
+			$('#pricestyle').html('.product_price {visibility: hidden }');
 		}
 	},
 	getProductDetail:function(nproduct,product){

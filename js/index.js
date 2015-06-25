@@ -23,6 +23,14 @@ var app = {
     // Application Constructor
     initialize: function() {
 		console.log("Se inicializa la aplicación");
+		
+		//Añadimos el estilo dinámico para el precio
+		$('head').append(
+		  $('<style/>', {
+			id: 'pricestyle',
+			html: '.product_price {visibility: hidden }'
+		  })
+		);
         this.manejadores();
 		LoadingDialog.init();
 		//console.log(cordova.file);
@@ -138,7 +146,7 @@ var app = {
 		$(document).on("singletap",".goto-checkout-popup",function(e){
 			
 			$('.popup').UIPopupClose();
-			OrderManager.emptyProductSizes();css 
+			OrderManager.emptyProductSizes(); 
 			$(".button.pedidos").trigger('singletap');
 			OrderManager.checkoutEnabled=false;
 			//app.navProducts("#productos","product-cat",true);

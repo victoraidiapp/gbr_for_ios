@@ -199,6 +199,7 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 	
 	//DataManager.shopCart[DataManager.currentProduct.modelo]=product;
 	DataManager.shopCart.push(product);
+	console.log("En el carrito hay "+DataManager.shopCart.length);
 	//console.log("El contenido del shopcart es "+DataManager.shopCart);
 	OrderManager.updateOrder();
 	
@@ -213,20 +214,35 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 		console.log("Me han pedido actualizar la orden de pedido");
 		$('#order-details').html('');
 		
-		//En función del tipo de cliente si es centro comercial le colutamos la primera linea
-		if(DataManager.clientsJSON.cliente[0].tipo=="CENTRO COMERCIAL"){
-				
-		}else{
-			
-		}
+		
 		
 		for(x in DataManager.shopCart){
-			console.log("Vamos a añadir el producto "+x)
+			console.log("Vamos a añadir el producto "+x+" en el que hay "+DataManager.shopCart[x].tallas.length+" tallas" )
 				var t=0;
 				
 				for(tt in DataManager.shopCart[x].tallas){
-				$('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
-							'<div class="first-line" '+$customcss+'>'+
+					
+				//En función del tipo de cliente si es centro comercial le colutamos la primera linea
+				console.log("El tipo de cliente es "+DataManager.clientsJSON.cliente[0].tipo);
+					if(DataManager.clientsJSON.cliente[0].tipo=="CENTRO COMERCIAL"){
+						console.log("Es un centro comercial");
+							$('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
+							'<div class="first-line condensed" >'+
+							'	<span class="article">'+DataManager.shopCart[x].detail.modelo+'</span>'+
+								'<span class="size-label">Talla</span>'+
+								'<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+
+							'<input type="number" class="quantity-value updater double-val" placeholder="0" value="'+DataManager.shopCart[x].tallas[tt].cantidad+'"/>'+
+								'<span class="quantity-label">uds</span>'+
+								'<span class="del-button">X</span>'+
+								'</div>'+
+					'</li>');	
+				
+					}else{
+						console.log("No es un centro comercial");
+						
+						
+						$('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
+							'<div class="first-line">'+
 							'	<span class="article">'+DataManager.shopCart[x].detail.modelo+'</span>'+
 								'<span class="size-label">Talla</span>'+
 								'<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+
@@ -242,8 +258,12 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 								'<span class="del-button">X</span>'+
 							'</div>'+
 					'</li>');	
+				
+					}
 				t++;	
-				}
+			}
+					
+				
 				
 		}
 		OrderManager.updateValues();

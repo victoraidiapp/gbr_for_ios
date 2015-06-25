@@ -261,6 +261,8 @@ var app = {
 		var n=$("#product-viewer .carousel-panel-active h2").data("nproduct");
 		var tallas=DataManager.catalogueJSON.producto[n].tallas;
 		$("#productos #product-sizes").html('');
+		
+		
 		for(t in tallas){
 			$("#productos #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
 		}

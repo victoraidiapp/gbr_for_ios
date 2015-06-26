@@ -747,7 +747,7 @@ font-size:95%;
   left: 20px;	
 }
 .img_product img{
-height:auto;
+height:auto!important;
 width:110px;	
 }
 
@@ -802,9 +802,31 @@ position: absolute;
   margin-left: 120px;
   width: 200px;
 }
+.product-carrousel .product_logos p{
+  margin-left: 0px;
+  float: left;
+  width: inherit;	
+}
+.product_price{
+display:block;
+float:left;
+clear:none;	
+padding-top:10px;
+}
+.product_price h3{
+font-size:1.5em;	
+}
+.product_price .value{
+	 margin-left: 0px!important;
+  float: left;
+  margin-top: 0px;
+  font-size: 1.3em!important;
+  margin-bottom: 0px!important;
+  line-height: 1.7em;
+}
 .product-carrousel h3.inline {
-  display: block;
-  line-height: 1em;
+display: block;
+  line-height: 1.4em;
 }
 
 .product-carrousel .value {

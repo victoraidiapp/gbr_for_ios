@@ -207,6 +207,13 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		$.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
 		DataManager.carouselObject=$('#product-viewer').data('carousel');
+		DataManager.carouselObject.onSlide(function(){
+			
+			$('section.current').scrollTop(0);
+			console.log("Hemos deslizado el panel");
+			
+			
+		})
 		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
 		 $('#product-carrousel').removeClass('navigable');
 		 console.log("El numero de familias es "+DataManager.catalogueJSON.familia.length)
@@ -248,6 +255,13 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 		$.UISetupCarousel({ target: '#outlet-product-viewer', panels: DataManager.outletProductCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
 		DataManager.outletCarouselObject=$('#outlet-product-viewer').data('carousel');
+		DataManager.outletCarouselObject.onSlide(function(){
+			
+			$('section.current').scrollTop(0);
+			console.log("Hemos deslizado el panel");
+			
+			
+		})
 		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
 		 $('#outlet-product-carrousel').removeClass('navigable');
 		
@@ -425,6 +439,13 @@ xhr.send();
 			$.UISetupCarousel({ target: '#search-product-viewer', panels: DataManager.searchProductCarrousel, loop: true,pagination:true });
 		// $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
 		DataManager.searchCarouselObject=$('#search-product-viewer').data('carousel');
+		DataManager.searchCarouselObject.onSlide(function(){
+			
+			$('section.current').scrollTop(0);
+			console.log("Hemos deslizado el panel");
+			
+			
+		})
 		 //console.log("El contenido del carrousel es "+DataManager.productCarrousel+" en "+DataManager.productCarrousel.length);
 		 $('#search-product-carrousel').removeClass('navigable');
 		 console.log("Retornamos");

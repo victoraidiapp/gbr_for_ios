@@ -154,15 +154,15 @@ var app = {
 			
 		})
 		
-		$(document).on("singletap","#searchByCatalogo",function(e){
-			e.preventDefault();
+		$(document).on("tap","#searchByCatalogo",function(e){
+			
 		console.log("Queremos cargar la sección de catalogo");
 		app.navProducts("#productos","product-cat",false);
 		return false;
 		})
 		
 		$(document).on("singletap","#showFamilia",function(e){
-			e.preventDefault();
+			
 		
 		app.navProducts("#productos","product-fam",false);
 		return false;
@@ -378,6 +378,7 @@ var app = {
 		//console.log("El contenido del product destino es "+$("#"+section).html());
 		//console.log("El backEnabled es "+$("#"+section).data('backenabled'));
 		console.log("Vamos a la section "+section+" cuyo backenabled es "+$("#"+section).data('backenabled'));
+		//$("section.current").scrollTop(0);
 		app.checkNavButtons();
 		
 	},

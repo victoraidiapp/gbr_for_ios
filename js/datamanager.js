@@ -391,6 +391,9 @@ xhr.send();
 	searchModel:function(model){
 		$('#search-model').blur();
 		//console.log("Queremos buscar "+model);
+		//Limpiamos la cadena de búsqueda anterior
+		$('#search-model').val("");
+		
 		var regexp=new RegExp(".*"+model+".*","i");
 		//console.log("La expresión regular es "+regexp.toString());
 		

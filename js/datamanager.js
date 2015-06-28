@@ -1,10 +1,11 @@
 // JavaScript Document
 var DataManager={
-	SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/',
-	categorias:'http://datic.es/gahibre/img/bbdd/categorias/',
-	normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
-	logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/',
-	promociones:'http://datic.es/gahibre/img/bbdd/empresas/'},
+	SERVER:{products:'http://datic.es/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/productos/',
+	categorias:'http://datic.es/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/categorias/',
+	normativas:'http://datic.es/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/normativas/',
+	logotipos:'http://datic.es/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/logotipos/',
+	promociones:'http://datic.es/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/empresas/'},
+	
 	productCarrousel:new Array(),
 	searchProductCarrousel:new Array(),
 	outletProductCarrousel:new Array(),
@@ -16,6 +17,7 @@ var DataManager={
 	userDNI:null,
 	currentProduct:null,
 	shopCart:Array(),
+	requestingDNI:false,
 	prices:false,
 	init:function(callbackInit){
 		
@@ -97,7 +99,7 @@ if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
 			}
 			
 			for(p in DataManager.catalogueJSON.producto){
-				//console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
+				console.log(DataManager.catalogueJSON.producto[p].fotoGrande)
 				arrProds.push(DataManager.SERVER.products+DataManager.catalogueJSON.producto[p].fotoGrande);
 				
 			}
@@ -304,16 +306,21 @@ values['token']=token;
 			dataType:"text",
 			data:values,
 			success:function(r){
-				//console.log("El resultado obtenido es "+r);
+				console.log("El resultado obtenido es "+r);
 			callBack(r)	
 			},
 			error:function(r){
+				console.log("El error obtenido es "+r);
+				for(i in r){
+				console.log("El valor de "+i+" es "+r[i]);	
+				}
 				errorCallBack(r);
 			}
 		})
 	},
 	getRemoteBlob:function(remote,callback,errorCallback){
 		var xhr = new XMLHttpRequest();
+		console.log("Desde DataManager.getRemoteBlob intentamos descargar la imagen "+remote);
 xhr.open('GET', remote, true);
 xhr.responseType = 'blob';
 
@@ -506,7 +513,7 @@ xhr.send();
 					DataManager.loadClients(dni,r);
 				})*/
 			}else{
-				if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+				if(DataManager.requestingDNI){
 					$.UIPopup({
           id: "requestDNI",
           title: 'NIF CORRECTO', 
@@ -515,6 +522,7 @@ xhr.send();
 		  
 				})
 				}
+				DataManager.requestingDNI=false;
 				LocalFileManager.writeToClients(r);
 				DataManager.loadClients(dni,r);	
 				
@@ -531,6 +539,7 @@ xhr.send();
 	},
 	requestDNI:function(){
 		console.log("Me han pedido solicitar el DNI");
+		DataManager.requestingDNI=true;
 		$.UIPopup({
           id: "requestDNI",
           title: 'NIF NECESARIO', 

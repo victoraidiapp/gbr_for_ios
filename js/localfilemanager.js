@@ -3,7 +3,8 @@ var LocalFileManager={
 	docDirectory:null,
 	catalogueFile:null,
 	clientesFile:null,
-	docsPath:null,
+	docsPath:"/Documents/",
+	
 	
 	
 	init:function(callback){
@@ -12,7 +13,8 @@ var LocalFileManager={
 	console.log("Inicializamos el localfilemanager");
 	deviceDir={'iOS':cordova.file.documentsDirectory,'Android':cordova.file.dataDirectory};
 	console.log("La plataforma es "+device.platform);
-	window.resolveLocalFileSystemURL(deviceDir[device.platform], function(dirEntry){
+	/*window.resolveLocalFileSystemURL(deviceDir[device.platform], function(dirEntry){*/
+     window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dirEntry){
 		LocalFileManager.docDirectory=dirEntry;
 		console.log("El directorio raiz es "+dirEntry.fullPath);
 		dirEntry.getFile('catalogue.txt', {}, function(fileEntry) {
@@ -41,7 +43,7 @@ var LocalFileManager={
 			
 			
 				})		
-		LocalFileManager.docsPath=dirEntry.toURL();
+	//	LocalFileManager.docsPath=dirEntry.toURL();
 		//Creamos la carpeta de imagenes de productos
 		/*dirEntry.getDirectory("src",{create: true}, function(dirEntry) {
 			console.log("He creado correctamente el directorio "+dirEntry.fullPath);

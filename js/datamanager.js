@@ -16,6 +16,7 @@ var DataManager={
 	userDNI:null,
 	currentProduct:null,
 	shopCart:Array(),
+	requestingDNI:false,
 	prices:false,
 	init:function(callbackInit){
 		
@@ -509,7 +510,7 @@ xhr.send();
 					DataManager.loadClients(dni,r);
 				})*/
 			}else{
-				if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
+				if(DataManager.requestingDNI){
 					$.UIPopup({
           id: "requestDNI",
           title: 'NIF CORRECTO', 
@@ -517,6 +518,7 @@ xhr.send();
 		  cancelButton:"Cerrar"
 		  
 				})
+				DataManager.requestingDNI=false;
 				}
 				LocalFileManager.writeToClients(r);
 				DataManager.loadClients(dni,r);	
@@ -534,6 +536,7 @@ xhr.send();
 	},
 	requestDNI:function(){
 		console.log("Me han pedido solicitar el DNI");
+		DataManager.requestingDNI=true;
 		$.UIPopup({
           id: "requestDNI",
           title: 'NIF NECESARIO', 

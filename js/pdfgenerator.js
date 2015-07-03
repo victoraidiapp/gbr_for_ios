@@ -85,12 +85,12 @@ console.log("CREANDO UN PDF CON EL COMERCIAL "+comercial);
 					doc.text(110, initY, shopcart[x].tallas[tt].cantidad);
 					//sólo se calcula la cantidad si no es centro comercial
 					if(customer.tipo!="CENTRO COMERCIAL"){
-					console.log("GEnerando la linea de descuento "+shopcart[x].tallas[tt].descuento+" de "+x);
+					console.log("GEnerando la linea de descuento "+shopcart[x].tallas[tt].descuento.toFixed(2)+" de "+x);
 					doc.text(138, initY, shopcart[x].tallas[tt].descuento);
 					console.log("GEnerando la linea de precio "+shopcart[x].detail.precio+" de "+x);
 					doc.text(150, initY, shopcart[x].detail.precio+' €');
 					console.log("GEnerando la linea de subtotal "+shopcart[x].tallas[tt].subtotal+" de "+x);
-					doc.text(175, initY, shopcart[x].tallas[tt].subtotal+' €');
+					doc.text(175, initY, shopcart[x].tallas[tt].subtotal.toFixed(2)+' €');
 					console.log("Y ahora vamos a realizar la operacione de total ");
 				total=eval(total+'+'+shopcart[x].tallas[tt].subtotal);
 				console.log("El total es "+total);
@@ -111,7 +111,7 @@ if(customer.tipo!="CENTRO COMERCIAL"){
 	
 	doc.setFontSize(10);
 	doc.text(118, 226, 'TOTAL: ');
-	doc.text(138, 226, ' '+total+' €');
+	doc.text(138, 226, ' '+total.toFixed(2)+' €');
 }
 	console.log("Las observcaiones son "+observaciones);
 	doc.rect(20, 235, 180, 40);	// Observaciones

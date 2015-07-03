@@ -316,7 +316,7 @@ console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
 	$('#order-details .subtotal').each(function(){
 		total+=parseFloat($(this).text());
 	})
-	$('#order-summary .total-value').text(total);
+	$('#order-summary .total-value').text(total.toFixed(2)+' €');
 	
 	}
 	

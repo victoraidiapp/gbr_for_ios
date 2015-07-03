@@ -587,7 +587,7 @@ xhr.send();
 					normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.normativas[n]+'"/>';
 				}
-				
+		
 		return '<h2 data-nproduct="'+nproduct+'">Modelo '+product.modelo+'</h2>'+
             '<div class="center big_image img_product"><img src="'+LocalFileManager.docsPath+'src/img_prod/'+
 				product.fotoGrande+'" /></div>'+

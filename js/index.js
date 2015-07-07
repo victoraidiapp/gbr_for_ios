@@ -275,7 +275,7 @@ manejadores: function() {
                           
                           
                           for(t in tallas){
-                          $("#productos #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
+                          $("#productos #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" placeholder="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
                           }
                           
                           DataManager.currentProduct=DataManager.catalogueJSON.producto[n];
@@ -294,7 +294,7 @@ manejadores: function() {
                           var tallas=DataManager.catalogueJSON.outlet[n].tallas;
                           $("#outlet #product-sizes").html('');
                           for(t in tallas){
-                          $("#outlet #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.outlet[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" value="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.outlet[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.outlet[n].cantidad+'">-</span></div></li>')
+                          $("#outlet #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.outlet[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" placeholder="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.outlet[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.outlet[n].cantidad+'">-</span></div></li>')
                           }
                           
                           DataManager.currentProduct=DataManager.catalogueJSON.outlet[n];
@@ -311,7 +311,23 @@ manejadores: function() {
                         $(this).siblings('.quantity').trigger('updateVal',[$(this).data('operation')]);
                         })
     
-    
+    $('.sizes-list').on('change','input.quantity',function(){
+                        var v=$(this).val();
+                        var patron=new RegExp('[0-9,.]*');
+                        if(patron.test($(this).val())){
+                        console.log("El valor es correcto");
+                        if(parseInt(v)>0){
+                        
+                        }else{
+                        $(this).val('');
+                        }
+                        }else{
+                        console.log("El valor introducido no es correcto");
+                        $(this).val('');
+                        }
+                        
+                        $(this).parents('li').trigger("updateCheck");
+                        })
     
     $('.sizes-list').on("updateVal",".quantity",function(e,operation){
                         var v=$(this).val();

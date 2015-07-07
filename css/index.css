@@ -418,7 +418,9 @@ article.current .loading.visible{
 /*ADD-TO-CART*/
 
 #add-to-cart .first-line,
-#add-to-cart .second-line{
+#add-to-cart .second-line,
+#outlet-add-to-cart .first-line,
+#outlet-add-to-cart .second-line{
     display:block;
     position:static;
     text-transform:none;
@@ -429,20 +431,23 @@ article.current .loading.visible{
 
 
 
-#add-to-cart .first-line .article{
+#add-to-cart .first-line .article,
+#outlet-add-to-cart .first-line .article{
     width: 55%;
     display: inline-block;
     
 }
 
-#add-to-cart .first-line .size-label{
+#add-to-cart .first-line .size-label,
+#outlet-add-to-cart .first-line .size-label{
     width: 18%;
     display: inline-block;
     
     
 }
 
-#add-to-cart .first-line .size-value{
+#add-to-cart .first-line .size-value,
+#outlet-add-to-cart .first-line .size-value{
     color: #043680;
     display: inline-block;
     width: 17%;

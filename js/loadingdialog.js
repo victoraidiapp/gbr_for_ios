@@ -13,6 +13,7 @@ show:function(texto){
 	console.log(";ostramos el dialogo");
 	$('article.current .loading').html(texto).addClass('visible');;
 	$('article.current .loading').nextAll().addClass('whenloading');
+    $('section.current').scrollTop(0);
 },
 hide:function(t){
 	console.log("Ocultamos");

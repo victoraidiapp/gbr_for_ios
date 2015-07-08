@@ -93,6 +93,16 @@ manejadores: function() {
                    
                    })
     
+    $(document).on("scroll","section",function(e){
+                   console.log("Estas haciendo scroll en una section");
+                   
+                   })
+    
+    $(document).on("scroll","article",function(e){
+                   console.log("Estas haciendo scroll en una article");
+                   
+                   })
+    
     $(document).on("singletap",".goto-checkout",function(e){
                    //Hay que comprobar si hay productos añadidos
                    
@@ -174,7 +184,7 @@ manejadores: function() {
     
     
     $("#product-cat").on("singletap","li",function(e){
-                         e.preventDefault();
+                         console.log("Has picado en un item del product list");
                          app.navProducts("#productos","product-carrousel",false);
                          //DataManager.carouselObject.goToPanel($(this).index()-1);
                          DataManager.carouselObject.goToPanel($(this).index());
@@ -269,7 +279,7 @@ manejadores: function() {
                           return;
                           }
                           
-                          var n=$("#product-viewer .carousel-panel-active h2").data("nproduct");
+                          var n=$("section.current .product-viewer .carousel-panel-active h2").data("nproduct");
                           var tallas=DataManager.catalogueJSON.producto[n].tallas;
                           $("#productos #product-sizes").html('');
                           

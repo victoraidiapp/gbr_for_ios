@@ -173,6 +173,7 @@ sendOrder:function(){
                                          
                                          
                                          plugin.email.open({
+                                                           to:"gahibre@gahibre.com",
                                                            attachments: archivos,
                                                            subject:'ALBARAN DE PEDIDO DESDE GAHIBRE FOR IOS',
                                                            isHtml:true,

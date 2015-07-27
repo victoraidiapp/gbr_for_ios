@@ -102,6 +102,8 @@ init:function(){
                            })
     
     $("#checkout").on('tap','#empty-order',function(e){
+                      $("#customerSelect option").removeAttr("selected");
+                      $("#observaciones").val("");
                       DataManager.shopCart=new Array();
                       DataManager.currentProduct=null;
                       OrderManager.updateOrder();

@@ -606,7 +606,7 @@ getProductDetail:function(nproduct,product){
 				product.logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.categoria.categoria+'" class="mini-logo"/></p>'+
 				'<p>'+normativas+'</p></div>'+
-    '<div class="product_price"><h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+'</span></div>'+	
+    '<div class="product_price"><h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+' €</span></div>'+	
 				'</div>';
 },
 addProductToList:function(list,product){

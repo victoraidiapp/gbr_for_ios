@@ -785,12 +785,12 @@ and (orientation : landscape)
     /*MAQUETACIÓN LANDSCAPE DETALLE DE PRODUCTO*/
     .img_product{
         position: absolute;
-        top: 20px;
+        top: 50px;
         left: 20px;
     }
     .img_product img{
         height:auto!important;
-        width:110px;
+        width:130px;
     }
     
     .product-carrousel h2 {
@@ -800,7 +800,7 @@ and (orientation : landscape)
         line-height: 1.6em;
         position: absolute;
         top: 20px;
-        left: 140px;
+        left: 160px;
         padding: 0px;
         margin: 0px;
     }
@@ -815,7 +815,7 @@ and (orientation : landscape)
         width: 100%;
         position: absolute;
         top: 50px;
-        left: 130px;
+        left: 150px;
     }
     
     .product-carrousel h3 {
@@ -923,7 +923,7 @@ and (orientation : landscape)
 and (-webkit-min-device-pixel-ratio: 2)
 {
     .product-carrousel p{
-        width:300px;
+        width:250px;
     }
     
 }
@@ -974,7 +974,7 @@ and (-webkit-min-device-pixel-ratio: 2)
         margin-bottom: 0.5em;
         /* float: right; */
         margin-left: 150px;
-        width: 350px;
+        width: 300px;
     }
     
     .product-carrousel .value {
@@ -986,6 +986,19 @@ and (-webkit-min-device-pixel-ratio: 2)
         display: block;
         margin-left: 150px;
         margin-bottom: 0.5em;
+    }
+    
+    .product-carrousel h2{
+        
+        left:190px;
+    }
+    .product-carrousel .details{
+        
+        left:180px;
+    }
+    
+    .img_product img{
+        width:160px;
     }
 }
 
@@ -1170,13 +1183,15 @@ and (-webkit-min-device-pixel-ratio: 1)
         height:25px;
         margin-right:10%;
     }
-    
+    .img_product{
+        top:90px;
+    }
     .img_product img{
         height:auto!important;
-        width:300px;
+        width:340px;
     }
     .product-carrousel h2{
-        left:320px;
+        left:380px;
         font-size:1.8em;
         line-height:1.8em;
     }
@@ -1190,7 +1205,7 @@ and (-webkit-min-device-pixel-ratio: 1)
         width: 100%;
         position: absolute;
         top: 70px;
-        left: 310px;
+        left: 370px;
         font-size: 1.4em;
     }
     
@@ -1202,7 +1217,7 @@ and (-webkit-min-device-pixel-ratio: 1)
         margin-bottom: 0em;
         /* float: right; */
         margin-left: 210px;
-        width: 400px;
+        width: 340px;
         margin-top:30px;
     }
     .product-carrousel h3{

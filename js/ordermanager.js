@@ -18,6 +18,8 @@ init:function(){
     $('#order-details').on('update','li',function(){
                            //console.log("La expresión es "+$(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val())
                            var subtotal=eval($(this).find('.price-value').val()+'*'+$(this).find('.quantity-value').val());
+                           DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].cantidad=$(this).find('.quantity-value').val();
+                           DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].precio=$(this).find('.price-value').val();
                            
                            var desc=$(this).find('.discount-value').val();
                            DataManager.shopCart[$(this).data('idproduct')].tallas[$(this).data('idtalla')].descuento=desc;
@@ -211,6 +213,8 @@ addToCart:function(){
                                 var t=Array();
                                 t["talla"]=	ta;
                                 t["cantidad"]=v;
+                                t["descuento"]=0;
+                                t["precio"]=DataManager.currentProduct.precio;
                                 console.log("El valor de la talla "+t["talla"]+" es "+t["cantidad"]);
                                 product["tallas"].push(t);
                                 }
@@ -258,6 +262,8 @@ updateOrder:function(){
                 
             }else{
                 console.log("No es un centro comercial");
+                var desc='';
+                if(DataManager.shopCart[x].tallas[tt].descuento>0)desc='value="'+DataManager.shopCart[x].tallas[tt].descuento+'"';
                 
                 
                 $('#order-details').append('<li data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
@@ -266,12 +272,12 @@ updateOrder:function(){
                                            '<span class="size-label">Talla</span>'+
                                            '<span class="size-value">'+DataManager.shopCart[x].tallas[tt].talla+'</span>'+
                                            '<span class="discount-label">% Dto:</span>'+
-                                           '<input type="number" class="discount-value updater double-val" placeholder="0"/>'+
+                                           '<input type="number" class="discount-value updater double-val" placeholder="0" '+desc+'/>'+
                                            '</div>'+
                                            '<div class="second-line" data-idproduct="'+x+'" data-idtalla="'+tt+'">'+
                                            '<input type="number" class="quantity-value updater double-val" placeholder="0" value="'+DataManager.shopCart[x].tallas[tt].cantidad+'"/>'+
                                            '<span class="quantity-label">uds</span>'+
-                                           '<input type="number" class="price-value updater double-val" placeholder="0" value="'+DataManager.shopCart[x].detail.precio+'"/>'+
+                                           '<input type="number" class="price-value updater double-val" placeholder="0" value="'+DataManager.shopCart[x].tallas[tt].precio+'"/>'+
                                            '<span class="price-label">€/ud</span>'+
                                            '<span class="subtotal">0</span>'+
                                            '<span class="del-button">X</span>'+

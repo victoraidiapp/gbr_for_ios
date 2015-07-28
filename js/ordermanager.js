@@ -254,7 +254,7 @@ updateOrder:function(){
                                            '<span class="quantity-label">uds</span>'+
                                            '<span class="del-button">X</span>'+
                                            '</div>'+
-                                           '</li>');	
+                                           '</li>');
                 
             }else{
                 console.log("No es un centro comercial");
@@ -276,10 +276,10 @@ updateOrder:function(){
                                            '<span class="subtotal">0</span>'+
                                            '<span class="del-button">X</span>'+
                                            '</div>'+
-                                           '</li>');	
+                                           '</li>');
                 
             }
-            t++;	
+            t++;
         }
         
         
@@ -305,7 +305,7 @@ checkDNI:function(){
     
 },
 updateValues:function(){
-    $('#order-details li').trigger('update');	
+    $('#order-details li').trigger('update');
 },
 getOrderSize:function(){
     var n=0;
@@ -332,7 +332,7 @@ updateTotal:function(){
     $('#order-details .subtotal').each(function(){
                                        total+=parseFloat($(this).text());
                                        })
-    $('#order-summary .total-value').text(total);
+    $('#order-summary .total-value').text(total.toFixed(2));
     
 },
 enableInputs:function(){

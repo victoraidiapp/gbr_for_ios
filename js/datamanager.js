@@ -1,10 +1,10 @@
 // JavaScript Document
 var DataManager={
-SERVER:{products:'http://datic.es/gahibre/img/bbdd/productos/',
-categorias:'http://datic.es/gahibre/img/bbdd/categorias/',
-normativas:'http://datic.es/gahibre/img/bbdd/normativas/',
-logotipos:'http://datic.es/gahibre/img/bbdd/logotipos/',
-    promociones:'http://datic.es/gahibre/img/bbdd/empresas/'},
+SERVER:{products:'http://www.gahibre.com/gahibre/img/bbdd/productos/',
+categorias:'http://www.gahibre.com/gahibre/img/bbdd/categorias/',
+normativas:'http://www.gahibre.com/gahibre/img/bbdd/normativas/',
+logotipos:'http://www.gahibre.com/gahibre/img/bbdd/logotipos/',
+    promociones:'http://www.gahibre.com/gahibre/img/bbdd/empresas/'},
 productCarrousel:new Array(),
 searchProductCarrousel:new Array(),
 outletProductCarrousel:new Array(),
@@ -285,7 +285,7 @@ getClientsFromServer:function(dni,callBack,errorCallBack){
     
     $.ajax({
            type:"POST",
-           url:"http://datic.es/gahibre/webservice/cliente_ios.php",
+           url:"http://www.gahibre.com/gahibre/webservice/cliente_ios.php",
            dataType:"text",
            data:values,
            success:function(r){
@@ -315,7 +315,7 @@ getProductsFromServer:function(callBack,errorCallBack){
     
     $.ajax({
            type:"POST",
-           url:"http://datic.es/gahibre/webservice/servicio_ios.php",
+           url:"http://www.gahibre.com/gahibre/webservice/servicio_ios.php",
            dataType:"text",
            data:values,
            success:function(r){

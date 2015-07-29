@@ -464,7 +464,7 @@ searchFirstProductOfFamily:function(idFamily){
     for(g in DataManager.catalogueJSON.producto){
         
         if(DataManager.catalogueJSON.producto[g].gama.idFamilia==idFamily){
-            return i;	
+            return i;
         }
         i++;
     }
@@ -477,10 +477,10 @@ loadClients:function(dni,r){
     
     if(typeof(dni)!="undefined" && dni!==null){
         console.log("VAMOS A GUARDAR EL DNI "+dni);
-        localStorage.setItem("dni",dni);	
+        localStorage.setItem("dni",dni);
         
     }else{
-        return;	
+        return;
     }
     
     /* cargamos los clientes en el select de pedidos*/
@@ -501,11 +501,11 @@ loadClients:function(dni,r){
         //Ocultamos el selector de cliente
         $('.customer-line').css('display','none');
         //Ocultamos los precios
-        DataManager.showPrices(false);	
+        DataManager.showPrices(false);
         
         
     }else{//cliente final
-        DataManager.showPrices(true);	
+        DataManager.showPrices(true);
         //Ocultamos el selector de cliente
         $('.customer-line').css('display','none');
         $("#customerSelect").append('<option value="0">'+DataManager.clientsJSON.cliente[0].nombre+'</option>');
@@ -525,7 +525,7 @@ syncClients:function(dni){
                                      DataManager.userDNI=null;
                                      $.UIPopup({
                                                id: "requestDNI",
-                                               title: 'NIF INCORRECTO', 
+                                               title: 'NIF INCORRECTO',
                                                message: 'EL dni introducido no es correcto',
                                                cancelButton:"Cerrar"
                                                
@@ -537,7 +537,7 @@ syncClients:function(dni){
                                      if(DataManager.requestingDNI){
                                      $.UIPopup({
                                                id: "requestDNI",
-                                               title: 'NIF CORRECTO', 
+                                               title: 'NIF CORRECTO',
                                                message: 'Ha iniciado sesión correctamente. Sus datos quedarán guardados en la aplicación.',
                                                cancelButton:"Cerrar"
                                                
@@ -545,7 +545,7 @@ syncClients:function(dni){
                                      DataManager.requestingDNI=false;
                                      }
                                      LocalFileManager.writeToClients(r);
-                                     DataManager.loadClients(dni,r);	
+                                     DataManager.loadClients(dni,r);
                                      
                                      //Loguardamos en el localstorage
                                      
@@ -563,10 +563,10 @@ requestDNI:function(){
     DataManager.requestingDNI=true;
     $.UIPopup({
               id: "requestDNI",
-              title: 'NIF NECESARIO', 
-              message: 'Por favor introduzca dni para poder realizar pedidos<br/><input class="dnireq" type="text" placeholder="dni o nif" id="dni"/>', 
-              cancelButton: 'Ahora no', 
-              continueButton: 'Conectar', 
+              title: 'NIF NECESARIO',
+              message: 'Por favor introduzca dni para poder realizar pedidos<br/><input class="dnireq" type="text" placeholder="dni o nif" id="dni"/>',
+              cancelButton: 'Ahora no',
+              continueButton: 'Conectar',
               callback: function() {
               console.log("El dni escrito es "+$("#dni").val());
               
@@ -605,14 +605,15 @@ getProductDetail:function(nproduct,product){
     '<div class="product_logos"><p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.categoria.categoria+'" class="mini-logo"/></p>'+
-				'<p>'+normativas+'</p></div>'+
-    '<div class="product_price"><h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+' €</span></div>'+	
-				'</div>';
+				
+    '<div class="product_price"><h3 class="inline">P.V.P: </h3><span class="value">'+product.precio+' €</span></div>'+
+    '<div class="product_logos" style="clear:both;"><p>'+normativas+'</p></div>'+
+    '</div>';
 },
 addProductToList:function(list,product){
     
     jQuery(list).append('<li class="nav comp"><aside><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
-                        product.fotoGrande+'" class="img-inlist"/></aside><div><h2>'+product.modelo+'</h2></div></li>');	
+                        product.fotoGrande+'" class="img-inlist"/></aside><div><h2>'+product.modelo+'</h2></div></li>');
 }
     
 };

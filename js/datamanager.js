@@ -587,8 +587,8 @@ getProductDetail:function(nproduct,product){
     
     normativas='';
 				for(n in product.normativas){
-                    normativas+='<img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
-                    product.normativas[n]+'"/>';
+                    normativas+='<figure><img class="mini-logo" src="'+LocalFileManager.docsPath+"src/img_prod/"+
+                    product.normativas[n].normativa+'"/><figcaption>'+product.normativas[n].riesgo+'</figcaption></figure>';
                 }
 				
     return '<h2 data-nproduct="'+nproduct+'">Modelo '+product.modelo+'</h2>'+

@@ -734,7 +734,19 @@ article.current .loading.visible{
 #checkout .buttons #more-products{
     width:25%;
 }
-
+.product-carrousel .product_logos figure{
+    margin-left: 0px;
+    float: left;
+    width: inherit;
+    margin:0px;
+    padding:0px;
+    margin-left:10px;
+    text-align:center;
+}
+.product-carrousel .product_logos figcaption{
+    
+    font-size:0.8em;
+}
 @media only screen
 and (orientation : landscape)
 {
@@ -848,6 +860,11 @@ and (orientation : landscape)
         margin-left: 0px;
         float: left;
         width: inherit;
+    }
+    .product-carrousel .product_logos figure{
+        margin-left: 0px!important;
+        margin-right:10px;
+        
     }
     .product_price{
         display:block;

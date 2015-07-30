@@ -1114,7 +1114,9 @@ and (-webkit-min-device-pixel-ratio: 1)
         height:25px;
         margin-right:10%;
     }
-    
+    .mini-logo{
+        max-height:80px;
+    }
 }
 
 @media only screen
@@ -1261,7 +1263,9 @@ and (-webkit-min-device-pixel-ratio: 1)
         margin-bottom: 0px!important;
         line-height: 1.7em;
     }
-    
+    .mini-logo{
+        max-height:80px;
+    }
 }
 
 /* iPad 3 y 4 retina*/
@@ -1271,7 +1275,9 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (-webkit-min-device-pixel-ratio: 2)
 {
-    
+    .mini-logo{
+        max-height:80px;
+    }
 }
 
 @media only screen
@@ -1294,6 +1300,10 @@ and (-webkit-min-device-pixel-ratio: 2)
      height:34.3%;
      margin-left: -14%;
      }*/
+    
+    .mini-logo{
+        max-height:80px;
+    }
 }
 
 /*************************************/

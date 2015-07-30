@@ -610,7 +610,7 @@ getProductDetail:function(nproduct,product){
     '<h3>USO</h3>'+
     '<p>'+product.uso+'</p>'+
     '<h3 class="inline">TALLA: </h3><span class="value">'+product.tallas.join()+'</span>'+
-    '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+product.empaquetado+'</span>'+
+    '<h3 class="inline">EMPAQUETADO: </h3><span class="value">'+product.cantidad+'</span>'+
     
     '<div class="product_logos"><p><img src="'+LocalFileManager.docsPath+"src/img_prod/"+
 				product.logotipo+'" class="mini-logo"/><img src="'+LocalFileManager.docsPath+"src/img_prod/"+

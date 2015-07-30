@@ -552,6 +552,16 @@ syncClients:function(dni){
                                      }
                                      
                                      },function(r){
+                                     LoadingDialog.hide();
+                                     if(DataManager.requestingDNI){
+                                     $.UIPopup({
+                                               id: "requestDNI",
+                                               title: 'ERROR DE CONEXION',
+                                               message: 'No se ha podido establecer una conexión con el servidor de GAHIBRE.',
+                                               cancelButton:"Cerrar"
+                                               
+                                               })
+                                     }
                                      console.log("Error al intentar conectar los clientes");
                                      LocalFileManager.readClients(function(r){
                                                                   DataManager.loadClients(dni,r);

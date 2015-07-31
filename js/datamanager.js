@@ -1,10 +1,12 @@
 // JavaScript Document
 var DataManager={
-SERVER:{products:'http://www.gahibre.com/gahibre/img/bbdd/productos/',
-categorias:'http://www.gahibre.com/gahibre/img/bbdd/categorias/',
-normativas:'http://www.gahibre.com/gahibre/img/bbdd/normativas/',
-logotipos:'http://www.gahibre.com/gahibre/img/bbdd/logotipos/',
-    promociones:'http://www.gahibre.com/gahibre/img/bbdd/empresas/'},
+SERVER:{products:'http://www.gahibre.com/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/productos/',
+categorias:'http://www.gahibre.com/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/categorias/',
+normativas:'http://www.gahibre.com/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/normativas/',
+logotipos:'http://www.gahibre.com/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/logotipos/',
+    promociones:'http://www.gahibre.com/gahibre/webservice/getfile_ios.php?file=/gahibre/img/bbdd/empresas/'},
+    
+    
 productCarrousel:new Array(),
 searchProductCarrousel:new Array(),
 outletProductCarrousel:new Array(),

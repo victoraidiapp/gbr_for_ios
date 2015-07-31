@@ -747,6 +747,24 @@ article.current .loading.visible{
     
     font-size:0.8em;
 }
+
+/*MAQUETACIÓN portrait HISTORIA*/
+.historia_bottom{
+    display:block;
+    width:100%;
+}
+.historia_left,historia_right{
+    display:none;
+}
+.historia_left{
+    
+    float:left;
+}
+.historia_right{
+    float:right;
+}
+
+
 @media only screen
 and (orientation : landscape)
 {
@@ -897,6 +915,13 @@ and (orientation : landscape)
         display: block;
         margin-left: 120px;
         margin-bottom: 0.5em;
+    }
+    /*MAQUETACIÓN LANDSCAPE HISTORIA*/
+    .historia_bottom{
+        display:none;
+    }
+    .historia_left,historia_right{
+        display:block;
     }
     
 }

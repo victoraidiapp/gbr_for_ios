@@ -673,15 +673,7 @@ article.current .loading.visible{
     background-position-y: 100px;
     
 }
-#aboutGahibre img{
-    width: 90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:10px;
-    margin-bottom:10px;
-    
-}
+
 #checkout .total-line{
     padding-left: 15px;
     padding-right: 20px;
@@ -753,15 +745,16 @@ article.current .loading.visible{
     display:block;
     width:100%;
 }
-.historia_left,historia_right{
+.historia_left,.historia_right{
     display:none;
 }
 .historia_left{
-    
+    margin-right:15px;
     float:left;
 }
 .historia_right{
     float:right;
+    margin-left:15px;
 }
 
 
@@ -920,8 +913,10 @@ and (orientation : landscape)
     .historia_bottom{
         display:none;
     }
-    .historia_left,historia_right{
+    .historia_left,.historia_right{
         display:block;
+        width:35%;
+        
     }
     
 }
@@ -956,6 +951,14 @@ and (-webkit-min-device-pixel-ratio: 2)
     .img-inlist{
         height:50px;
     }
+    
+    #aboutGahibre{
+        
+        
+        background-size: 100% 20%;
+        
+        
+    }
 }
 
 @media only screen
@@ -966,6 +969,14 @@ and (-webkit-min-device-pixel-ratio: 2)
 {
     .product-carrousel p{
         width:280px;
+    }
+    
+    #aboutGahibre{
+        
+        
+        background-size: 70% 30%;
+        
+        
     }
     
 }
@@ -1142,6 +1153,12 @@ and (-webkit-min-device-pixel-ratio: 1)
     .mini-logo{
         max-height:80px;
     }
+    #aboutGahibre{
+        
+        
+        font-size: 1.4em;
+        
+    }
 }
 
 @media only screen
@@ -1291,6 +1308,13 @@ and (-webkit-min-device-pixel-ratio: 1)
     .mini-logo{
         max-height:80px;
     }
+    
+    #aboutGahibre{
+        
+        
+        font-size: 1.4em;
+        background-size: 70% 30%;
+    }
 }
 
 /* iPad 3 y 4 retina*/
@@ -1302,6 +1326,13 @@ and (-webkit-min-device-pixel-ratio: 2)
 {
     .mini-logo{
         max-height:80px;
+    }
+    
+    #aboutGahibre{
+        
+        
+        
+        background-size: 80% 30%;
     }
 }
 
@@ -1328,6 +1359,12 @@ and (-webkit-min-device-pixel-ratio: 2)
     
     .mini-logo{
         max-height:80px;
+    }
+    #aboutGahibre{
+        
+        
+        
+        background-size: 80% 40%;
     }
 }
 

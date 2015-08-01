@@ -285,7 +285,7 @@ manejadores: function() {
                           
                           
                           for(t in tallas){
-                          $("#productos #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" placeholder="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidad+'">-</span></div></li>')
+                          $("#productos #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.producto[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" placeholder="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.producto[n].cantidadn+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.producto[n].cantidadn+'">-</span></div></li>')
                           }
                           
                           DataManager.currentProduct=DataManager.catalogueJSON.producto[n];
@@ -304,7 +304,7 @@ manejadores: function() {
                           var tallas=DataManager.catalogueJSON.outlet[n].tallas;
                           $("#outlet #product-sizes").html('');
                           for(t in tallas){
-                          $("#outlet #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.outlet[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" placeholder="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.outlet[n].cantidad+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.outlet[n].cantidad+'">-</span></div></li>')
+                          $("#outlet #product-sizes").append('<li><div class="first-line"><input type="checkbox" id="add"/><span class="article">'+DataManager.catalogueJSON.outlet[n].modelo+'</span><span class="size-label">Talla</span><span class="size-value">'+tallas[t]+'</span></div>                <div class="second-line"><input type="text" class="quantity" placeholder="0"/><span class="quantity-button plus" data-operation="+'+DataManager.catalogueJSON.outlet[n].cantidadn+'">+</span><span class="quantity-button minor" data-operation="-'+DataManager.catalogueJSON.outlet[n].cantidadn+'">-</span></div></li>')
                           }
                           
                           DataManager.currentProduct=DataManager.catalogueJSON.outlet[n];
@@ -455,7 +455,7 @@ nav_pre_outlet:function(){
 },
 nav_pre_home:function(){
     if(!$('#about').hasClass('current')){
-        app.navProducts('#home','about',true);	
+        app.navProducts('#home','about',true);
     }else{
         app.navProducts('#home','promo',true);
     }
@@ -473,12 +473,12 @@ nav_pre_pedidos:function(){
         //El carrito de la compra notiene pedidos
         $.UIPopup({
                   id: "noArticles",
-                  title: 'PEDIDO', 
+                  title: 'PEDIDO',
                   message: 'No hay artículos en el pedido',
                   cancelButton:"ACEPTAR"
                   
                   })
-        return true;	
+        return true;
     }
     if(DataManager.userDNI==='undefined' || DataManager.userDNI===null){
         
@@ -487,7 +487,7 @@ nav_pre_pedidos:function(){
         
         
         DataManager.requestDNI();
-        return true;	
+        return true;
     }
     return false;
     

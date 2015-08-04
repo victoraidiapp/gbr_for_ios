@@ -206,8 +206,8 @@ initCatalogue:function(){
     }
     //console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
     //console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());
-    $.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: true,pagination:false });
-    // $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: true });
+    $.UISetupCarousel({ target: '#product-viewer', panels: DataManager.productCarrousel, loop: false,pagination:false });
+    // $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
     DataManager.carouselObject=$('#product-viewer').data('carousel');
     DataManager.carouselObject.onSlide(function(){
                                        
@@ -254,8 +254,8 @@ initOutlet:function(){
     }
     //console.log("EL LISTADO DE PRODUCTOS ES \n"+DataManager.productCarrousel);
     //console.log("EL LISTADO DE PRODUCTOS ES \n"+jQuery("#product-cat ul.list").html());
-    $.UISetupCarousel({ target: '#outlet-product-viewer', panels: DataManager.outletProductCarrousel, loop: true,pagination:false });
-    // $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: true });
+    $.UISetupCarousel({ target: '#outlet-product-viewer', panels: DataManager.outletProductCarrousel, loop: false,pagination:false });
+    // $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
     DataManager.outletCarouselObject=$('#outlet-product-viewer').data('carousel');
     DataManager.outletCarouselObject.onSlide(function(){
                                              
@@ -441,8 +441,8 @@ searchModel:function(model){
             console.log("No es nulo");
         }
         $('#search-product-carrousel').addClass('navigable');
-        $.UISetupCarousel({ target: '#search-product-viewer', panels: DataManager.searchProductCarrousel, loop: true,pagination:false });
-        // $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: true });
+        $.UISetupCarousel({ target: '#search-product-viewer', panels: DataManager.searchProductCarrousel, loop: false,pagination:false });
+        // $.UISetupCarousel({ target: '#product-carrousel', panels: DataManager.productCarrousel, loop: false });
         DataManager.searchCarouselObject=$('#search-product-viewer').data('carousel');
         DataManager.searchCarouselObject.onSlide(function(){
                                                  

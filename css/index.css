@@ -756,7 +756,13 @@ article.current .loading.visible{
     float:right;
     margin-left:15px;
 }
-
+#product-viewer,
+#search-product-viewer,
+#outlet-product-viewer{
+    
+    width:100%;
+    height:900px;
+}
 
 @media only screen
 and (orientation : landscape)
@@ -1159,6 +1165,14 @@ and (-webkit-min-device-pixel-ratio: 1)
         font-size: 1.4em;
         
     }
+    
+    #product-viewer,
+    #search-product-viewer,
+    #outlet-product-viewer{
+        
+        width:100%;
+        height:1000px;
+    }
 }
 
 @media only screen
@@ -1314,6 +1328,14 @@ and (-webkit-min-device-pixel-ratio: 1)
         
         font-size: 1.4em;
         background-size: 70% 30%;
+    }
+    
+    #product-viewer,
+    #search-product-viewer,
+    #outlet-product-viewer{
+        
+        width:100%;
+        height:800px;
     }
 }
 

@@ -751,6 +751,7 @@ article.current .loading.visible{
 .historia_left{
     margin-right:15px;
     float:left;
+    margin-bottom:30px;
 }
 .historia_right{
     float:right;
@@ -922,8 +923,13 @@ and (orientation : landscape)
     }
     .historia_left,.historia_right{
         display:block;
-        width:35%;
+        width:30%;
         
+    }
+    
+    .historia_left{
+        
+        margin-bottom:0px;
     }
     
     #product-viewer,
@@ -968,7 +974,7 @@ and (-webkit-min-device-pixel-ratio: 2)
     
     #aboutGahibre{
         
-        
+        font-size:1em;
         background-size: 100% 20%;
         
         
@@ -998,7 +1004,7 @@ and (-webkit-min-device-pixel-ratio: 2)
         
         background-size: 70% 30%;
         
-        
+        font-size:1em;
     }
     
     #product-viewer,
@@ -1047,11 +1053,18 @@ and (-webkit-min-device-pixel-ratio: 2)
         width:100%;
         height:850px;
     }
+    #aboutGahibre{
+        
+        
+        
+        
+        font-size:0.8em;
+    }
 }
 
 @media only screen
 and (min-device-width : 375px)
-and (max-device-width : 667px)
+and (min-device-height : 667px)
 and (orientation : landscape)
 and (-webkit-min-device-pixel-ratio: 2)
 {
@@ -1089,6 +1102,13 @@ and (-webkit-min-device-pixel-ratio: 2)
     
     .img_product img{
         width:160px;
+    }
+    #aboutGahibre{
+        
+        
+        
+        
+        font-size:0.8em;
     }
 }
 
@@ -1193,7 +1213,7 @@ and (-webkit-min-device-pixel-ratio: 1)
     #aboutGahibre{
         
         
-        font-size: 1.4em;
+        font-size: 1.1em;
         
     }
     
@@ -1357,7 +1377,7 @@ and (-webkit-min-device-pixel-ratio: 1)
     #aboutGahibre{
         
         
-        font-size: 1.4em;
+        font-size: 1.1em;
         background-size: 70% 30%;
     }
     
@@ -1367,6 +1387,11 @@ and (-webkit-min-device-pixel-ratio: 1)
         
         width:100%;
         height:800px;
+    }
+    
+    .historia_left{
+        
+        margin-bottom:30px;
     }
 }
 

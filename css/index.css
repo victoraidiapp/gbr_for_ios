@@ -877,6 +877,7 @@ and (orientation : landscape)
         margin-left: 0px;
         float: left;
         width: inherit;
+        margin-top:0px;
     }
     .product-carrousel .product_logos figure{
         margin-left: 0px!important;
